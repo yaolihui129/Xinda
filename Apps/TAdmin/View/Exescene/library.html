@@ -1,0 +1,33 @@
+ <layout name="layout" />
+ <h2>待测<{$arr.type}>场景库 
+	 <span class="pull-right"> 当前项目：<{$_SESSION['proid']|getProNo=###}>
+	 	<a href="__URL__/queue/stagetesterid/<{$arr.id}>"> 返回</a>
+	 </span>
+ </h2>
+ <div class="row">
+	  <div class="col-md-6">
+	  		<table border="1" width="95%" align="left">
+               <tr><th bgcolor="#ccc">列队场景</th></tr>
+               <volist name='exe' id='ex'>
+               <tr>                            
+                  <td ><a href="#" ><{$ex.id}>：<{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}></a></td>                                                                                        
+                </tr>
+               </volist>
+             </table>	  
+	  </div>
+	  <div class="col-md-6">
+	  	<table border="1" width="100%" align="left">
+             <tr><th bgcolor="#ccc">待测场景</th></tr>
+             <volist name='scene' id='se'>
+             <tr>                           
+                 <td ><a href="#" ><{$se.id}>:<{$se.swho}>【<{$se.swhen}>】  <{$se.scene}></a>
+                      <a href="__APP__/TAdmin/Exescene/insert/sceneid/<{$se.id}>/stagetesterid/<{$arr.id}>/type/<{$arr.type}>" 
+                      type="button" class="btn btn-info btn-xs pull-right" >加入<span class="badge"><{$se.id|countSFunc=###}></span></a>
+                 </td>                                          
+             </tr>
+             </volist>
+        </table>  
+	  </div>
+  </div>
+        
+                                                                 

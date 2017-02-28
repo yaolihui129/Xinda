@@ -1,0 +1,106 @@
+<layout name="layout" />
+<div class="container">
+<div class="row">
+  <div class="col-md-8">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}>
+	          <div class="btn-group pull-right">
+	          	<a href="__APP__/TAdmin/Exescene/index/type/<{$arr.type}>" class="btn btn-warning btn-xs">返 回 </a>
+	          </div>            
+          </h3>
+        </div>
+        <h4>
+        	<switch name="arr.results">
+				<case value="通过"><span class="label label-success "></case>
+				<case value="失败"><span class="label label-danger "></case>
+				<default /><span class="label label-default pull-right">
+			</switch><{$arr.results}></span>
+			
+			<{$arr.sn}>.【<{$arr.id}>】
+			<switch name="arr.sceneid">
+				<case value="0"><{$arr.pathid|getSPath=###}></case>			          
+				<default /><{$arr.swho}>【<{$arr.swhen}>】<{$arr.scene}>
+			</switch>			
+			<div class="btn-group">
+				<a  href="__APP__/TAdmin/Exescene/pass/id/<{$arr.id}>" title="标记测试通过"  class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-ok">通过</span></a>
+				<a href="__APP__/TAdmin/Exescene/fail/id/<{$arr.id}>"  title="标记测试失败" class="btn btn-danger btn-xs">
+					<span class="glyphicon glyphicon-remove">失败</span></a>					  
+			</div>
+	    </h4>
+        
+          <ul class="list-group">    
+			  <volist name='exe' id='ex' empty="没有数据">
+			  	<switch name="ex.result">
+		          <case value="通过"><li class="list-group-item list-group-item-success"></case>
+		          <case value="失败"><li class="list-group-item list-group-item-danger"></case>
+		          <default /><li class="list-group-item">
+		      </switch>
+		      <span>  
+			      <switch name="ex.result">
+						<case value="通过"><span class="label label-success"></case>
+						<case value="失败"><span class="label label-danger"></case>
+						<default /><span class="label label-default">
+				  </switch><{$ex.result}></span>
+				 <{$ex.func}>(<{$ex.funcremarks}>)意图：<{$ex.main}>
+			 </span>
+				 <form action="__URL__/update" method="post"  >
+				 <div class="input-group">
+					<input type="hidden" name="id" value="<{$ex.id}>" />
+					<input type="hidden" name="result" value="失败" />
+					<div class="row">
+	  					<div class="col-lg-9">
+						    <input type="text"  name="remark" value="<{$ex.remark}>" class="form-control"/>
+						</div>
+						<div class="col-lg-3">
+						   <input type="text" name="bugid" value="<{$ex.bugid}>"  class="form-control" placeholder="Bugid"/>
+						</div>
+					</div>					        
+					<span class="input-group-btn">
+						<button  class="btn btn-danger" type="submit" >
+							<span class="glyphicon glyphicon-remove">标记失败</span> 
+						</button>
+						<a href="__URL__/pass/id/<{$ex.id}>"  class="btn btn-success ">
+						<span class="glyphicon glyphicon-ok">标记通过</span></a>
+						<a target="_blank" href="__APP__/TAdmin/Case/index/funcid/<{$ex.funcid}>"  
+						class="btn btn-info ">用例<{$ex.funcid|countFCase=###}></a>
+						<a target="_blank" href="__APP__/TAdmin/Rules/index/funcid/<{$ex.funcid}>"  
+						class="btn btn-warning ">规则<{$ex.funcid|countFRules=###}></a>
+						<a target="_blank" href="__APP__/TAdmin/Element/index/funcid/<{$ex.funcid}>"  
+						class="btn btn-info">模板</a>
+					</span>
+				</div>
+				</form>		      
+		      </li>
+			  </volist>			  
+          </ul>
+		  <div class="well well-sm"><b>流程:</b><{$arr.flow}></div>                  
+      </div>
+  </div>
+  <div class="col-md-4 hidden-xs hidden-sm">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title"><{$_SESSION['testgp']}>测试项目</h3>
+      </div>
+      <ul class="list-group">
+        <volist name='data' id='vo' empty="没有数据">
+          <switch name="vo.id">
+          	<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>
+          	<default /><li class="list-group-item ">
+       	  </switch>
+              <a href="__URL__/index/id/<{$vo.id}>"><{$vo.sn}>:<{$vo.results}>	              
+	              <switch name="vo.sceneid">
+						<case value="0"><{$vo.pathid|getSPath=###}></case>			          
+						<default /><{$vo.swho}>【<{$vo.swhen}>】<{$vo.scene}>
+				  </switch>                
+              </a>
+              <span class="badge"><{$vo.id|countExeFunc=###}></span>
+            </li>
+         </volist>
+       </ul>
+    </div>
+  </div>
+</div>
+</div>
+

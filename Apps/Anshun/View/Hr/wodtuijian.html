@@ -1,0 +1,41 @@
+<layout name="layout" />
+<span class="hidden-sm hidden-md hidden-lg"><img src="__IMG__/shangj.jpg" alt="__IMG__/shangj.jpg" width="100%"></span>
+<div class="panel panel-primary">
+     <div class="panel-heading">
+	     <h3 class="panel-title">赏金猎人
+	     	<a href="__APP__/Xiuli/Customer/personal" class="btn btn-warning btn-xs pull-right" >返 回</a>
+	     </h3>   	
+     </div>
+     <div class="panel-body">
+     <span class="hidden-xs"><img src="__IMG__/shangj.jpg" alt="__IMG__/shangj.jpg" width="100%"></span>    	
+     	<ul  class="list-group">
+	     		<li class="list-group-item list-group-item-info hidden-xs">
+	     			 <div class="row">
+	     			 	<div class="col-md-1">人员</div>
+	     			 	<div class="col-md-2">电话</div>
+	     			 	<div class="col-md-2">职位</div>
+	     			 	<div class="col-md-1">入职奖</div>
+	     			 	<div class="col-md-1">转正奖</div>
+	     			 	<div class="col-md-4">备注</div>
+	     			 	<div class="col-md-1">状态</div>
+	     			 </div>
+	     		</li>
+	     	<volist name='data' id='vo' empty="暂时还没有推荐人员">
+	     		<li class="list-group-item">
+	     			<div class="row">
+	     				<div class="col-md-1"><{$vo.name}></div>
+	     				<div class="col-md-2"><a href="tel:<{$vo.phone}>"><{$vo.phone}></a></div>
+	     				<div class="col-md-2"><{$vo.hrid|getHrtitle=###}></div>
+	     				<div class="col-md-1">￥入职奖</div>
+	     				<div class="col-md-1">￥转正奖</div>
+	     				<div class="col-md-4"><{$vo.remark}></div>
+	     				<div class="col-md-1"><{$vo.state}></div>
+	     			</div>
+	     		</li>
+	     	</volist>
+     	
+     	
+     	</ul>
+        
+     </div>             	
+</div> 

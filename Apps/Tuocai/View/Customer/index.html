@@ -1,0 +1,22 @@
+<layout name="layout" />
+<h3 >师资力量</h3>
+<volist name='data' id='ar' empty="没有数据">
+	<div class="panel panel-default">    
+		<div class="media">
+			<a class="media-left" href="#">
+				<img src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>" class="img-thumbnail">
+			</a>
+			<div class="media-body">
+				<h4 class="media-heading"><{$ar.realname}>【<{$ar.course}>】<{$ar.coursetype}></h4>
+				<{$ar.remark}>
+			</div>
+		</div>     
+	</div>
+</volist>                     
+    
+
+
+
+
+
+              

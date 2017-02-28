@@ -1,0 +1,77 @@
+<layout name="layout" />
+	<ol class="breadcrumb">
+	<span>所在位置：</span>
+	  <li><a href="__APP__/Admin/Index/index"><span class="glyphicon glyphicon-home"></span> 首页</a></li>	  
+	  <li class="active">系统信息</li>
+	  <span class="pull-right"><a href="__APP__/Admin/Index/index"><button type="button" class="btn btn-warning btn-xs">返回</button></a></span>
+	</ol>      
+	<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">系统信息</h1>
+        </div>
+        
+        <table class="table table-striped table-bordered table-hover" >
+		    <tr>
+		        <th width="15%" bgcolor="#ccc" >操作系统</th>
+		        <td><?php echo PHP_OS;?></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc" >Apache版本</th>
+		        <td><?php echo apache_get_version();?></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">PHP版本</th>
+		        <td><?php echo PHP_VERSION;?></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">运行方式</th>
+		        <td><?php echo PHP_SAPI;?></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">Apache目录</th>
+		        <td><?php echo php_ini_loaded_file();?></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">数据库服务器</th>
+		        <td><{$Think.config.DB_HOST}></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">数据库名字</th>
+		        <td><{$Think.config.DB_NAME}></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">数据库端口</th>
+		        <td><{$Think.config.DB_PORT}></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">数据库表前缀</th>
+		        <td><{$Think.config.DB_PREFIX}></td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">系统名称</th>
+		        <td>测试管理平台</td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">开发团队</th>
+		        <td>yaolh</td>
+		    </tr>
+		    <tr>
+		        <th bgcolor="#ccc">客户端IP</th>
+		        <td><{$_SESSION['ip']}></td>
+		    </tr>
+		    <tr>
+		    	<th bgcolor="#ccc">客户端浏览器</th>
+		    	<td><{$_SESSION['browser']}></td>
+		    </tr>
+		    
+		    <tr>
+		    	<th bgcolor="#ccc">客户端系统</th>
+		    	<td><{$_SESSION['os']}></td>
+		    </tr>
+		    
+
+	    </table>
+             		
+                	
+    </div>
+        

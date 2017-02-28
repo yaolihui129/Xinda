@@ -1,0 +1,167 @@
+<layout name="layout" />
+<div class="container">
+<div class="row"> 
+  <div class="col-md-9">
+  		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    	<div class="btn-group pull-right">
+		    		<a data-toggle="modal" href="#tianjscene" class=" btn btn-info btn-xs" >添加</a>
+		    		<a href="__APP__/TAdmin/Program" class="btn btn-warning btn-xs">返回</a>
+		    	</div>
+		    </h3>
+		  </div>
+  <div class="panel-body table-responsive">
+   	 <b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
+	 <div class="well well-sm"><{$arr.desc}></div>  	  
+    <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" ><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
+		  	<span class="badge"><{$arr.id|countStage=###}></span></a>
+		  </li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
+		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
+		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
+		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+		  <li role="presentation" ><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
+		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+		  <li role="presentation" class="active"><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Element/library/proid/<{$arr.id}>">控件库</a></li>
+	</ul>
+	<div class="panel panel-default">
+		  <ul class="list-group">
+		   <form action="__URL__/order" method="post" >
+		         <volist name='scene' id='st' empty="本项目还没有场景">
+		            <li class="list-group-item">
+		            <span>
+		                <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/>
+		                <{$st.type}><{$st.id}>.<b><{$st.swho}></b>【<{$st.swhen}>】<{$st.scene}>（来源：<{$st.sourceid}>）
+		
+		                <span class="badge"><{$st.state}>-<{$st.level}></span>
+		                <div class="btn-group pull-right">
+		                  <a href="__URL__/copy/sceneid/<{$st.id}>/proid/<{$_SESSION['copy']}>"  class="btn btn-success btn-xs"
+		                  onclick="return confirm('你确定复制场景<{$st.id}>到：<{$_SESSION['copy']|getProNo=###}>吗？')">复制到：
+		                  <{$_SESSION['copy']|getProNo=###}></a>
+		                  <a href="__APP__/TAdmin/Scenefunc/index/sceneid/<{$st.id}>" class="btn btn-info btn-xs">场景功能
+		                  <{$st.id|countSFunc=###}></a>
+		                  <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+		                    <span class="caret"></span>
+		                    <span class="sr-only">Toggle Dropdown</span>
+		                  </button>
+		                  <ul class="dropdown-menu" role="menu">		                    
+		                    <li><a href="__URL__/mod/id/<{$st.id}>" >修改</a></li>
+		                    <li class="divider "></li>
+		                    <li><a href="__URL__/del/id/<{$st.id}>"  onclick="return confirm('你确定要删除场景：<{$st.swho}>:<{$swhen}><{$st.risk}>？')" >删除</a></li>         
+		                  </ul>
+		                </div>
+		                </span>
+		            </li>
+		        </volist>
+		        <input type="submit" name="do_submit" value="批量排序" class="btn">
+		    </form>
+		  </ul>
+		</div>
+    </div>
+  </div>
+  
+  
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm">
+  	<div class="panel panel-info">
+	  <div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
+	  <ul class="list-group">
+	    <volist name='pros' id='pro' empty="没有数据"> 			
+            <switch name="pro.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+			</switch> 
+            <a href="__URL__/index/proid/<{$pro.id}>">
+            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>            	
+            </a>
+            <span class="badge"><{$pro.id|countScene=###}></span>
+            </li>
+        </volist>
+      </ul>	  
+	</div>
+  	 
+  </div>
+  
+</div> 
+</div>
+
+
+
+
+<!-- 添加-模态框 -->
+<div class="modal fade " id="tianjscene" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">场景-添加</h4>
+	    </div>
+	    <div class="modal-body">
+	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
+	      	<input type="hidden" name="proid" value="<{$arr.id}>" />
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">顺序:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="sn" value="<{$c}>" placeholder="顺序">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="product" class="col-sm-2 control-label">类型:</label>
+					<div class="col-sm-10"><{$type}></div>						
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">状态:</label>
+					<div class="col-sm-10"><{$state}></div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">级别:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="level" value="2" placeholder="级别">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">角色:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="swho" value="默认" placeholder="角色">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">时间:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="swhen" value="默认" placeholder="时间">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">场景:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="scene" value="" placeholder="场景">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">流程:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="flow" value="" placeholder="大致流程">
+					</div>
+				</div>
+				<!--  <div class="form-group">
+					<label for="state" class="col-sm-2 control-label">地址:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="testip" value="" placeholder="测试地址URL">
+					</div>
+				</div>-->
+				
+		</div>
+		<div class="modal-footer">
+		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		     <button type="submit" class="btn btn-primary">提交</button></form>
+		</div>
+    </div>       
+  </div>

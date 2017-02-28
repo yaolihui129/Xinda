@@ -1,0 +1,42 @@
+<layout name="layout" />
+        <div class="place">所在位置：<a href="__URL__/index/type/<{$w.type}>"> 优惠活动</a>>编辑
+            <span style="float:right;margin-right:60px;">
+            <a href="__URL__/index/type/<{$w.type}>"> 返回</a>
+            </span>
+        </div>
+        <div class="content">
+           <div class="main">
+              <div class="top">优惠活动</div>
+              <div class="left" >
+                    <volist name='arr' id='vo' empty="没有数据">
+                      <ul><li><a href="__URL__/mod/id/<{$vo.id}>">【<{$vo.voucher}>】<{$vo.title}></a><hr></li></ul>
+                    </volist>
+              </div>
+              <div class="midd"  align="center">
+                    <table border="0" width="730" align="left">
+                     <form action="__URL__/update" method="post" >
+                         <input type="hidden" name="id" value="<{$data.id}>" />
+                         <tr><td> 活动：</td><td><input type="text" name="title" value="<{$data.title}>"  class="input600"/><{$state}></td></tr>
+                         <tr><td> 内容:</td><td><{$remark}></td><tr>
+                         <tr><td> 开始:</td><td><{$start}>&nbsp;结束：<{$end}>类型：<{$data.voucher}></td></tr>
+                         <tr><td>&nbsp;</td></tr>
+                         <tr><td><b>规则</b> </td>
+                             <td>特等奖<{$data.specia}>
+                                 <br>一等奖<{$data.first}>
+                                 <br>二等奖<{$data.second}>
+                                 <br>三等奖<{$data.third}>
+                                 <br>参与奖<{$data.canyu}>
+                                 <br>奖券数<{$data.total}>
+                             </td>
+                         </tr>
+                         <tr><td>&nbsp;</td></tr>
+                         <tr><td></td>
+                             <td>
+                                <input type="submit" class="btn" name="do_submit" value="提 交"></form>
+                                <a href="__URL__/add"><button class="btn">添加</button></a>
+                                 <a href="__URL__/index"><button  class="btn" >返回</button></a>
+                             </td>
+                         </tr>
+                     </table>
+              </div><!-- midd -->
+           </div><!-- main -->

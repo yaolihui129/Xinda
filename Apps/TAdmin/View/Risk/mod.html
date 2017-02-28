@@ -1,0 +1,43 @@
+  <layout name="layout" />
+        <div class="place">
+                                 所在位置：
+             <a href="__APP__/TAdmin/Program">项目</a>
+             ><a href="__URL__/index/proid/<{$w.proid}>">风险</a>
+             >详情
+            <span style="float:right;margin-right:60px;">
+            <a href="__URL__/index/proid/<{$w.proid}>"> 返回</a>
+            </span>
+        </div>
+        <div class="content">
+           <div class="main">
+              <div class="top">风险详情</div>
+              <div class="left"  width="20%" align="left">
+                    <volist name='data' id='vo' empty="没有数据">
+                       <a href="__URL__/mod/id/<{$vo.id}>/proid/<{$w.proid}>"><{$vo.sn}>.<{$vo.risk}>:<{$vo.state}></a><br>
+                    </volist>
+              </div>
+              <div class="midd" width="50%" align="right" >
+
+                  <table border="0" width="650" align="left">
+                   <form action="__URL__/update" method="post" >
+                   <input type="hidden" name="id" value="<{$risk.id}>" />
+                   <tr><td>更新：</td><td><{$risk.moder}>更新于:<{$risk.updateTime}></td></tr>
+                     <tr><td> 顺序：</td>
+                         <td>
+                           <input type="text" name="sn" value="<{$risk.sn}>"  class="input60"/>
+                           <input type="hidden" name="proid" readonly= "true "  bgcolor="#ccc" value="<{$w.proid}>" />
+                                                                       状态<{$state}>级别<{$level}>
+                         </td>
+                     </tr>
+                     <tr><td>风险</td><td><input type="text" name="risk" value="<{$risk.risk}>"  class="input600"/></td></tr>
+                      <tr><td>方案</td><td><{$tamethod}></td></tr>
+                     <tr><td>备注</td><td><{$tremaks}></td></tr>
+                     <tr><td></td>
+                         <td>
+                            <input type="submit" class="btn" name="do_submit" value="提 交"> </form>
+                             <a href="__URL__/index/proid/<{$w.proid}>"><button  class="btn" >返回</button></a>
+                         </td>
+                     </tr>
+                  </table>
+              </div><!-- midd -->
+           </div><!-- main -->

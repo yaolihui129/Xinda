@@ -1,0 +1,60 @@
+<layout name="layout" />
+  <div class="row">
+    <div class="col-sm-10">
+        <p class="pull-right visible-xs"><button class="btn-xs btn-primary">tar</button></p>
+        <div class="panel panel-default">
+          <h3 >数据字典【<{$w.type}>】-修改</h3>
+            <div class="panel-body addmod">
+                <form action="__URL__/update" method="post" enctype='multipart/form-data' role="form">
+                  <input type="hidden" name="id" value="<{$dic.id}>" />
+                  <div class="form-group">
+                        <label for="exampleupdateTime"><{$dic.moder}>：</label>
+                        更新于:<{$dic.updatetime}> 
+                    </div>
+                  <div class="form-group">
+                      <label for="exampleInputusername"></label>
+                      <input type="text" class="form-control" name="k" value="<{$dic.k}>" placeholder="sn" >  
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputusername"></label>
+                      <input type="text" class="form-control" name="v" value="<{$dic.v}>" placeholder="键值" >  
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputusername"></label>
+                      <input type="text" class="form-control" name="type" value="<{$dic.type}>" placeholder="sn" >  
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputusername"></label>
+                      <{$state}> 
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputusername"></label>
+                      <input type="text" class="form-control" name="remark" value="<{$dic.remark}>" placeholder="备注" >  
+                  </div>
+                  <button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
+                </form>
+                  <div class="btn-group pull-left">
+
+                      <a href="__URL__/add/type/<{$w.type}>"><button  class="btn btn-success btn-lg" style="margin-left:50px;">添 加</button></a>
+
+                      <a href="__URL__/index/type/<{$w.type}>"><button  class="btn btn-warning btn-lg" style="margin-left:50px;">返 回</button></a>
+                  </div>
+            </div>
+        </div>
+    </div>                      
+    <div class="col-sm-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">字典</h3>
+            </div>            
+            <ul class="list-group">
+            <volist name='data' id='vo' empty="没有数据">
+               <li class="list-group-item" >
+                  <a href="__URL__/mod/id/<{$vo.id}>/type/<{$w.type}>"><{$vo.k}>:<{$vo.v}></a>
+               </li>
+            </volist>            
+            </ul>                        
+        </div>          
+    </div>
+</div>
+     

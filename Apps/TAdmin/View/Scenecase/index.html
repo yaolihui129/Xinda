@@ -1,0 +1,41 @@
+<layout name="layout" />
+<h2>功能用例库
+<div class="btn-group pull-right">
+    <a href="__APP__/TAdmin/Scenefunc/index/sceneid/<{$sf['sceneid']}>" class="btn btn-warning">
+    <span class="glyphicon glyphicon-arrow-left">返回</span></a>
+</div>
+</h2>
+<div class="row">
+  <div class="col-md-5">
+  	<div class="panel panel-success">
+	  <div class="panel-heading"><{$sf.sceneid|getScene=###}></div>	  
+	     <ul class="list-group">
+            <volist name='data' id='vo' empty="没有数据">
+            	 <switch name="vo.id">
+					<case value="$sf.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+					<default /><li class="list-group-item ">
+				 </switch>                
+               		<a href="__URL__/index/sfuncid/<{$vo.id}>">
+                    <{$vo.sn}>.<{$vo.sysno}>-<{$vo.path}>-<{$vo.func}>(<{$vo.remarks}>)-<{$vo.casemain}></a>
+                    <span class="badge"><{$vo.casestate}></span>
+               </li>                    
+            </volist>
+         </ul>	  
+	</div>
+  </div>
+  <div class="col-md-7">
+  	<div class="panel panel-info">
+	  <div class="panel-heading"><{$sf['id']|getSceneFunc=###}></div>
+	  <ul class="list-group">		
+        <volist name='arr' id='st' empty="没有数据">                      
+           <li  class="list-group-item">
+              <{$st.sn}>.<span class="badge"><{$st.state}></span><{$st.main}>-预期：<{$st.expected}><{$st.fproid|getProNo=###}>
+              <a href="__URL__/bind/id/<{$st.id}>/sfuncid/<{$sf.id}>">绑定</a>             
+           </li>                                          
+        </volist>        
+     </ul>
+	</div>
+  	
+  </div>
+</div>
+              

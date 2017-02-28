@@ -1,0 +1,136 @@
+<layout name="layout" />
+<h2>数据用例模板</h2>
+ <div class="col-md-9">  
+  	<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+    	<{$arr.sn}>.<{$arr.id|getSPFunc=###}>   	
+    	<a data-toggle="modal" href="#tianjcase" class=" btn btn-info btn-xs pull-right" >添加用例</a>    	
+    </h3>
+  </div>
+  <div class="panel-body table-responsive"> 
+	<table class="table table-striped table-bordered table-hover table-condensed ">
+          <tr >
+          	<th width=3%   bgcolor="#ccc">顺序</th>
+            <th width=30%  bgcolor="#ccc">意图</th> 
+            <th width=20%  bgcolor="#ccc">预期</th>
+            <th width=5%   bgcolor="#ccc">状态</th>
+            <th width=3%   bgcolor="#ccc"><{$data[0]['control']?$data[0]['control']:'Num1'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[1]['control']?$data[1]['control']:'Num2'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[2]['control']?$data[2]['control']:'Num3'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[3]['control']?$data[3]['control']:'Num4'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[4]['control']?$data[4]['control']:'Num5'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[5]['control']?$data[5]['control']:'Num6'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[6]['control']?$data[6]['control']:'Num7'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[7]['control']?$data[7]['control']:'Num8'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[8]['control']?$data[8]['control']:'Num9'}></th>
+            <th width=3%   bgcolor="#ccc"><{$data[9]['control']?$data[9]['control']:'Num10'}></th>
+            <th width=3%   bgcolor="#ccc">操作 </th> 
+         </tr>
+         <form action="__APP__/TAdmin/Case/order" method="post" >
+         <volist name='cases' id='case' empty="没有用例">
+            <tr>             	
+                <td align="center" ><input type="text" name="sn[<{$case.id}>]" value="<{$case.sn}>"  class="input40"/></td>
+                <td ><{$case.id}>:【<{$case.state}>】<{$case.main}>-<{$case.level}>(<{$case.fproid|getProNo=###}>)
+                	<a  href="__APP__/TAdmin/Case/mod/id/<{$case.id}>/p/Element" type="button" class="btn btn-info btn-xs pull-right">修改</a>
+                </td>
+                <td><{$case.expected}></td>
+                <td align="center" >
+                   <a href="__URL__/setdstate/id/<{$case.id}>/dstate/<{$case.dstate}>" title="变更状态"><{$case.dstate}></a>
+                </td>
+                <td align="center" ><{$case.num1}></td>
+                <td align="center" ><{$case.num2}></td>
+                <td align="center" ><{$case.num3}></td>
+                <td align="center" ><{$case.num4}></td>
+                <td align="center" ><{$case.num5}></td>
+                <td align="center" ><{$case.num6}></td>
+                <td align="center" ><{$case.num7}></td>
+                <td align="center" ><{$case.num8}></td>
+                <td align="center" ><{$case.num9}></td>
+                <td align="center" ><{$case.num10}></td>
+                <td align="center" ><a href="__APP__/TAdmin/Case/data/id/<{$case.id}>/p/Element" >更多</a></td>                             
+            </tr>
+            </volist>
+            	<tr><td  colspan="10"><input type="submit" name="do_submit" value="批量排序" class="btn"></td></tr>
+            </form>
+       </table>
+    </div>
+  </div>
+  
+  
+  </div>
+  <div class="col-md-3 hidden-xs">
+  	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">控件
+	    	<a  href="__URL__/add/funcid/<{$arr.id}>/p/Element" class=" btn btn-info btn-xs pull-right" >添加控件</a>
+	    </h3>
+	  </div>
+	  <ul class="list-group">
+	   	<form action="__URL__/order" method="post" >
+	    <volist name='data' id='vo' empty=" "> 			
+           <switch name="vo.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+		 </switch> 
+		 	<input type="text" name="sn[<{$vo.id}>]" value="<{$vo.sn}>"  class="input40"/>
+            <a href="__URL__/mod/id/<{$vo.id}>/p/Element"><{$vo.typeset}>:<{$vo.control}>-<{$vo.data}></a>
+            </li>           
+        </volist>
+        	<input type="submit" name="do_submit" value="批量排序" class="btn">
+        </form>
+        
+      </ul>	  
+	</div>
+  	 
+  </div>
+  
+</div> 
+
+
+<!-- 添加-模态框 -->
+<div class="modal fade " id="tianjcase" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">用例-添加</h4>
+	    </div>
+	    <div class="modal-body">
+	      	<form action="__APP__/TAdmin/Case/insert" method="post" class="form-horizontal" role="form" >
+	      	<input type="hidden" name="funcid" value="<{$arr.id}>" />
+	      	<input type="hidden" name="fproid" value="<{$_SESSION['proid']}>" />
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">顺序:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="sn" value="<{$cc}>" placeholder="顺序">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="product" class="col-sm-2 control-label">意图:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="main" value=" " placeholder="意图">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="product" class="col-sm-2 control-label">预期:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="expected" value=" " placeholder="预期">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">状态:</label>
+					<div class="col-sm-10"><{$state}></div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">操作:</label>
+					<div class="col-sm-10"><{$caozuo}></div>
+				</div>							
+		</div>
+		<div class="modal-footer">
+		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		     <button type="submit" class="btn btn-primary">提交</button></form>
+		</div>
+    </div>       
+  </div> 
+        

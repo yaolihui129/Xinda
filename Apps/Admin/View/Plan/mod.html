@@ -1,0 +1,40 @@
+ <layout name="layout" />
+ <ol class="breadcrumb">
+    <span>所在位置：</span>      
+    <li><a href="__URL__">课程安排</a></li>   
+    <li class="active">编辑</li>
+    <a href="__URL__"><button type="button" class="btn btn-warning btn-xs pull-right">返回</button></a>
+  </ol> 
+<div class="panel panel-default">
+<h3 >课程安排-编辑</h3>   
+      <div class="panel-body">
+           <form action="__URL__/insert" method="post" enctype='multipart/form-data' role="form">
+           <input type="hidden" name="id" value="<{$arr.id}>" />
+           
+                   <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">地点：</label>
+                      <input type="text" class="form-control" name="adress" value="<{$arr.adress}>"  placeholder="上课地点">  
+                  </div>             
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">老师：</label>
+                      <input type="text" class="form-control" name="teacher" value="<{$arr.teacher}>"  readonly>  
+                  </div>
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">课程：</label>
+                      <input type="text" class="form-control" name="teacher" value="<{$arr.course}>"  readonly>  
+                  </div> 
+                  
+                  <div class="form-group input-group-lg">                      
+                      <input type="text" class="form-control" name="skdate" value="<{$arr.riqi}>" readonly > 
+                  </div>
+                  <div class="form-group">                      
+                      <input type="text" class="form-control" name="skweek" value="<{$arr.xingqi}>"  readonly>                     
+                  </div>
+                  <div class="form-group ">                     
+                      <input type="text" class="form-control" name="sktime" value="<{$arr.sktime}>" readonly>  
+                  </div>                                      
+                  <button type="submit" class="btn btn-info  pull-left" >提 交</button>
+           </form>              
+           <a href="__URL__"><button  class="btn btn-warning  pull-right" >返 回</button></a>                
+     </div>
+</div>

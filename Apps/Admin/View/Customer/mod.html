@@ -1,0 +1,38 @@
+<layout name="layout" />
+<h3 >人员-修改</h3>
+<div class="panel panel-default">
+
+     <div class="panel-body addmod">
+         <form action="__URL__/update" method="post" enctype='multipart/form-data' role="form">
+         <input type="hidden" name="wid" value="<{$arr.wid}>" />
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">手机：</label>
+                      <input type="text" class="form-control" value="<{$arr.tpid|getPhone=###}>" readonly>  
+                  </div>
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">姓名：</label>
+                      <input type="text" class="form-control"  value="<{$arr.tpid|getCRealname=###}>"  readonly>  
+                  </div>
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">分类：</label>
+                      <input type="text" class="form-control" name="type" value="<{$arr.type}>" placeholder="分类" >                         
+                  </div>                  
+                   <div class="form-group input-group-lg">
+                      <label for="exampleInputusername">状态：</label>
+                      <{$state}>
+                  </div>
+                  <div class="form-group ">
+                      <label for="exampleInputusername">科目：</label>
+                      <input type="text" class="form-control" name="course" value="<{$arr.course}>" placeholder="科目" >  
+                  </div>
+                  
+                  
+                  <button type="submit" class="btn btn-info  pull-left" >提 交</button>
+                </form>
+                  <a href="__URL__/index"><button  class="btn btn-warning pull-right" >返 回</button></a>                      
+                 
+            </div>
+</div>
+   
+
+     

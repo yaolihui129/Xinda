@@ -1,0 +1,109 @@
+<layout name="layout" />
+<div class="container">
+<div class="row"> 
+  <div class="col-md-9">
+  		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    	<div class="btn-group pull-right">
+		    	<a href="__APP__/TAdmin/Program"  class="btn btn-warning btn-xs">返 回</a>
+		    	</div>
+		    </h3>
+		  </div>
+  <div class="panel-body table-responsive">	    	
+	 <b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
+	 <div class="well well-sm"><{$arr.desc}></div>    
+    <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" ><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
+		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
+		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+		  <li role="presentation" class="active"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
+		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
+		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+		  <li role="presentation" ><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
+		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Element/library/proid/<{$arr.id}>">控件库</a></li>	  
+	</ul>
+	<div class="row">
+	  <div class="col-md-6">
+	  		<div class="panel panel-success">
+			  <div class="panel-heading">关联系统</div>
+			      <ul class="list-group">
+			        <volist name='data' id='st' empty="没有数据">
+			            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+			              <div class="btn-group pull-right">
+			                <a href="__APP__/TAdmin/Path/index/sysid/<{$st.branch}>/proid/<{$arr.id}>" 
+			                class="btn btn-info btn-xs">路径<{$st.branch|countPath=###}></a>
+			                <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+			                  <span class="caret"></span>
+			                  <span class="sr-only">Toggle Dropdown</span>
+			                </button>
+			                <ul class="dropdown-menu" role="menu">			                  
+			                  <li>
+				                  <a href="__URL__/mod/id/<{$st.branch}>/proid/<{$arr.id}>">
+				                  <span class="glyphicon glyphicon-cloud"> 修改</span></a>
+				              </li>                 
+			                  <li class="divider"></li>
+			                  <li>
+			                  	  <a href="__URL__/del/id/<{$st.id}>"  onclick="return confirm('你确定要从项目中移除：<{$st.name}>系统吗？')">
+			                  	  <span class="glyphicon glyphicon-remove"> 移除</span></a>
+			                  </li>
+			                </ul>
+			              </div>
+			            </li>
+			        </volist> 
+			      </ul>
+			</div>
+	  </div>
+	  <div class="col-md-6">
+	  		<div class="panel panel-danger">
+			  <div class="panel-heading">备选系统</div>
+			      <ul class="list-group">
+			        <volist name='syses' id='st' empty="没有数据">
+			            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+			              <a href="__URL__/insert/project/<{$arr.id}>/branch/<{$st.id}>"  
+			              class="btn btn-danger btn-xs pull-right">
+			                <span class="glyphicon glyphicon-link"> 关联 </span></a>
+			            </li>
+			        </volist> 
+			      </ul>
+			</div>	 
+	  </div>
+	</div>     
+    </div>
+  </div>
+  
+  
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3>
+	  </div>
+	  <ul class="list-group">
+	    <volist name='pros' id='pro' empty="没有数据"> 			
+           <switch name="pro.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+			</switch>   
+	            <a href="__URL__/index/proid/<{$pro.id}>">
+	            	<span class="badge"><{$pro.status|getProst=###}></span>
+	            	<{$pro.name}>
+	            	<span class="badge"><{$pro.id|countProsys=###}></span>
+	            </a>           
+            </li>
+        </volist>
+      </ul>	  
+	</div>  	 
+  </div> 
+</div> 
+</div>
+
+
+

@@ -1,0 +1,53 @@
+<layout name="layout" />  
+<div class="container"><h3 >管理员-修改</h3>   
+	<div class="panel panel-default">  
+     <div class="panel-body">
+         <form action="__URL__/update" method="post" enctype='multipart/form-data'  role="form">
+         <input type="hidden" name="id" value="<{$user.id}>" />         
+               <div class="form-group ">
+                   <label for="exampleInputusername" class="col-sm-1">员工号：</label>
+                   <div  class="col-sm-11">
+                   		<input type="text" class="form-control" name="userno" value="<{$user.userno}>" placeholder="员工号" > 
+                   </div>
+               </div>
+               <div class="form-group ">
+                   <label for="exampleInputusername" class="col-sm-1 control-label">登录名：</label>
+                   <div  class="col-sm-11">
+                   		<input type="text" class="form-control" name="account" value="<{$user.account}>" placeholder="登录名" >
+				   </div>
+               </div>
+               <div class="form-group ">
+                    <label for="exampleInputrealname" class="col-sm-1 control-label">姓名：</label>
+                    <div  class="col-sm-11">
+                    	<input type="text" class="form-control" name="realname" value="<{$user.realname}>" placeholder="姓名" >
+                    </div> 
+               </div>                 
+               <div class="form-group ">
+                    <label for="exampleInputrealname" class="col-sm-1 control-label">分组：</label>
+                    <div  class="col-sm-11"><{$usergp}></div>                       
+               </div>
+               <div class="form-group ">
+                   <label for="exampleInputrealname" class="col-sm-1 control-label">手机号：</label>
+                   <div  class="col-sm-11">
+                   		<input type="tel" class="form-control" name="phone" value="<{$user.phone}>" placeholder="手机" >
+                   </div> 
+               </div>
+               <div class="form-group ">
+                   <label for="exampleInputrealname" class="col-sm-1 control-label">座机：</label>
+                   <div  class="col-sm-11">
+                   		<input type="tel" class="form-control" name="mobile" value="<{$user.mobile}>" placeholder="座机" >
+                   </div>
+               </div> 
+               <div class="form-group ">
+                   <label for="exampleInputrealname" class="col-sm-1 control-label">邮箱：</label>
+                   <div  class="col-sm-11">
+                   <input type="email" class="form-control" name="email" value="<{$user.email}>" placeholder="邮箱" >
+                   </div> 
+               </div><br>
+               <button type="submit" class="btn btn-info btn-lg pull-left" >提 交</button>
+          </form>
+               <a href="__URL__" class="btn btn-warning btn-lg pull-right" > 返 回</a>      	  
+     	 </div>                                 
+      </div>
+</div>
+   

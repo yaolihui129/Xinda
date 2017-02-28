@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+/*layout*/
+body{
+	padding-top:60px;
+	padding-bottom:50px;
+	background-color:#eee; 
+}
+#qqLoginBtn{background:url(../Public/images/Connect_logo_7.png)}
+/*字体*/
+.font12{font-size:12px;}
+.font13{font-size:13px;}
+.font14{font-size:14px;}
+.font16{font-size:16px;}
+.font18{font-size:18px;}
+.font20{font-size:24px;}
+.lh18{line-height:18px;}
+.lh20{line-height:20px;}
+.lh24{line-height:24px;}
+.lh28{line-height:28px;}
+.lh30{line-height:30px;}
+.hei24{height:24px;}
+.hei30{height:30px;}
+.hei60{height:60px;}
+
+
+
+

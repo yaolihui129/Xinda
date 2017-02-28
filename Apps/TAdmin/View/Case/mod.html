@@ -1,0 +1,76 @@
+<layout name="layout" />
+<div class="row">
+	<div class="col-md-3 hidden-xs hidden-sm">
+ 		 	<div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title"><{$case.funcid|getSPFunc=###}></h3></div>            
+	            <ul class="list-group">
+		  			 <volist name='data' id='vo' empty="没有数据">
+		  			 <li class="list-group-item" >
+		            	<a href="__URL__/mod/id/<{$vo.id}>/p/<{$p}>"><{$vo.sn}>
+			            	<span class="badge"><{$vo.state}></span>
+			            	<{$vo.main}>【<{$vo.level}>】		            	
+		            	</a>
+		            	<span class="badge"><{$vo.fproid|getProNo=###}></span>
+					</li>
+		        	</volist>
+	        	</ul>
+        	</div>                            	
+	</div>
+<div class="col-md-5">	
+ <h3>用例-编辑</h3>	
+  	<div class="panel-body">
+  		<form action="__APP__/TAdmin/Case/update" method="post" class="form-horizontal" role="form" >
+  		<input type="hidden" name="id" value="<{$case.id}>" />  		     	  		
+		<div class="form-group">					   
+			<label for="short" class="col-sm-2 control-label">级别:</label>
+			<div class="col-sm-10"><input type="text" class="form-control" name="level" value="<{$case.level}>" placeholder="级别"></div>
+		</div>
+		<div class="form-group">
+			<label for="product" class="col-sm-2 control-label">*意图:</label>
+			<div class="col-sm-10"><input type="text" class="form-control" name="main" value="<{$case.main}>" placeholder="意图"></div>
+		</div>
+		
+		<div class="form-group">
+			<label for="product" class="col-sm-2 control-label">预期:</label>
+			<div class="col-sm-10"><input type="text" class="form-control" name="expected" value="<{$case.expected}>" placeholder="预期"></div>
+		</div>
+		<div class="form-group">
+			<label for="state" class="col-sm-2 control-label">状态:</label>
+			<div class="col-sm-10"><{$state}></div>
+		</div>
+		<div class="form-group">
+			<label for="state" class="col-sm-2 control-label">项目:</label>
+			<div class="col-sm-10"><{$fproid}></div>
+		</div>
+		<!--<div class="form-group">
+			<label for="state" class="col-sm-2 control-label">操作:</label>
+			<div class="col-sm-10"><{$caozuo}></div>
+		</div>  -->
+					  
+		<button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
+        </form>
+         <div class="btn-group pull-right">                       
+              <a href="__APP__/TAdmin/<{$p}>/index/funcid/<{$case.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
+         </div>
+  	</div>	
+</div>
+<div class="col-md-4">
+	  <div class="panel panel-success">
+		  <div class="panel-heading">需求规则</div>
+		  <ul class="list-group">	   		
+	         <volist name='rules' id='rule' empty="无需求描述">
+	            <li class="list-group-item"><span class="label label-default"><{$rule.source}><{$rule.updatetime}> </span><br><{$rule.sn}>.              
+	                <switch name="rule.state">
+			          <case value="待确认"><b> <{$rule.id}>:【<{$rule.state}>】<{$rule.rules}>(<{$rule.fproid|getProNo=###}>)</b></case>
+			          <case value="作废"><s> <{$rule.id}>:【<{$rule.state}>】<{$rule.rules}>(<{$rule.fproid|getProNo=###}>)</s></case>
+			          <default /> <{$rule.id}>:【<{$rule.state}>】<{$rule.rules}>(<{$rule.fproid|getProNo=###}>)
+			      	</switch>	                
+	                		         	                	               	         	                	                
+	            </li>
+	        </volist>
+	  	</ul>		  		  
+	  </div>
+</div>
+ 		 
+</div>           
+ 

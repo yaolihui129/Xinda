@@ -1,0 +1,12 @@
+<layout name="layout" />
+<div class="row">
+    <div class="col-sm-9">          
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">找工作<a href="__URL__/add" class="btn btn-info pull-right">发布</a></h3></div>            	                 	
+	        	<volist name='data' id='vo' empty="没有数据">
+	       			<{$vo.title}>工资：<{$vo.salary}><{$vo.desc}>
+					<a href="__URL__/signup/id/<{$vo.id}>" class="btn btn-info">报名</a>						
+				</volist>		   				
+        	</div>          	
+    </div>
+</div>

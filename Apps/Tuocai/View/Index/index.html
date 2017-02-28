@@ -1,0 +1,102 @@
+<layout name="layout" />
+<div class="row">
+	<div class="col-md-3 ">
+	  	<div class="thumbnail" ><br>
+			<img src="__IMAGES__/WechatIMG1.jpeg" alt="__IMAGES__/WechatIMG1.jpeg" width="100%">
+			<div class="caption">
+				<h4>扫描二维码关注微信公众号</h4><br>
+				<h3><{$_SESSION['web']}></h3>
+				<h4>热线:<{$_SESSION['tel']}></h4>
+				<h4>Q Q:<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['qq']}>&amp;site=qq&amp;menu=yes" target="_blank">
+					<{$_SESSION['qq']}></a>
+				</h4>				       			         
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">	
+	  	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+		  <ol class="carousel-indicators">
+		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+		  </ol>		
+		  <div class="carousel-inner" role="listbox">
+		    <div class="item active" >
+		      <a href="<{$pic[0]['url']}>">
+		      	<img src="__UPLOAD__<{$pic[0]['path']}><{$pic[0]['img']}>" alt="__UPLOAD__<{$pic[0]['path']}><{$pic[0]['img']}>" width="100%">
+		      </a>
+		      <div class="carousel-caption"><{$pic[0][title]}></div>
+		    </div>
+		    <div class="item" >
+		      <a href="<{$pic[1]['url']}>">
+		      	<img src="__UPLOAD__<{$pic[1]['path']}><{$pic[1]['img']}>" alt="__UPLOAD__<{$pic[1]['path']}><{$pic[1]['img']}>" width="100%">
+		      </a>
+		      <div class="carousel-caption"><{$pic[1][title]}></div>		      
+		    </div>
+		    <div class="item" >
+		      <a href="<{$pic[2]['url']}>">
+		      	<img src="__UPLOAD__<{$pic[2]['path']}><{$pic[2]['img']}>" alt="__UPLOAD__<{$pic[2]['path']}><{$pic[2]['img']}>" width="100%">
+		      </a>
+		      <div class="carousel-caption"><{$pic[2][title]}></div>		      
+		    </div>
+		    <div class="item" >
+		      <a href="<{$pic[3]['url']}>">
+		      	<img src="__UPLOAD__<{$pic[3]['path']}><{$pic[3]['img']}>" alt="__UPLOAD__<{$pic[3]['path']}><{$pic[3]['img']}>" width="100%">
+		      </a>
+		      <div class="carousel-caption"><{$pic[3][title]}></div>		      
+		    </div>
+		    <div class="item" >
+		      <a href="<{$pic[4]['url']}>">
+		      	<img src="__UPLOAD__<{$pic[4]['path']}><{$pic[4]['img']}>" alt="__UPLOAD__<{$pic[4]['path']}>thumb_<{$pic[4]['img']}>" width="100%">
+		      </a>
+		      <div class="carousel-caption"><{$pic[4][title]}></div>		      
+		    </div>		    
+		  </div>				  
+		</div>  
+	</div>
+	
+</div>
+	
+	
+ <div class="row">
+    <div class="panel panel-info">
+		<div class="panel-heading"><h3 class="panel-title">推荐课程
+			<span class="pull-right">
+			<a href="__APP__/Tuocai/Servicelist">更多</a></span></h3>
+		</div>
+		<volist name='data' id='ar' empty="没有数据">
+	      	<div class="col-xs-12 col-md-3">
+				<div class="thumbnail" >
+					<a href="__APP__/Tuocai/Service/index/id/<{$ar.id}>" >
+					     <img data-src="holder.js/100%x180" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>"  height="180px">
+					</a>
+					<div class="caption"><h5><{$ar.name}></h5></div>
+				</div>
+			</div>
+		</volist>			       		
+	</div>					  		 
+</div>
+
+<div class="row">
+    <div class="panel panel-success">
+		<div class="panel-heading"><h3 class="panel-title">师资力量
+			<span class="pull-right">
+			<a href="__APP__/Tuocai/Customer/index/isteacher/1">更多</a></span></h3>
+		</div>
+		<volist name='arr' id='ar' empty="没有数据">
+			<div class="panel panel-default">    
+				<div class="media">
+					<a class="media-left" href="#">
+						<img src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>" class="img-thumbnail">
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><{$ar.realname}>【<{$ar.course}>】<{$ar.coursetype}></h4>
+						<{$ar.remark}>
+					</div>
+				</div>     
+			</div>
+		</volist> 			       		
+	</div>					  		 
+</div>

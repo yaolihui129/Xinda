@@ -1,0 +1,38 @@
+<layout name="layout" />     
+<div class="row">
+   <div class="col-sm-8">           
+        <div class="panel panel-primary">
+             <div class="panel-heading"><h3 class="panel-title">关于我们</h3></div>             	
+             <img alt="关于我们" src="__UPLOAD__<{$_SESSION['img']}>" height="400" width="100%">            	
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">企业理念</h3></div>             	
+        	<div class="panel-bady">
+        		<p>麦田双辉</p>
+        	</div>
+        </div>
+        
+   </div>
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+             	<div class="panel-heading">
+                  	<h3 class="panel-title">关于我们</h3>
+            	</div>            
+                <ul class="list-group">
+			        <li class="list-group-item">关于我们</li>
+			        <li class="list-group-item"><a href="__APP__/Mtsh/About/hr" title="诚聘人才">诚聘人才</a></li>
+			    </ul>                        
+            </div>
+            <div class="panel panel-primary">
+	            <div class="panel-heading"><h3 class="panel-title">联系方式</h3></div>
+	            <div class="panel-body">
+	             	<div class="danye_main">
+	         			<dd><{$_SESSION['Mtsh']['web']}></dd>
+	         			<dd>地址：<{$_SESSION['Mtsh']['adress']}></dd>
+	         			<dd>热线：<{$_SESSION['Mtsh']['phone']}></dd>
+	         			<dd>网站：<a href="__APP__/Mtsh"><{$_SESSION['Mtsh']['url']}></a></dd> 
+	            	</div>     	
+	             </div>
+	       </div>          
+        </div>
+</div>

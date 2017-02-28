@@ -1,0 +1,17 @@
+<layout name="layout" /><h3 >上传头像</h3>
+<div class="panel panel-default">  
+     <div class="panel-body">
+         <form action="__URL__/upload" method="post" enctype='multipart/form-data'  role="form">
+              <input type="hidden" name="id" value="<{$user.id}>" />
+              <label for="exampleInputrealname">姓名：</label><{$user.realname}>                                   
+			  <div class="form-group input-group-lg">                 
+                  <img alt="头像" src="__UPLOAD__<{$user.path}><{$user.img}>" alt="__UPLOAD__<{$user.path}><{$user.img}>" height="400px" >                
+                  <input type="file" name="img" />                 
+              </div>  
+              <button type="submit" class="btn btn-info btn-lg pull-left">提 交</button>
+          </form>          
+               <a href="__URL__" class="btn btn-warning btn-lg pull-right" >返 回</a>        
+      </div>
+</div>
+    
+

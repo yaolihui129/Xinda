@@ -1,0 +1,46 @@
+<layout name="layout" />
+  <ol class="breadcrumb">
+    <span>所在位置：</span>
+        <li><a href="__APP__/Home/Index/index"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+        <li class="active">课程-<{$w.coursetype}></li>
+    <span class="pull-right"><a href="__APP__/Home/Index/index"><button type="button" class="btn btn-warning btn-xs pull-right">返回</button></a></span>
+  </ol>
+  <h1 ><{$w.coursetype}></h1>
+
+  
+  <div class="row">
+    <div class="col-sm-10">
+        <p class="pull-right visible-xs"><button class="btn-xs btn-primary">tar</button></p>
+        <div class="panel panel-default">
+            <div class="row">
+                <volist name='data' id='ar' empty="没有数据">
+				  <div class="col-sm-6 col-md-4">
+				    <div class="thumbnail">
+				      <img src="__UPLOAD__/<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>" class="img-thumbnail">
+				      <div class="caption">
+				        <h3><{$ar.course}></h3>				        		       
+				      </div>
+				    </div>
+				  </div>
+                </volist>
+            </div>
+        </div>
+    </div>                      
+    <div class="col-sm-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">分类</h3>
+            </div>            
+            <ul class="list-group">
+            <volist name='arr' id='vo' empty="没有数据">
+               <li class="list-group-item" ><a href="__URL__/index/coursetype/<{$vo.v}>"><{$vo.v}></a></li>
+            </volist>            
+            </ul>                        
+        </div>          
+    </div>
+</div>
+
+
+
+
+              

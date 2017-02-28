@@ -1,0 +1,47 @@
+<layout name="layout" />
+        <div class="place"> 所在位置：<a href="__APP__/Admin/Voucher">优惠活动</a> >奖券
+            <span style="float:right;margin-right:60px;">
+               <a href="__APP__/Admin/Voucher"> 返回</a>
+            </span>
+
+        </div>
+        <div class="content">
+           <div class="main">
+              <div class="top">奖券
+                 <span style="float:right;"><{$w.voucherid|getVoucher=###}></span>
+              </div>
+              <div class="left">
+                    <volist name='arr' id='vo' empty="没有数据">
+                      <ul>
+                         <li><a href="__URL__/index/id/<{$vo.id}>">【<{$vo.state}>】<{$vo.title}>:<{$vo.total}></a></li>
+                       </ul>
+                    </volist>
+              </div>
+              <div class="midd" align="center">
+                   <table border="1" width="80%">
+                     <tr>
+                       <th width=3% align="center" bgcolor="#ccc">id</th>
+                       <th width=7% align="left" bgcolor="#ccc">奖券</th>
+                       <th width=5% align="center" bgcolor="#ccc">ip</th>
+                       <th width=5% align="center" bgcolor="#ccc">手机</th>
+                       <th width=5% align="center" bgcolor="#ccc">维护</th>
+                       <th width=10% align="center" bgcolor="#ccc">更新时间</th>
+                       <!--  <th width=5% align="center" bgcolor="#ccc">操作 </th>-->
+                     </tr>
+                     <volist name='data' id='da' empty="没有数据">
+                    <tr>
+                        <td align="center"><{$da.id}></td>
+                        <td align="left"><{$da.result}></td>
+                        <td align="center"><{$da.ip}></td>
+                        <td align="center"><{$da.owner}></td>
+                        <td align="center"><{$da.moder}></td>
+                        <td align="center"><{$da.updatetime}></td>
+                       <!-- <td align="center">
+                          <a href="__URL__/del/id/<{$ar.id}>" onclick="return confirm('你确定要删除：<{$ar.v}>？')">删除</a>
+                       </td> -->
+                    </tr>
+                    </volist>
+                </table>
+
+              </div><!-- midd -->
+           </div><!-- main -->

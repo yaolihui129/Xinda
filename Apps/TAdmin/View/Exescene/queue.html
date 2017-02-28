@@ -1,0 +1,70 @@
+<layout name="layout" />
+<div class="container">
+<div class="row"> 
+  <div class="col-md-9">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	  	<h3 class="panel-title">【<{$arr.type}>】规划列队(<{$_SESSION['proid']|getProNo=###}>)
+	  		<div class="btn-group pull-right">
+			  <a href="__URL__/library/stagetesterid/<{$arr.id}>"  class="btn btn-info btn-xs">场景库<{$_SESSION['proid']|countScene=###}></a>
+			  <a href="__APP__/TAdmin/Path/library/stagetesterid/<{$arr.id}>" class="btn btn-success btn-xs">待测模块</a>
+			  <a href="__APP__/TAdmin/Stagetester/index/stageid/<{$arr.stageid}>/type/<{$arr.type}>"  class="btn btn-warning btn-xs"> 返 回 </a>
+			</div>
+	  	</h3>
+	  </div>
+	  	 <div class="starter-template">
+		     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		        <form action="__URL__/order" method="post" >
+		            <volist name='exe' id='ex'>
+				         <div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="heading<{$pro.id}>">
+								<h4 class="panel-title">
+									<input  type="text" name="sn[<{$ex.id}>]" value="<{$ex.sn}>" class="input40"/>
+									<a data-toggle="collapse" data-parent="#accordion" href="#<{$ex.id}>" aria-expanded="true" aria-controls="<{$ex.id}>">								
+					                   	<{$ex.id}>：
+					                   	<switch name="ex.sceneid">
+							          		<case value="0"><{$ex.pathid|getSPath=###}></case>			          
+							         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
+							      		</switch>
+					                   <span class="badge"><{$ex.id|countExeFunc=###}></span>			                   
+									</a>								
+									<span class="badge pull-right"><{$ex.results}></span>
+								</h4>
+							</div>
+							   <div id="<{$ex.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ex.id}>">
+									<ul><{$ex.id|getESceneFunc=###}></ul>									
+							   </div>
+				  		</div>
+		         	</volist>
+		         	<input type="submit" name="do_submit" value="批量排序" class="btn">
+		        </form>
+		     </div>
+		  </div>		
+  </div>
+  
+  
+  </div>
+  <div class="col-md-3 hidden-xs">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">人员轮次</h3>
+	  </div>
+	  <ol class="list-group">
+	    <volist name='data' id='vo' empty="没有数据"> 			
+           <switch name="vo.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+		 </switch> 
+           <a href="__URL__/queue/stagetesterid/<{$vo.id}>"><{$vo.stage}>:<{$vo.tester}>【<{$vo.id|countExescene=###}>】
+                       <span class="badge pull-right"><{$vo.state}></span></a></li>
+        </volist>
+      </ol>	  
+	</div>
+  	 
+  </div>
+  
+</div> 
+</div>
+
+
+              

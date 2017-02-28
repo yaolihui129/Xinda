@@ -1,0 +1,51 @@
+<layout name="layout" />
+<div class="container">
+	<div class="row">
+		<div class="col-md-5 hidden-xs hidden-sm">
+ 		 	<div class="panel panel-primary">
+            <div class="panel-heading"><h3 class="panel-title">路径</h3></div>            
+            <ul class="list-group">
+	  			<volist name='data' id='vo' empty="没有数据">
+		  			 <li class="list-group-item" >
+		            	<a href="__URL__/mod/id/<{$vo.id}>/proid/<{$proid}>">
+		            	<{$vo.sn}>.<{$vo.branch|getBranchName=###}>-<{$vo.parent|getModuleName=###}>-<{$vo.name}>【<{$vo.state}>】</a>
+					 </li>
+	        	</volist>
+        	</ul>
+        	</div>                           	
+  		</div>
+  		<div class="col-md-7"><h3>路径-编辑</h3>	
+  			<div class="panel-body">
+  		     <form action="__URL__/update" method="post" class="form-horizontal" role="form" >
+  		     	  <input type="hidden" name="id" value="<{$path.id}>" />  		     	   		     	    
+					  <div class="form-group">					   
+					    <label for="short" class="col-sm-2 control-label">顺序:</label>
+					    <div class="col-sm-10"><input type="text" class="form-control" name="sn" value="<{$path.sn}>" placeholder="顺序"></div>
+					  </div>
+					  <div class="form-group">
+						<label for="parent" class="col-sm-2 control-label">父级:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"  value="<{$path.parent|getModuleName=###}>" placeholder="父级" readonly>
+						</div>
+					  </div>
+					  <div class="form-group">
+					    <label for="product" class="col-sm-2 control-label">路径:</label>
+					    <div class="col-sm-10"><input type="text" class="form-control"  value="<{$path.name}>" placeholder="路径" readonly></div>
+					  </div>
+					  
+					  <div class="form-group">
+						<label for="parent" class="col-sm-2 control-label">简称:</label>
+						<div class="col-sm-10"><input type="text" class="form-control" name="short" value="<{$path.short}> " placeholder="简称"></div>
+					  </div>
+					  <div class="form-group">
+					    <label for="state" class="col-sm-2 control-label">状态:</label>
+					    <div class="col-sm-10"><{$state}></div>
+					  </div>					  
+					  <button type="submit" class="btn btn-info btn-lg pull-left" >提 交</button>
+              </form>
+                     <a href="__URL__/index/sysid/<{$path.branch}>/proid/<{$proid}>"   class="btn btn-warning btn-lg pull-right " >返 回</a>                                        
+  		   </div>	            
+  		</div>		 
+	</div>
+</div>           
+     

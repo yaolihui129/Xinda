@@ -1,0 +1,55 @@
+<layout name="layout" />
+<div class="row">
+   <div class="col-sm-12">
+          <div class="panel panel-default">  
+            <div class="panel-body">
+                <form action="__URL__/create" method="post" enctype='multipart/form-data'  role="form">                 
+                    <div class="form-group ">
+					    <label for="inputEmail3" class="col-sm-2 control-label">岗位:</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" name="work" value="<{$arr.title}>" placeholder="岗位" readonly>  
+					    </div>
+					</div>
+					<div class="form-group ">
+					    <label for="inputEmail3" class="col-sm-2 control-label">薪酬:</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" name="salary" value="<{$arr.salary}>" placeholder="薪酬" readonly>  
+					    </div>
+					</div>
+					<div class="form-group ">
+					    <label for="inputEmail3" class="col-sm-2 control-label">工作地点:</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" name="place" value="<{$arr.place}>" placeholder="工作地点" readonly>  
+					    </div>
+					</div>
+					<div class="form-group ">
+					    <label for="inputEmail3" class="col-sm-2 control-label">姓名:</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" name="realname" value="<{$_SESSION['realname']}>" placeholder="姓名" >  
+					    </div>
+					</div>
+                    <div class="form-group ">
+					    <label for="inputEmail3" class="col-sm-2 control-label">手机:</label>
+					    <div class="col-sm-9">
+					      <input type="phone" class="form-control" name="phone" value="" placeholder="手机" > 					     
+					    </div>
+					</div>
+					                                  
+					<div class="form-group ">
+						<label for="inputEmail3" class="col-sm-2 control-label"></label>
+						<div class="col-sm-9">&nbsp;</div>
+					</div>
+					<div class="form-group ">
+						<label for="inputEmail3" class="col-sm-2 control-label"></label>
+						<div class="col-sm-5">
+							<button type="submit" class="btn btn-info">提 交</button></form>
+						</div>
+						<div class="col-sm-4">
+							<a href="__URL__" class="btn btn-warning" >返 回</a>
+						</div>
+						
+		</div>					
+    </div>
+</div>
+                     
+    

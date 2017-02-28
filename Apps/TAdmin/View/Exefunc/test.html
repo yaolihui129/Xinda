@@ -1,0 +1,63 @@
+ <layout name="layout" />
+        <div class="place">
+                                 所在位置：
+             <a href="__APP__/TAdmin/Exescene/test/type/A/stagetesterid/<{$w.stagetesterid}>">自动化测试</a>
+             >详情
+               <span style="float:right;margin-right:60px;">
+                   <a href="__APP__/TAdmin/Exescene/test/type/A/stagetesterid/<{$w.stagetesterid}>"> 返回</a>
+               </span>
+        </div>
+        <div class="content">
+           <div class="main">
+              <div class="top">自动化测试数据
+                  <span style="float:right;">
+                                             当前项目：<{$w.proid|getProNo=###}>
+                 </span>
+              </div>
+              <div class="left" align="left" style="width:20%;">
+              <hr />
+                    <volist name='data' id='vo' empty="没有数据">
+                      <ur>
+                         <li><a href="__URL__/test/id/<{$vo.id}>/stagetesterid/<{$w.stagetesterid}>/proid/<{$w.proid}>/type/<{$w.type}>">
+                        <{$vo.sn}>:<{$vo.swho}>【<{$vo.swhen}>】<{$vo.scene}><br />
+                         <{$vo.results}>:<{$vo.id|countExeFunc=###}></a><hr /></li>
+                       </ur>
+                    </volist>
+              </div>
+              <div class="midd" align="right" >
+                   <table border="1" width="80%" align="center">
+
+                     <tr>
+                       <th width=2% align="center" bgcolor="#ccc">ID</th>
+                       <th width=2% align="center" bgcolor="#ccc">顺序</th>
+                       <th width=2% align="center" bgcolor="#ccc">功能ID</th>
+                       <th width=7% align="left" bgcolor="#ccc">路径</th>
+                       <th width=5% align="left" bgcolor="#ccc">功能</th>
+                       <th width=5% align="left" bgcolor="#ccc">备注</th>
+                       <th width=5% align="left" bgcolor="#ccc">意图</th>
+                       <th width=3% align="center" bgcolor="#ccc">结果</th>
+                       <th width=3% align="left" bgcolor="#ccc">说明</th>
+                       <th width=3% align="center" bgcolor="#ccc">num1</th>
+                       <th width=3% align="center" bgcolor="#ccc">操作 </th>
+                     </tr>
+                     <volist name='exe' id='ex' empty="没有数据">
+                    <tr>
+                       <td align="center" ><{$ex.id}></td>
+                       <td align="center" ><{$ex.sn}></td>
+                       <td align="center" ><{$ex.funcid}></td>
+                       <td align="left" ><{$ex.path}></td>
+                       <td align="left" ><{$ex.func}></td>
+                       <td align="left" ><{$ex.funcremarks}></td>
+                       <td align="left" ><{$ex.main}></td>
+                       <td align="center" ><{$ex.result}></td>
+                       <td align="left" ><{$ex.remarks}></td>
+                       <td align="center" ><{$ex.num1}></td>
+                       <td align="center" >
+                          <a href="#" >数据</a>
+                       </td>
+                    </tr>
+                    </volist>
+                </table>
+
+              </div><!-- midd -->
+           </div><!-- main -->

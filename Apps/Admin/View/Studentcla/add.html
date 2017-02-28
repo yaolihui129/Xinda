@@ -1,0 +1,53 @@
+<layout name="layout" />
+ <ol class="breadcrumb">
+	<span>所在位置：</span>
+	<li><a href="__APP__/Admin/Course">课程管理</a></li>
+	<li><a href="__APP__/Admin/Teacherclass/index/id/<{$arr.courseid}>">已安排老师</a></li>
+	<li><a href="__URL__/index/techclassid/<{$arr.id}>">上课学生</a></li>		  	  
+	<li class="active">添加</li>
+</ol>  
+<div class="row">
+  <div class="col-md-6">
+  		<div class="panel-body">
+          <form action="__URL__/insert" method="post" enctype='multipart/form-data'  role="form">
+          <input type="hidden" name="techclassid" value="<{$arr.id}>" /> 
+          <input type="hidden" name="courseid" value="<{$arr.courseid}>" />                               
+                  <div class="form-group ">
+                      <label for="exampleInputusername" >课程：</label>
+                      <input type="text" class="form-control" name="course" value="<{$arr.course}>" placeholder="暂无课程名，不能绑定" readonly>  
+                  </div>
+                  <div class="form-group ">
+                      <label for="exampleInputusername" >老师：</label>
+                      <input type="text" class="form-control" name="teacher" value="<{$arr.teacher}>" placeholder="暂无老师信息，不能绑定" readonly>  
+                  </div>
+                  <div class="form-group ">
+                      <label for="exampleInputusername" >老师有手机：</label>
+                      <input type="text" class="form-control" name="tphone" value="<{$arr.phone}>" placeholder="暂无老师信息，不能绑定" readonly>  
+                  </div>
+                  <div class="form-group input-group-lg">
+                      <label for="exampleInputrealname">学生手机号：</label>
+                      <input type="text" class="form-control" name="sphone" value="" placeholder="学生手机号" >                                            
+                  </div>                                                                                                     
+                  <button type="submit" class="btn btn-info  pull-left" >绑定</button>
+                </form>
+                  <div class="btn-group pull-right">
+                      <a href="__URL__/index/techclassid/<{$arr.id}>"><button  class="btn btn-warning " >返 回</button></a>
+                  </div>
+            </div>
+  
+  </div>
+  <div class="col-md-6">
+  		<div class="panel panel-default">
+  		  <div class="panel-heading">
+		    <h3 class="panel-title">学生</h3>
+		  </div>  
+		 <ul class="list-group">
+			<volist name='data' id='ar' empty="没有数据">
+				<li class="list-group-item">【<{$ar.coursetype}>】<{$ar.realname}>：<{$ar.phone}></li>
+			</volist>					
+		</ul>
+		  
+	</div>
+  
+  </div>
+</div>

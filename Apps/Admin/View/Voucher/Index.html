@@ -1,0 +1,52 @@
+<layout name="layout" />
+   <div class="place"> 所在位置：优惠活动</div>
+   <div class="content">
+       <div class="main">
+              <div class="top">优惠活动</div>
+              <div class="midd">
+                 <table border="1" width="100%" align="center">
+                     <tr>
+                       <th width=5% align="center" bgcolor="#ccc">类型</th>
+                       <th width=14% align="left" bgcolor="#ccc">优惠活动
+                           <span style="float:right;margin-right:5px;">
+                             <a href="__URL__/add/" > &nbsp;添加 &nbsp;</a>
+                           </span>
+                       </th>
+                       <th width=3% align="center" bgcolor="#ccc">奖券</th>
+                       <th width=3% align="center" bgcolor="#ccc">特等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">一等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">二等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">三等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">参与奖</th>
+                       <th width=5% align="center" bgcolor="#ccc">开始</th>
+                       <th width=5% align="center" bgcolor="#ccc">结束</th>
+                       <th width=3% align="center" bgcolor="#ccc">状态</th>
+                       <th width=3% align="center" bgcolor="#ccc">维护</th>
+                       <th width=7% align="center" bgcolor="#ccc">最后更新</th>
+                     </tr>
+                     <volist name='arr' id='vo' empty="没有数据">
+                     <tr>
+                       <td align="center"><{$vo.voucher}></td>
+                       <td align="left"><{$vo.title}>
+                           <span style="float:right;margin-right:5px;">
+                               <a href="__URL__/photo/id/<{$st.id}>">图片</a>
+                               <a href="__URL__/mod/id/<{$vo.id}>">修改</a>
+                         </span>
+                       </td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.total}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.specia}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.first}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.second}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.third}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.canyu}></a></td>
+                       <td align="center"><{$vo.start}></td>
+                       <td align="center"><{$vo.end}></td>
+                       <td align="center"><{$vo.state}></td>
+
+                       <td align="center"><{$vo.moder}></td>
+                       <td align="center"><{$vo.updatetime}></td>
+                    </tr>
+                  </volist>
+                 </table>
+        </div><!-- midd -->
+     </div><!-- main -->

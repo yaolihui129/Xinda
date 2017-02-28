@@ -1,0 +1,112 @@
+<layout name="layout" />
+<h2><{$w.proid|getProNo=###}>:功能库 
+	<span class="pull-right">
+        <a href="__APP__/TAdmin/Scenefunc/index/proid/<{$w.proid}>/sceneid/<{$w.sceneid}>"> 返回</a>
+    </span>
+</h2>
+<div class="row">
+  <div class="col-md-2">
+  <ul class="list-group">
+  	<volist name='data' id='vo' empty="没有数据">
+   		<li class="list-group-item"><a href="__URL__/library/pathid/<{$vo.id}>/sceneid/<{$w.sceneid}>">
+              <{$vo.sysno}><{$vo.sn}>:<{$vo.path}></a><span class="badge"><{$vo.id|countFunc=###}></span></li>
+   	</volist>
+   </ul>
+  </div>
+  <div class="col-md-2">
+  		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <{$w.pathid|getPath=###}>
+		  </div>
+		  <ul class="list-group">
+		    <volist name='funcs' id='st' empty="没有数据">
+		      <li class="list-group-item"><{$st.sn}>.<{$st.func}><span class="badge pull-left"><{$st.state}></span>
+		      <div class="btn-group ">
+				  <a href="__APP__/TAdmin/Scenefunc/addscene/funcid/<{$st.id}>/sceneid/<{$w.sceneid}>" type="button" class="btn btn-info btn-xs">
+				  <span class="glyphicon glyphicon-plus"> 场景</span></a>
+				  <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+				    <span class="caret"></span>
+				    <span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a  href="__APP__/TAdmin/Hc/addhc/funcid/<{$st.id}>" >
+				    <span class="glyphicon glyphicon-plus"> 缓存</span></a></li>
+				</div>		    		        
+		      </li>
+		    </volist>
+		  </ul>
+		</div>
+  </div>
+  <div class="col-md-4">	
+  		<div class="panel panel-success">
+		  <div class="panel-heading">场景功能点：
+		  <a href="__APP__/TAdmin/Scenefunc/addAllhc/sceneid/<{$w.sceneid}>" type="button" class="btn btn-info btn-xs pull-right">
+		  	<span class="glyphicon glyphicon-plus">全部缓存</span></a>	
+		  <br><{$w.sceneid|getScene=###}>
+		  		    
+		  </div>
+		  <ul class="list-group">
+		   <form action="__APP__/TAdmin/Scenefunc/order" method="post" >
+		       <volist name='sfunc' id='st' empty="没有数据">
+		            <li class="list-group-item">
+		              <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/>路径：
+		              <{$st.path}><br>功能点：<{$st.func}>(<{$st.remarks}>)
+		              <div class="btn-group pull-right">
+						  <a href="__APP__/TAdmin/Scenefunc/addhc/id/<{$st.id}>" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-plus">缓存</span></a>
+						  <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a  href="__APP__/TAdmin/Scenefunc/del/id/<{$st.id}>" ><span class="glyphicon glyphicon-remove"> 移除</span></a></li>
+						</div>
+		            </li>
+		        </volist>
+		        <input type="submit" name="do_submit" value="批量排序" class="btn">
+		    </form>
+		  </ul>
+		</div>
+  </div>
+  <div class="col-md-4">
+     <div class="panel panel-danger">
+      <div class="panel-heading">缓存功能点
+      		<div class="btn-group pull-right">
+		       <a href="__APP__/TAdmin/Hc/addAllsf/sceneid/<{$w.sceneid}>" type="button" class="btn btn-info btn-xs">
+		        <span class="glyphicon glyphicon-plus">全部场景</span></a>
+		       <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+		       <span class="caret"></span>
+		       <span class="sr-only">Toggle Dropdown</span>
+		       </button>
+		       <ul class="dropdown-menu" role="menu">
+		           <li><a  href="__APP__/TAdmin/Hc/delAll" onclick="return confirm('你确定要清空缓存列表吗？')" >
+		           <span class="glyphicon glyphicon-remove"> 清空缓存</span></a></li>
+		        </ul>
+		     </div>
+      </div>
+      <ul class="list-group">
+       <form action="__APP__/TAdmin/Hcfunc/order" method="post" >
+          <volist name='hfunc' id='hc'>
+                <li class="list-group-item">
+                  <input type="text" name="sn[<{$hc.id}>]" value="<{$hc.sn}>"  class="input40"/>路径：
+                  <{$hc.path}><br>功能点：
+                  <{$hc.func}>(<{$hc.remarks}>)
+                  <div class="btn-group pull-right">
+		              <a href="__APP__/TAdmin/Hc/addfunc/id/<{$hc.id}>/sceneid/<{$w.sceneid}>" type="button" class="btn btn-info btn-xs">
+		              <span class="glyphicon glyphicon-plus">场景</span></a>
+		              <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+		                <span class="caret"></span>
+		                <span class="sr-only">Toggle Dropdown</span>
+		              </button>
+		              <ul class="dropdown-menu" role="menu">
+		                <li><a  href="__APP__/TAdmin/Hc/del/id/<{$hc.id}>" ><span class="glyphicon glyphicon-remove"> 移除</span></a></li>
+		               </ul>
+		            </div>
+                </li>
+            </volist>
+            <input type="submit" name="do_submit" value="批量排序" class="btn">
+        </form>
+      </ul>
+    </div>
+  
+  </div>
+</div>

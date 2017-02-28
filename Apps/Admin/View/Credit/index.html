@@ -1,0 +1,60 @@
+<layout name="layout" />
+<div class="panel panel-default">		  
+	<div class="panel-body">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="__URL__/add">征信系统</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">			      			      
+				<ul class="nav navbar-nav">		      	
+					<form action="__URL__/index " method="post" class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+						    <div class="input-group">
+								<input type="text" name="search" class="form-control" value="<{$w.search}>" placeholder="姓名、手机号、身份证号">
+								<span class="input-group-btn">
+								    <button type="submit" class="btn btn-default" type="button">查询</button>
+								    <a href="__APP__/Admin/Customer" type="button" class="btn btn-info">返回客户管理</a>
+								</span>
+							</div>										        					          
+						 </div>				        
+					</form>										
+				</ul>
+			</div>					  
+		</nav>
+		<empty name="data">			
+			<div class="btn-group">
+				<a href="__URL__/add" class="btn btn-info">添加客户</a>																								    										    									    										    											
+			</div>
+		<else /> 
+			<ul class="list-group">
+				<volist name='data' id='ar' empty="没有相关信息">
+					<li class="list-group-item">
+						<div class="row">								  												  	
+							<div class="col-md-1"><{$ar.realname}></div>	
+							<div class="col-md-2"><{$ar.phone}></div>							  
+							<div class="col-md-2"><{$ar.pincodes}></div>	
+							<div class="col-md-2"><{$ar.weixin}></div>
+							<div class="col-md-2"><{$ar.qq}></div>
+							<div class="col-md-3">
+								<div class="btn-group pull-right">
+									<a href="__APP__/Admin/Customer/add/tpid/<{$ar.id}>" class="btn btn-info">合作</a>
+									<a href="#" class="btn btn-info">详情</a>																    										    									    										    											
+								</div>
+							</div>
+						</div>					  		
+					</li>
+				</volist>					
+			</ul>
+		</empty> 
+		
+		
+		
+		
+		</div>
+</div>

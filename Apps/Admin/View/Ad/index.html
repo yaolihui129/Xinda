@@ -1,0 +1,31 @@
+<layout name="layout" />
+<div class="row">
+<h3 >轮播广告</h3>
+	<div class="col-md-12">
+	<volist name='data' id='ar' empty="没有数据">
+		<div class="panel panel-default">
+			<div class="media">
+				<a class="media-left" href="#">
+					<img src="__UPLOAD__/<{$_SESSION['qz']}><{$ar.path}><{$ar.img}>" alt="<{$ar.img}>" class="img-thumbnail" width="200px">
+				</a>
+				<div class="media-body">
+					<h4 ><{$ar.title}><br>跳转： <{$ar.url}><br>路径：<{$ar.path}><br>描述：<{$ar.remark}><br></h4>   
+					<div class="btn-group">
+						<a href="__URL__/img/id/<{$ar.id}>" class="btn btn-info ">上传图片</a>
+						<a href="__URL__/mod/id/<{$ar.id}>" class="btn btn-warning ">修改</a>
+					</div>     	            				
+				</div>				
+			</div>	        						        			        
+	   </div>
+	</volist>	        
+	</div>	
+</div>  
+
+		  
+ 
+        
+  
+  
+  
+  
+     

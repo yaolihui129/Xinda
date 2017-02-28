@@ -1,0 +1,22 @@
+<layout name="layout" />
+<div class="panel panel-default">
+	<div class="panel-heading"><b>修改手机登录密码</b><a href="__URL__/personal"class="btn btn-warning btn-xs pull-right" >返 回</a></div>  
+     <div class="panel-body">
+     <form action="__URL__/set" method="post" enctype='multipart/form-data'  role="form">
+         <input type="hidden" name="id" value="<{$user.id}>" />
+         <div class="form-group input-group-lg">            
+             <input type="text" class="form-control" value="<{$user.realname}>" readonly> 
+         </div> 
+         <div class="form-group input-group-lg">              
+              <input type="password" class="form-control" name="pass1" value="" placeholder="原密码，默认为：7186126" > 
+         </div> 
+         <div class="form-group input-group-lg">             
+              <input type="password" class="form-control" name="pass2" value="" placeholder="新密码" > 
+         </div>                  
+         <div class="form-group input-group-lg">             
+              <input type="password" class="form-control" name="pass3" value="" placeholder="确认密码" > 
+          </div>                      
+          <button type="submit" class="btn btn-info btn-lg">提 交</button>
+       </form>                 
+     </div>
+</div>
