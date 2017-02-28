@@ -1,0 +1,10 @@
+language: php
+php:
+  - 5.3
+  - 5.4
+before_script:
+  - composer install
+  - cd tests
+script: phpunit -v
+notifications:
+ webhooks: https://oapi.dingtalk.com/robot/send?access_token=e3c8dfdf3e29b537078fbf810ab3358670967dd7846bd982599c35c4ba4b83d9
