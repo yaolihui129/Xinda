@@ -2,7 +2,7 @@
 namespace Xinda\Controller;
 use Think\Controller;
 class AboutController extends Controller {
-    public function about(){
+    public function index(){
         $m=D('product');
          $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
          $_SESSION['Xinda']=$data;         

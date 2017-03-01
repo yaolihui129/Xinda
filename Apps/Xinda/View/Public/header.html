@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><{$_SESSION['Xinda']['web']}></title>
 	<meta name="keywords" content="<{$_SESSION['keywords']}>" />
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">				
+			
     <import type="css" file="css.xd_home" />
 
     <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -47,14 +47,14 @@
 		  <a class="navbar-brand" href="__APP__/Xinda"><{$_SESSION['Xinda']['web']}></a>
 		  <div class="collapse navbar-collapse" id="navbar-collapse">
 		    <ul class="navbar-nav ml-auto">
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/Servicelist">主营业务</a></li>
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/About/Hr">诚聘人才</a></li>
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/About/about">关于我们</a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/About/hr"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/About"><span class="glyphicon glyphicon-phone-alt"> 关于我们</span></a></li>
 		      <empty name="_SESSION['isCLogin']">
 		      	  <li class="nav-item"><a data-toggle="modal" href="#Login" class="nav-link">登录</a></li>
 		      <else />
-			      <li class="nav-item"><a href="#" class="nav-link"> <{$_SESSION['realname']}></a></li>
-			      <li class="nav-item"><a href="__APP__/Xinda/Login/logout" class="nav-link">退出</a></li>
+			      <li class="nav-item"><a href="__APP__/Xinda/Customer/personal" class="nav-link"> <span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span></a></li>
+			      
 		      </empty>
 		    </ul>
 		  </div>
