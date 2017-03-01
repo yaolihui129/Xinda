@@ -18,7 +18,7 @@ class ServicelistController extends Controller {
             $arr=$m->where($where)->order('sn')->select();                        
             $this->assign('arr',$arr);
          
-            $m=D('tc_prodservice');
+            $m=D('xd_prodservice');
             if($_GET['cate']){
                 $map['cate']=$_GET['cate'];
                 
@@ -27,7 +27,7 @@ class ServicelistController extends Controller {
                 ->order('utime desc')->select();
             }else {
                 $data=$m->where($map)->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-                ->order('utime desc')->limit(12)->select();
+                ->order('utime desc')->select();
             }
                    
             $this->assign('data',$data);

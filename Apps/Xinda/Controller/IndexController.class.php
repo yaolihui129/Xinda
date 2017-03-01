@@ -17,7 +17,7 @@ class IndexController extends Controller {
         $pic=$m->where($where)->order('utime desc')->select();
         $this->assign('pic',$pic);
         
-        $m=D('as_prodservice');
+        $m=D('xd_prodservice');
         $where['istj']=1;
         $data=$m->where($where)
         ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")

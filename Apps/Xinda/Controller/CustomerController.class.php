@@ -4,16 +4,18 @@ use Think\Controller;
 class CustomerController extends Controller {
 
 	public function index(){
-	  $m=D('product');
+	    /* 实例化模型*/
+	    $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
         $_SESSION['Xinda']=$data;
         $_SESSION['Xinda']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
-       
+        /* 接收参数*/
         $where['state']="发布";
-		$m=M('tc_customer');
+        /* 实例化模型*/
+        $m=M('tc_customer');
         $data=$m->where($where)->order('utime desc')->select();
         $this->assign('data',$data);
         $this->assign('w',$where);       

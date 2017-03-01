@@ -7,15 +7,15 @@ class HrController extends Controller {
     
         $m=D('product');
         $data=$m->field('web,adress,phone,tel,qq,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
+        $_SESSION['Xinda']=$data;
+        $_SESSION['Xinda']['img']=$data['path'].$data['img'];
+        $_SESSION['Xinda']['web']='智慧信达-招聘';
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
     
         $m=D('tp_hr');
-        $where['prodid']=1;
+        $where['prodid']=6;
         $where['istuij']=0;
         $where['state']='招聘中';
         $data=$m->where($where)->order('sn,id')->select();

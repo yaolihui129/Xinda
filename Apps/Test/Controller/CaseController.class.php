@@ -24,6 +24,7 @@ class CaseController extends Controller {
     public function procase(){
         /* 接收参数*/
         $proid=$_GET['proid'];
+        $_SESSION['proid']= $proid;
         /* 实例化模型*/
         $m=D('project');
         $arr=$m->field("id,name,code,begin,end,testgp,status,pri,deleted,desc,po,pm,qd,rd,order")->find($proid);
