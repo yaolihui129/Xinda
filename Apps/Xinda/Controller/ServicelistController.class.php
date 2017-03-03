@@ -31,6 +31,7 @@ class ServicelistController extends Controller {
             }
                    
             $this->assign('data',$data);
+            $this->assign('cate',$_GET['cate']);
                   
         $this->display();
     }

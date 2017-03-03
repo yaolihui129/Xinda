@@ -1,60 +1,50 @@
-<layout name="layout" />	
-<div class="row">
-	<div class="panel panel-success">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<{$arr.cate|getCatname=###}>-<b><{$arr.name}></b>
-				<a href="__APP__/Xiuli/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
-			</h3>
-		</div>
-		<div class="panel-body">
-			<div class="col-md-3 ">
-				<img src="__UPLOAD__<{$arr.path}><{$arr.img}>" alt="<{$arr.img}>"  height="180px">		
-			</div>
-			<div class="col-md-7 ">
-				<h5>编号：<{$arr.mark}></h5>
-				<h4>名称：<{$arr.name}></h4>
-				<switch name="arr.money">
-				    <case value="0"><br></case>				    
-				    <default /><h4>价格：<b>￥<{$arr.money}></b>(市场价：<s><em>￥<{$arr.smoney}></em></s>)</h4>
-								<!--<h4>运费：￥<{$arr.wlmoney}></h4>-->
-								
-				</switch>
-				<h5>制作周期：<{$arr.weight}></h5>				
-				<a href="#" class="btn btn-info btn-xs">咨询预约：<{$_SESSION['Xiuli']['tel']}></a>
-				<span class="hidden-xs hidden-sm">
-					<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['Xiuli']['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
-						<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['Xiuli']['qq']}>:41">
-					</a>
-				</span>
-	
-			</div>
-												
-		</div>
-		<div class="panel panel-success">
-			<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
-			<div class="panel-body"><p><{$arr.content}></p></div>			
-		</div>
-	</div>
-	
-</div>
+<layout name="layout" />
+<div class="container" >	
 
-<div class="row">
-    <div class="panel panel-success">
-		<div class="panel-heading"><h3 class="panel-title">成功案例<span class="pull-right"><a href="__APP__/Xiuli">更多</a></span></h3></div>
-		<div class="panel-body">
-		<volist name='date1' id='ar' empty="没有数据">
-	      	<div class="col-xs-12 col-md-3">
-				<div class="thumbnail" >
-					<a href="#" >
-					     <img data-src="holder.js/100%x180" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>"  height="180px">
-					</a>
-					<div class="caption"><{$ar.name}></div>
-				</div>
+		<div class="panel panel-success" style="margin:100px 20px 50px;">
+			<div class="panel-heading">
+				<h5 class="panel-title">
+					<{$arr.cate|getCatname=###}>-<b><{$arr.name}></b>
+					<a href="__APP__/Xiuli/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
+				</h5>
 			</div>
-		</volist>
-		</div>			       		
-	</div>					  		 
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-5 ">
+						<img src="__UPLOAD__<{$arr.path}><{$arr.img}>" alt="<{$arr.img}>"  height="280px">		
+					</div>
+					<div class="col-md-7 ">
+						<h5>编号：<{$arr.mark}></h5>
+						<h4>名称：<{$arr.name}></h4>
+						<switch name="arr.money">
+						    <case value="0"><br></case>				    
+						    <default /><h4>价格：<b>￥<{$arr.money}></b>(市场价：<s><em>￥<{$arr.smoney}></em></s>)</h4>
+										<!--<h4>运费：￥<{$arr.wlmoney}></h4>-->
+										
+						</switch>
+						<h5>制作周期：<{$arr.weight}></h5>				
+						<a href="tel:：<{$_SESSION['Xiuli']['tel']}>" class="btn btn-info btn-xs">咨询预约</a>
+						<span class="hidden-xs hidden-sm">
+							<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['Xiuli']['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
+								<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['Xiuli']['qq']}>:41">
+							</a>
+						</span>
+			
+					</div>
+				
+				</div>
+				
+													
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
+				<div class="panel-body"><p><{$arr.content}></p></div>			
+			</div>
+		</div>
+		
+
+	
+	
 </div>
 
 	
