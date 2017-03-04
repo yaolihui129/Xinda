@@ -12,12 +12,13 @@ class ServicelistController extends Controller {
             $_SESSION['browser']=GetBrowser();
             $_SESSION['os']=GetOs();
             
-            $where['prodid']=6;            
+                     
             $m=D('xd_cate');
-            $map['state']='发布';
+            $where['state']='正常';
             $arr=$m->where($where)->order('sn')->select();                        
             $this->assign('arr',$arr);
-         
+            
+            $map['state']='发布';
             $m=D('xd_prodservice');
             if($_GET['cate']){
                 $map['cate']=$_GET['cate'];
