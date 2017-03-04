@@ -21,10 +21,10 @@ class IndexController extends Controller {
         $where['istj']=1;
         $where['state']='发布';
         $data=$m->where($where)
-        ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+        ->field("id,mark,name,state,content,money,smoney,num,istj,cate,path,img,utime")
         ->order('utime desc')
         ->select();
-        $this->assign('data',$data);               
+        $this->assign('data',$data); 
         
         $this->display();
     }

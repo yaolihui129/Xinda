@@ -16,8 +16,7 @@
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');	
 	  ga('create', 'UA-86975455-1', 'auto');
 	  ga('send', 'pageview');
 	</script> 
@@ -113,32 +112,41 @@
     <div class="container">
       <h1 class="text-center mb-5">推荐产品</h1>
     </div>
+	<volist name='data' id='ar' empty="没有数据">
+		<if condition="$key%2 eq 0 ">
+			<div class="container feature-section">
+		      <div class="row align-items-center">
+		        <div class="col-lg-5">
+		          <h4><{$ar.name}></h4>
+		          <p class="text-center"><{$ar.content}></p>
+		        </div>
+		        <div class="col-lg-7">
+		          <a href="__APP__/Xinda/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="List" /></a>
+		        </div>
+		      </div>
+		      <div class="divider_line"></div>
+		    </div>
+		
+		<else /> 
+			<div class="container feature-section">
+		      <div class="row align-items-center">
+		        <div class="col-lg-5 push-lg-7">
+		          <h4><{$ar.name}></h4>
+		          <p class="text-center"><{$ar.content}></p>
+		        </div>
+		        <div class="col-lg-7 pull-lg-5">
+		          <a href="__APP__/Xinda/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="Campaign" /></a>
+		        </div>
+		      </div>
+		      <div class="divider_line"></div>
+		    </div>
 
-    <div class="container feature-section">
-      <div class="row align-items-center">
-        <div class="col-lg-5">
-          <h4>产品one</h4>
-          <h5 class="text-center">产品one介绍</h5>
-        </div>
-        <div class="col-lg-7">
-          <img class="img-fluid" src="__IMAGES__/list-5.png" alt="List" />
-        </div>
-      </div>
-      <div class="divider_line"></div>
-    </div>
 
-    <div class="container feature-section">
-      <div class="row align-items-center">
-        <div class="col-lg-5 push-lg-7">
-          <h4>产品二</h4>
-          <h5 class="text-center">产品二介绍</h5>
-        </div>
-        <div class="col-lg-7 pull-lg-5">
-          <img class="img-fluid" src="__IMAGES__/campaign-c.png" alt="Campaign" />
-        </div>
-      </div>
-      <div class="divider_line"></div>
-    </div>
+		</if>
+	
+	    
+	</volist>
+    
 
    
 	<div class="signup-area text-center">
@@ -147,7 +155,7 @@
 	      <div class="row align-items-center">
 	        <div class="col-lg-12">
 	          <a class="btn btn-primary btn-lg " href="tel:18801043607">马上预约</a>
-	          <p class="text-muted"><br>我们完成的不只是一项需求，而是帮您解决您困扰的问题</p>          
+	          <p class="text-muted"><br>我们完成的不只是一项需求，而是实实在在的解决您困扰的问题</p>          
 	        </div>
 	        
 	      </div>
