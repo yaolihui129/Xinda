@@ -3,7 +3,8 @@ namespace Xinda\Controller;
 use Think\Controller;
 class AboutController extends Controller {
     public function index(){
-        $m=D('product');
+         /* 实例化模型*/
+         $m=D('product');
          $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
          $_SESSION['Xinda']=$data;         
          $_SESSION['Xinda']['img']=$data['path'].$data['img'];
@@ -16,7 +17,7 @@ class AboutController extends Controller {
     }
     
     public function hr(){
-    
+        /* 实例化模型*/
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
         $_SESSION['Xinda']=$data;
@@ -25,7 +26,7 @@ class AboutController extends Controller {
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
-    
+        /* 实例化模型*/
         $m=D('tp_hr');
         $where['prodid']=6;
         $where['state']='招聘中';

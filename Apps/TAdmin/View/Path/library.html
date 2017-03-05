@@ -17,7 +17,7 @@
              		 	<a data-toggle="collapse" data-parent="#accordion" href="#<{$ex.id}>" aria-expanded="true" aria-controls="<{$ex.id}>">                  		
                   		<{$ex.id}>
                   		<switch name="ex.sceneid">
-			          		<case value="0"><{$ex.pathid|getSPath=###}></case>			          
+			          		<case value="0"><{$ex.pathid|getSPath=###}> <span class="badge"><{$ex.pathid|countPFunc=###}></span></case>			          
 			         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
 			      		</switch>               		                 		                  		
                   		</a>                  		               
