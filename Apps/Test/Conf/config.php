@@ -9,4 +9,7 @@ return array(
         '__IMG__'=>__ROOT__.'/Public/images',
         '__UPLOAD__'=>__ROOT__.'/Upload/Test'
     ),
+    //连接数据库
+    'DB_HOST'=>'192.168.21.10',
+    'DB_NAME'=>'zentao',
 );

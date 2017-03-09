@@ -1,62 +1,73 @@
 <layout name="layout" />
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><{$arr.id|getPro=###}>
-	    <div class="btn-group pull-right">
-	    	<a href="__APP__/Test" class="btn btn-warning btn-xs">返回</a>
-	    </div>
-    </h3>
-  </div>
-  <div class="panel-body table-responsive">
-	<b> 产品：</b><{$arr.po|getRealname=###}>
-	<b> 项目：</b><{$arr.pm|getRealname=###}>
-	<b> 研发：</b><{$arr.rd|getRealname=###}>
-	<b> 测试：</b><{$arr.qd|getRealname=###}><br>
-	 <div class="well well-sm"><b>简介：</b><br><{$arr.desc}></div>	  
-    	<ul class="nav nav-tabs" role="tablist">
-		  <li role="presentation" ><a href="__APP__/Test/Stage/index/proid/<{$arr.id}>">里程碑
-		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/Test/Risk/index/proid/<{$arr.id}>">风险
-		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-		  <li role="presentation" class="active"><a href="__APP__/Test/Func/func/proid/<{$arr.id}>">功能点
-		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" "><a href="__APP__/Test/Func/range/proid/<{$arr.id}>">范围
-		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/Test/Scene/index/proid/<{$arr.id}>">场景
-		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/Test/Case/procase/proid/<{$arr.id}>">用例
-		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/Test/Rules/prorules/proid/<{$arr.id}>">本期需求
-		  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
-		  
-		</ul>
-        <table class="table table-striped table-bordered table-hover table-condensed ">
-            <volist name='data' id='st' empty="没有数据">
-                <switch name="st.fproid">
-					<case value="$arr.id"> <tr class="info"></case>
-					<default /><tr class="default">
-				</switch>
-                    <td align="left" >
-	                    <span class="badge"><{$st.fproid|getProNo=###}></span>
-	                    <span class="label label-default"><{$st.branch|getBranchName=###}></span>
-	                	<span class="label label-info"><{$st.parent|getModuleName=###}></span>
-	                	<span class="label label-info"><{$st.name}></span>
-	                	<b><{$st.func}>(ID:<{$st.id}>)</b>	                	                    	
-                       	<div class="btn-group pull-right">
-							<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
-								 用例 <span class="badge"><{$st.id|countFCase=###}></span><span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu " role="menu">
-								<li ><a target="_blank" href="__APP__/Test/Case/index/funcid/<{$st.id}>">用例 
-								<span class="badge pull-right"><{$st.id|countFCase=###}></span></a></li>
-								<li class="divider "></li>
-								<li ><a target="_blank" href="__APP__/Test/Rules/index/funcid/<{$st.id}>">规则
-								<span class="badge pull-right"><{$st.id|countFRules=###}></span></a></li>						    
-							</ul>
-						</div>
-                     </td>                      
-                 </tr>
-           </volist>
-       </table>
-    </div>
-  </div>
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+			    <div class="btn-group pull-right">
+			    	<a href="__APP__/Test" class="btn btn-warning btn-xs">返回</a>
+			    </div>
+		    </h3>
+		  </div>
+		  <div class="panel-body">			  
+		    	<ul class="nav nav-tabs" role="tablist">
+				  <li role="presentation" ><a href="__APP__/Test/Stage/index/proid/<{$arr.id}>">里程碑
+				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/Test/Risk/index/proid/<{$arr.id}>">风险
+				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+				  <li role="presentation" class="active"><a href="__APP__/Test/Func/func/proid/<{$arr.id}>">功能点
+				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+				  <li role="presentation" "><a href="__APP__/Test/Func/range/proid/<{$arr.id}>">范围
+				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/Test/Scene/index/proid/<{$arr.id}>">场景
+				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/Test/Case/procase/proid/<{$arr.id}>">用例
+				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/Test/Rules/prorules/proid/<{$arr.id}>">本期需求
+				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
+				  
+				</ul>
+		        <table class="table table-striped table-bordered table-hover table-condensed ">
+		            <volist name='data' id='st' empty="没有数据">
+		                <switch name="st.fproid">
+							<case value="$arr.id"> <tr class="info"></case>
+							<default /><tr class="default">
+						</switch>
+		                    <td align="left" >
+			                    
+			                    <{$st.id}>.
+			                    <span class="label label-default"><{$st.branch|getBranchName=###}></span>
+			                	<span class="label label-info"><{$st.parent|getModuleName=###}></span>
+			                	<span class="label label-info"><{$st.name}></span>
+			                	<b><{$st.func}></b><span class="badge"><{$st.fproid|getProNo=###}></span>	                	                    	
+		                       	<div class="btn-group pull-right">
+									<a target="_blank" href="__APP__/Test/Case/index/funcid/<{$st.id}>" class="btn btn-success btn-xs">用例 
+									<span class="badge"><{$st.id|countFCase=###}></span></a>
+									<a target="_blank" href="__APP__/Test/Rules/index/funcid/<{$st.id}>" class="btn btn-info btn-xs">规则
+									<span class="badge"><{$st.id|countFRules=###}></span></a>
+									
+									
+									
+								</div>
+		                     </td>                      
+		                 </tr>
+		           </volist>
+		       </table>
+		    </div>
+		  </div>
+	
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">项目简介</h3></div>			
+			<div class="panel-body">	
+				<b> 产品：</b><{$arr.po|getRealname=###}>
+				<b> 项目：</b><{$arr.pm|getRealname=###}><br>
+				<b> 研发：</b><{$arr.rd|getRealname=###}>
+				<b> 测试：</b><{$arr.qd|getRealname=###}><br><br>
+				<{$arr.desc}>
+			</div>			
+		</div>
+	</div>
+</div>
+

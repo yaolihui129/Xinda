@@ -68,7 +68,7 @@
 	</div>
 	<div class="col-md-4">
 		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">简介</h3></div>			
+			<div class="panel-heading"><h3 class="panel-title">项目简介</h3></div>			
 			<div class="panel-body">	
 					<b> 产品：</b><{$arr.po|getRealname=###}>
 					<b> 项目：</b><{$arr.pm|getRealname=###}><br>
@@ -84,8 +84,9 @@
 		<div class="panel panel-info">
 	  	<div class="panel-heading">
 		    <h3 class="panel-title">里程碑
-		  		<span class="badge"><{$arr.id|countStage=###}></span>
+		  		<span class="badge pull-right"><{$arr.id|countStage=###}></span>
 		  	</h3>
+		  	
 		</div>
 	  	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
            <volist name='stage' id='st' empty="没有数据">
