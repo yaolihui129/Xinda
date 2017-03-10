@@ -1,0 +1,74 @@
+<layout name="layout" />
+<div class="container">	
+	<nav class="navbar navbar-default" role="navigation">			 
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="__URL__/receive">安顺汽车维修服务收车</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">			      			      
+			<ul class="nav navbar-nav navbar-right">		      	
+				<form action="__URL__/search " method="post" class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="text" name="search" class="form-control" value="<{$search}>" placeholder="车牌号，识别代码">
+							<span class="input-group-btn">
+								 <button type="submit" class="btn btn-default" type="button">查询</button>
+							</span>
+						</div>		        					          
+					</div>				        
+				</form>
+			</ul>
+		</div>			  
+	</nav> 
+	
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<empty name="arr">
+					<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">车辆档案库：<{$search}></h4>
+							</div>
+							<div class="panel-body">
+								
+								无此车辆信息
+								<div class="btn-group pull-right">
+									<a href="__APP__/Anshun/Car/add/plateno/<{$search}> " class="btn btn-info btn-lg">创建车辆档案</a>
+								</div>
+							</div>
+					</div>
+					
+					
+				<else /> 
+					<volist name='arr' id='st' empty="没有数据">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<{$st.plateno}>&nbsp; <{$st.brand}>-<{$st.type}>&nbsp; <{$st.color}>
+									<span class="badge pull-right">出厂：<{$st.ccdate}></span>
+								</h4>
+							</div>
+							<div class="panel-body">											        
+								<b>识别代码：</b><{$st.vim}>
+								<div class="btn-group pull-right">
+									<a href="__URL__/receive/id/<{$st.id}> " class="btn btn-success btn-lg">收车</a>	
+									<a href="__APP__/Anshun/Car/mod/id/<{$st.id}> " class="btn btn-info btn-lg">车辆信息</a>							
+								</div> 
+								<br>								
+								<{$st.id|getServicelist=###}> 					 					
+							</div>
+					  	</div>
+					</volist>
+				</empty>
+			</div>
+		</div>
+	</div>
+	
+</div>			
+			

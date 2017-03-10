@@ -1,0 +1,34 @@
+<layout name="layout" />
+<div class="container">	
+	<div class="row">
+		<div class="col-md-12">
+			<volist name='arr' id='st' empty="没有数据">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h4 class="panel-title"><{$st.carid|getCarinfo=###}><span class="bage pull-right"><{$st.state}></span></h4>
+					</div>
+					<div class="panel-body">											        
+						收车时间：<{$st.sdate}>
+						<img alt="__UPLOAD__/<{$st.pathfront}><{$st.imgfront}>" src="__UPLOAD__/<{$st.pathfront}><{$st.imgfront}>">
+						<{$st.textfront}>
+						<img alt="__UPLOAD__/<{$st.pathback}><{$st.imgback}>" src="__UPLOAD__/<{$st.pathback}><{$st.imgback}>">
+						<{$st.textback}>
+						<img alt="__UPLOAD__/<{$st.pathleft}><{$st.imgleft}>" src="__UPLOAD__/<{$st.pathleft}><{$st.imgleft}>">
+						<{$st.textleft}>
+						<img alt="__UPLOAD__/<{$st.pathright}><{$st.imgright}>" src="__UPLOAD__/<{$st.pathright}><{$st.imgright}>">
+						<{$st.textright}>
+						<img alt="__UPLOAD__/<{$st.pathservice}><{$st.imgservice}>" src="__UPLOAD__/<{$st.pathservice}><{$st.imgservice}>">
+						<{$st.textservice}>
+						<img alt="__UPLOAD__/<{$st.pathoil}><{$st.imgoil}>" src="__UPLOAD__/<{$st.pathoil}><{$st.imgoil}>">
+						<{$st.oilgauge}>						
+						<div class="btn-group pull-right">
+							<a href="# " class="btn btn-success btn-lg">收车</a>	
+							<a href="__APP__/Anshun/Car/mod/id/<{$st.carid}> " class="btn btn-info btn-lg">车辆信息</a>							
+						</div> 
+												 					
+					</div>
+				</div>
+			</volist>
+		</div>
+	</div>
+</div>	

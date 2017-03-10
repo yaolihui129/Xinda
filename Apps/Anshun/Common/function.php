@@ -10,3 +10,4 @@ function getCatname($cateid){
         return "|-";
     }
 }
+

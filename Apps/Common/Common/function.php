@@ -9,6 +9,32 @@ function getState($id){
         return ;
     }
 }
+//根据车辆ID获取维修记录
+function getServicelist($carid){
+    $m=M('order_serviccar');
+    $where[carid]=$carid;
+    $data=$m->where($where)->select();
+    $str=$data;
+
+    if ($data){
+        return $str;
+    }else {
+        return "暂时还没有维修保养记录";
+    }
+
+}
+//根据车辆ID获取车牌号
+function getCarinfo($carid){
+    $m=D('car');
+    $data=$m->find($carid);
+    $str=$data['brand']."-".$data['type'].$data['plateno']."&nbsp;【".$data['color']."】";
+    if($data){
+        return $str;
+    }else{
+        return "没有车牌信息";
+    }
+    
+}
 
 //根据id获取活动信息
 function getVoucher($id){

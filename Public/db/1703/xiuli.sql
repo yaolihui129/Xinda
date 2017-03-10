@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2017-03-09 10:30:11
+Date: 2017-03-10 17:59:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -554,37 +554,6 @@ INSERT INTO `zt_as_cate` VALUES ('6', '6', '4', '装饰类', '正常', '4', '贾
 INSERT INTO `zt_as_cate` VALUES ('7', '3', '4', '清洁类', '正常', '4', '贾晓月', '2017-02-18 19:00:16');
 
 -- ----------------------------
--- Table structure for `zt_as_order`
--- ----------------------------
-DROP TABLE IF EXISTS `zt_as_order`;
-CREATE TABLE `zt_as_order` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
-  `money` decimal(10,1) unsigned NOT NULL DEFAULT '0.0' COMMENT '订单金额',
-  `productmoney` decimal(10,1) unsigned NOT NULL DEFAULT '0.0' COMMENT '商品总额',
-  `state` smallint(6) NOT NULL DEFAULT '1' COMMENT '订单状态',
-  `payway` smallint(6) NOT NULL DEFAULT '1' COMMENT '支付方式',
-  `content` varchar(255) NOT NULL COMMENT '订单留言',
-  `atime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下单时间',
-  `ptime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '付款时间',
-  `stime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发货时间',
-  `wlname` varchar(20) NOT NULL COMMENT '物流名称',
-  `wlid` varchar(20) NOT NULL COMMENT '运单编号',
-  `wlmoney` decimal(5,1) NOT NULL COMMENT '物流运费',
-  `uid` int(10) unsigned NOT NULL COMMENT '用户编号',
-  `uname` varchar(20) NOT NULL COMMENT '用户名',
-  `utname` varchar(10) NOT NULL COMMENT '收货人名',
-  `uphone` char(11) NOT NULL COMMENT '收货手机',
-  `utel` varchar(20) NOT NULL COMMENT '收货人固定电话',
-  `uaddress` varchar(255) NOT NULL COMMENT '用户地址',
-  PRIMARY KEY (`id`),
-  KEY `order_uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of zt_as_order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `zt_as_orderdata`
 -- ----------------------------
 DROP TABLE IF EXISTS `zt_as_orderdata`;
@@ -961,6 +930,27 @@ CREATE TABLE `zt_burn` (
 -- ----------------------------
 -- Records of zt_burn
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `zt_car`
+-- ----------------------------
+DROP TABLE IF EXISTS `zt_car`;
+CREATE TABLE `zt_car` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `plateno` char(7) DEFAULT NULL,
+  `vim` char(17) DEFAULT NULL,
+  `brand` varchar(25) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `ccdate` date DEFAULT NULL,
+  `color` varchar(5) DEFAULT NULL,
+  `owner` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of zt_car
+-- ----------------------------
+INSERT INTO `zt_car` VALUES ('1', '冀E213B9', 'LDC661240f3331467', '东风雪铁龙', 'C3-XR', '2015-06-11', '白色', null);
 
 -- ----------------------------
 -- Table structure for `zt_case`
@@ -4584,6 +4574,55 @@ INSERT INTO `zt_mt_prodservice` VALUES ('1', '', '找保姆', '', '0', null, '0'
 INSERT INTO `zt_mt_prodservice` VALUES ('2', '', '聘月嫂', '', '0', null, '0', '0', '0', '1', null, '1', null, '1', '1', '/Product/2017-01-24/', '5887249e7ed61.png', '腰立辉', '2017-02-09 21:50:10');
 INSERT INTO `zt_mt_prodservice` VALUES ('3', '', '钟点工', '', '0', null, '0', '0', '0', '1', null, '1', null, '1', '1', '/Product/2017-01-24/', '5887250ec196f.png', '腰立辉', '2017-02-09 21:50:11');
 INSERT INTO `zt_mt_prodservice` VALUES ('4', '', '拼家政', '', '0', null, '0', '0', '0', '1', null, '1', null, '1', '1', '/Product/2017-01-24/', '588724199cb81.png', '腰立辉', '2017-02-09 21:50:16');
+
+-- ----------------------------
+-- Table structure for `zt_order_serviccar`
+-- ----------------------------
+DROP TABLE IF EXISTS `zt_order_serviccar`;
+CREATE TABLE `zt_order_serviccar` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
+  `money` decimal(10,1) unsigned DEFAULT '0.0' COMMENT '订单金额',
+  `productmoney` decimal(10,1) unsigned DEFAULT '0.0' COMMENT '商品总额',
+  `state` varchar(6) DEFAULT '待维修' COMMENT '订单状态',
+  `uid` smallint(6) DEFAULT NULL,
+  `phone` char(11) DEFAULT NULL COMMENT '用户手机',
+  `carid` smallint(6) DEFAULT NULL COMMENT '车辆ID',
+  `pathfront` varchar(32) DEFAULT NULL,
+  `imgfront` varchar(255) DEFAULT NULL COMMENT '车前',
+  `textfront` varchar(255) DEFAULT NULL,
+  `pathback` varchar(255) DEFAULT NULL,
+  `imgback` varchar(255) DEFAULT NULL COMMENT '车后',
+  `textback` varchar(255) DEFAULT NULL,
+  `pathleft` varchar(255) DEFAULT NULL,
+  `imgleft` varchar(255) DEFAULT NULL COMMENT '车左',
+  `textleft` varchar(255) DEFAULT NULL,
+  `pthright` varchar(255) DEFAULT NULL,
+  `imgright` varchar(255) DEFAULT NULL COMMENT '车右',
+  `textright` varchar(255) DEFAULT NULL,
+  `pathservice` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `imgservice` varchar(255) DEFAULT NULL COMMENT '维修处',
+  `textservice` varchar(255) DEFAULT NULL,
+  `odograph` int(11) DEFAULT NULL COMMENT '里程数',
+  `pathoil` varchar(255) DEFAULT NULL,
+  `imgoil` varchar(255) DEFAULT NULL COMMENT '油量表图片',
+  `oilgauge` int(11) DEFAULT NULL COMMENT '油量',
+  `content` varchar(255) DEFAULT NULL COMMENT '备注',
+  `prodid` smallint(6) DEFAULT NULL COMMENT '服务机构',
+  `sdate` date DEFAULT NULL,
+  `adder` varchar(10) DEFAULT NULL,
+  `moder` varchar(10) DEFAULT NULL,
+  `ctime` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '收车时间',
+  `utime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=100010 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of zt_order_serviccar
+-- ----------------------------
+INSERT INTO `zt_order_serviccar` VALUES ('100003', '0.0', '0.0', '待维修', null, '13931162537', '1', null, null, '车前无明显伤痕', null, null, '车后无明显伤痕', null, null, '左侧无明显伤痕', null, null, '右侧无明显伤痕', null, null, 'iuasd', null, null, null, '70', 'asdasd', '4', '2017-03-10', '', '', '2017-03-10 16:37:01', '2017-03-10 16:37:01');
+INSERT INTO `zt_order_serviccar` VALUES ('100004', '0.0', '0.0', '待维修', null, '13931162537', '1', null, null, '车前无明显伤痕', null, null, '车后无明显伤痕', null, null, '左侧无明显伤痕', null, null, '右侧无明显伤痕', null, null, 'wqeq', null, null, null, '12', 'qw', '4', '2017-03-10', '', '', '2017-03-10 16:45:35', '2017-03-10 16:45:35');
+INSERT INTO `zt_order_serviccar` VALUES ('100005', '0.0', '0.0', '待维修', null, '18801043607', '1', null, null, '车前无明显伤痕', null, null, '车后无明显伤痕', null, null, '左侧无明显伤痕', null, null, '右侧无明显伤痕', null, null, 'dfs', null, null, null, '6', 'fdgdf', '4', '2017-03-10', '', '', '2017-03-10 16:49:55', '2017-03-10 16:49:55');
+INSERT INTO `zt_order_serviccar` VALUES ('100006', '0.0', '0.0', '待维修', null, '13931162537', '1', null, null, '车前无明显伤痕', null, null, '车后无明显伤痕', null, null, '左侧无明显伤痕', null, null, '右侧无明显伤痕', null, null, 'asd', null, null, null, '50', 'asd', '4', '2017-03-10', '', '', '2017-03-10 16:57:47', '2017-03-10 16:57:47');
 
 -- ----------------------------
 -- Table structure for `zt_product`
