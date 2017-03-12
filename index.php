@@ -11,7 +11,7 @@ define('APP_PATH','./Apps/');
 define('RUNTIME_PATH','./Runtime/');
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false,true
-define('APP_DEBUG',false);
+define('APP_DEBUG',true);
 
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';

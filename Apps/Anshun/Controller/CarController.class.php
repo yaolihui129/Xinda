@@ -18,25 +18,37 @@ class CarController extends Controller {
     
     
     public function add(){
-        
-        $this->display();
-    
+        $plateno=$_GET['plateno'];
+        if($plateno){
+            $this->assign('plateno',$plateno);
+            $this->display();
+        }else {
+            $this->error('请先查询车牌号信息');
+        }
     }
     
     public function insert(){
         /*实例化模型*/
-        $db=D('car');
+        $m=D('car');
+        $where['vim']=$_POST['vim'];
+        $arr=$m->where($where)->select();
+        if($arr){
+            $this->error('车辆识别码重复，请核实车辆来路');
+        }else {
+            $_POST['moder']=$_SESSION['realname'];
+            if(!$m->create()){
+                $this->error($m->getError());
+            }
+            $lastId=$m->add();
+            if($lastId){
+                $this->success("成功",U('Order'));
+            }else{
+                $this->error('失败');
+            }
+        }
+        
          
-        $_POST['moder']=$_SESSION['realname'];            
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        $lastId=$m->add();
-        if($lastId){
-            $this->success("成功");
-        }else{
-            $this->error('失败');
-        }
+        
     }
     
    
@@ -46,9 +58,7 @@ class CarController extends Controller {
         $m=D('car');
         $arr=$m->find($_GET[id]);
         $this->assign('arr',$arr);
-    
-       
-    
+
         $this->display();
     }
     
@@ -63,11 +73,5 @@ class CarController extends Controller {
             $this->error("修改失败！");
         }
     }
-    
-    
-    
-
-    
-    
     
 }

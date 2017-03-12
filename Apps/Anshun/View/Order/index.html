@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="__URL__/receive">安顺汽车维修服务收车</a>
+			<a class="navbar-brand" href="__URL__/receive">安顺汽修-<b>收车</b></a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">			      			      
 			<ul class="nav navbar-nav navbar-right">		      	
@@ -26,49 +26,15 @@
 		</div>			  
 	</nav> 
 	
-	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<empty name="arr">
-					<div class="panel panel-info">
-							<div class="panel-heading">
-								<h4 class="panel-title">车辆档案库：<{$search}></h4>
-							</div>
-							<div class="panel-body">
-								
-								无此车辆信息
-								<div class="btn-group pull-right">
-									<a href="__APP__/Anshun/Car/add/plateno/<{$search}> " class="btn btn-info btn-lg">创建车辆档案</a>
-								</div>
-							</div>
-					</div>
-					
-					
-				<else /> 
-					<volist name='arr' id='st' empty="没有数据">
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<{$st.plateno}>&nbsp; <{$st.brand}>-<{$st.type}>&nbsp; <{$st.color}>
-									<span class="badge pull-right">出厂：<{$st.ccdate}></span>
-								</h4>
-							</div>
-							<div class="panel-body">											        
-								<b>识别代码：</b><{$st.vim}>
-								<div class="btn-group pull-right">
-									<a href="__URL__/receive/id/<{$st.id}> " class="btn btn-success btn-lg">收车</a>	
-									<a href="__APP__/Anshun/Car/mod/id/<{$st.id}> " class="btn btn-info btn-lg">车辆信息</a>							
-								</div> 
-								<br>								
-								<{$st.id|getServicelist=###}> 					 					
-							</div>
-					  	</div>
-					</volist>
-				</empty>
+	<div class="panel panel-default">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">收车交车流程图</h4>
+			</div>
+			<div class="panel-body">
+				<img alt="__IMAGES__/receive.jpg" src="__IMAGES__/receive.png" width="100%">					
 			</div>
 		</div>
 	</div>
-	
 </div>			
 			

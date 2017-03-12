@@ -13,9 +13,18 @@ function getState($id){
 function getServicelist($carid){
     $m=M('order_serviccar');
     $where[carid]=$carid;
-    $data=$m->where($where)->select();
-    $str=$data;
-
+    $data=$m->where($where)->order('ctime desc')->select();
+    
+     $str.='<br><br><ul class="list-group">';
+        foreach ($data as $ar){
+          $str.='<li class="list-group-item">';
+          $str.=$ar['sdate'].':'.getProduct($ar['prodid']).$ar['typy'].$ar['textservice'].'&nbsp;里程数：'.$ar['odograph'];
+          $str.= '</li>';
+        }
+        
+        $str.='</ul>';
+    
+    
     if ($data){
         return $str;
     }else {
@@ -27,7 +36,7 @@ function getServicelist($carid){
 function getCarinfo($carid){
     $m=D('car');
     $data=$m->find($carid);
-    $str=$data['brand']."-".$data['type'].$data['plateno']."&nbsp;【".$data['color']."】";
+    $str=$data['plateno']."&nbsp;".$data['type']."&nbsp;【".$data['color']."】";
     if($data){
         return $str;
     }else{
@@ -353,7 +362,13 @@ function getPlan($dateid){
             return ;
         }
     } 
-    
+    //根据prodid 获取机构名称
+    function getProduct($prodid){
+        $m=M('product');
+        $data=$m->find($prodid);
+        $str=$data['name'];
+        return $str;
+    }
     
     
     // 根据id获取项目信息

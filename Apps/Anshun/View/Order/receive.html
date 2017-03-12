@@ -6,7 +6,7 @@
 			 	<div class="panel-heading">
 				    <h3 class="panel-title">收车:<{$arr.plateno}>
 					    <div class="btn-group pull-right">
-					    	<a href="__URL__/index/search/<{$arr.plateno}>" class="btn btn-warning btn-xs">返回</a>
+					    	<a href="__URL__/search/search/<{$arr.plateno}>" class="btn btn-warning btn-xs">返回</a>
 					    </div>
 				    </h3>
 				</div>
@@ -14,51 +14,27 @@
 			 		<form action="__URL__/insert" method="post" enctype='multipart/form-data'  role="form">                    
 	                     <input type="hidden" name="carid" value="<{$arr.id}>" />
 	                     <input type="hidden" name="prodid" value='4' />
-	                     
-	                     <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">车前：</label>
-					          <div  class="col-sm-10">
-					            <input type="text" class="form-control" name="textfront" value="车前无明显伤痕" placeholder="车前" >
-							  </div>
-					      </div>
-					      <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">车后：</label>
-					          <div  class="col-sm-10">
-					            <input type="text" class="form-control" name="textback" value="车后无明显伤痕" placeholder="车后" >
-							  </div>
-					      </div>
-					      <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">车左：</label>
-					          <div  class="col-sm-10">
-					            <input type="text" class="form-control" name="textleft" value="左侧无明显伤痕" placeholder="车左" >
-							  </div>
-					      </div>
-					      <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">车右：</label>
-					          <div  class="col-sm-10">
-					            <input type="text" class="form-control" name="textright" value="右侧无明显伤痕" placeholder="车右" >
-							  </div>
-					      </div>
+	                     <input type="hidden" name="textfront" value="车前:无明显伤痕" >
+	                     <input type="hidden" name="textback" value="车后:无明显伤痕" >
+					     <input type="hidden" name="textleft" value="左侧:无明显伤痕" >
+					     <input type="hidden"  name="textright" value="右侧:无明显伤痕" >
+					      
 					      <div class="form-group ">
 					          <label for="exampleInputusername" class="col-sm-2 control-label">维修：</label>
-					          <div  class="col-sm-10">
+					          <div  class="col-sm-5">
 					            <input type="text" class="form-control" name="textservice" value="" placeholder="维修">
 							  </div>
-					      </div>
-					      <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">油量：</label>
-					          <div  class="col-sm-10">
-					            <input type="number " class="form-control" name="oilgauge" value="" placeholder="油量">
+							  <div  class="col-sm-5">
+							  	<input type="tel" class="form-control" name="phone" value="" placeholder="客户电话">
 							  </div>
 					      </div>
-					      
 					      <div class="form-group ">
-					          <label for="exampleInputusername" class="col-sm-2 control-label">客户电话：</label>
-					          <div  class="col-sm-10">
-					            <input type="tel" class="form-control" name="phone" value="" placeholder="客户电话">
+					          <label for="exampleInputusername" class="col-sm-2 control-label">里程：</label>					          
+							  <div  class="col-sm-10">
+							  	<input type="number " class="form-control" name="odograph" value="" placeholder="里程数">
 							  </div>
-					      </div>					      
-					      
+							  
+					      </div>
 					      <div class="form-group ">
 					          <label for="exampleInputusername" class="col-sm-2 control-label">备注：</label>
 					          <div  class="col-sm-10">
@@ -71,10 +47,8 @@
 					      	<div  class="col-sm-10">&nbsp;</div>
 					      </div>
 					      <div class="form-group ">
-					         <label for="exampleInputusername" class="col-sm-2 control-label"></label>
-					         <button type="submit" class="btn btn-info col-sm-8" >收 车</button>
-					         <label for="exampleInputusername" class="col-sm-2 control-label"></label>
-					       </div>  
+					        <button type="submit" class="btn btn-info btn-lg btn-block" >收 车</button>					         
+					      </div>  
 				   </form>	  
 				</div>
 			</div>

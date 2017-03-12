@@ -8,22 +8,60 @@
 						<h4 class="panel-title"><{$st.carid|getCarinfo=###}><span class="bage pull-right"><{$st.state}></span></h4>
 					</div>
 					<div class="panel-body">											        
-						收车时间：<{$st.sdate}>
-						<img alt="__UPLOAD__/<{$st.pathfront}><{$st.imgfront}>" src="__UPLOAD__/<{$st.pathfront}><{$st.imgfront}>">
-						<{$st.textfront}>
-						<img alt="__UPLOAD__/<{$st.pathback}><{$st.imgback}>" src="__UPLOAD__/<{$st.pathback}><{$st.imgback}>">
-						<{$st.textback}>
-						<img alt="__UPLOAD__/<{$st.pathleft}><{$st.imgleft}>" src="__UPLOAD__/<{$st.pathleft}><{$st.imgleft}>">
-						<{$st.textleft}>
-						<img alt="__UPLOAD__/<{$st.pathright}><{$st.imgright}>" src="__UPLOAD__/<{$st.pathright}><{$st.imgright}>">
-						<{$st.textright}>
-						<img alt="__UPLOAD__/<{$st.pathservice}><{$st.imgservice}>" src="__UPLOAD__/<{$st.pathservice}><{$st.imgservice}>">
-						<{$st.textservice}>
-						<img alt="__UPLOAD__/<{$st.pathoil}><{$st.imgoil}>" src="__UPLOAD__/<{$st.pathoil}><{$st.imgoil}>">
-						<{$st.oilgauge}>						
-						<div class="btn-group pull-right">
-							<a href="# " class="btn btn-success btn-lg">收车</a>	
-							<a href="__APP__/Anshun/Car/mod/id/<{$st.carid}> " class="btn btn-info btn-lg">车辆信息</a>							
+						收车时间：<{$st.sdate}><br>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgfront/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__/<{$st.pathfront}><{$st.imgfront}>" alt="<{$st.imgfront}>"  height="180px">
+								</a>
+								<div class="caption">车前：<{$st.textfront}></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgback/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathback}><{$st.imgback}>" alt="<{$st.imgback}>"  height="180px">
+								</a>
+								<div class="caption">车后：<{$st.textback}></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgleft/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathleft}><{$st.imgleft}>" alt="<{$st.imgleft}>"  height="180px">
+								</a>
+								<div class="caption">左侧：<{$st.textleft}></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgright/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathright}><{$st.imgright}>" alt="<{$st.imgright}>"  height="180px">
+								</a>
+								<div class="caption">右侧：<{$st.textright}></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgservice/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathservice}><{$st.imgservice}>" alt="<{$st.imgservice}>"  height="180px">
+								</a>
+								<div class="caption">维修：<{$st.textservice}></div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-4">
+							<div class="thumbnail" >
+								<a href="__URL__/imgoil/id/<{$st.id}>" >
+									<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathoil}><{$st.imgoil}>" alt="<{$st.imgoil}>"  height="180px">
+								</a>
+								<div class="caption">里程：<{$st.oilgauge}>&nbsp;油量：<{$st.oilgauge}></div>
+							</div>
+						</div>
+											
+						<div class="btn-group pull-right">								
+							<a href="__URL__/imgservice/id/<{$st.id}> " class="btn btn-warning btn-lg">拍照</a>
+							<a href="__URL__/imgoil/id/<{$st.id}> " class="btn btn-primary btn-lg">维修</a>	
+							<a href="__URL__/imgoil/id/<{$st.id}> " class="btn btn-success btn-lg">交车</a>															
 						</div> 
 												 					
 					</div>

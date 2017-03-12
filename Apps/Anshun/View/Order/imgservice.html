@@ -1,0 +1,75 @@
+<layout name="layout" />
+<div class="row">
+	<div class="col-md-7">			
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form action="__URL__/pic" method="post" enctype='multipart/form-data'  role="form">
+				     <input type="hidden" name="id" value="<{$arr.id}>" />
+				     <input type="hidden" name="place" value="service" />		         						
+					 <div class="panel panel-primary"> 
+						<div class="panel-heading">
+							<h3 class="panel-title">维修部位照片
+								<div class="btn-group pull-right">
+							    	<a href="__URL__/servicelist" class="btn btn-warning btn-xs">返回</a>
+							    </div>
+							</h3>
+						</div>
+						<div class="panel-body">
+					 		<img  src="__UPLOAD__<{$arr.pathservice}><{$arr.imgservice}>" alt="<{$arr.imgservice}>"  width="100%">
+					 		<input type="file" class="form-control" name="img">
+							<input  name="textservice" class="form-control" value="<{$arr.textservice}>" /><br>	  
+							<div class="form-group ">
+							 	<button type="submit" class="btn btn-info btn-lg btn-block" >提 交</button>
+							</div>
+					 	</div>
+					 </div>
+					 
+				</form>	
+			</div>
+		</div>
+	</div>
+					
+		<div class="col-md-5">
+			<div class="panel panel-primary"> 
+				<div class="panel-heading">
+					<h3 class="panel-title">切换方位照片</h3>
+				</div>            		                     
+			    <ul class="list-group">
+			 		<li class="list-group-item">
+			 			<a href="__URL__/imgfront/id/<{$arr.id}>" title="#">
+			 				<img  src="__UPLOAD__<{$arr.pathfront}><{$arr.imgfront}>" alt="<{$arr.imgfront}>"  height="80px">
+			 				<h3 class="pull-right">车前&nbsp;&nbsp;&nbsp;</h3>
+			 			</a>
+			 		</li>
+			 		<li class="list-group-item">
+			 			<a href="__URL__/imgback/id/<{$arr.id}>" title="#">
+			 				<img  src="__UPLOAD__<{$arr.pathback}><{$arr.imgback}>" alt="<{$arr.imgback}>"  height="80px">
+			 				<h3 class="pull-right">车后&nbsp;&nbsp;&nbsp;</h3>
+			 			</a>
+			 		</li>
+			 		<li class="list-group-item">
+			 			<a href="__URL__/imgleft/id/<{$arr.id}>" title="#">
+			 				<img  src="__UPLOAD__<{$arr.pathleft}><{$arr.imgleft}>" alt="<{$arr.imgleft}>"  height="80px">
+			 				<h3 class="pull-right">左侧&nbsp;&nbsp;&nbsp;</h3>
+			 			</a>
+			 		</li>
+			 		<li class="list-group-item">
+			 			<a href="__URL__/imgright/id/<{$arr.id}>" title="#">
+			 				<img  src="__UPLOAD__<{$arr.pathright}><{$arr.imgright}>" alt="<{$arr.imgright}>"  height="80px">
+			 				<h3 class="pull-right">右侧&nbsp;&nbsp;&nbsp;</h3>
+			 			</a>
+			 		</li>
+			 		<li class="list-group-item">
+			 			<img  src="__UPLOAD__<{$arr.pathservice}><{$arr.imgservice}>" alt="<{$arr.imgservice}>"  height="80px">	
+			 			<h3 class="pull-right">维修&nbsp;&nbsp;&nbsp;</h3>		 			
+			 		</li>
+			 		<li class="list-group-item">
+			 			<a href="__URL__/imgoil/id/<{$arr.id}>" title="#">
+			 				<img  src="__UPLOAD__<{$arr.pathoil}><{$arr.imgoil}>" alt="<{$arr.imgoil}>"  height="80px">
+			 				<h3 class="pull-right">里程&nbsp;&nbsp;&nbsp;</h3>
+			 			</a>
+			 		</li>				 
+				</ul>                        
+			 </div>		
+		</div>
+</div>
