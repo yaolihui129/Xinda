@@ -1,5 +1,5 @@
 <?php
-namespace Xiuli\Controller;
+namespace Xinda\Controller;
 use Think\Controller;
 class HrController extends Controller {
     
@@ -13,6 +13,14 @@ class HrController extends Controller {
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
+        //微信所用的变量
+        $time=time();
+        $nonceStr=getRandCode(16);//生成16位的随机数
+        dump($nonceStr);
+        $signature="";
+        $this->assign('time',$time);
+        $this->assign('nonceStr',$nonceStr);
+        $this->assign('signature',$signature);
     
         $m=D('tp_hr');
         $where['prodid']=6;
@@ -23,6 +31,13 @@ class HrController extends Controller {
     
         $this->display();
     }
+    
+    
+    
+    
+
+    
+    
     
     public function wodtuijian(){
         

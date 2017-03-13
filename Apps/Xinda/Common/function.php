@@ -10,3 +10,13 @@ function getCatname($cateid){
         return "|-";
     }
 }
+//获取微信AccessToken
+function getWxAccessToken(){
+    //1.请求url地址
+    $appid = 'wx3452e8086f5fefab';
+    $appsecret =  'df38233db1ca1150fa34d42dabf8f5cc';
+    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$appid."&secret=".$appsecret;
+    $res = httpGet($url);
+    
+    return $res;
+}

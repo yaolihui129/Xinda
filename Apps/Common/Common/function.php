@@ -140,6 +140,23 @@ function GetOs(){
     }else{return "获取访客操作系统信息失败！";}
 }
 
+//获取随机码
+function getRandCode($s){
+    $array = array(
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+        '0','1','2','3','4','5','6','8','9'
+    );
+    $tmpstr ='';
+    $max =count($array);
+    for($i=1;$i<=$s;$i++){
+        $key =rand(0,$max-1);
+        $tmpstr.=$array[$key];
+    }
+    return $tmpstr;
+}
+
+
 // 执行CURL操作
 function httpGet($url){
     //1.获取初始化URL
@@ -158,6 +175,21 @@ function httpGet($url){
         $res=curl_errno($ch);
     }
     return $res;
+}
+
+//获取getJsApiTicket全局票据
+function getJsApiTicket(){
+    //如果session中保存有效的jsapi_ticket
+    if ($_SESSION['jsapi_ticket_expire_time']>time()&& $_SESSION['jsapi_ticket']){
+        $jsapi_ticket = $_SESSION['jsapi_ticket'];
+    }else {
+        $access_token = getWxAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
+        $res =httpGet($url);
+        $jsapi_ticket=$res['ticket'];
+        $_SESSION['jsapi_ticket']=$jsapi_ticket;
+        $_SESSION['jsapi_ticket_expire_time']=time()+7000;
+    }
 }
 
 //更新微信AccessToken
@@ -179,6 +211,16 @@ function setWxAccessToken(){
     }
 }
 
+
+function getWxServerIp(){
+    $accessToken = getWxAccessToken();
+    $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$accessToken;
+    $res = httpGet($url);    
+    $arr = json_decode($res,true);
+    echo "<pre>";
+    var_dump( $arr );
+    echo "</pre>";
+}
 
 //根据日期获取星期
 function   wk($date) {
