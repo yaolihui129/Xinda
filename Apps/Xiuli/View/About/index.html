@@ -1,0 +1,41 @@
+<layout name="layout" />     
+	<div class="row">
+        <div class="col-sm-3">                                       
+           <div class="panel panel-danger">
+             	<div class="panel-heading"><h1 class="panel-title">服务号</h1></div>
+             	<div class="panel-body">           	   
+	         		<img src="__IMAGES__/WechatIMG1.jpeg" alt="__IMAGES__/WechatIMG1.jpeg" width="100%">            	    	
+             	</div>
+           </div>          
+           <div class="panel panel-danger">
+             	<div class="panel-heading"><h1 class="panel-title">支付宝付款码</h1></div>
+             	<div class="panel-body">           	   
+	         		<img src="__IMAGES__/WechatIMG1.jpeg" alt="__IMAGES__/WechatIMG1.jpeg" width="100%">            	    	
+             	</div>
+           </div>
+           <div class="panel panel-danger">
+             	<div class="panel-heading"><h1 class="panel-title">微信付款码</h1></div>
+             	<div class="panel-body">           	   
+	         		<img src="__IMAGES__/WechatIMG1.jpeg" alt="__IMAGES__/WechatIMG1.jpeg" width="100%">            	    	
+             	</div>
+           </div>
+      	</div>
+        <div class="col-sm-9">
+           <div class="panel panel-danger">
+             	<div class="panel-heading"><h1 class="panel-title"><{$_SESSION['Xiuli']['web']}></h1></div>
+             	<img alt="关于我们" src="__UPLOAD__<{$_SESSION['Xiuli']['img']}>" height="400" width="100%">
+             	<div class="panel-body">           	   	         		
+	         		<dd>地址：<{$_SESSION['Xiuli']['adress']}></dd>
+	         		<dd>热线：<a href="tel:<{$_SESSION['Xiuli']['tel']}>"><{$_SESSION['Xiuli']['tel']}></a></dd>
+	         		<dd>手机：<a href="tel:<{$_SESSION['Xiuli']['phone']}>"><{$_SESSION['Xiuli']['phone']}></a></dd>
+	         		<dd>网站：<a href="__APP__/Xiuli"><{$_SESSION['Xiuli']['url']}></a></dd>             	    	
+             	</div>
+            </div>
+            
+            <div class="panel panel-danger">
+             	<div class="panel-heading"><h1 class="panel-title">主营业务</h1></div>
+             	<div class="panel-body"><p><{$_SESSION['Xiuli']['desc']}></p></div>
+            </div>           	
+        </div>
+        
+    </div>

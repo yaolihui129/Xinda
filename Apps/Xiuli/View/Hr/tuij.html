@@ -1,0 +1,50 @@
+<layout name="layout" />
+<img src="__IMG__/hr.png" alt="__IMG__/hr.png" width="100%">
+<div class="panel panel-primary">
+	<div class="panel-heading"><b><{$arr.title}></b>
+		<span class="label label-danger"><{$arr.state}></span>		
+	</div>
+	<div class="panel-body">
+		<div class="col-md-6">
+			<b>职位：</b><{$arr.title}><br>
+			<b>人数：</b><{$arr.num}><br>
+			<b>工资：</b><{$arr.salary}><br>				    
+			<b>要求：</b><{$arr.desc}><br>
+			<b>发布日期：</b><{$arr.rtime}><br>
+			<b>悬赏：</b>被推荐人员，可以成功入职，奖励推荐人XX元话费（直接充入推荐人手机）；被推荐成可以通过试用期且成功转正，推荐人将获得XX元的现金奖励（直接打入推荐者手机号绑定的支付宝钱包）；<br><hr>
+			<div id="ckepop">
+				<span class="jiathis_txt">分享到：</span>
+				<a class="jiathis_button_qzone">QQ空间</a>
+				<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>				
+			</div><br>
+			<hr>					    
+		</div>
+		<div class="col-md-6">					
+		<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >		  		     	   		     	  		  		     	   							  
+			<input type="hidden" name="hrid" value="<{$arr.id}>" />
+			<div class="form-group">
+				<label for="product" class="col-sm-2 control-label">手机号</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="phone" value="" placeholder="应聘者手机号">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="state" class="col-sm-2 control-label">姓名</label>
+				<div class="col-sm-10"><input type="text" class="form-control" name="name" value="" placeholder="应聘者姓名"></div>
+			</div>
+			<div class="form-group">
+				<label for="state" class="col-sm-2 control-label">推荐职位</label>
+				<div class="col-sm-10"><input type="text" class="form-control"  value="<{$arr.title}>" readonly></div>
+			</div>
+			<div class="form-group">
+				<label for="state" class="col-sm-2 control-label">推荐</label>
+				<div class="col-sm-10"><input type="text" class="form-control" name="tuij" value="<{$_SESSION['uphone']}>" placeholder="登录网站后，推荐手机号会自动填入" readonly></div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-lg pull-left">推 荐</button>
+		</form>		
+		</div>	    
+	</div>
+	
+	
+</div>
+    

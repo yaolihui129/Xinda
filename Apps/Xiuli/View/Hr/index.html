@@ -1,0 +1,36 @@
+<layout name="layout" />
+<span class="hidden-sm hidden-md hidden-lg"><img src="__IMG__/hr.png" alt="__IMG__/hr.png" width="100%"></span>
+<div class="panel panel-primary">
+     <div class="panel-heading"><h3 class="panel-title">诚聘人才</h3></div>
+     <div class="panel-body">
+     <span class="hidden-xs"><img src="__IMG__/hr.png" alt="__IMG__/hr.png" width="100%"></span>    	
+     	<volist name='data' id='vo' empty="暂时没有招聘信息">
+     	<div class="col-xs-12 col-md-6">
+	        <div class="panel panel-primary">
+				<div class="panel-heading"><b><{$vo.title}></b>
+				  	<span class="label label-danger pull-right"><{$vo.state}></span> 
+				  	<span class="pull-right"></span>
+				</div>
+				<div class="panel-body">
+				   <b>职位：</b><{$vo.title}><br>
+				   <b>人数：</b><{$vo.num}><br>
+				   <b>工资：</b><{$vo.salary}><br>				    
+				   <b>要求：</b><{$vo.desc}><br>
+				   <b>发布日期：</b><{$vo.rtime}><br>
+				   <span class="hidden-sm hidden-md hidden-lg">
+				   		<a href="tel:<{$_SESSION['Xiuli']['tel']}>" class="btn btn-primary">电话咨询</a>
+				   </span>
+				   <a href="__URL__/baom/id/<{$vo.id}>" class="btn btn-primary">现在报名</a>				   		    
+				</div>
+			</div>
+		</div> 
+        </volist>
+        <hr>
+       <div id="ckepop" class="col-xs-12 col-md-12">
+				<span class="jiathis_txt">分享到：</span>
+				<a class="jiathis_button_qzone">QQ空间</a>
+				<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>				
+			</div><hr>
+			
+     </div>             	
+</div>          	
