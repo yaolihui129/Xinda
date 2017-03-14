@@ -4,6 +4,16 @@ body{
 	padding-top:70px;
 	padding-bottom:50px;
 }
+.my-span{  
+  
+    width: 100px;    
+    height: 20px;    
+    overflow: hidden;    
+    display: block;   
+    text-overflow: ellipsis;   
+    white-space: nowrap;   
+    cursor: pointer;    
+}  
 
 /*定位*/
 .fl{float:left;}

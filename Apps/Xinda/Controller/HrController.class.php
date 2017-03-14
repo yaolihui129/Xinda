@@ -14,10 +14,14 @@ class HrController extends Controller {
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
         //微信所用的变量
-        $time=time();
-        $nonceStr=getRandCode(16);//生成16位的随机数
-        dump($nonceStr);
-        $signature="";
+        $timestamp=time();
+        $nonceStr=getRandCode(16);//生成16位的随机数     
+        $jsapi_ticket=getJsApiTicket();//获取全局票据
+        $signature = "jsapi_ticket=".$jsapi_ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=http://mp.weixin.qq.com?params=value";
+        $signature = sha1($signature);
+        
+        
+//         dump(getWxAccessToken());
         $this->assign('time',$time);
         $this->assign('nonceStr',$nonceStr);
         $this->assign('signature',$signature);

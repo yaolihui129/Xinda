@@ -6,6 +6,17 @@ body{
 	background-color:#eee; 
 }
 #qqLoginBtn{background:url(../Public/images/Connect_logo_7.png)}
+
+.my-span{  
+  
+    width: 100px;    
+    height: 20px;    
+    overflow: hidden;    
+    display: block;   
+    text-overflow: ellipsis;   
+    white-space: nowrap;   
+    cursor: pointer;    
+}  
 /*字体*/
 .font12{font-size:12px;}
 .font13{font-size:13px;}

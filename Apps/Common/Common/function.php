@@ -180,35 +180,19 @@ function httpGet($url){
 //获取getJsApiTicket全局票据
 function getJsApiTicket(){
     //如果session中保存有效的jsapi_ticket
+  
     if ($_SESSION['jsapi_ticket_expire_time']>time()&& $_SESSION['jsapi_ticket']){
         $jsapi_ticket = $_SESSION['jsapi_ticket'];
+        
     }else {
         $access_token = getWxAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
-        $res =httpGet($url);
+        $res =json_decode(httpGet($url),true);
         $jsapi_ticket=$res['ticket'];
         $_SESSION['jsapi_ticket']=$jsapi_ticket;
         $_SESSION['jsapi_ticket_expire_time']=time()+7000;
     }
-}
-
-//更新微信AccessToken
-function setWxAccessToken(){
-    $m=D('wx_wechat');
-    $arr=$m->find($_GET[id]);
-
-    $appid=$arr['appid'];
-    $appsecret=$arr['appsecret'];
-    $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
-    if(time()>=$arr['otiem']){
-        $arr = json_decode(httpGet($url), true);
-        $data['id']=$_GET[id];
-        $data['access_token']=$arr['access_token'];
-        $data['expires_in']=$arr['expires_in'];
-        $data['otime']=time()+7000;
-        //更新AccessToken
-        $m->save($data);
-    }
+    return $jsapi_ticket;
 }
 
 
