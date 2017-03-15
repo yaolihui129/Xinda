@@ -23,10 +23,10 @@ class LoginController extends Controller {
         $where['openid']=$_SESSION['openid'];
         $arr=$m->where($where)->select();
         if ($arr){
-            $_SESSION['userid']=$arr['id'];
+            $_SESSION['Anshun']['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Anshun';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Anshun/Index');
@@ -49,7 +49,7 @@ class LoginController extends Controller {
             $lastId=$m->add();
                         
             $arr=$m->where($where)->select();
-            $_SESSION['userid']=$arr['id'];
+            $_SESSION['Anshun']['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
             $_SESSION['isCLogin']='Anshun';
@@ -68,7 +68,7 @@ class LoginController extends Controller {
          $data=$m->where($where)->field('id,phone,realname')->find();
         
         if ($data){            
-            $_SESSION['userid']=$data['id'];
+            $_SESSION['Anshun']['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
             $_SESSION['isCLogin']='Anshun';

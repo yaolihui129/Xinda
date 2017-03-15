@@ -10,8 +10,8 @@ class IndexController extends Controller {
         $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();                                 
-       
+        $_SESSION['os']=GetOs();  
+        
         $m=D('tp_ad');
         $where['prodid']=2;
         $pic=$m->where($where)->order('utime desc')->select();

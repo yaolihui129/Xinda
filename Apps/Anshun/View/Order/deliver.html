@@ -1,19 +1,54 @@
 <layout name="layout" />
-<h1>交付</h1>
-<div class="container">	
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-info">			 	
-			 	<div class="panel-heading">
-				    <h3 class="panel-title">收车
-					    <div class="btn-group pull-right">
-					    	<a href="#" class="btn btn-warning btn-xs">返回</a>
-					    </div>
-				    </h3>
+<layout name="layout" />
+<switch name="_SESSION['isCLogin']">
+		<case value="Anshun">
+			<div class="container">	
+				<volist name='arr' id='st' empty="没有数据">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h4 class="panel-title"><{$st.carid|getCarinfo=###}><span class="bage pull-right"><{$st.state}></span></h4>
+						</div>
+						<div class="panel-body">											        
+							收车时间：<{$st.sdate}><br>
+							<div class="col-xs-12 col-md-4">
+								<div class="thumbnail" >
+									<a href="__URL__/imgservice/id/<{$st.id}>" >
+										<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathservice}><{$st.imgservice}>" alt="<{$st.imgservice}>"  height="180px">
+									</a>
+									<div class="caption">维修：<{$st.textservice}></div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="thumbnail" >
+									<a href="__URL__/imgoil/id/<{$st.id}>" >
+										<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathoil}><{$st.imgoil}>" alt="<{$st.imgoil}>"  height="180px">
+									</a>
+									<div class="caption">里程：<{$st.oilgauge}>&nbsp;油量：<{$st.oilgauge}></div>
+								</div>
+							</div>														
+							<div class="btn-group pull-right">								
+								<a href="__URL__/imgservice/id/<{$st.id}> " class="btn btn-warning btn-lg">拍照</a>
+								<a href="__URL__/imgoil/id/<{$st.id}> " class="btn btn-primary btn-lg">维修</a>	
+								<a href="__URL__/imgoil/id/<{$st.id}> " class="btn btn-success btn-lg">交车</a>															
+							</div> 
+						</div>
+					</div>
+				</volist>
+			</div>	
+		</case>				    
+		<default />
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h4 class="panel-title">未登录</h4>
+						</div>
+						<div class="panel-body" align="center" style="height:400px;">
+							<div style="height:200px;"></div>
+								<a data-toggle="modal" href="#Login" class="btn btn-info btn-lg btn-block" >登录</a>	
+											
+						</div>
+					</div>
 				</div>
-			 	<div class="panel-body">
-			 	</div>
-			 </div>
-		</div>
-	</div>
-</div>	
+			</div>
+</switch>

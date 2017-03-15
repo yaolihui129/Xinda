@@ -78,6 +78,8 @@ class OrderController extends Controller {
         $this->display();
     }
     
+
+    
     public function imgfront(){
         /* 实例化模型*/
         $m=D('order_serviccar');       
@@ -172,6 +174,12 @@ class OrderController extends Controller {
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
+        
+        /* 实例化模型*/
+        $m=D('order_serviccar');
+        $where['state']='已完工';
+        $arr=$m->where($where)->order('ctime desc')->select();
+        $this->assign('arr',$arr);
         
         $this->display();
         
