@@ -22,7 +22,7 @@ class HrController extends Controller {
         
         
 //         dump(getWxAccessToken());
-        $this->assign('time',$time);
+        $this->assign('timestamp',$timestamp);
         $this->assign('nonceStr',$nonceStr);
         $this->assign('signature',$signature);
     

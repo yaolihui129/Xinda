@@ -1,7 +1,7 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class CustomerController extends Controller {
+class CustomerController extends CommonController {
 
 	public function index(){
 	    /* 实例化模型*/
@@ -12,14 +12,57 @@ class CustomerController extends Controller {
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
-        /* 接收参数*/
-        $where['state']="发布";
-        /* 实例化模型*/
-        $m=M('tc_customer');
-        $data=$m->where($where)->order('utime desc')->select();
-        $this->assign('data',$data);
-        $this->assign('w',$where);       
+             
 	    $this->display();
+    }
+    
+    public function checked(){
+        if($_POST['phone']){
+            $m=D('tp_customer');
+            $where['phone']=$_POST['phone'];
+            $data=$m->where($where)->select();
+            if($data){
+                $this->error("这个号码已经注册，无需重复注册");
+            }else{
+                $this->redirect('/Xinda/Customer/register/phone/'.$_POST['phone']);
+            }
+        }else{
+            $this->error("您没有填写手机号");
+        }
+        
+    }
+    
+    public function register(){
+    
+        $m=D('product');
+        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(1);
+        $_SESSION['Xiuli']=$data;
+        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
+        $_SESSION['ip']=get_client_ip();
+        $_SESSION['browser']=GetBrowser();
+        $_SESSION['os']=GetOs();
+    
+        $phone=$_GET['phone'];
+        $this->assign('phone',$phone);
+    
+        $this->display();
+    }
+    
+
+    public function insert(){
+        $m=D('tp_customer');
+        $_POST['password']=md5(123456);
+        $_POST['ctime']=time();
+        if(!$m->create()){
+            $this->error($m->getError());
+        }
+        $lastId=$m->add();
+        if($lastId){
+            $this->success("注册成功",U('Xinda/Index'));
+        }else{
+            $this->error("注册失败");
+        }
+    
     }
 
    
@@ -66,11 +109,15 @@ class CustomerController extends Controller {
 
 public function personal(){
        /* 接收参数*/
-        $id =  $_SESSION['id'];
+        if($_SESSION['openid']){
+            $where['openid']=$_SESSION['openid'];
+        }else {
+            $where['id'] =  $_SESSION['Xiuli']['userid'];
+        }    
         /* 实例化模型*/
-        $m=M('tc_customer');       
-        $user=$m->find($id);
-        $this->assign('user',$user);
+        $m=M('tp_customer');
+        $arr=$m->where($where)->select();
+        $this->assign('arr',$arr);
 
         $this->display();
     }

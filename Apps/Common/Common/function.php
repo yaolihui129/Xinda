@@ -177,6 +177,31 @@ function httpGet($url){
     return $res;
 }
 
+function httpPost($url,$data){
+    //1.获取初始化URL
+    $data ='';
+    $ch=curl_init();
+    //2.设置curl的参数
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 500);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch,CURLOPT_HTTPHEADER,array("application/x-www-form-urlencode;charset=utd-8"),"Content-length:".strlen($data));
+    //3.采集
+    $res = curl_exec($ch);
+    //4.关闭
+    curl_close($ch);
+    if(curl_errno($ch)){
+        $res=curl_errno($ch);
+    }
+    return $res;
+    
+}
+
+
+
+
 //获取getJsApiTicket全局票据
 function getJsApiTicket(){
     //如果session中保存有效的jsapi_ticket

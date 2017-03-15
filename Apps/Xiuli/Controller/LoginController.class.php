@@ -3,13 +3,18 @@ namespace Xiuli\Controller;
 use Think\Controller;
 class LoginController extends Controller {
 
-    public function qq_login(){
-
-        $qqobj=new \Org\Util\Qqconnect();              
-        $qqobj->getAuthCode(); 
-
-    }
+       public function index(){
+           dump($_SESSION);
+           $this->display();
+       }
     
+        public function qq_login(){
+    
+            $qqobj=new \Org\Util\Qqconnect();              
+            $qqobj->getAuthCode(); 
+    
+        }
+        
    
     public function qq_callback(){
                
@@ -23,10 +28,10 @@ class LoginController extends Controller {
         $where['openid']=$_SESSION['openid'];
         $arr=$m->where($where)->select();
         if ($arr){
-            $_SESSION['userid']=$arr['id'];
+            $_SESSION['Xiuli']['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['Xiuli']['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xiuli/Index');
@@ -49,10 +54,10 @@ class LoginController extends Controller {
             $lastId=$m->add();
                         
             $arr=$m->where($where)->select();
-            $_SESSION['userid']=$arr['id'];
+            $_SESSION['Xiuli']['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['Xiuli']['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xiuli/Index');
@@ -68,10 +73,10 @@ class LoginController extends Controller {
          $data=$m->where($where)->field('id,phone,realname')->find();
         
         if ($data){            
-            $_SESSION['userid']=$data['id'];
+            $_SESSION['Xiuli']['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['Xiuli']['isCLogin']='Xiuli';
 //             $this->redirect('/Xiuli/Index');
             $this->success("登录成功!");
         }else{

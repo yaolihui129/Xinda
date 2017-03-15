@@ -1,7 +1,7 @@
 <?php
 namespace Xiuli\Controller;
 use Think\Controller;
-class CustomerController extends Controller {
+class CustomerController extends CommonController {
     
     public function index(){
         
@@ -129,10 +129,11 @@ class CustomerController extends Controller {
     
     public function personal(){
         /* 接收参数*/
+       
         if($_SESSION['openid']){
             $where['openid']=$_SESSION['openid'];
         }else {
-            $where['id'] =  $_SESSION['userid'];
+            $where['id'] =  $_SESSION['Xiuli']['userid'];
         }        
         /* 实例化模型*/
         $m=M('tp_customer');

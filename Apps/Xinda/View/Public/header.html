@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="baidu-site-verification" content="GsgImQGMad" />
     <title><{$_SESSION['Xinda']['web']}></title>
     <meta name="keywords" content="<{$_SESSION['keywords']}>" />
 	  <meta name="description" content="" />
@@ -26,8 +27,6 @@
           ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       });
 
-        
-        
         wx.ready(function(){
         	wx.checkJsApi({
         	    jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
@@ -44,13 +43,11 @@
               success: function () { 
 
                   // 用户确认分享后执行的回调函数
-
               },
 
               cancel: function () { 
 
                   // 用户取消分享后执行的回调函数
-
               }
           });
 
@@ -64,13 +61,11 @@
               success: function () { 
 
                   // 用户确认分享后执行的回调函数
-
               },
 
               cancel: function () { 
 
                   // 用户取消分享后执行的回调函数
-
               }
 
           });
@@ -108,7 +103,7 @@
            <!-- <li><a href="__APP__/Xinda/Successcase"><span class="glyphicon glyphicon-gift"> 成功案例</span></a></li>  -->
             <li><a href="__APP__/Xinda/About/hr"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>				
             <li><a href="__APP__/Xinda/About"><span class="glyphicon glyphicon-phone-alt"></span> 关于我们</a></li>           
-            <empty name="_SESSION['isCLogin']">
+            <empty name="_SESSION['Xinda']['isCLogin']">
            		<li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>
            		<li><a  href="__APP__/Xinda/Customer" class="pull-right" >注册</a></li>	
           	<else />
