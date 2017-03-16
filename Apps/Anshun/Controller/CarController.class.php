@@ -6,7 +6,7 @@ class CarController extends Controller {
     public function index(){
         /*实例化模型*/
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(4);
+        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,url,record,path,img')->find(4);
         $_SESSION['Anshun']=$data;
         $_SESSION['Anshun']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();

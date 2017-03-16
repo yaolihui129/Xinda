@@ -27,23 +27,35 @@
 							<img alt="__IMAGES__/receive.jpg" src="__IMAGES__/receive.png" width="100%">					
 						</div>
 					</div>
-				</div>
+				</div><br><br><br>
 			</div>
 		</case>				    
 		<default />
-			<div class="container">
-				<div class="panel panel-default">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h4 class="panel-title">未登录</h4>
-						</div>
-						<div class="panel-body" align="center" style="height:400px;">
-							<div style="height:200px;"></div>
-								<a data-toggle="modal" href="#Login" class="btn btn-info btn-lg btn-block" >登录</a>	
-											
-						</div>
+			<div class="container"><br><br><br>
+				<div class="modal-content">
+			    	<div class="modal-header">				        、
+				        <h4 class="modal-title" >登录</h4>
+				    </div>
+				    <div class="modal-body">
+				      	<form action="__APP__/Anshun/Login/login" method="post" class="form-horizontal" role="form" >	      	
+							<div class="form-group">
+								<label for="short" class="col-sm-2 control-label">手机:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="phone" value="" placeholder="用户名">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="product" class="col-sm-2 control-label">密码:</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control" name="password" value="" placeholder="密码">
+								</div>
+							</div>
+													
 					</div>
-				</div>
+					<div class="modal-footer">					          
+					     <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button></form>
+					</div>
+			    </div><br><br><br><br><br>
 			</div>
 								
 </switch>

@@ -6,7 +6,7 @@ class HrController extends Controller {
     public function index(){
     
         $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,url,record,path,img')->find(1);
+        $data=$m->field('web,adress,keywords,phone,tel,qq,url,record,path,img')->find(1);
         $_SESSION['Xiuli']=$data;
         $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
         $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
