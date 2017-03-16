@@ -35,6 +35,7 @@ class OrderController extends Controller {
         $m=D('car');
         $arr=$m->find($_GET['id']);
         $this->assign('arr',$arr);
+        $this->assign("textservice", selectCate());
         
         $this->display();
         
@@ -71,7 +72,7 @@ class OrderController extends Controller {
         
         /* 实例化模型*/
         $m=D('order_serviccar');
-        $where['state']='待维修';
+//         $where['state']='待维修';
         $arr=$m->where($where)->order('ctime desc')->select();
         $this->assign('arr',$arr);
 
@@ -161,12 +162,36 @@ class OrderController extends Controller {
             }
         }
     }
+    //修理
+    public function weixiu(){
+        $arr['id']=$_GET['id'];
+        /* 实例化模型*/
+        $m=D('order_serviccar');
+        $arr['state']='修理中';
+        if ($m->save($arr)){
+            $this->success("开始修理");
+        }else{
+            $this->error("失败！");
+        }
+    }
     
     
-    /*
-     * 交付
-     */
+    //完工
+    public function wangong(){
+        $arr['id']=$_GET['id'];
+        /* 实例化模型*/        
+        $m=D('order_serviccar');
+        $arr['state']='已完工';
+        if ($m->save($arr)){
+            $this->success("已完工");
+        }else{
+            $this->error("失败！");
+        }
+    }
+    
+     // 交付
     public function deliver(){
+        /* 实例化模型*/
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(4);
         $_SESSION['Anshun']=$data;
