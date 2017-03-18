@@ -28,6 +28,47 @@ class OrderController extends Controller {
         $this->display();
          
     } 
+    //预约
+    public function yuyue(){
+        /* 实例化模型*/
+        $m=D('order_serviccar');
+        
+        $this->assign("textservice", selectCate());
+        $this->display();
+    }
+    
+    public function yyinsert(){
+       if($_POST['phone']){
+           /* 实例化模型*/
+           $m=M('tp_customer');
+           $where=array("phone"=>$_POST['phone']);
+           $arr=$m->where($where)->select();
+           $_POST['uid']=$arr[0]['id'];
+           
+           /* 实例化模型*/
+           $m=D('order_serviccar');
+           
+           $_POST['adder']=$_SESSION['realname'];
+           $_POST['moder']=$_SESSION['realname'];
+           $_POST['sdate']=date("Y-m-d",time());
+           $_POST['ctime']=date("Y-m-d H:i:s",time());
+           if(!$m->create()){
+               $this->error($m->getError());
+           }
+           $lastId=$m->add();
+           if($lastId){
+               $this->success("预约成功",U('Index/index'));
+           }else{
+               $this->error('失败');
+           }
+       }else {
+           $this->error('联系电话没有填写');
+       }
+        
+        
+    }
+    
+    
     
     //收车
     public function receive(){

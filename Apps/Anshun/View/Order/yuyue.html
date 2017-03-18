@@ -1,0 +1,57 @@
+<layout name="layout" />
+<div class="container">	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">			 	
+			 	<div class="panel-heading">
+				    <h3 class="panel-title">预约维修&保养
+					    <div class="btn-group pull-right">
+					    	<a href="__APP__/Anshun/Index" class="btn btn-warning btn-xs">返回</a>
+					    </div>
+				    </h3>
+				</div>
+			 	<div class="panel-body">
+			 		<form action="__URL__/yyinsert" method="post" enctype='multipart/form-data'  role="form">                    	                     
+	                     <input type="hidden" name="prodid" value='4' />
+	                     <input type="hidden" name="textfront" value="车前:无明显伤痕" >
+	                     <input type="hidden" name="textback" value="车后:无明显伤痕" >
+					     <input type="hidden" name="textleft" value="左侧:无明显伤痕" >
+					     <input type="hidden"  name="textright" value="右侧:无明显伤痕" >
+					      
+					      <div class="form-group ">
+					          <label for="exampleInputusername" class="col-sm-2 control-label">维修：</label>
+					          <div  class="col-sm-10"><{$textservice}></div>							  
+					      </div>
+					      <div class="form-group ">
+					          <label for="exampleInputusername" class="col-sm-2 control-label">联系电话：</label>					          
+							  <div  class="col-sm-10">
+							  	<input type="tel" class="form-control" name="phone" value="<{$_SESSION['uphone']}>" placeholder="联系电话">
+							  </div>							  
+					      </div>
+					      <div class="form-group ">
+					          <label for="exampleInputusername" class="col-sm-2 control-label">车牌号：</label>					          
+							  <div  class="col-sm-10">
+							  	<input type="text" class="form-control" name="plateno" value="" placeholder="车牌号">
+							  </div>							  
+					      </div>
+					      <div class="form-group ">
+					          <label for="exampleInputusername" class="col-sm-2 control-label">里程：</label>					          
+							  <div  class="col-sm-10">
+							  	<input type="number " class="form-control" name="odograph" value="" placeholder="里程数">
+							  </div>
+							  
+					      </div>
+					      <div class="form-group ">
+					      	<label for="exampleInputusername" class="col-sm-2 control-label"></label>
+					      	<div  class="col-sm-10">&nbsp;</div>
+					      </div>
+					      <div class="form-group ">
+					        <button type="submit" class="btn btn-info btn-lg btn-block" >预 &nbsp; 约</button>					         
+					      </div>  
+				   </form>	  
+				</div>
+			</div>
+		</div>                
+	</div>
+
+</div>
