@@ -68,7 +68,7 @@ class LoginController extends Controller {
          $data=$m->where($where)->field('id,phone,realname')->find();
         
         if ($data){            
-            $_SESSION['Anshun']['userid']=$data['id'];
+            $_SESSION['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
             $_SESSION['isCLogin']='Anshun';

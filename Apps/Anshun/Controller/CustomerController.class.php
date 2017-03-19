@@ -134,7 +134,6 @@ class CustomerController extends Controller {
         }else {
             $where['id'] =  $_SESSION['userid'];
         }
-        
         /* 实例化模型*/
         $m=M('tp_customer');
         $arr=$m->where($where)->select();
@@ -142,6 +141,30 @@ class CustomerController extends Controller {
 
         $this->display();
 
-    }  
+    } 
+    
+    
+    public function yuyue() {
+        /* 接收参数*/
+        if($_SESSION['openid']){
+            $where['openid']=$_SESSION['openid'];
+        }else {
+            $where['id'] =  $_SESSION['userid'];
+        }
+        /* 实例化模型*/
+        $m=M('tp_customer');
+        $arr=$m->where($where)->select();
+        
+        
+        
+        /* 实例化模型*/
+        $m=D('order_serviccar');
+        $map['phone']=$arr[0]['phone'];
+        $data=$m->where($map)->select();
+        $this->assign('data',$data);
+//         dump($data);
+        
+        $this->display();
+    }
 
 }

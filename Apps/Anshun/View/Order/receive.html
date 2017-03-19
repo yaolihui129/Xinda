@@ -1,4 +1,24 @@
-<layout name="layout" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><{$_SESSION['Anshun']['web']}></title>
+    <meta name="keywords" content="<{$_SESSION['keywords']}>" />
+	<meta name="description" content="" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/css/fileinput.css" rel="stylesheet">
+         
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div class="container"> 
+
+
 <div class="container">	
 	<div class="row">
 		<div class="col-md-12">
@@ -56,3 +76,24 @@
 	</div>
 
 </div>
+
+
+
+
+     	<div class="foot navbar-bottom list-inline text-center">
+         	Copyright <span class="num">&copy;</span> 2016-2017
+     		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
+     		IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
+     		<p>咨询热线：<a href="tel:<{$_SESSION['Anshun']['phone']}>"><{$_SESSION['Anshun']['phone']}></a></p>    	
+    	</div>
+     </div>
+
+	
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>    
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/js/fileinput.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>      
+    
+     </body>
+</html>

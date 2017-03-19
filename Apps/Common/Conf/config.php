@@ -16,7 +16,7 @@ return array(
     'DB_NAME'=>'xiuli',
     'DB_USER'=>'root',
     'DB_PWD'=>'root',
-    'DB_PORT'=>'3307',
+    'DB_PORT'=>'3306',
     
     'DB_PREFIX'=>'zt_',
     'DB_CHARSET'=> 'utf8', // 字符集

@@ -43,7 +43,22 @@ class OrderController extends Controller {
            $m=M('tp_customer');
            $where=array("phone"=>$_POST['phone']);
            $arr=$m->where($where)->select();
-           $_POST['uid']=$arr[0]['id'];
+           if($arr){
+               $_POST['uid']=$arr[0]['id'];
+           }else {
+               $data['phone']=$_POST['phone'];
+               $data['password']=md5(123456);
+               $data['ctime']=time();
+               $data['moder']='维修预约';
+               if(!$m->create($data)){
+                   $this->error($m->getError());
+               }
+               $lastId=$m->add($data);
+               $arr=$m->where($where)->select();
+               $_POST['uid']=$arr[0]['id'];
+           }
+           
+           
            
            /* 实例化模型*/
            $m=D('order_serviccar');
@@ -83,22 +98,50 @@ class OrderController extends Controller {
     }
     
     public function insert(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $carid=$_POST['carid'];
-        $_POST['adder']=$_SESSION['realname'];
-        $_POST['moder']=$_SESSION['realname']; 
-        $_POST['sdate']=date("Y-m-d",time());
-        $_POST['ctime']=date("Y-m-d H:i:s",time());
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        $lastId=$m->add();
-        if($lastId){
-            $this->success("成功",U('Anshun/Order/servicelist'));
-        }else{
-            $this->error('失败');
-        }
+        if($_POST['phone']){
+            /* 实例化模型*/
+            $m=M('tp_customer');
+            $where=array("phone"=>$_POST['phone']);
+            $arr=$m->where($where)->select();
+            if($arr){
+                $_POST['uid']=$arr[0]['id'];
+            }else {
+                $data['phone']=$_POST['phone'];
+                $data['password']=md5(123456);
+                $data['ctime']=time();
+                $data['moder']='维修预约';
+                if(!$m->create($data)){
+                    $this->error($m->getError());
+                }
+                $lastId=$m->add($data);
+                $arr=$m->where($where)->select();
+                $_POST['uid']=$arr[0]['id'];
+            }
+            
+            
+            /* 实例化模型*/
+            $m=D('order_serviccar');
+            $carid=$_POST['carid'];
+            $_POST['adder']=$_SESSION['realname'];
+            $_POST['moder']=$_SESSION['realname'];
+            $_POST['sdate']=date("Y-m-d",time());
+            $_POST['ctime']=date("Y-m-d H:i:s",time());
+            if(!$m->create()){
+                $this->error($m->getError());
+            }
+            $lastId=$m->add();
+            if($lastId){
+                $this->success("成功",U('Anshun/Order/servicelist'));
+            }else{
+                $this->error('失败');
+            }
+               
+        }else {
+           $this->error('联系电话没有填写');
+       }
+        
+        
+       
     }
     
     public function servicelist(){
@@ -111,9 +154,18 @@ class OrderController extends Controller {
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
         
+        /*接收参数*/
+        if($_GET['state']){
+            $state=$_GET['state'];
+        }else {
+            $state='待维修';
+        }
+        
+        $this->assign('state',$state);
+        
         /* 实例化模型*/
         $m=D('order_serviccar');
-//         $where['state']='待维修';
+        $where['state']=$state;
         $arr=$m->where($where)->order('ctime desc')->select();
         $this->assign('arr',$arr);
 
@@ -230,28 +282,32 @@ class OrderController extends Controller {
         }
     }
     
-     // 交付
-    public function deliver(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        
+    
+    //交车
+    public function jiaoche(){
+        $arr['id']=$_GET['id'];
         /* 实例化模型*/
         $m=D('order_serviccar');
-        $where['state']='已完工';
-        $arr=$m->where($where)->order('ctime desc')->select();
-        $this->assign('arr',$arr);
-        
-        $this->display();
-        
+        $arr['state']='已交车';
+        if ($m->save($arr)){
+            $this->success("已交车");
+        }else{
+            $this->error("失败！");
+        }
     }
     
-    
-    
+    //交车
+    public function quxiao(){
+        $arr['id']=$_GET['id'];
+        /* 实例化模型*/
+        $m=D('order_serviccar');
+        $arr['state']='已取消';
+        if ($m->save($arr)){
+            $this->success("已取消");
+        }else{
+            $this->error("失败！");
+        }
+    }
+      
     
 }

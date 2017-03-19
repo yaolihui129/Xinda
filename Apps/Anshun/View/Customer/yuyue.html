@@ -1,0 +1,88 @@
+<layout name="layout" />
+<div class="container">	
+	<volist name='data' id='st' empty="没有数据">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<empty name="st.carid">
+						<a href="tel:<{$st.phone}>"><{$st.phone}></a>
+					<else /> 
+						<{$st.carid|getCarinfo=###}>
+					</empty> 
+					<span class="bage pull-right"><{$st.state}></span>
+				</h4>
+			</div>
+			<div class="panel-body">											        
+				收车时间：<{$st.sdate}><br>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathfront}><{$st.imgfront}>" alt="<{$st.imgfront}>"  height="180px">
+						</a>
+						<div class="caption">
+							<switch name="st.textfront">
+							    <case value="车前:无明显伤痕">车前：尚未检查出有伤痕</case>							    
+							    <default /><{$st.textfront}>
+							</switch>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathback}><{$st.imgback}>" alt="<{$st.imgback}>"  height="180px">
+						</a>
+						<div class="caption">
+							<switch name="st.textback">
+							    <case value="车后:无明显伤痕">车尾：尚未检查出有伤痕</case>							    
+							    <default /><{$st.textback}>
+							</switch>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathleft}><{$st.imgleft}>" alt="<{$st.imgleft}>"  height="180px">
+						</a>
+						<div class="caption">
+							<switch name="st.textleft">
+							    <case value="左侧:无明显伤痕">左侧：尚未检查出有伤痕</case>							    
+							    <default /><{$st.textleft}>
+							</switch>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathright}><{$st.imgright}>" alt="<{$st.imgright}>"  height="180px">
+						</a>
+						<div class="caption">
+							<switch name="st.textright">
+							    <case value="右侧:无明显伤痕">右侧：尚未检查出有伤痕</case>							    
+							    <default /><{$st.textright}>
+							</switch>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathservice}><{$st.imgservice}>" alt="<{$st.imgservice}>"  height="180px">
+						</a>
+						<div class="caption"><{$st.textservice}></div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="thumbnail" >
+						<a href="#" >
+							<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.pathoil}><{$st.imgoil}>" alt="<{$st.imgoil}>"  height="180px">
+						</a>
+						<div class="caption">里程：<{$st.oilgauge}>&nbsp;油量：<{$st.oilgauge}></div>
+					</div>
+				</div>							
+			</div>
+		</div>
+	</volist>
+</div>
