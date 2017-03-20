@@ -70,4 +70,10 @@ class OrderController extends Controller {
         }
     }
     
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
 }

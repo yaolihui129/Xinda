@@ -2,7 +2,7 @@
 namespace Demo\Controller;
 use Think\Controller;
 class AboutController extends Controller {
-    public function About(){
+    public function index(){
 
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(12);
@@ -16,5 +16,9 @@ class AboutController extends Controller {
     }
     
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
     
 }

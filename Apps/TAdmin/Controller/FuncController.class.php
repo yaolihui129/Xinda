@@ -284,6 +284,12 @@ class FuncController extends CommonController{
         
        
     }
+    
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
 
 
 }

@@ -4,7 +4,7 @@ use Think\Controller;
 class LoginController extends Controller {
 
        public function index(){
-           dump($_SESSION);
+           
            $this->display();
        }
     
@@ -28,10 +28,10 @@ class LoginController extends Controller {
         $where['openid']=$_SESSION['openid'];
         $arr=$m->where($where)->select();
         if ($arr){
-            $_SESSION['Xiuli']['userid']=$arr['id'];
+            $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['Xiuli']['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xiuli/Index');
@@ -54,10 +54,10 @@ class LoginController extends Controller {
             $lastId=$m->add();
                         
             $arr=$m->where($where)->select();
-            $_SESSION['Xiuli']['userid']=$arr['id'];
+            $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['Xiuli']['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xiuli/Index');
@@ -73,10 +73,10 @@ class LoginController extends Controller {
          $data=$m->where($where)->field('id,phone,realname')->find();
         
         if ($data){            
-            $_SESSION['Xiuli']['userid']=$data['id'];
+            $_SESSION['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
-            $_SESSION['Xiuli']['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Xiuli';
 //             $this->redirect('/Xiuli/Index');
             $this->success("登录成功!");
         }else{

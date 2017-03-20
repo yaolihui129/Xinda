@@ -112,7 +112,7 @@ public function personal(){
         if($_SESSION['openid']){
             $where['openid']=$_SESSION['openid'];
         }else {
-            $where['id'] =  $_SESSION['Xiuli']['userid'];
+            $where['id'] =  $_SESSION['userid'];
         }    
         /* 实例化模型*/
         $m=M('tp_customer');
@@ -120,6 +120,11 @@ public function personal(){
         $this->assign('arr',$arr);
 
         $this->display();
+    }
+    
+    public function _empty(){
+    
+        $this->display('index');
     }
 
 

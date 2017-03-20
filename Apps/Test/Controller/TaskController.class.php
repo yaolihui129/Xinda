@@ -47,12 +47,7 @@ class TaskController extends Controller {
     }
     
     public function finish(){
-//         $m=D('task');
-//         $where['deleted']='0';
-//         $where['assignedTo']='closed';
-//         $data=$m->where($where)
-//         ->order("finishedBy")
-//         ->select();
+
 
         $Model = new \Think\Model() ;// 实例化一个model对象 没有对应任何数据表
         $data=$Model
@@ -73,6 +68,11 @@ class TaskController extends Controller {
     
         $this->display();
     
+    }
+    
+    public function _empty(){
+    
+        $this->display('index');
     }
     
     

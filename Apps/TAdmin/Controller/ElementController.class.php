@@ -177,6 +177,12 @@ class ElementController extends CommonController{
             $this->error('删除失败');
         }
     }
+    
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
 
 
 }

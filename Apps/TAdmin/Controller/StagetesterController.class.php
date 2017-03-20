@@ -59,5 +59,10 @@ class StagetesterController extends CommonController {
             $this->error("重新排序失败...");
         }
     }
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
 
 }

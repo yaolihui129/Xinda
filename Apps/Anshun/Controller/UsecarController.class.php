@@ -2,8 +2,14 @@
 namespace Anshun\Controller;
 use Think\Controller;
 class UsecarController extends Controller {
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
     public function index(){
-         $m=D('product');
+       $m=D('product');
        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,url,record,path,img')->find(4);
        $_SESSION['Anshun']=$data;
        $_SESSION['Anshun']['img']=$data['path'].$data['img'];

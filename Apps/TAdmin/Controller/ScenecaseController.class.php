@@ -65,4 +65,10 @@ public function index(){
             $this->error("绑定失败！");
         }
     }
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
 }

@@ -19,4 +19,10 @@ class SceneController extends Controller {
     }
     
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
+    
 }

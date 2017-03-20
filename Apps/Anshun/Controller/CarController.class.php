@@ -3,6 +3,12 @@ namespace Anshun\Controller;
 use Think\Controller;
 class CarController extends Controller {
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
+    
     public function index(){
         /*实例化模型*/
         $m=D('product');

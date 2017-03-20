@@ -22,10 +22,6 @@ class ProgramController extends CommonController {
 
 	     $this->display();
     }
-    
-   
-
-
 
    public function search(){
        /* 接收参数*/
@@ -49,6 +45,12 @@ class ProgramController extends CommonController {
    
        $this->display('index');
            
+   }
+   
+   
+   public function _empty(){
+   
+       $this->display('index');
    }
  
 }

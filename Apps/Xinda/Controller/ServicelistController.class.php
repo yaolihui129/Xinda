@@ -38,5 +38,11 @@ class ServicelistController extends Controller {
     }
     
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
+    
     
 }

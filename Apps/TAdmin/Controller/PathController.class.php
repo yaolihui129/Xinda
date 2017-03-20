@@ -171,4 +171,10 @@ class PathController extends CommonController {
             $this->error("失败");
         }
     }
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
 }

@@ -27,9 +27,6 @@ class DatacaseController extends CommonController{
 
     }
 
-  
-
-
     public function update(){
         $db=D('case');
         $_POST['moder']=$_SESSION['realname'];
@@ -39,5 +36,11 @@ class DatacaseController extends CommonController{
             $this->error("修改失败！");
         }
 
+    }
+    
+    
+    public function _empty(){
+    
+        $this->display('index');
     }
 }

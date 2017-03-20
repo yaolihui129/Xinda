@@ -23,10 +23,10 @@ public function qq_login(){
         $where['openid']=$_SESSION['openid'];
         $arr=$m->where($where)->select();
         if ($arr){
-            $_SESSION['Xinda']['userid']=$arr['id'];
+            $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['Xinda']['isCLogin']='Xinda';
+            $_SESSION['isCLogin']='Xinda';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xinda/Index');
@@ -49,10 +49,10 @@ public function qq_login(){
             $lastId=$m->add();
                         
             $arr=$m->where($where)->select();
-            $_SESSION['Xinda']['userid']=$arr['id'];
+            $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['Xinda']['isCLogin']='Xinda';
+            $_SESSION['isCLogin']='Xinda';
             $_SESSION['QC_userData']=$cus;
             
             $this->redirect('/Xinda/Index');
@@ -68,10 +68,10 @@ public function qq_login(){
          $data=$m->where($where)->field('id,phone,realname')->find();
         
         if ($data){            
-            $_SESSION['Xinda']['userid']=$data['id'];
+            $_SESSION['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
-            $_SESSION['Xinda']['isCLogin']='Xinda';
+            $_SESSION['isCLogin']='Xinda';
 //             $this->redirect('/Xinda/Index');
             $this->success("登录成功!");
         }else{

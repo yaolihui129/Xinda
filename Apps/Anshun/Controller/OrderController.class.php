@@ -3,6 +3,12 @@ namespace Anshun\Controller;
 use Think\Controller;
 class OrderController extends Controller {
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
+    
     public function index(){
         $m=D('product');
         $data=$m->field('web,adress,keywords,desc,phone,tel,qq,url,record,path,img')->find(4);
@@ -32,13 +38,17 @@ class OrderController extends Controller {
     public function yuyue(){
         /* 实例化模型*/
         $m=D('order_serviccar');
-        
+        $yydate=date("Y-m-d",time()+1*24*3600);
+        $this->assign("yydate", $yydate);
         $this->assign("textservice", selectCate());
+        
         $this->display();
     }
     
     public function yyinsert(){
-       if($_POST['phone']){
+       
+        //关联客户信息，客户信息不存在创建客户
+        if($_POST['phone']){
            /* 实例化模型*/
            $m=M('tp_customer');
            $where=array("phone"=>$_POST['phone']);
@@ -57,8 +67,31 @@ class OrderController extends Controller {
                $arr=$m->where($where)->select();
                $_POST['uid']=$arr[0]['id'];
            }
-           
-           
+       }else {
+           $this->error('联系电话没有填写');
+       }
+       
+       
+       //处理车辆信息    
+       if($_POST['plateno']){
+           /* 实例化模型*/
+           $m=M('car');
+           $where=array("plateno"=>$_POST['plateno']);
+           $arr=$m->where($where)->select();
+           if($arr){
+               $_POST['carid']=$arr[0]['id'];
+           }else {
+               $data['plateno']=$_POST['plateno'];               
+               $data['ctime']=time();
+               $data['moder']='维修预约';
+               if(!$m->create($data)){
+                   $this->error($m->getError());
+               }
+               $lastId=$m->add($data);
+               $arr=$m->where($where)->select();
+               $_POST['carid']=$arr[0]['id'];
+           }
+       }
            
            /* 实例化模型*/
            $m=D('order_serviccar');
@@ -76,9 +109,7 @@ class OrderController extends Controller {
            }else{
                $this->error('失败');
            }
-       }else {
-           $this->error('联系电话没有填写');
-       }
+      
         
         
     }

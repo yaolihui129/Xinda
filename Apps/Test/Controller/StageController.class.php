@@ -17,4 +17,9 @@ class StageController extends Controller {
 
         $this->display();
     }
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
 }

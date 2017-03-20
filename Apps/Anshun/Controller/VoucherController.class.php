@@ -2,6 +2,13 @@
 namespace Anshun\Controller;
 use Think\Controller;
 class VoucherController extends Controller {
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
+    
     public function index(){
         $m=D('product');
         $data=$m->field('web,adress,keywords,desc,phone,tel,qq,url,record,path,img')->find(4);

@@ -52,9 +52,12 @@ class ProgramController extends Controller {
         
         
         $this->display('index');
-        
-        
-        
-        
+
+    }
+    
+    
+    public function _empty(){
+    
+        $this->display('index');
     }
 }

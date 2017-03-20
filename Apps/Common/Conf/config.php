@@ -6,6 +6,11 @@ return array(
     'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Demo'),//设置允许模块
     'DEFAULT_MODULE' => 'Xinda',//设置默认模块设置
     'MODULE_DENY_LIST' => array('Common','Runtime'), // 禁止访问的模块列表
+    'APP_SUB_DOMAIN_DEPLOY'   =>    1, // 开启子域名配置
+    'APP_SUB_DOMAIN_RULES'    =>    array(
+        'admin'        => 'Admin',  // admin子域名指向Admin模块
+        'test'         => 'Test',  // test子域名指向Test模块
+    ),
     //修改定界符
     'TMPL_L_DELIM'=>'<{',
     'TMPL_R_DELIM'=>'}>',

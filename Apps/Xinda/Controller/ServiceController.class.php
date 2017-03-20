@@ -2,7 +2,7 @@
 namespace Xinda\Controller;
 use Think\Controller;
 class ServiceController extends Controller {
-    public function Index(){
+    public function index(){
 
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
@@ -19,6 +19,9 @@ class ServiceController extends Controller {
         $this->display();
     }
     
+    public function _empty(){
     
+        $this->display('index');
+    }
     
 }

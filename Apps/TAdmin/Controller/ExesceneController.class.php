@@ -186,6 +186,9 @@ public function library(){
 
 }
 
+public function _empty(){
 
+    $this->display('index');
+}
 
 }

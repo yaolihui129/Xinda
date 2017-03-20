@@ -3,6 +3,11 @@ namespace Anshun\Controller;
 use Think\Controller;
 class CustomerController extends Controller {
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
     public function index(){
         
         $m=D('product');
@@ -155,14 +160,11 @@ class CustomerController extends Controller {
         $m=M('tp_customer');
         $arr=$m->where($where)->select();
         
-        
-        
         /* 实例化模型*/
         $m=D('order_serviccar');
         $map['phone']=$arr[0]['phone'];
         $data=$m->where($map)->select();
         $this->assign('data',$data);
-//         dump($data);
         
         $this->display();
     }

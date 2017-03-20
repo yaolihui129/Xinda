@@ -12,6 +12,12 @@ class ExesceneController extends Controller {
         dump($arr);
         
     }
+    
+    
+    public function _empty(){
+    
+        $this->display('index');
+    }
         
         
 }

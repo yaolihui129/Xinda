@@ -75,4 +75,9 @@ class BranchController extends CommonController {
         $this->display();
     }
     
+    public function _empty(){
+    
+        $this->display('index');
+    }
+    
 }
