@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : xiuli
+Source Server         : Xiuli
 Source Server Version : 50535
 Source Host           : 2lbrknae.2248.dnstoo.com:5503
 Source Database       : xiuli
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50535
 File Encoding         : 65001
 
-Date: 2017-03-21 09:23:45
+Date: 2017-03-21 22:30:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -4701,7 +4701,7 @@ CREATE TABLE `zt_product` (
 -- Records of zt_product
 -- ----------------------------
 INSERT INTO `zt_product` VALUES ('1', '秀丽广告', 'Xiuli', 'platform', 'normal', '<p class=\"MsoNormal\"><b><span style=\"font-size:16pt;font-family:\'宋体\';\">广告类：大型室外广告牌、楼体亮化工程、<span>LED</span>显示屏、展板展架、条幅吊旗、锦旗授带、写真喷绘、铜牌铜字、钛金字、发光字、<span>PVC</span>字<span></span></span></b></p>\n<p class=\"MsoNormal\"><b><span style=\"font-size:16pt;font-family:\'宋体\';\">文印类：打字复印、彩喷彩页、快照证书、书本装订、中高档胸卡、桌牌菜单、名片、充值卡、印制单据<span></span></span></b></p>', 'zhangxl', 'jiaxn', 'yao', 'private', '', 'yao', '2017-01-08 22:23:39', '8.2.4', '5', '0', '秀丽', '13463925200', '0319-7186126', '2830690782', 'Xiuli', 'xl_', '临城-秀丽广告', '临城秀丽广告,秀丽广告,临城广告', '临城兴临街转盘北200米路西', 'www.xiuliguanggao.com', '/Setting/2017-01-24/', '588706de454f9.png', '2017-03-16 10:54:52', '冀ICP备17001594号', 'V1.0.0');
-INSERT INTO `zt_product` VALUES ('2', '拓才教育', 'Tuocai', 'platform', 'normal', '', 'liangxw', 'jiaxn', 'yao', 'private', '', 'yao', '2017-01-08 22:24:09', '8.2.4', '10', '0', '拓才', null, '0311-89849355', '285981407', 'Tuocai', 'tc_', '石家庄-拓才教育', '石家庄拓才教育,石家庄课外辅导,石家庄一对一辅导', '石家庄', 'www.xiuliguanggao.com/index.php/Tuocai', '/Setting/adress/2016-12-13/', '584fb53ddc613.jpg', '2017-03-16 10:56:06', null, 'V1.0.0');
+INSERT INTO `zt_product` VALUES ('2', '拓才教育', 'Tuocai', 'platform', 'normal', '', 'liangxw', 'jiaxn', 'yao', 'private', '', 'yao', '2017-01-08 22:24:09', '8.2.4', '10', '0', '拓才', '13426179579', '0311-89849355', '285981407', 'Tuocai', 'tc_', '石家庄-拓才教育', '石家庄拓才教育,石家庄课外辅导,石家庄一对一辅导', '河北省石家庄市裕华区大马庄园6号楼3单元402室', 'www.xiuliguanggao.com/index.php/Tuocai', '/Setting/adress/2016-12-13/', '584fb53ddc613.jpg', '2017-03-21 10:39:52', null, 'V1.0.0');
 INSERT INTO `zt_product` VALUES ('3', '麦田双辉', 'Mtsh', 'platform', 'normal', '', 'yao', 'jiaxn', 'yao', 'private', '', 'yao', '2017-01-08 22:24:52', '8.2.4', '15', '0', '双辉', '18801043607', '0319-7167618', '83000892', 'Mtsh', 'mt_', '麦田双辉-服务中心', null, '临城', 'www.xiuliguanggao.com/index.php/Mtsh', '/Setting/2017-01-19/', '58805b69780c6.png', '2017-03-16 10:55:05', '', 'V1.0.0');
 INSERT INTO `zt_product` VALUES ('4', '安顺汽修', 'Anshun', 'platform', 'normal', '主营业务：钣金喷漆、汽车维修、汽车保养、汽车用品<br />', 'jiaxy', 'jiaxn', 'yao', 'private', '', 'yao', '2017-01-08 22:25:22', '8.2.4', '20', '0', '安顺', '13785900902', null, '1058793920', 'Anshun', 'as_', '安顺汽车服务中心', '临城安顺汽修,安顺汽修,临城汽修', '临城镇府前街射兽村中学东200米', 'www.xiuliguanggao.com/index.php/Anshun', '/Setting/2017-02-21/', '58abf9b696c71.jpg', '2017-03-16 11:53:44', null, 'V1.0.0');
 INSERT INTO `zt_product` VALUES ('5', '测试管理', 'Test', 'platform', 'normal', '自主设计的测试管理平台', 'yao', 'jiaxn', 'yao', 'private', '', 'jeff', '2017-01-08 22:29:58', '8.2.4', '25', '0', 'Test', '18801043607', null, null, 'Test', 'tt_', '测试管理平台', null, '虚拟网络世界', 'www.xiuliguanggao.com/index.php/Test', null, null, '2017-02-10 22:23:58', null, 'V1.0.0');

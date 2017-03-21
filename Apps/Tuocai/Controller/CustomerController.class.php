@@ -53,70 +53,112 @@ class CustomerController extends Controller {
     //添加人员
     public function add(){
         
+        $this->assign("selectCate", selectCate());
+        $this->assign("selectType",selectType());
+        
         $this->display();
     }
-    //个人注册
-    public function tianj(){
-       
-        //1.判断手机号是否填写                   
-        if($_POST['phone']){           
-            //2.检查登录表时候有该手机
-            $where['phone']=$_POST['phone'];
-            $m=D('tp_customer');            
-            $arr=$m->where($where)->select();
-            if($arr){
-                //3.检查客户表是否有该手机
-                $m=D('tc_customer');
-                $map['tpid']=$arr[0]['id'];
-                $data=$m->where($map)->select();
-                if($data){
-                    //如果客户表存在
-                }else {
-                    //如果客户表不存在，创建该客户
-                    
-                }
-                
-            }else {
-                //登录表没有，直接创建
-                $_POST['password']=md5(123456);
-                $_POST['ctime']=time();
-                if(!$m->create()){
-                    $this->error($m->getError());
-                }
-                $lastId=$m->add();
+    
+    
+        //个人注册
+        public function tianj(){       
+            //1.判断手机号是否填写                   
+            if($_POST['phone']){           
+                //2.检查登录表时候有该手机
+                $where['phone']=$_POST['phone'];
+                $m=D('tp_customer');            
                 $arr=$m->where($where)->select();
-                //客户表，插入记录
+                if($arr){
+                    //3.检查客户表是否有该手机
+                    $m=D('tc_customer');
+                    $map['tpid']=$arr[0]['id'];
+                    $data=$m->where($map)->select();
+                    if($data){
+                        //如果客户表存在
+                        $this->error("客户已经存在");
+                    }else {
+                        //如果客户表不存在，创建该客户                    
+                        $m=D('tc_customer');
+                        $data['tpid']       =  $arr[0]['id'];
+                        $data['type']       =  $_POST['type'];
+                        if($_POST['type']=="学生"){
+                            $data['isteacher']=0;
+                        }else {
+                            $data['isteacher']=1;
+                        }
+                        $data['realname']   =  $_POST['realname'];
+                        $data['coursetype'] =  $_POST['coursetype'];
+                        $data['course']     =  $_POST['course'];
+                        $data['ctime']      =  time();
+                        $data['adder']      =  $_SESSION['realname'];
+                        $data['moder']      =  $_SESSION['realname'];
+                        if(!$m->create($data)){
+                            $this->error($m->getError());
+                        }
+                        $lastId=$m->add($data);
+                        if($lastId){
+                            $this->success('添加成功',U('Customer/renylist'));
+                        }else {
+                            $this->error("添加失败");
+                        }
+                    }
+                    
+                }else {
+                    //登录表没有，直接创建
+                    $arr['phone']      =  $_POST['phone'];
+                    $arr['realname']   =  $_POST['realname'];
+                    $arr['password']   =  md5(123456);
+                    $arr['ctime']      =  time();
+                    $arr['moder']      =  $_SESSION['realname'];
+                    if(!$m->create($arr)){
+                        $this->error($m->getError());
+                    }
+                    $lastId=$m->add($arr);
+                    $arr=$m->where($where)->select();
+                    
+                    
+                    //客户表，插入记录
+                    $m=D('tc_customer');
+                    $data['tpid']       =  $arr[0]['id'];
+                    $data['type']       =  $_POST['type'];
+                    if($_POST['type']=="学生"){
+                        $data['isteacher']=0;
+                    }else {
+                        $data['isteacher']=1;
+                    }
+                    $data['coursetype'] =  $_POST['coursetype'];
+                    $data['course']     =  $_POST['course'];
+                    $data['ctime']      =  time();
+                    $data['adder']      =  $_SESSION['realname'];
+                    $data['moder']      =  $_SESSION['realname'];
+                    $data['remark']     =  $_POST['remark'];
+                    if(!$m->create($data)){
+                        $this->error($m->getError());
+                    }
+                    $lastId=$m->add($data);
+                    
+                    if($lastId){
+                        $this->success('添加成功',U('Customer/renylist'));
+                    }else {
+                        $this->error("添加失败");
+                    }
+                }
+            }else {
+                $this->error("手机号不能为空");
             }
-            
-            
-            
-            
-            
-        }else {
-            $this->error("手机号不能为空");
+    
         }
-        
-        
-        /* 实例化模型*/
-        
-        $m=D('tp_customer');
-        
-    
-    }
-    
-    
-    
-   
- public function setpass(){
-        /* 接收参数*/
-        $id =  $_SESSION['id'];
-        /* 实例化模型*/
-        $m=M('tc_customer');        
-        $user=$m->find($id);
-        $this->assign('user',$user);
 
-        $this->display();
-    }
+     public function setpass(){
+            /* 接收参数*/
+            $id =  $_SESSION['id'];
+            /* 实例化模型*/
+            $m=M('tc_customer');        
+            $user=$m->find($id);
+            $this->assign('user',$user);
+    
+            $this->display();
+        }
     
     
     //检查手机号是否注册过
@@ -171,46 +213,46 @@ class CustomerController extends Controller {
      
     
 
- public function set(){
-       /* 接收参数*/
-       $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-       $pass1= $_POST['pass1'];
-       $pass2= $_POST['pass2'];
-       $pass3= $_POST['pass3'];
-       /* 实例化模型*/
-        $m=M('tc_customer');
-        
-        $user=$m->find($id);
-        if (md5($pass1)==$user['password']) {
-            if ($pass2==$pass3) {
-                $arr['id']=$id;
-                $arr['password']=md5($pass2);
-                $arr['moder']=$_SESSION['realname'];
-                if ($m->save($arr)){
-                        $this->success("密码修改成功！",U('Tuocai/Index/index'));
+     public function set(){
+           /* 接收参数*/
+           $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
+           $pass1= $_POST['pass1'];
+           $pass2= $_POST['pass2'];
+           $pass3= $_POST['pass3'];
+           /* 实例化模型*/
+            $m=M('tc_customer');
+            
+            $user=$m->find($id);
+            if (md5($pass1)==$user['password']) {
+                if ($pass2==$pass3) {
+                    $arr['id']=$id;
+                    $arr['password']=md5($pass2);
+                    $arr['moder']=$_SESSION['realname'];
+                    if ($m->save($arr)){
+                            $this->success("密码修改成功！",U('Tuocai/Index/index'));
+                    }else{
+                            $this->error("密码修改失败！");
+                    }
+    
                 }else{
-                        $this->error("密码修改失败！");
+                    $this->error('新密码和确认面不一致');
                 }
-
             }else{
-                $this->error('新密码和确认面不一致');
+                $this->error('原密码错误');
             }
-        }else{
-            $this->error('原密码错误');
-        }
+    
+    
+     }
 
 
- }
-
-
- public function mod(){
-        $id=$_GET['id'];
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->find($id);
-        $this->assign('arr',$arr);
-        
-        $this->display();
+     public function mod(){
+            $id=$_GET['id'];
+            /* 实例化模型*/
+            $m=M('tp_customer');
+            $arr=$m->find($id);
+            $this->assign('arr',$arr);
+            
+            $this->display();
     }
     
     public function update(){

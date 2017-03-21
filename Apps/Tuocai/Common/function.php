@@ -10,3 +10,29 @@ function getCatname($cateid){
         return "|-";
     }
 }
+
+function selectCate($value="小学课程") {
+    $html = '<select name="coursetype" class="form-control">';
+    $m =M('tc_cate');
+    $where=array("pid"=>0,"state"=>"正常");
+    $cats = $m->where($where)->order('sn')->select();
+    foreach($cats as $cat) {
+        $selected = ($cat['catname']==$value) ? "selected" : "";
+        $html .= '<option '.$selected.' value="'.$cat['catname'].'">'.$cat['catname'].'</option>';
+    }
+    $html .='<select>';
+    return $html;
+}
+
+
+function selectType($v="学生"){
+    $html = '<select name="coursetype" class="form-control">';
+    $html .= '<option '.$selected.' value="学生">学生</option>';
+    $html .= '<option  value="助教">助教</option>';
+    $html .= '<option  value="老师">老师</option>';
+    $html.='<select>';
+    return $html;
+}
+
+
+
