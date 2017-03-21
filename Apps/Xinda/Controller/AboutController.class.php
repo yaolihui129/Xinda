@@ -5,7 +5,7 @@ class AboutController extends Controller {
     public function index(){
          /* 实例化模型*/
          $m=D('product');
-         $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
+         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(6);
          $_SESSION['Xinda']=$data;         
          $_SESSION['Xinda']['img']=$data['path'].$data['img'];
          $_SESSION['Xinda']['web']=$data['web'];
@@ -19,7 +19,7 @@ class AboutController extends Controller {
     public function hr(){
         /* 实例化模型*/
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(6);
         $_SESSION['Xinda']=$data;
         $_SESSION['Xinda']['img']=$data['path'].$data['img'];
         $_SESSION['Xinda']['web']='北京智慧信达-招聘';

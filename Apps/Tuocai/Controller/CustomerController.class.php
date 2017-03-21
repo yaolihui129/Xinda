@@ -4,8 +4,8 @@ use Think\Controller;
 class CustomerController extends Controller {
 
 	public function index(){
-	   $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(2);
+	    $m=D('product');
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
         $_SESSION['Tuocai']=$data;
         $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
@@ -20,7 +20,92 @@ class CustomerController extends Controller {
         $this->assign('w',$where);       
 	    $this->display();
     }
-
+    
+    //人员列表
+    public function renylist(){
+        /* 实例化模型*/
+        $m=D('product');
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
+        $_SESSION['Anshun']=$data;
+        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
+        $_SESSION['ip']=get_client_ip();
+        $_SESSION['browser']=GetBrowser();
+        $_SESSION['os']=GetOs();
+        
+        /*接收参数*/
+        if($_GET['type']){
+            $type=$_GET['type'];
+        }else {
+            $type='学生';
+        }
+        
+        $this->assign('type',$type);
+        
+        /* 实例化模型*/
+        $m=D('tc_customer');
+        $where['type']=$type;
+        $arr=$m->where($where)->order('ctime desc')->select();
+        $this->assign('arr',$arr);
+        
+        $this->display();
+    }
+    
+    //添加人员
+    public function add(){
+        
+        $this->display();
+    }
+    //个人注册
+    public function tianj(){
+       
+        //1.判断手机号是否填写                   
+        if($_POST['phone']){           
+            //2.检查登录表时候有该手机
+            $where['phone']=$_POST['phone'];
+            $m=D('tp_customer');            
+            $arr=$m->where($where)->select();
+            if($arr){
+                //3.检查客户表是否有该手机
+                $m=D('tc_customer');
+                $map['tpid']=$arr[0]['id'];
+                $data=$m->where($map)->select();
+                if($data){
+                    //如果客户表存在
+                }else {
+                    //如果客户表不存在，创建该客户
+                    
+                }
+                
+            }else {
+                //登录表没有，直接创建
+                $_POST['password']=md5(123456);
+                $_POST['ctime']=time();
+                if(!$m->create()){
+                    $this->error($m->getError());
+                }
+                $lastId=$m->add();
+                $arr=$m->where($where)->select();
+                //客户表，插入记录
+            }
+            
+            
+            
+            
+            
+        }else {
+            $this->error("手机号不能为空");
+        }
+        
+        
+        /* 实例化模型*/
+        
+        $m=D('tp_customer');
+        
+    
+    }
+    
+    
+    
    
  public function setpass(){
         /* 接收参数*/
@@ -34,7 +119,7 @@ class CustomerController extends Controller {
     }
     
     
-    
+    //检查手机号是否注册过
     public function checked(){
         if($_POST['phone']){
             $m=D('tp_customer');
@@ -43,7 +128,7 @@ class CustomerController extends Controller {
             if($data){
                 $this->error("这个号码已经注册，无需重复注册");
             }else{
-                $this->redirect('/Xiuli/Customer/register/phone/'.$_POST['phone']);
+                $this->redirect('/Tuocai/Customer/register/phone/'.$_POST['phone']);
             }
         }else{
             $this->error("您没有填写手机号");
@@ -51,11 +136,11 @@ class CustomerController extends Controller {
     
     
     }
-    
+    //个人注册
     public function register(){
     
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(1);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
         $_SESSION['Xiuli']=$data;
         $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
@@ -67,8 +152,7 @@ class CustomerController extends Controller {
     
         $this->display();
     }
-    
-    
+    //个人注册
     public function insert(){
         $m=D('tp_customer');
         $_POST['password']=md5(123456);
@@ -78,12 +162,14 @@ class CustomerController extends Controller {
         }
         $lastId=$m->add();
         if($lastId){
-            $this->success("注册成功",U('Xiuli/Index'));
+            $this->success("注册成功");
         }else{
             $this->error("注册失败");
         }
     
     }
+     
+    
 
  public function set(){
        /* 接收参数*/

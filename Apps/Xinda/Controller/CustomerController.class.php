@@ -6,7 +6,7 @@ class CustomerController extends CommonController {
 	public function index(){
 	    /* 实例化模型*/
 	    $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(6);
         $_SESSION['Xinda']=$data;
         $_SESSION['Xinda']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
@@ -35,7 +35,7 @@ class CustomerController extends CommonController {
     public function register(){
     
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(1);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
         $_SESSION['Xiuli']=$data;
         $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();

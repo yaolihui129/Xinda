@@ -5,7 +5,7 @@ class ServicelistController extends Controller {
     public function index(){
 
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(3);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(3);
         $_SESSION['Mtsh']=$data;
         $_SESSION['Mtsh']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();

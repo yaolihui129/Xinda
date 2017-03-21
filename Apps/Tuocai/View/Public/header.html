@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="baidu-site-verification" content="lray2q7QLH" />
-    <title><{$_SESSION['web']}></title>
+    <title><{$_SESSION['Tuocai']['web']}></title>
     <meta name="keywords" content="<{$_SESSION['keywords']}>" />
 	<meta name="description" content="<{$_SESSION['desc']}>" />
 	<link rel="shortcut icon" href="favicon.ico"/>
@@ -50,24 +50,15 @@
             <li><a href="__APP__/Tuocai/Customer/index/isteacher/1">
             	<span class="glyphicon glyphicon-user"> 师资力量</span> </a>
             </li>
-            <li><a href="__APP__/Tuocai/About/index">
-            	<span class="glyphicon glyphicon-phone-alt"> 关于我们</span></a>
-            </li>
-            
-            <empty name="_SESSION['isCLogin']">
+            	<empty name="_SESSION['isCLogin']">
             	<li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>           
-          <else />
-          <li class="divider"></li>
-              <li class="dropdown">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 欢迎你-<{$_SESSION['realname']}> <span class="caret"></span></a>
-                 <ul class="dropdown-menu" role="menu">                    
-                    <li><a href="__APP__/Tuocai/Course/mycourse">我的课程</a></li>
-                    <li><a href="__APP__/Tuocai/Customer/setpass">修改密码</a></li>
-                	<li class="divider"></li>
-                	<li><a href="__APP__/Tuocai/Login/logout">退出</a></li>
-                </ul>
-              </li>
-          </empty>
+	          	<else />
+	          		<li>
+		          		<a href="__APP__/Xinda/Customer/personal">
+		          			<span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span>
+		          		</a>
+	          		</li>  
+	          </empty>
           </ul>                   
         </div>
       </div>

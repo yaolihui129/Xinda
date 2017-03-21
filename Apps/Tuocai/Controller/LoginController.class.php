@@ -26,10 +26,10 @@ class LoginController extends Controller {
             $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Tuocai';
             $_SESSION['QC_userData']=$cus;
     
-            $this->redirect('/Xiuli/Index');
+            $this->redirect('/Tuocai/Index');
         }else {
     
             $_POST['openid']=$_SESSION['openid'];
@@ -52,10 +52,10 @@ class LoginController extends Controller {
             $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Tuocai';
             $_SESSION['QC_userData']=$cus;
     
-            $this->redirect('/Xiuli/Index');
+            $this->redirect('/Tuocai/Index');
     
         }
     
@@ -67,13 +67,13 @@ class LoginController extends Controller {
          $where['phone']=$_POST['phone'];
          $where['password']=md5($_POST['password']);
          $data=$m->where($where)->field('id,phone,realname')->find();
-        dump($data);
+       
         
         if ($data){
             $_SESSION['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
             $_SESSION['realname']=$data['realname'];
-            $_SESSION['isCLogin']='Xiuli';
+            $_SESSION['isCLogin']='Tuocai';
 //             $this->redirect('/Xiuli/Index');
             $this->success("登录成功!");
         }else{

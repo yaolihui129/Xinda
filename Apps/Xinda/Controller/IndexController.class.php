@@ -5,7 +5,7 @@ class IndexController extends Controller {
     public function index(){
         
         $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(6);
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(6);
         $_SESSION['Xinda']=$data;
         $_SESSION['Xinda']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
