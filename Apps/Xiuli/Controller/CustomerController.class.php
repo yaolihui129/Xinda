@@ -133,7 +133,7 @@ class CustomerController extends Controller {
         if($_SESSION['openid']){
             $where['openid']=$_SESSION['openid'];
         }else {
-            $where['id'] =  $_SESSION['Xiuli']['userid'];
+            $where['id'] =  $_SESSION['userid'];
         }        
         /* 实例化模型*/
         $m=M('tp_customer');

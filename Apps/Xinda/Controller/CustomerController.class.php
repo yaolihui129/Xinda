@@ -36,8 +36,8 @@ class CustomerController extends Controller {
     
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
+        $_SESSION['Xinda']=$data;
+        $_SESSION['Xinda']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
@@ -65,12 +65,22 @@ class CustomerController extends Controller {
     
     }
 
+    public function mod(){
+        /* 接收参数*/
+        $id =  $_SESSION['userid'];
+        /* 实例化模型*/
+        $m=M('tp_customer');
+        $arr=$m->find($id);
+        $this->assign('arr',$arr);
+    
+        $this->display();
+    }
    
  public function setpass(){
         /* 接收参数*/
-        $id =  $_SESSION['id'];
+        $id =  $_SESSION['userid'];
         /* 实例化模型*/
-        $m=M('tc_customer');        
+        $m=M('tp_customer');        
         $user=$m->find($id);
         $this->assign('user',$user);
 
@@ -84,7 +94,7 @@ class CustomerController extends Controller {
        $pass2= $_POST['pass2'];
        $pass3= $_POST['pass3'];
        /* 实例化模型*/
-        $m=M('tc_customer');
+        $m=M('tp_customer');
         
         $user=$m->find($id);
         if (md5($pass1)==$user['password']) {
@@ -93,9 +103,9 @@ class CustomerController extends Controller {
                 $arr['password']=md5($pass2);
                 $arr['moder']=$_SESSION['realname'];
                 if ($m->save($arr)){
-                        $this->success("密码修改成功！",U('Tuocai/Index/index'));
+                   $this->success("密码修改成功！",U('Tuocai/Index/index'));
                 }else{
-                        $this->error("密码修改失败！");
+                   $this->error("密码修改失败！");
                 }
 
             }else{
