@@ -11,7 +11,8 @@ class ServicelistController extends Controller {
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
             
-        $where['prodid']=2;            
+        $where['prodid']=2; 
+        $where['state']='正常';
         $m=D('tc_cate');
         $arr=$m->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);

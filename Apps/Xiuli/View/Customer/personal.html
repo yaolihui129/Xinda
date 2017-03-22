@@ -1,7 +1,12 @@
 <layout name="layout" />
 <div class="container"> 
 <p class="text-center">
-	<img src="<{$arr[0]['figureurl_qq_2']}>" alt="<{$arr[0]['figureurl_qq_2']}>" class="img-circle">
+	<empty name="arr[0]['figureurl_qq_2']">
+		<img src="__IMG__/toux.jpg" alt="__IMG__/头像.jpg" width="100%">
+	<else /> 
+		<img src="<{$arr[0]['figureurl_qq_2']}>" alt="<{$arr[0]['figureurl_qq_2']}>" class="img-circle">
+	</empty> 
+	
 </p>
 <p class="text-center">
 	<{$arr[0]['realname']}>&nbsp;-&nbsp;

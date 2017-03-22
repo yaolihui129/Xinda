@@ -83,7 +83,7 @@ class LoginController extends Controller {
 
     }
 
-    public function logout(){
+public function logout(){
         $username =$_SESSION['realname'];
         $_SESSION = array();
 
@@ -92,7 +92,7 @@ class LoginController extends Controller {
         }        
         session_destroy();// 销毁sesstion
 
-        $this->success("再见 {$username}, 退出成功!");
+        $this->success("再见 {$username}, 退出成功!",U('/Tuocai/Index'));
 
     }
 }

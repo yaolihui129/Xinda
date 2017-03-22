@@ -1,28 +1,24 @@
 <layout name="layout" />
-  <ol class="breadcrumb">
-    <span>所在位置：</span>
-        <li><a href="__APP__/Tuocai/Index/index"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
-        <li class="active">我的课程</li>
-    <span class="pull-right"><a href="__APP__/Tuocai/Index/index"><button type="button" class="btn btn-warning btn-xs pull-right">返回</button></a></span>
-  </ol>
-  <div class="panel panel-default">
-  	<div class="panel-heading">
-    	<h3 class="panel-title">我的课程
-    	<switch name="_SESSION['isteacher']">
-		    <case value="1">（老师）</case>    
-		    <default />（学生）
-		</switch>
-    	
-    	</h3>
-  	</div>
-  	<ul class="list-group">
-		  <volist name='arr' id='vo' empty="没有数据">
-  			 <li class="list-group-item" >
-            	<a href="#"><{$vo.skdate}>(<{$vo.skweek}>):<{$vo.sktime}><br>
-            	<{$vo.course}>,上课地点：<{$vo.adress}></a>
-				</li>
-        	</volist>
-	</ul>
-  
-  
-</div>
+<div class="panel-body">
+<h3><{$userid|getCusName=###}>的课程表</h3>   	  
+    <!-- <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" class="active"><a href="#">未开始</a></li>
+		  <li role="presentation"><a href="#">已完成</a></li>	  
+	</ul> -->
+	<div class="panel panel-default">
+		  <ul class="list-group">		   
+			   <volist name='data' id='st' empty="没有数据">
+			     <li class="list-group-item">		        
+			       <div class="row">
+				       	<div class="col-md-4">				       					       	
+					       	【 <{$st.cusid|getCusName=###}>】老师的
+					       	《<{$st.courseid|getServiceName=###}>》			       	
+				       	</div>
+				        <div class="col-md-4">&nbsp;&nbsp;上课时间：<{$st.riqi}>&nbsp;<{$st.sktime}></div>
+				        <div class="col-md-4">&nbsp;&nbsp;上课地点：<{$st.adress}></div>		        		                				        
+			        </div>
+			      </li>
+			   </volist>
+		</ul>
+    </div>
+  </div>

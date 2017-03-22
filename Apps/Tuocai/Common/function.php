@@ -26,12 +26,21 @@ function selectCate($value="小学课程") {
 
 
 function selectType($v="学生"){
-    $html = '<select name="coursetype" class="form-control">';
+    $html = '<select name="type" class="form-control">';
     $html .= '<option '.$selected.' value="学生">学生</option>';
     $html .= '<option  value="助教">助教</option>';
     $html .= '<option  value="老师">老师</option>';
     $html.='<select>';
     return $html;
+}
+
+
+//获取课程信息
+function getServiceName($id){
+    $m =M('tc_prodservice');
+    $arr=$m->find($id);
+    return $arr['name'];
+    
 }
 
 

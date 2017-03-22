@@ -1,7 +1,7 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class CustomerController extends CommonController {
+class CustomerController extends Controller {
 
 	public function index(){
 	    /* 实例化模型*/

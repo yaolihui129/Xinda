@@ -41,20 +41,26 @@
 				<volist name='arr' id='st' empty="没有数据">
 					<div class="panel panel-info">
 						<div class="panel-heading">
-							<h4 class="panel-title"><{$st.tpid}><span class="bage pull-right"><{$st.type}></span></h4>
+							<h4 class="panel-title">
+								<{$st.tpid|getCusName=###}>
+								<span class="bage pull-right"><{$st.type}></span>
+							</h4>
 						</div>
 						<div class="panel-body">											        							
-							<div class="col-xs-12 col-md-4">
+							<div class="col-xs-12 col-md-3">
 								<div class="thumbnail" >
 									<a href="__URL__/mod/id/<{$st.id}>" >
-										<img data-src="holder.js/100%x180" src="#" alt="<{$st.imgservice}>"  height="180px">
+										<img data-src="holder.js/100%x180" src="__UPLOAD__<{$st.path}><{$st.img}>" alt="<{$st.imgservice}>"  height="180px">
 									</a>
-									<div class="caption">维修：<{$st.textservice}></div>
+									<div class="caption"><{$st.tpid|getCusName=###}>:<a href="tel:<{$st.tpid|getCusPhone=###}>"><{$st.tpid|getCusPhone=###}></a></div>
 								</div>
 							</div>
+							<div class="col-xs-12 col-md-9">
+							<p> <{$st.remark}></p>
+							</div>
  																					
-							</div> 
-						</div>
+						</div> 
+					</div>
 					
 				</volist>
 			</div>	
@@ -93,7 +99,7 @@
          	Copyright <span class="num">&copy;</span> 2016-2017
      		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
      		IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
-     		<p>咨询热线：<a href="tel:<{$_SESSION['Tuocai']['phone']}>"><{$_SESSION['Tuocai']['phone']}></a></p>    	
+     		<p>咨询热线：<a href="tel:<{$_SESSION['Tuocai']['tel']}>"><{$_SESSION['Tuocai']['tel']}></a></p>    	
     	</div>
      </div>
 

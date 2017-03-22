@@ -4,6 +4,7 @@ use Think\Controller;
 class CustomerController extends Controller {
 
 	public function index(){
+	    /* 实例化模型*/
 	    $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
         $_SESSION['Tuocai']=$data;
@@ -21,6 +22,28 @@ class CustomerController extends Controller {
 	    $this->display();
     }
     
+    //课程列表（根据老师选课程）
+    public function teacher(){
+        /* 实例化模型*/
+        $m=D('product');
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
+        $_SESSION['Tuocai']=$data;
+        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
+        $_SESSION['ip']=get_client_ip();
+        $_SESSION['browser']=GetBrowser();
+        $_SESSION['os']=GetOs();
+        
+        /* 实例化模型*/
+        $m=D('tc_customer');
+        $where['isteacher']=1;
+        $arr=$m->where($where)->order('ctime desc')->select();
+        $this->assign('arr',$arr);
+    dump($arr);
+        $this->display();
+    
+    }
+    
+    
     //人员列表
     public function renylist(){
         /* 实例化模型*/
@@ -31,7 +54,7 @@ class CustomerController extends Controller {
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
-        
+//         dump($_SESSION);
         /*接收参数*/
         if($_GET['type']){
             $type=$_GET['type'];
@@ -151,9 +174,9 @@ class CustomerController extends Controller {
 
      public function setpass(){
             /* 接收参数*/
-            $id =  $_SESSION['id'];
+            $id =  $_SESSION['userid'];          
             /* 实例化模型*/
-            $m=M('tc_customer');        
+            $m=M('tp_customer');        
             $user=$m->find($id);
             $this->assign('user',$user);
     
@@ -164,6 +187,7 @@ class CustomerController extends Controller {
     //检查手机号是否注册过
     public function checked(){
         if($_POST['phone']){
+            /* 实例化模型*/
             $m=D('tp_customer');
             $where['phone']=$_POST['phone'];
             $data=$m->where($where)->select();
@@ -180,7 +204,7 @@ class CustomerController extends Controller {
     }
     //个人注册
     public function register(){
-    
+        /* 实例化模型*/
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
         $_SESSION['Xiuli']=$data;
@@ -196,6 +220,7 @@ class CustomerController extends Controller {
     }
     //个人注册
     public function insert(){
+        /* 实例化模型*/
         $m=D('tp_customer');
         $_POST['password']=md5(123456);
         $_POST['ctime']=time();
@@ -220,18 +245,20 @@ class CustomerController extends Controller {
            $pass2= $_POST['pass2'];
            $pass3= $_POST['pass3'];
            /* 实例化模型*/
-            $m=M('tc_customer');
-            
+            $m=M('tc_customer');            
             $user=$m->find($id);
+            //判定原密码是否正确
             if (md5($pass1)==$user['password']) {
+                //判定两次新密码是否一致
                 if ($pass2==$pass3) {
                     $arr['id']=$id;
                     $arr['password']=md5($pass2);
                     $arr['moder']=$_SESSION['realname'];
                     if ($m->save($arr)){
-                            $this->success("密码修改成功！",U('Tuocai/Index/index'));
+                       $this->success("密码修改成功！请用新密码重新登录",U('Tuocai/Index/index'));
+                       session_destroy();// 销毁sesstion
                     }else{
-                            $this->error("密码修改失败！");
+                       $this->error("密码修改失败！");
                     }
     
                 }else{
@@ -246,7 +273,8 @@ class CustomerController extends Controller {
 
 
      public function mod(){
-            $id=$_GET['id'];
+            /* 接收参数*/
+            $id =  $_SESSION['userid'];   
             /* 实例化模型*/
             $m=M('tp_customer');
             $arr=$m->find($id);
@@ -273,7 +301,7 @@ class CustomerController extends Controller {
         }else {
             $where['id'] =  $_SESSION['userid'];
         }
-        
+
         /* 实例化模型*/
         $m=M('tp_customer');
         $arr=$m->where($where)->select();
@@ -286,7 +314,7 @@ class CustomerController extends Controller {
     
     public function _empty(){
     
-        $this->display('index');
+        $this->display('/Tuocai/Index');
     }
 
 }

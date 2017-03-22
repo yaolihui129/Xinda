@@ -45,6 +45,26 @@ function getCarinfo($carid){
     
 }
 
+//根据id获取客户电话
+function getCusPhone($id){
+    $m=D('tp_customer');
+    $arr=$m->find($id);
+    
+    return $arr['phone'];
+    
+}
+
+
+//根据id获取客户姓名
+
+function getCusName($id){
+    $m=D('tp_customer');
+    $arr=$m->find($id);
+    
+    return $arr['realname'];
+
+}
+
 //根据id获取活动信息
 function getVoucher($id){
     if ($id){

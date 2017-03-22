@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><{$_SESSION['Tuocai']['web']}></title>
+    <meta name="keywords" content="<{$_SESSION['keywords']}>" />
+	<meta name="description" content="" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">      
+  </head>
+  <body>
+
+	<switch name="_SESSION['isCLogin']">
+		<case value="Tuocai">			
+			<nav class="navbar navbar-default" role="navigation">			 
+				<div class="navbar-header">			
+					<a class="navbar-brand pull-left" href="#">拓才教育-<b>安排课程（选老师）</b></a>					      										
+				</div>					  
+			</nav> 
+			<div class="container">	
+				<div class="panel-body">				 	  				    
+					<div class="panel panel-default">
+						  <ul class="list-group">		   
+							   <volist name='arr' id='st' empty="没有数据">
+							     <li class="list-group-item">		        
+							       <div class="row">
+								       	<div class="col-md-4">				       					       	
+									       	【 <{$st.tpid|getCusName=###}>】老师
+									       		       	
+								       	</div>
+								        <div class="col-md-4">&nbsp;&nbsp;<{$st.coursetype}></div>
+								        <div class="col-md-4">
+								        	<empty name="_SESSION['Courseid']">
+												<a href="__APP__/Tuocai/Course/index/teacherid/<{$st.id}>/cate/<{$st.coursetype}>" class="btn btn-info btn-xs pull-right">下一步</a>
+											<else /> 
+												<a href="__APP__/Tuocai/Plan/index/teacherid/<{$st.id}>" class="btn btn-info btn-xs pull-right">下一步</a>
+											</empty>
+								        	
+								        </div>		        		                				        
+							        </div>
+							      </li>
+							   </volist>
+						</ul>
+				    </div>
+				  </div>		
+			
+		</case>				    
+		<default />
+			<div class="container"><br><br><br>
+				<div class="modal-content">
+			    	<div class="modal-header">				        、
+				        <h4 class="modal-title" >登录</h4>
+				    </div>
+				    <div class="modal-body">
+				      	<form action="__APP__/Tuocai/Login/login" method="post" class="form-horizontal" role="form" >	      	
+							<div class="form-group">
+								<label for="short" class="col-sm-2 control-label">手机:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="phone" value="" placeholder="用户名">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="product" class="col-sm-2 control-label">密码:</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control" name="password" value="" placeholder="密码">
+								</div>
+							</div>
+													
+					</div>
+					<div class="modal-footer">					          
+					     <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button></form>
+					</div>
+			    </div><br><br><br><br><br>
+			</div>
+								
+	</switch>
+	<div class="foot navbar-bottom list-inline text-center">
+         	Copyright <span class="num">&copy;</span> 2016-2017
+     		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
+     		IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
+     		<p>咨询热线：<a href="tel:<{$_SESSION['Tuocai']['phone']}>"><{$_SESSION['Tuocai']['phone']}></a></p>    	
+    </div>
+</div>
+
+	
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>    
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+     </body>
+</html>
