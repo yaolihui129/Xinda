@@ -58,12 +58,15 @@ function getCusPhone($id){
 //根据id获取客户姓名
 
 function getCusName($id){
-    $m=D('tp_customer');
-    $arr=$m->find($id);
-    
-    return $arr['realname'];
-
+    if($id){
+        $m=D('tp_customer');
+        $arr=$m->find($id);
+        
+        return $arr['realname'];
+    }
 }
+
+
 
 //根据id获取活动信息
 function getVoucher($id){
@@ -365,19 +368,18 @@ function getPFCase($funcid){
 
 //根据dateid 获取排课信息
 function getPlan($dateid){
-        $m=D('plan');
-        $where['tuoc_plan.dateid']=$dateid;
-        $arr=$m
-        ->where($where)
-        ->join('tuoc_techclass ON tuoc_plan.techclassid =tuoc_techclass.id')
+        $m=D('tc_plan');
+        $where['zt_tc_plan.dateid']=$dateid;
+        $arr=$m->where($where)
+        ->join('zt_tc_techclass ON zt_tc_plan.techclassid =zt_tc_techclass.id')
         ->select();
         if($arr){
-        foreach ($arr as $ar){
-        $str.='<li class="list-group-item">'
-                  . $ar['teacher']."老师的【".$ar['course']."】课程,上课地点：".$ar['adress']  
-              .'</li>';
-        };
-        return $str;
+            foreach ($arr as $ar){
+                $str.='<li class="list-group-item">';
+                $str.=      $ar['techclassid']."老师的【".$ar['course']."】课程,上课地点：".$ar['adress'] ; 
+                $str.= '</li>';
+            };
+            return $str;
         }else{
             return "暂无课程";
         }
@@ -387,7 +389,7 @@ function getPlan($dateid){
      * 根据dateid 获取排课信息
      * */
     function countPlan($dateid){
-        $m=D('plan');
+        $m=D('tc_plan');
         $where['dateid']=$dateid;
         $arr=$m->where($where)->count();
         return $arr;
@@ -421,6 +423,8 @@ function getPlan($dateid){
         $html .='<select>';
         return $html;
     }  
+    
+   
     
 // 根据id获取项目信息
     function getPro($projectid){

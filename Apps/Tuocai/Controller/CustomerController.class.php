@@ -2,87 +2,101 @@
 namespace Tuocai\Controller;
 use Think\Controller;
 class CustomerController extends Controller {
-
-	public function index(){
-	    /* 实例化模型*/
-	    $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-
-        $where['isteacher'] = !empty($_GET['isteacher']) ? $_GET['isteacher'] : 1;
-        $where['state']="发布";
-		$m=M('tc_customer');
-        $data=$m->where($where)->order('utime desc')->select();
-        $this->assign('data',$data);
-        $this->assign('w',$where);       
-	    $this->display();
-    }
-    
-    //课程列表（根据老师选课程）
-    public function teacher(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        
-        /* 实例化模型*/
-        $m=D('tc_customer');
-        $where['isteacher']=1;
-        $arr=$m->where($where)->order('ctime desc')->select();
-        $this->assign('arr',$arr);
-    dump($arr);
-        $this->display();
-    
-    }
-    
-    
-    //人员列表
-    public function renylist(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-//         dump($_SESSION);
-        /*接收参数*/
-        if($_GET['type']){
-            $type=$_GET['type'];
-        }else {
-            $type='学生';
+             //空方法容错处理
+            public function _empty(){           
+                $this->display('/Tuocai/Index');
+            }
+  
+         //前端师资力量展示
+    	public function index(){
+    	    /* 实例化模型*/
+    	    $m=D('product');
+            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
+            $_SESSION['Tuocai']=$data;
+            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
+            $_SESSION['ip']=get_client_ip();
+            $_SESSION['browser']=GetBrowser();
+            $_SESSION['os']=GetOs();
+            /*接收参数*/
+            $where['isteacher'] = !empty($_GET['isteacher']) ? $_GET['isteacher'] : 1;
+            $where['state']="发布";
+            /* 实例化模型*/
+    		$m=M('tc_customer');
+            $data=$m->where($where)->order('utime desc')->select();
+            $this->assign('data',$data);
+            $this->assign('w',$where);
+            
+    	    $this->display();
         }
-        
-        $this->assign('type',$type);
-        
-        /* 实例化模型*/
-        $m=D('tc_customer');
-        $where['type']=$type;
-        $arr=$m->where($where)->order('ctime desc')->select();
-        $this->assign('arr',$arr);
-        
-        $this->display();
-    }
     
-    //添加人员
-    public function add(){
-        
-        $this->assign("selectCate", selectCate());
-        $this->assign("selectType",selectType());
-        
-        $this->display();
-    }
+        //课程列表（根据老师选课程）
+        public function teacher(){
+            /* 实例化模型*/
+            $m=D('product');
+            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
+            $_SESSION['Tuocai']=$data;
+            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
+            $_SESSION['ip']=get_client_ip();
+            $_SESSION['browser']=GetBrowser();
+            $_SESSION['os']=GetOs();           
+            /* 实例化模型*/
+            $m=D('tc_customer');
+            $where['isteacher']=1;
+            $arr=$m->where($where)->order('ctime desc')->select();
+            $this->assign('arr',$arr);
+
+            $this->display();       
+        }
     
     
+        //人员列表
+        public function renylist(){
+            /* 实例化模型*/
+            $m=D('product');
+            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
+            $_SESSION['Tuocai']=$data;
+            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
+            $_SESSION['ip']=get_client_ip();
+            $_SESSION['browser']=GetBrowser();
+            $_SESSION['os']=GetOs();    
+            /*接收参数*/
+            if($_GET['type']){
+                $type=$_GET['type'];
+            }else {
+                $type='学生';
+            }           
+            $this->assign('type',$type);            
+            /* 实例化模型*/
+            $m=D('tc_customer');
+            $where['type']=$type;
+            $arr=$m->where($where)->order('ctime desc')->select();
+            $this->assign('arr',$arr);
+            
+            $this->display();
+        }
+    
+        //客户信息编辑
+        public function cusmod(){       
+            /* 实例化模型*/
+            $m=D('tc_customer');        
+            $arr=$m->find($_GET['id']);
+            $this->assign('arr',$arr);
+            $this->assign("selectCate", selectCate($arr['coursetype']));
+            $this->assign("selectType",formselect($arr['type'],"state","tcType"));       
+            
+            $this->display();
+        }
+    
+        //添加人员
+        public function add(){
+           
+            $this->assign("type",  $_GET['type']);
+            $this->assign("selectCate", selectCate());
+            $this->assign("selectType",formselect("学生","state","tcType"));
+            
+            $this->display();
+        }
+
         //个人注册
         public function tianj(){       
             //1.判断手机号是否填写                   
@@ -207,8 +221,8 @@ class CustomerController extends Controller {
         /* 实例化模型*/
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
+        $_SESSION['Tuocai']=$data;
+        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
@@ -218,8 +232,10 @@ class CustomerController extends Controller {
     
         $this->display();
     }
-    //个人注册
+    //个人注册的插入
     public function insert(){
+       
+        
         /* 实例化模型*/
         $m=D('tp_customer');
         $_POST['password']=md5(123456);
@@ -294,6 +310,43 @@ class CustomerController extends Controller {
         }
     }
     
+    public function cusupdate(){
+        // 实例化上传类
+        $upload = new \Think\Upload();
+        $upload->maxSize  =     7145728 ;// 设置附件上传大小
+        $upload->exts     =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->rootPath =  './Upload/Tuocai/';// 设置附件上传目录
+        $upload->savePath = '/Customer/'; // 设置附件上传目录       
+        $info  =   $upload->upload();
+        /* 实例化模型*/
+        $db=D('tc_customer');
+        $_POST['moder']=$_SESSION['realname'];
+        //判定是否有图片上传
+        if(!$info) {
+            // 没有图片上传时,保存信息             
+            $message=$db->save($_POST);
+        }else{
+            // 上传成功 获取上传文件信息
+            $_POST['path']=$info['img']['savepath'];
+            $_POST['img']=$info['img']['savename'];
+            // 没有图片上传时,保存信息
+            $message=$db->save($_POST);
+            $image = new \Think\Image();
+            //打开图片资源
+            $image->open('./Upload/Tuocai'.$info['img']['savepath'].$info['img']['savename']);
+            //等比例缩放
+            $image->thumb(600, 400)->save('./Upload/Tuocai'.$info['img']['savepath'].$info['img']['savename']);   
+        }
+        //传递保存信息
+        if ($message){
+            $this->success("修改成功！");
+        }else{
+            $this->error("修改失败！");
+        }
+
+        
+    }
+    
     public function personal(){
         /* 接收参数*/
         if($_SESSION['openid']){
@@ -312,11 +365,7 @@ class CustomerController extends Controller {
     }  
     
     
-    public function _empty(){
-    
-        $this->display('/Tuocai/Index');
-    }
-
+   
 }
  
 

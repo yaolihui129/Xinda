@@ -14,49 +14,48 @@
 	<switch name="_SESSION['isCLogin']">
 		<case value="Tuocai">			
 			<nav class="navbar navbar-default" role="navigation">
-				<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header"><a class="navbar-brand" href="#"><{$p}></a></div>
+				<div class="container">				
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#"><{$p}></a>					
+					</div>
 						<ul class="nav navbar-nav navbar-right">		      	
 							<form action="__URL__/search " method="post" class="navbar-form navbar-left" role="search">
 								<div class="form-group">
 									 <div class="input-group">
 										<input type="date" class="form-control" name="riqi" value="<{$p}>" >
-										<span class="input-group-btn">
-											 <button type="submit" class="btn btn-default" type="button">Go!</button>
+										<span class="input-group-btn pull-left">
+											 <button type="submit" class="btn btn-info " type="button">查询</button>
 										</span>
-									 </div><!-- /input-group -->				        					          
+									 </div>			        					          
 								</div>				        
 							</form>
 						</ul>
-				</div><!-- /.container-fluid -->
+				</div>
 			</nav>
-			<div class="container">	
-				<div class="panel-body">				 	  				    
-					<div class="panel panel-default">
-						  <ul class="list-group">		   
-							   <volist name='arr' id='st' empty="没有数据">
-							     <li class="list-group-item">		        
-							       <div class="row">
-								       	<div class="col-md-4">				       					       	
-									       	【 <{$st.tpid|getCusName=###}>】老师
-									       		       	
-								       	</div>
-								        <div class="col-md-4">&nbsp;&nbsp;<{$st.coursetype}></div>
-								        <div class="col-md-4">
-								        	<empty name="_SESSION['Courseid']">
-												<a href="__APP__/Tuocai/Course/index/teacherid/<{$st.id}>/cate/<{$st.coursetype}>" class="btn btn-info btn-xs pull-right">下一步</a>
-											<else /> 
-												<a href="__APP__/Tuocai/Plan/index/teacherid/<{$st.id}>" class="btn btn-info btn-xs pull-right">下一步</a>
-											</empty>
-								        	
-								        </div>		        		                				        
-							        </div>
-							      </li>
-							   </volist>
-						</ul>
-				    </div>
-				  </div>		
+			<div class="container">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">	 	  
+					 <volist name='arr' id='st' empty="没有数据">
+						 <div class="panel panel-default">
+						 	<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
+									<{$st.riqi}>(<{$st.xingqi}>):<{$st.sktime}></a>
+									
+										<div class="btn-group pull-right">
+										  <a type="button" href="#" class="btn btn-info  btn-xs">排课
+										    <span class="badge"><{$st.id|countPlan=###}></span>
+										  </a>
+										</div>
+
+								</h4>
+							</div>
+							<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">
+								<ol class="list-group"><{$st.id|getPlan=###}></ol>
+							</div>
+						 </div>		                      
+					 </volist>
+				 </div>	
+			</div>
 			
 		</case>				    
 		<default />
@@ -88,13 +87,17 @@
 			</div>
 								
 	</switch>
+	
+	
+	
+	
 	<div class="foot navbar-bottom list-inline text-center">
          	Copyright <span class="num">&copy;</span> 2016-2017
      		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
      		IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
      		<p>咨询热线：<a href="tel:<{$_SESSION['Tuocai']['phone']}>"><{$_SESSION['Tuocai']['phone']}></a></p>    	
     </div>
-</div>
+
 
 	
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>    

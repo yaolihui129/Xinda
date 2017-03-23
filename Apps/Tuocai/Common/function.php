@@ -26,10 +26,14 @@ function selectCate($value="小学课程") {
 
 
 function selectType($v="学生"){
+    $selected = ($v==$value) ? "selected" : "";
     $html = '<select name="type" class="form-control">';
-    $html .= '<option '.$selected.' value="学生">学生</option>';
-    $html .= '<option  value="助教">助教</option>';
-    $html .= '<option  value="老师">老师</option>';
+    $value="学生";
+    $html .= '<option '.$selected.' value='.$value.'>学生</option>';
+    $value="助教";
+    $html .= '<option '.$selected.' value='.$value.'>助教</option>';
+    $value="老师";
+    $html .= '<option '.$selected.' value='.$value.'>老师</option>';
     $html.='<select>';
     return $html;
 }
@@ -43,5 +47,16 @@ function getServiceName($id){
     
 }
 
+
+//根据id获取客户姓名
+
+function getTpid($id){
+    if($id){
+        $m=D('tc_customer');
+        $arr=$m->find($id);
+        
+        return $arr['tpid'];
+    }
+}
 
 
