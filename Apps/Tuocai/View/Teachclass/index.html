@@ -13,50 +13,39 @@
 
 	<switch name="_SESSION['isCLogin']">
 		<case value="Tuocai">			
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="container">				
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#"><{$p}></a>					
-					</div>
-						<ul class="nav navbar-nav navbar-right">		      	
-							<form action="__URL__/search " method="post" class="navbar-form navbar-left" role="search">
-								<div class="form-group">
-									 <div class="input-group">
-										<input type="date" class="form-control" name="riqi" value="<{$p}>" >
-										<span class="input-group-btn">
-											 <button type="submit" class="btn btn-info " type="button">查询</button>
-										</span>
-									 </div>			        					          
-								</div>				        
-							</form>
-						</ul>
-				</div>
-			</nav>
 			<div class="container">
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">	 	  
-					 <volist name='arr' id='st' empty="没有数据">
-						 <div class="panel panel-default">
-						 	<div class="panel-heading" role="tab" id="heading<{$st.id}>">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
-									<{$st.riqi}>(<{$st.xingqi}>):<{$st.sktime}></a>
-									
-										<div class="btn-group pull-right">
-										  <a type="button" href="__URL__/insert/teachclassid/<{$teachclassid}>/dateid/<{$st.id}>" class="btn btn-info  btn-xs">排课
-										    <span class="badge"><{$st.id|countPlan=###}></span>
-										  </a>
-										</div>
-
-								</h4>
-							</div>
-							<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">
-								<ol class="list-group"><{$st.id|getPlan=###}></ol>
-							</div>
-						 </div>		                      
-					 </volist>
-				 </div>	
+				<nav class="navbar navbar-default" role="navigation">			 
+					<div class="navbar-header">			
+						<a class="navbar-brand pull-left" href="#">拓才教育-<b>排课选课</b> </a>
+						<notempty name="tpid">
+							<a href="__APP__/Tuocai/Customer/renylist/type/<{$_SESSION['type']}>"  class="navbar-brand pull-right">返回</a>
+						</notempty>  			      										
+					</div>					  
+				</nav> 
 			</div>
 			
+			<div class="container">	
+				<h3><{$_SESSION['teacherid']|getTpid|getCusName=###}></h3>			
+				<ul class="list-group">		   
+					<volist name='data' id='st' empty="没有数据">
+						<li class="list-group-item">		        
+							<div class="row">
+								 <div class="col-md-2">【<{$st.cate|getCatname=###}>】</div>
+								    <div class="col-md-10"><{$st.name}>
+								       <empty name="teacherid">
+											<a href="__APP__/Tuocai/Customer/teacher/courseid/<{$st.id}>" class="btn btn-info btn-xs pull-right">下一步</a>
+									   <else /> 
+											<a href="__URL__/add/courseid/<{$st.id}>/teacherid/<{$teacherid}>" class="btn btn-info btn-xs pull-right">下一步</a>
+									   </empty>
+								        
+								 </div>								        		        		                				        
+							</div>
+						</li>
+					</volist>
+				</ul>
+				    
+				 		
+			</div>
 		</case>				    
 		<default />
 			<div class="container"><br><br><br>
@@ -87,7 +76,6 @@
 			</div>
 								
 	</switch>
-	
 	
 	
 	

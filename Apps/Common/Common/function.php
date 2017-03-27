@@ -366,34 +366,7 @@ function getPFCase($funcid){
 
 
 
-//根据dateid 获取排课信息
-function getPlan($dateid){
-        $m=D('tc_plan');
-        $where['zt_tc_plan.dateid']=$dateid;
-        $arr=$m->where($where)
-        ->join('zt_tc_techclass ON zt_tc_plan.techclassid =zt_tc_techclass.id')
-        ->select();
-        if($arr){
-            foreach ($arr as $ar){
-                $str.='<li class="list-group-item">';
-                $str.=      $ar['techclassid']."老师的【".$ar['course']."】课程,上课地点：".$ar['adress'] ; 
-                $str.= '</li>';
-            };
-            return $str;
-        }else{
-            return "暂无课程";
-        }
-}
     
-    /*
-     * 根据dateid 获取排课信息
-     * */
-    function countPlan($dateid){
-        $m=D('tc_plan');
-        $where['dateid']=$dateid;
-        $arr=$m->where($where)->count();
-        return $arr;
-    }
     
     /**
      * 根据proid获取风险数

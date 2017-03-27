@@ -28,9 +28,9 @@ class LoginController extends Controller {
         $where['openid']=$_SESSION['openid'];
         $arr=$m->where($where)->select();
         if ($arr){
-            $_SESSION['userid']=$arr['id'];
-            $_SESSION['uphone']=$arr['phone'];
-            $_SESSION['realname']=$cus['nickname'];
+            $_SESSION['userid']=$arr[0]['id'];
+            $_SESSION['uphone']=$arr[0]['phone'];
+            $_SESSION['realname']=$arr[0]['realname'];
             $_SESSION['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             
@@ -54,9 +54,9 @@ class LoginController extends Controller {
             $lastId=$m->add();
                         
             $arr=$m->where($where)->select();
-            $_SESSION['userid']=$arr['id'];
-            $_SESSION['uphone']=$arr['phone'];
-            $_SESSION['realname']=$cus['nickname'];
+            $_SESSION['userid']=$arr[0]['id'];
+            $_SESSION['uphone']=$arr[0]['phone'];
+            $_SESSION['realname']=$arr[0]['realname'];
             $_SESSION['isCLogin']='Xiuli';
             $_SESSION['QC_userData']=$cus;
             

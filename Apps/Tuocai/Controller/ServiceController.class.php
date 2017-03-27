@@ -21,7 +21,7 @@ class ServiceController extends Controller {
     
     public function _empty(){
     
-        $this->display('index');
+         $this->display('Tuocai/Index');
     }
     
     

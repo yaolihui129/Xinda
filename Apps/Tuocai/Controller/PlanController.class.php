@@ -21,8 +21,8 @@ class PlanController extends Controller {
         $arr=$m->where($where)->order('riqi,sn')->limit(35)->select();
         $this->assign('arr',$arr);
         
-        $_SESSION['courseid']=$_GET['courseid'];
-        
+        $teachclassid=$_GET['teachclassid'];
+        $this->assign('teachclassid',$teachclassid);
         
         $this->display();
     }
@@ -53,16 +53,37 @@ class PlanController extends Controller {
         $map['riqi']=array('egt',$_POST['riqi']);
         $arr=$m->where($map)->order('riqi,sn')->limit(35)->select();
         $this->assign('arr',$arr);
+//         dump($arr);
         $where=$_POST['riqi'];
         $this->assign('p',$where);   
          
         $this->display('index');       
     }
-   
-    public function add(){
-        
-        
-        $this->display('index');
+
+    
+    public function insert(){
+        /* 接收参数*/
+        $_POST['teachclassid']=$_GET['teachclassid'];
+        $_POST['dateid']=$_GET['dateid'];
+        /* 实例化模型*/
+        $m=D('tc_plan');
+        $_POST['ctime']=time();
+        $_POST['adder']=$_SESSION['realname'];
+        $_POST['moder']=$_SESSION['realname'];
+        dump($_POST);
+        if(!$m->create()){
+            $this->error($m->getError());
+        }
+        $lastId=$m->add();
+        if($lastId){
+            $this->success("成功");
+        }else{
+            $this->error("失败");
+        }
+    
     }
+    
+    
+    
     
 }

@@ -59,4 +59,89 @@ function getTpid($id){
     }
 }
 
+//根据teachclassid获取课程信息
+
+function getTeachclassInfo($teachclassid){
+    
+    $m=M('tc_teachclass');
+    $data=$m->find($teachclassid);
+    //拼接字符串
+    $str.='【';
+    $str.=getCusName(getTpid($data['teacherid']));
+    $str.='】老师的《';
+    $str.=getServiceName($data['courseid']);
+    $str.='》<br>&nbsp; &nbsp;地点：';
+    $str.=$data['address'];
+    $str.='<span class="badge">';
+    $str.=$data['state'];
+    $str.='</span>';
+    
+    return $str;
+    
+}
+
+
+
+
+//根据dateid 获取排课信息
+function getPlan($dateid){
+    $m=D('tc_plan');
+    $where['zt_tc_plan.dateid']=$dateid;
+    $arr=$m->where($where)
+    ->join('zt_tc_teachclass ON zt_tc_plan.teachclassid =zt_tc_teachclass.id')
+    ->select();
+
+    if($arr){
+        foreach ($arr as $ar){
+            $str.='<li class="list-group-item">';
+            $str.=      getTeachclassInfo($ar['teachclassid']);
+            $str.= '</li>';
+        };
+        return $str;
+    }else{
+        return "暂无安排课程";
+    }
+}
+
+/*
+ * 根据dateid 获取排课信息
+ * */
+function countPlan($dateid){
+    $m=D('tc_plan');
+    $where['dateid']=$dateid;
+    $arr=$m->where($where)->count();
+    return $arr;
+}
+
+
+
+
+//根据teachclassid 获取排课信息
+function getTeachPlan($teachclassid){
+    $m=D('tc_plan');
+    $where['zt_tc_plan.teachclassid']=$teachclassid;
+    $arr=$m->where($where)
+    ->join('zt_tc_teachclass ON zt_tc_plan.teachclassid =zt_tc_teachclass.id')
+    ->select();
+    if($arr){
+        foreach ($arr as $ar){
+            $str.='<li class="list-group-item">';
+            $str.=      $ar['teachclassid']."老师的【".$ar['course']."】课程,上课地点：".$ar['adress'] ;
+            $str.= '</li>';
+        };
+        return $str;
+    }else{
+        return "暂无课程";
+    }
+}
+
+/*
+ * 根据dateid 获取排课信息
+ * */
+function countTeachPlan($teachclassid){
+    $m=D('tc_plan');
+    $where['teachclassid']=$teachclassid;
+    $arr=$m->where($where)->count();
+    return $arr['state'];
+}
 
