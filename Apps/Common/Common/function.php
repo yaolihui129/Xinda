@@ -9,6 +9,8 @@ function getState($id){
         return ;
     }
 }
+
+
 //根据车辆ID获取维修记录
 function getServicelist($carid){
     $m=M('order_serviccar');
@@ -202,15 +204,21 @@ function httpGet($url){
 
 function httpPost($url,$data){
     //1.获取初始化URL
-    $data ='';
     $ch=curl_init();
     //2.设置curl的参数
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
     curl_setopt($ch, CURLOPT_TIMEOUT, 500);
+    //设置抓取的url
     curl_setopt($ch, CURLOPT_URL, $url);
+    //设置头文件的信息作为数据流输出
+    curl_setopt($curl, CURLOPT_HEADER, 1);
+    //设置获取的信息以文件流的形式返回，而不是直接输出。
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //设置post方式提交
     curl_setopt($ch, CURLOPT_POST, 1);
+    //post变量
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch,CURLOPT_HTTPHEADER,array("application/x-www-form-urlencode;charset=utd-8"),"Content-length:".strlen($data));
+
     //3.采集
     $res = curl_exec($ch);
     //4.关闭
@@ -224,16 +232,77 @@ function httpPost($url,$data){
 
 
 
+//参数1：访问的URL，参数2：post数据(不填则为GET)，参数3：提交的$cookies,参数4：是否返回$cookies
+function curl_request($url,$post='',$cookie='', $returnCookie=0){
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)');
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($curl, CURLOPT_AUTOREFERER, 1);
+    curl_setopt($curl, CURLOPT_REFERER, "http://XXX");
+    if($post) {
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($post));
+    }
+    if($cookie) {
+        curl_setopt($curl, CURLOPT_COOKIE, $cookie);
+    }
+    curl_setopt($curl, CURLOPT_HEADER, $returnCookie);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $data = curl_exec($curl);
+    if (curl_errno($curl)) {
+        return curl_error($curl);
+    }
+    curl_close($curl);
+    if($returnCookie){
+        list($header, $body) = explode("\r\n\r\n", $data, 2);
+        preg_match_all("/Set\-Cookie:([^;]*);/", $header, $matches);
+        $info['cookie']  = substr($matches[1][0], 1);
+        $info['content'] = $body;
+        return $info;
+    }else{
+        return $data;
+    }
+}
+
+//获取微信AccessToken
+function getWxAccessToken($id){
+     
+    $m=D('wx_wechat');
+    $arr=$m->find($id);
+
+    //如果access_token过期，重新获取
+    if((time() - $arr['otime'])>0){
+        $appid=$arr['appid'];
+        $appsecret=$arr['appsecret'];
+        $url='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
+        $arr = json_decode(httpGet($url), true);
+        $data['id']=$id;
+        $data['access_token']=$arr['access_token'];
+        $data['expires_in']=$arr['expires_in'];
+        $data['otime']=time()+7000;
+        //更新AccessToken
+        $m->save($data);
+        return $data['access_token'];
+
+    }else {
+        //如果access_token没有过期，直接从数据库中取值
+        return $arr['access_token'];
+        dump($arr);
+    }
+}
+
 
 //获取getJsApiTicket全局票据
-function getJsApiTicket(){
+function getJsApiTicket($id){
     //如果session中保存有效的jsapi_ticket
   
     if ($_SESSION['jsapi_ticket_expire_time']>time()&& $_SESSION['jsapi_ticket']){
         $jsapi_ticket = $_SESSION['jsapi_ticket'];
         
     }else {
-        $access_token = getWxAccessToken();
+        $access_token = getWxAccessToken($id);
         $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
         $res =json_decode(httpGet($url),true);
         $jsapi_ticket=$res['ticket'];
@@ -244,14 +313,12 @@ function getJsApiTicket(){
 }
 
 
-function getWxServerIp(){
-    $accessToken = getWxAccessToken();
+function getWxServerIp($id){
+    $accessToken = getWxAccessToken($id);
     $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$accessToken;
     $res = httpGet($url);    
     $arr = json_decode($res,true);
-    echo "<pre>";
-    var_dump( $arr );
-    echo "</pre>";
+    return $arr;
 }
 
 //根据日期获取星期
