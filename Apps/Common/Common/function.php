@@ -205,8 +205,7 @@ function httpGet($url){
 function httpPost($url,$data){
     //1.获取初始化URL
     $ch=curl_init();
-    //2.设置curl的参数
-    
+    //2.设置curl的参数   
     curl_setopt($ch, CURLOPT_TIMEOUT, 500);
     //设置抓取的url
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -218,7 +217,6 @@ function httpPost($url,$data){
     curl_setopt($ch, CURLOPT_POST, 1);
     //post变量
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
     //3.采集
     $res = curl_exec($ch);
     //4.关闭
@@ -230,7 +228,178 @@ function httpPost($url,$data){
     
 }
 
+//微信纯文本回复
+function wxReplyText($toUser,$fromUser,$content){
+    //回复用户消息(纯文本格式)
+    $msgType   = 'text';    
+    $time      = time();
+    $template  ="<xml>
+                 <ToUserName><![CDATA[%s]]></ToUserName>
+                 <FromUserName><![CDATA[%s]]></FromUserName>
+                 <CreateTime>%s</CreateTime>
+                 <MsgType><![CDATA[%s]]></MsgType>
+                 <Content><![CDATA[%s]]></Content>
+                 </xml>";
+    echo sprintf($template,$toUser,$fromUser,$time,$msgType,$content);
+}
 
+//微信图文回复
+function wxReplyNews($toUser,$fromUser,$arr){
+    $msgType   = 'news';
+    $time      = time();    
+    $template = "<xml>
+				<ToUserName><![CDATA[%s]]></ToUserName>
+				<FromUserName><![CDATA[%s]]></FromUserName>
+				<CreateTime>%s</CreateTime>
+				<MsgType><![CDATA[%s]]></MsgType>
+				<ArticleCount>".count($arr)."</ArticleCount>
+				<Articles>";
+    foreach($arr as $k=>$v){
+        $template .="<item>
+					<Title><![CDATA[".$v['title']."]]></Title>
+					<Description><![CDATA[".$v['description']."]]></Description>
+					<PicUrl><![CDATA[".$v['picUrl']."]]></PicUrl>
+					<Url><![CDATA[".$v['url']."]]></Url>
+					</item>";
+    }
+     
+    $template .="</Articles>
+						</xml> ";
+    echo sprintf($template, $toUser, $fromUser, $time, $msgType);
+    
+}
+
+//微信图片回复
+function wxReplyImage($toUser,$fromUser,$mediaId){
+    $msgType   = 'image';
+    $time      = time();
+    $template = "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[%s]]></MsgType>
+                <Image>
+                <MediaId><![CDATA[%s]]></MediaId>
+                </Image>
+                </xml>";
+    echo sprintf($template, $toUser, $fromUser, $time, $msgType,$mediaId);
+}
+
+//微信语音回复
+function wxReplyVoice($toUser,$fromUser,$mediaId){
+    $msgType   = 'voice';
+    $time      = time();
+    $template = "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[%s]]></MsgType>
+                <Voice>
+                <MediaId><![CDATA[%s]]></MediaId>
+                </Voice>
+                </xml>";
+    echo sprintf($template, $toUser, $fromUser, $time, $msgType,$mediaId);
+}
+
+//微信视频回复
+function wxReplyVideo($toUser,$fromUser,$mediaId,$title,$description){
+    $msgType   = 'video';
+    $time      = time();
+    $template = "<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Video>
+                        <MediaId><![CDATA[%s]]></MediaId>
+                        <Title><![CDATA[%s]]></Title>
+                        <Description><![CDATA[%s]]></Description>
+                    </Video>                
+                </xml>";
+    echo sprintf($template, $toUser, $fromUser, $time, $msgType,$mediaId,$title,$description);
+}
+
+//微信音乐回复
+function wxReplyMusic($toUser,$fromUser,$mediaId,$title,$description,$musicUrl,$HQMusicUrl,$thumbMediaId){
+    $msgType   = 'music';
+    $time      = time();
+    $template = "<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Music>
+                    <Title><![CDATA[%s]]></Title>
+                    <Description><![CDATA[%s]]></Description>
+                    <MusicUrl><![CDATA[%s]]></MusicUrl>
+                    <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+                    <ThumbMediaId><![CDATA[%s]]></ThumbMediaId>
+                    </Music>
+                  </xml>";
+    echo sprintf($template, $toUser, $fromUser, $time, $msgType,$title,$description,$musicUrl,$HQMusicUrl,$thumbMediaId);
+}
+
+
+function getTimeQrCode($token,$scene_id,$expire=30){
+    
+    $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;
+    $expire = $expire*24*60*60;
+    $postArr =array(
+        'expire_seconds'=>$expire,
+        'action_name'=>"QR_SCENE",
+        'action_info'=>array(
+            'scene'=>array('scene_id'=>$scene_id),
+        ),
+    );
+    //封装json
+    $postJson = json_encode($postArr);
+    //获取 $ticket
+    $res = httpPost($url, $postJson);
+    $res = json_decode($res,true);
+    $ticket =$res['ticket'];    
+    //使用$ticket换去二维码图片
+    $long_url='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$ticket;
+    $url='https://api.weixin.qq.com/cgi-bin/shorturl?access_token='.$token;
+    $array=array(
+        'action'=>'long2short',
+        'long_url'=>$long_url,
+    );
+    $postJson = json_encode($array);
+    $res = httpPost($url, $postJson);
+    $res = json_decode($res,true);
+    $short_url = $res['short_url'];
+    return $short_url;
+}
+
+function getForeverQrCode($token,$scene_id){
+    
+    $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;
+    //POST数据例子：
+    //{ "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}
+    $postArr =array(
+        'action_name'=>"QR_LIMIT_SCENE",
+        'action_info'=>array(
+            'scene'=>array('scene_id'=>$scene_id),
+        ),
+    );
+    $postJson = json_encode($postArr);
+    
+    $res = httpPost($url, $postJson);
+    $res = json_decode($res,true);
+    $ticket =$res['ticket'];
+    //2.使用$ticket换去二维码图片
+    $long_url='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$ticket;
+    $url='https://api.weixin.qq.com/cgi-bin/shorturl?access_token='.$token;
+    $array=array(
+        'action'=>'long2short',
+        'long_url'=>$long_url,
+    );
+    $postJson = json_encode($array);
+    $res = httpPost($url, $postJson);
+    $res = json_decode($res,true);
+    $short_url = $res['short_url'];
+    return $short_url;
+}
 
 //参数1：访问的URL，参数2：post数据(不填则为GET)，参数3：提交的$cookies,参数4：是否返回$cookies
 function curl_request($url,$post='',$cookie='', $returnCookie=0){
@@ -267,11 +436,9 @@ function curl_request($url,$post='',$cookie='', $returnCookie=0){
 }
 
 //获取微信AccessToken
-function getWxAccessToken($id){
-     
+function getWxAccessToken($id){     
     $m=D('wx_wechat');
     $arr=$m->find($id);
-
     //如果access_token过期，重新获取
     if((time() - $arr['otime'])>0){
         $appid=$arr['appid'];
@@ -298,7 +465,7 @@ function getWxAccessToken($id){
 function getJsApiTicket($id){
     //如果session中保存有效的jsapi_ticket
   
-    if ($_SESSION['jsapi_ticket_expire_time']>time()&& $_SESSION['jsapi_ticket']){
+    if (($_SESSION['jsapi_ticket_expire_time']-time()>0)){
         $jsapi_ticket = $_SESSION['jsapi_ticket'];
         
     }else {
@@ -430,14 +597,8 @@ function getPFCase($funcid){
     return $str;
     
 }
-
-
-
     
-    
-    /**
-     * 根据proid获取风险数
-     */
+   //根据proid获取风险数
     function countRisk($proid){
         $m=M("tp_risk");
         $where=array("proid"=>$proid);
@@ -477,6 +638,7 @@ function getPFCase($funcid){
             return ;
         }
     } 
+    
     //根据prodid 获取机构名称
     function getProduct($prodid){
         $m=M('product');
@@ -484,7 +646,6 @@ function getPFCase($funcid){
         $str=$data['name'];
         return $str;
     }
-    
     
     // 根据id获取项目信息
     function getProname($projectid){
@@ -498,9 +659,7 @@ function getPFCase($funcid){
         }
     }   
     
-
-//根据id获取项目编号
-
+    //根据id获取项目编号
     function getProNo($projectid){
         if ($projectid){
             $m=M('project');
@@ -511,19 +670,15 @@ function getPFCase($funcid){
         }
     }
     
-    /**
-     * 根据branchid获取路径数
-     */
+    //根据branchid获取路径数   
     function countPath($branchid){
         $m=M("module");
         $where=array("branch"=>$branchid);
         $count=$m->where($where)->count();
         return $count;
     }
-    
-    /**
-     * 根据分组获取项目数
-     */
+        
+    // 根据分组获取项目数     
     function countPro($testgp){
         $m=M("project");
         $where=array("testgp"=>$testgp);
@@ -599,8 +754,7 @@ function getPFCase($funcid){
         return $count;
     }
 
- //获取里程碑信息
-
+    //获取里程碑信息
     function getStage($stageid){
         if ($stageid){
             $m=M('tp_stage');
@@ -610,9 +764,7 @@ function getPFCase($funcid){
         }else {
             return ;
         }
-    }
-    
-    
+    }        
     //获取执行人信息
     function getStagetester($stagetesterid){
         $m=M("tp_stagetester");
@@ -625,8 +777,7 @@ function getPFCase($funcid){
     
     //获取执行场景信息
     function getExescene($exesceneid){
-        $m=M("tp_exescene");
-        
+        $m=M("tp_exescene");        
         $arr=$m->find($exesceneid);
         $str.=getStagetester($arr['stagetesterid']).'<br>';
         if($arr['pathid']){
@@ -645,12 +796,10 @@ function getPFCase($funcid){
             $where=array("zt_module.id"=>$moduleid);
             $data=$s->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
             ->where($where)
-            ->select();
-    
-            $str= '<span class="label label-default">'.getBranchName($data[0]['branch'])
-                    .'</span>&nbsp;<span class="label label-info">'
-                    .getModuleName($data[0]['parent'])."</span><b>"
-                    .$data[0]['name']."(".$data[0]['id'].")</b>";
+            ->select();   
+            $str.= '<span class="label label-default">'.getBranchName($data[0]['branch']).'</span>&nbsp;';
+            $str.= '<span class="label label-info">'.getModuleName($data[0]['parent'])."</span>" ;          
+            $str.=  "<b>".$data[0]['name']."(".$data[0]['id'].")</b>";
             return $str;
         }else {
             return ;

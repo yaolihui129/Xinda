@@ -7,15 +7,11 @@
     <title><{$_SESSION['Mtsh']['web']}></title>
     <meta name="keywords" content="<{$_SESSION['keywords']}>" />
 	<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <import type="css" file="css.home" />
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <import type="css" file="css.home" />    
   </head>
   <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      	<div class="container-fluid">
+      	<div class="container">
 	        <div class="navbar-header">
 	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 		            <span class="sr-only">Toggle navigation</span>
@@ -30,28 +26,22 @@
 	            <li ><a href="__APP__/Mtsh/Servicelist"><span class="glyphicon glyphicon-book"> 特色服务</span></a></li>		        		      
             	<li><a href="__APP__/Mtsh/Hr"><span class="glyphicon glyphicon-user"> 找工作</span> </a></li>
             	<li><a href="__APP__/Mtsh/House"><span class="glyphicon glyphicon-home"> 找房子</span> </a></li>
-            	<li><a href="__APP__/Mtsh/Fixture"><span class="glyphicon glyphicon-user"> 找装修</span> </a></li>	                       
-            <li>
-            	<a href="__APP__/Mtsh/About/index">
-            		<span class="glyphicon glyphicon-phone-alt"> 关于我们</span>
-            	</a>
-            </li>            
-            <empty name="_SESSION['isCLogin']">           
-              <li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>				            
+            	<li><a href="__APP__/Mtsh/Fixture"><span class="glyphicon glyphicon-user"> 找装修</span> </a></li>	                                             
+            <empty name="_SESSION['isCLogin']">
+           		<li><a data-toggle="modal" href="#Login" class="pull-right" >
+           			<span class="glyphicon glyphicon-phone">手机号登录</span></a>
+           		</li>
+           		<li>
+           			<a href="__APP__/Mtsh/Login/qq_login"  ><img alt="" src="__IMG__/bt_white_76X24.png" class="hidden-xs"></a>
+	           	</li>
+           		
+           		<!--  <li><a href="__APP__/Mtsh/Customer" class="pull-right" >注册</a></li>	-->
           	<else />
-          		<li class="divider"></li>
-              	<li class="dropdown">
-                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                 	<span class="glyphicon glyphicon-user"><{$_SESSION['realname']}></span> 
-	                    <span class="caret"></span>
-	                 </a>
-	                 <ul class="dropdown-menu" role="menu">                    
-	                    <li><a href="__APP__/Mtsh/Course/mycourse">个人中心</a></li>
-	                    <li><a href="__APP__/Mtsh/Customer/setpass">修改密码</a></li>
-	                	<li class="divider"></li>
-	                	<li><a href="__APP__/Mtsh/Login/logout">退出</a></li>
-	                </ul>
-              	</li>
+          		<li>
+	          		<a href="__APP__/Mtsh/Customer/personal">
+	          			<span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span>
+	          		</a>
+          		</li>         		         		        		             		
           	</empty>
           </ul>
         </div>

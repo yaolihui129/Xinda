@@ -2,6 +2,12 @@
 namespace Mtsh\Controller;
 use Think\Controller;
 class ServicelistController extends Controller {
+    
+    public function _empty(){
+    
+        $this->display('/Mtsh/Index');
+    }
+    
     public function index(){
 
         $m=D('product');
@@ -33,13 +39,5 @@ class ServicelistController extends Controller {
                   
         $this->display();
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-    
-    
-    
+
 }

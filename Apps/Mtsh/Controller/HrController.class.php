@@ -2,6 +2,12 @@
 namespace Mtsh\Controller;
 use Think\Controller;
 class HrController extends Controller {
+    
+    public function _empty(){
+    
+        $this->display('/Mtsh/Index');
+    }
+    
     public function index(){
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(3);
@@ -62,9 +68,6 @@ class HrController extends Controller {
     }
     
     
-    public function _empty(){
     
-        $this->display('index');
-    }
     
 }
