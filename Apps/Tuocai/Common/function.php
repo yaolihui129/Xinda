@@ -48,6 +48,16 @@ function getServiceName($id){
 }
 
 
+//根据id 获取老师信息
+function getTeacher($id){
+    $m=M('customer');
+    $where['isteacher']=1;
+    $data=$m->where($where)->find($id);
+
+    return $data['realname']."(".$data['phone'].")";
+}
+
+
 //根据id获取客户姓名
 
 function getTpid($id){
@@ -66,16 +76,10 @@ function getTeachclassInfo($teachclassid){
     $m=M('tc_teachclass');
     $data=$m->find($teachclassid);
     //拼接字符串
-    $str.='【';
-    $str.=getCusName(getTpid($data['teacherid']));
-    $str.='】老师的《';
-    $str.=getServiceName($data['courseid']);
-    $str.='》<br>&nbsp; &nbsp;地点：';
-    $str.=$data['address'];
-    $str.='<span class="badge">';
-    $str.=$data['state'];
-    $str.='</span>';
-    
+    $str.='【'.getCusName(getTpid($data['teacherid'])).'】老师的《'.getServiceName($data['courseid']).'》<br>';
+    $str.='&nbsp; &nbsp;地点：'.$data['address'];
+    $str.='<span class="badge">'.$data['state'].'</span>';
+   
     return $str;
     
 }
@@ -113,9 +117,6 @@ function countPlan($dateid){
     return $arr;
 }
 
-
-
-
 //根据teachclassid 获取排课信息
 function getTeachPlan($teachclassid){
     $m=D('tc_plan');
@@ -135,9 +136,7 @@ function getTeachPlan($teachclassid){
     }
 }
 
-/*
- * 根据dateid 获取排课信息
- * */
+//根据dateid 获取排课信息
 function countTeachPlan($teachclassid){
     $m=D('tc_plan');
     $where['teachclassid']=$teachclassid;

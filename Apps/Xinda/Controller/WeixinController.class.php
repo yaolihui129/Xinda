@@ -2,22 +2,22 @@
 namespace Xinda\Controller;
 use Think\Controller;
 class WeixinController extends Controller {
-    
+    //配置wxId
+    function getWxid(){
+        return 4;
+    }
+    //验证消息接口
     public function index(){
-        //获得参数 signature nonce token timestamp echostr
         $nonce      = $_GET['nonce'];
         $token      = "123weixin";
         $timestamp  = $_GET['timestamp'];
         $echostr    = $_GET['echostr'];
         $signature  = $_GET['signature'];
-        //形成数组,然后按字典排序
         $array = array();
-        $array = array($nonce,$timestamp,$token);
-        sort($array);        
-        //拼接成字符串，sha1加密,然后与signature进行校验
-        $str =sha1(implode($array));
-        if($str == $signature && $echostr){
-            //第一次接入Weixin api 接口的时候
+        $array = array($nonce,$timestamp,$token);               //形成数组,
+        sort($array);                                           //按字典排序            
+        $str =sha1(implode($array));                            //拼接成字符串，sha1加密,然后与signature进行校验
+        if($str == $signature && $echostr){                     //第一次接入Weixin api 接口的时候            
             echo $echostr;
             exit;
         }else{
@@ -26,22 +26,17 @@ class WeixinController extends Controller {
     }    
     
     //接收事件推送并回复
-    public function reponseMsg(){
-        //1.获取到微信推送过来的post数据（xml格式）
-        $postArr = $GLOBALS['HTTP_RAW_POST_DATA'];
-        //2.处理消息类型，并设置回复类型和内容
-        $postObj  = simplexml_load_string( $postArr );
+    public function reponseMsg(){       
+        $postArr  = $GLOBALS['HTTP_RAW_POST_DATA'];                                  //1.获取到微信推送过来的post数据（xml格式）       
+        $postObj  = simplexml_load_string( $postArr );                              //2.处理消息类型，并设置回复类型和内容
         $toUser   = $postObj->FromUserName;
-        $fromUser = $postObj->ToUserName;        
-        //判断该数据包是否是订阅的事件推送
-        if(strtolower($postObj->MsgType) == 'event'){
-            //如果是关注subscrine事件
-            if(strtolower($postObj->Event) == 'subscribe' ){
-                $content   = '欢迎关注智慧信达微信服务号，我们为您提供优质的网络服务';
+        $fromUser = $postObj->ToUserName;               
+        if(strtolower($postObj->MsgType) == 'event'){                                //判断该数据包是否是订阅的事件推送          
+            if(strtolower($postObj->Event) == 'subscribe' ){                         //如果是关注subscrine事件
+                $content   = '欢迎关注智慧信达微信服务号，我们为您提供优质的网络服务';      //设置回复内容
                 wxReplyText($toUser,$fromUser,$content);
-            }
-            //自定义菜单点击事件
-            if(strtolower($postObj->Event) == 'click' ){
+            }            
+            if(strtolower($postObj->Event) == 'click' ){//自定义菜单“推”事件                             
                 if(strtolower($postObj->EventKey) == 'item1' ){
                     $content   = '这是item1菜单的事件推送';
                     wxReplyText($toUser,$fromUser,$content);
@@ -50,32 +45,22 @@ class WeixinController extends Controller {
                     $content   = '这是歌曲菜单的事件推送';
                     wxReplyText($toUser,$fromUser,$content);
                 }
-            }
-            //自定义菜单跳转
-            if(strtolower($postObj->Event) == 'view' ){
+            }            
+            if(strtolower($postObj->Event) == 'view' ){//自定义菜单跳转
                 $content   = '跳转链接是：'.$postObj->EventKey;
                 wxReplyText($toUser,$fromUser,$content);
-            }
-//             //上传地理位置
-//             if(strtolower($postObj->Event) == 'location'){
-//                 //回复用户消息(纯文本格式)
-//                 $content   = $postObj->Precision."(".$postObj->Latitude.",".$postObj->Longitude.")";
-//                 wxReplyText($toUser,$fromUser,$content);
-//             }
-            //上传链接
-            if(strtolower($postObj->Event) == 'link'){
-                //回复用户消息(纯文本格式)
-                $Title= $postObj->Title;                
+            }           
+//             if(strtolower($postObj->Event) == 'location'){//上传地理位置
+                    //地理位置处理
+//             }           
+            if(strtolower($postObj->Event) == 'link'){ //上传链接                
+                $Title   = $postObj->Title;                
                 $Url     = $postObj->Url;
-                $content   = "<a href='". $Url."'>".$Title."</a>";
+                $content = "<a href='". $Url."'>".$Title."</a>";  //回复用户消息(纯文本格式)
                 wxReplyText($toUser,$fromUser,$content);   
-            }
-            
-            //重扫二维码
-            if(strtolower($postObj->Event) == 'scan'){
-                //临时二维码的参数值为200
-                if($postObj->EventKey == 200){
-                    //回复单图文消息
+            }                     
+            if(strtolower($postObj->Event) == 'scan'){ //重扫二维码              
+                if($postObj->EventKey == 200){ //临时二维码的参数值为200                   
                     $arr = array(
                         array(
                             'title'=>'北京智慧信达网络服务200',
@@ -84,9 +69,8 @@ class WeixinController extends Controller {
                             'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/openid/'.$toUser,
                         ),
                     );
-                    wxReplyNews($toUser,$fromUser,$arr);
-                }elseif($postObj->EventKey == 300){ //用久二维码的参数值为300                  
-                    //回复单图文消息
+                    wxReplyNews($toUser,$fromUser,$arr);    //回复单图文消息
+                }elseif($postObj->EventKey == 300){ //用久二维码的参数值为300                                    
                     $arr = array(
                         array(
                             'title'=>'北京智慧信达网络服务300',
@@ -95,7 +79,7 @@ class WeixinController extends Controller {
                             'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/openid/'.$toUser,
                         ),
                     );
-                    wxReplyNews($toUser,$fromUser,$arr);
+                    wxReplyNews($toUser,$fromUser,$arr);  //回复单图文消息
                 }else {
                     //回复单图文消息
                     $arr = array(
@@ -107,13 +91,11 @@ class WeixinController extends Controller {
                         ),
                     );
                     wxReplyNews($toUser,$fromUser,$arr);
-                }
-                
+                }                
             }
         }
-        
-        //语音回复
-        if(strtolower($postObj->MsgType) == 'voice'){            
+              
+        if(strtolower($postObj->MsgType) == 'voice'){  //语音回复          
                 //回复用户消息(纯文本格式)                
 //                 $content   = "您说的是：“".$postObj->Recognition."”MediaId:".$postObj->MediaId;               
 //                 wxReplyText($toUser,$fromUser,$content);
@@ -121,9 +103,8 @@ class WeixinController extends Controller {
                 $mediaId = $postObj->MediaId; 
                 wxReplyVoice($toUser,$fromUser,$mediaId);
         }
-        
-        //图片消息回复
-        if(strtolower($postObj->MsgType) == 'image'){
+               
+        if(strtolower($postObj->MsgType) == 'image'){ //图片消息回复
            //图片回复
 //             $mediaId=$postObj->MediaId;
 //             wxReplyPicText($toUser,$fromUser,$mediaId);
@@ -138,9 +119,8 @@ class WeixinController extends Controller {
             wxReplyNews($toUser,$fromUser,$arr);
 
         }
-        
-        //视频消息回复
-        if(strtolower($postObj->MsgType) == 'video'){           
+                
+        if(strtolower($postObj->MsgType) == 'video'){       //视频消息回复    
             $arr = array(
                 array(
                     'title'=>'视频上传成功',
@@ -151,8 +131,8 @@ class WeixinController extends Controller {
             );
             wxReplyNews($toUser,$fromUser,$arr);
         }        
-        //小视频消息回复
-        if(strtolower($postObj->MsgType) == 'shortvideo'){
+        
+        if(strtolower($postObj->MsgType) == 'shortvideo'){//小视频消息回复
             
             $arr = array(
                 array(
@@ -162,11 +142,11 @@ class WeixinController extends Controller {
                     'url'=>'http://www.zhihuixinda.com',
                 ),
             );
-            wxReplyNews($toUser,$fromUser,$arr);
+            wxReplyNews($toUser,$fromUser,$arr); 
         }
         
-        //关键字回复
-        if ( strtolower($postObj->MsgType) == 'text'){               
+        
+        if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复           
             if(trim($postObj->Content)=='智慧信达'){
                 //多图文回复                                             
                 $arr = array(
@@ -218,136 +198,88 @@ class WeixinController extends Controller {
             }                        
         }                               
     }
-    
-    //获取AccessToken
-   public function getToken(){       
-       $data = getWxAccessToken(1);
-       return $data;
-   }
-   //获取微信服务器地址
-   public function getWxServerIp() {
-       //判定$_SESSION['wx_ip_list']
-       if($_SESSION['wx_ip_list']){
-           //如果$_SESSION['wx_ip_list']有值，什么也不做
-       }else {
-           //如果$_SESSION['wx_ip_list']没有值，获取服务器清单并复制给$_SESSION['wx_ip_list']
-           $_SESSION['wx_ip_list'] = getWxServerIp(1);
-       }       
-       dump($_SESSION);      
-   }
-  
-   
-   //获取自定义菜单
-   function getMenu() {
-      $token = $this->getToken();
-      $url   = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$token;
-      $res   = httpGet($url);
-      $arr   = json_decode($res,true);
-      dump($arr);
-   }
-   
+       
    //创建自定义菜单
-   function creatMenu() {
-       $token   = $this->getToken();
-       $url     = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
-       $postArr = array(
+   function creatCaidan() {      
+       $postArr = array(  //组装数组                                     
            'button'=>array(
-               array(
-                   'name'=>urlencode('信达官网'),
-                   'type'=>'click',
-                   'key'=>'item1',
-               ),//第一个一级菜单
-               array(
+               array(//第一个一级菜单
+                   'name' => urlencode('信达官网'),
+                   'type' => 'click',
+                   'key'  => 'item1',
+               ),
+               array(//第二个一级菜单
                     'name'=>urlencode('产品介绍'),
                     'sub_button'=>array(
-                        array(
-                            'name'=>urlencode('硬件产品'),
-                            'type'=>'click',
-                            'key'=>'songs',
-                        ),//第一个二级菜单
-                        array(
-                            'name'=>urlencode('软件产品'),
-                            'type'=>'view',
-                            'url'=>'http://www.zhihuixinda.com',
-                        ),//第二个二级菜单
+                        array(//第一个二级菜单
+                            'name' => urlencode('硬件产品'),
+                            'type' => 'click',
+                            'key'  => 'songs',
+                        ),
+                        array(//第二个二级菜单
+                            'name' => urlencode('软件产品'),
+                            'type' => 'view',
+                            'url'  => 'http://www.zhihuixinda.com',
+                        ),
                     ),
-               ),//第二个一级菜单
-               array(
-                   'name'=>urlencode('专属服务'),
-                   'type'=>'view',
-                   'url'=>'http://www.zhihuixinda.com',
-               ),//第三个一级菜单
+               ),
+               array(//第三个一级菜单
+                   'name' => urlencode('专属服务'),
+                   'type' => 'view',
+                   'url'  => 'http://www.zhihuixinda.com',
+               ),
            ),           
        );
-       $postJson = urldecode(json_encode($postArr));
-       $res   = httpPost($url,$postJson);
-       dump($res);
-      
+       
+       $res = wxMenuCreat($this->getWxid(), $postArr);      
+       $this->ajaxReturn($res);     
    }
    
-   //拉取用户信息（认证后才可用）
+   function info(){
+       $res=getWxinfo($this->getWxid());
+       dump($res);
+       dump($this->getWxid());
+   }
+   function getMemu(){
+       $res=wxMenuGet($this->getWxid());
+       dump($res);      
+   }
+   //拉取用户信息
    function getUsers(){
-       $id=1;
-       $token = getWxAccessToken($id);       
-       $m=D('wx_wechat');
-       $data=$m->find($id);
-       $nextOpenid=$data['next_openid'];
-       $url   = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$token.'&next_openid='.$nextOpenid;
-       $res   = httpGet($url);
-       $arr   = json_decode($res,true);
-       $_POST['id']=$id;
-       $_POST['total']=$arr['total'];
-       $_POST['count']=$arr['count'];
-       $_POST['next_openid']=$arr['next_openid'];
-       $m->save($_POST);    
+       $res = wxGetUsers($this->getWxid());
+       $this->ajaxReturn($res);
    }
    
 
-   function TimeQrCode(){
-       $token=$this->getToken();   
-       //getTimeQrCode($token,$scene_id,$expire=30)
-       $url=getTimeQrCode($token,200,15); 
+   function qrCodeTime(){//getTimeQrCode($wxId,$scene_id,$expire=30)            
+       $url=getTimeQrCode($this->getWxid(),200,15); 
        dump($url);
        echo "临时二维码";
        echo "<img src='".$url."'/>";      
    }
    
-   function ForeverQrCode(){
-//        header('content-type:text/htm;charset=utf-8');
-       //获取ticket全局票据
-       $token = $this->getToken();
-       //getForeverQrCode($token,$scene_id);
-       $url=getForeverQrCode($token,300);            
+   function qrCodeForever(){//getForeverQrCode($wxId,$scene_id);       
+       $url=getForeverQrCode($this->getWxid(),300);            
        echo "用久二维码";
        echo "<img src='".$url."'/>";  
    }
    
    function sendTemplateMsg(){
-       //获取到Access——token
-       $token = $this->getToken();
-       $url   = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$token;
-       //2.组装数组
-       $Meg = array(
-          'touser'=>'oZQWOxPB-cAH37NlpBsB3CuRIwYU',
-          'template_id'=>'H5Xu84_YhAT0-IpaYdzWcNFAKb2V6P7-7f0EMA2TYcI',
-          'url'=>'http://www.zhihuixinda.com',
-          'data'=>array(
-          'name'=>array('value'=>'微信号申请','color'=>"#173177"),
-          'money'=>array('value'=>100,'color'=>"#173177"),
-          'date'=>array('value'=>date('Y-m-d H:i:s')),'color'=>"#173177")
-       );
-      
-      //将数组转化成json
-      $postJson =json_encode($Meg);  
-      $res = httpPost($url, $postJson);
-      dump($res);
+       $touser='oZQWOxPB-cAH37NlpBsB3CuRIwYU';
+       $template_id='H5Xu84_YhAT0-IpaYdzWcNFAKb2V6P7-7f0EMA2TYcI';
+       $call_url='http://www.zhihuixinda.com';
+       $data=array(
+              'name'=>array('value'=>'微信号申请','color'=>"#173177"),
+              'money'=>array('value'=>100,'color'=>"#173177"),
+              'date'=>array('value'=>date('Y-m-d H:i:s')),'color'=>"#173177"       
+            );
+       $res = wxSendTemplateMsg($this->getWxid(),$touser,$template_id,$call_url,$data);
+       $this->ajaxReturn($res);      
    }
    
    //获取用户的openid
    function getBaseInfo(){
-       $id=1;
-       $m=D('wx_wechat');
-       $data=$m->find($id);
+       $data  = getWxinfo($this->getWxid());
        $appid = $data['appid'];
        $redirect_uri = urlencode("http://www.zhihuixinda.com/index.php/Xinda/Weixin/getUserOpenid");
        $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
@@ -355,10 +287,8 @@ class WeixinController extends Controller {
        
    }
    function getUserOpenid(){
-       $id=1;
-       $m=D('wx_wechat');
-       $data=$m->find($id);
-       $appid = $data['appid'];
+       $data      = getWxinfo($this->getWxid());
+       $appid     = $data['appid'];
        $appsecret = $data['appsecret'];
        $code = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
@@ -366,11 +296,9 @@ class WeixinController extends Controller {
        $arr = json_decode($res,true);
        dump($arr);
    }
-   function getUserDetail(){
-       $id=1;
-       $m=D('wx_wechat');
-       $data=$m->find($id);
-       $appid = $data['appid'];            
+   function getUserDetail(){      
+       $data         = getWxinfo($this->getWxid());
+       $appid        = $data['appid'];            
        $redirect_uri = urlencode("http://www.zhihuixinda.com/index.php/Xinda/Weixin/getUserInfo");
        $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
        header('Location:'.$url);
@@ -378,12 +306,10 @@ class WeixinController extends Controller {
    }
    //获取用户的openid
    function getUserInfo(){
-       $id=1;
-       $m=D('wx_wechat');
-       $data=$m->find($id);
-       $appid = $data['appid'];
+       $data      = getWxinfo($this->getWxid());
+       $appid     = $data['appid'];
        $appsecret = $data['appsecret'];
-       $code = $_GET['code'];
+       $code      = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
        $res = httpGet($url);
        $arr = json_decode($res,true);
@@ -398,45 +324,27 @@ class WeixinController extends Controller {
        dump($res);
    }
    //群发接口
-   function sendMsgAll(){
-      //1.获取Token
-      $token=$this->getToken();
-      $url='https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.$token;
-      //2.组装数组
-      //纯文本
-      $array=array(
+   function sendMsgAll(){           
+      $array=array(//纯文本
           'touser'=>'oZQWOxElRgLz2KOBa6EAuDusWr1w',
-          'text'=>array(
-              'content'=>urlencode('锻炼出来了吗？不用回复，我收不到的【腰】'),
-          ),
+          'text'=>array('content'=>urlencode('锻炼出来了吗？不用回复，我收不到的【腰】')),
           'msgtype'=>'text',
-      );
-//       //单图文
-//       $array=array(
+      );     
+//       $array=array(//单图文
 //           'touser'=>'oZQWOxElRgLz2KOBa6EAuDusWr1w',
-//           'mpnews'=>array(
-//               'media_id'=>'',
-//           ),
+//           'mpnews'=>array('media_id'=>''),
 //           'msgtype'=>'mpnews',
-//       );
-      
-      //3.将array->json
-      $postJson =urldecode(json_encode($array));
-      //4.调用curl_post群发
-      $res = httpPost($url, $postJson);
-      dump($res);
-       
+//       );      
+     $res = wxSendMsgAll($this->getWxid(),$array,$type='preview');//生产环境群发$type='send'
+     $this->ajaxReturn($res);
    }
    
-   public function jssdk(){
-       $id=1;
-       $m=D('wx_wechat');
-       $arr=$m->find($id);
-       $this->assign('appid',$arr['appid']);
-       //微信所用的变量
+   public function jssdk(){      
+       $arr=getWxinfo($this->getWxid());
+       $this->assign('appid',$arr['appid']);       
        $timestamp=time();
        $nonceStr=getRandCode(16);//生成16位的随机数
-       $jsapi_ticket=getJsApiTicket($id);//获取全局票据
+       $jsapi_ticket=wxGetJsApiTicket($this->getWxid());//获取全局票据
        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
        $signature = "jsapi_ticket=".$jsapi_ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=".$url;
