@@ -1,9 +1,8 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class WeixinController extends Controller {
-    //配置wxId
-    function getWxid(){
+class WeixinController extends Controller {    
+    function getWxid(){//配置wxId
         return 4;
     }
     //验证消息接口
@@ -33,8 +32,16 @@ class WeixinController extends Controller {
         $fromUser = $postObj->ToUserName;               
         if(strtolower($postObj->MsgType) == 'event'){                                //判断该数据包是否是订阅的事件推送          
             if(strtolower($postObj->Event) == 'subscribe' ){                         //如果是关注subscrine事件
-                $content   = '欢迎关注智慧信达微信服务号，我们为您提供优质的网络服务';      //设置回复内容
-                wxReplyText($toUser,$fromUser,$content);
+                    //回复单图文消息
+                    $arr = array(
+                        array(
+                            'title'=>'北京智慧信达网络服务',
+                            'description'=>"北京智慧信达商贸有限公司",
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    );
+                    wxReplyNews($toUser,$fromUser,$arr);
             }            
             if(strtolower($postObj->Event) == 'click' ){//自定义菜单“推”事件                             
                 if(strtolower($postObj->EventKey) == 'item1' ){
@@ -151,10 +158,10 @@ class WeixinController extends Controller {
                 //多图文回复                                             
                 $arr = array(
                     array(
-                        'title'=>'北京智慧信达网络服务',
-                        'description'=>"北京智慧信达商贸有限公司",
-                        'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                        'url'=>'http://www.zhihuixinda.com',
+                            'title'=>'北京智慧信达网络服务',
+                            'description'=>"北京智慧信达商贸有限公司",
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                     ),
                     array(
                         'title'=>'临城秀丽广告门市',
@@ -185,12 +192,12 @@ class WeixinController extends Controller {
                     wxReplyText($toUser,$fromUser,$content);
                 }else {
                     //回复图文消息                   
-                    $arr = array(
+                    $arr = array(                        
                         array(
                             'title'=>'没有找到与“'.$where['key'].'”相关的内容',
-                            'description'=>"欢迎登录北京智慧信达网络服务官网",
+                            'description'=>"北京智慧信达商贸有限公司",
                             'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                            'url'=>'http://www.zhihuixinda.com',
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                         ),
                     );
                     wxReplyNews($toUser,$fromUser,$arr);
