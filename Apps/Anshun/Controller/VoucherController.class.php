@@ -1,23 +1,12 @@
 <?php
 namespace Anshun\Controller;
-use Think\Controller;
-class VoucherController extends Controller {
+class VoucherController extends WebInfoController {
     
-    public function _empty(){
-    
+    public function _empty(){   
         $this->display('index');
-    }
-    
-    
-    public function index(){
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,qz,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();      
-
+    }      
+    public function index(){        
+        WebInfoController::getWebInfo();   //获取页面信息    
         $m=D('as_voucher');
         $where=array("state"=>"发布");
         $arr=$m->where($where)->order('end desc')->select();
@@ -26,14 +15,10 @@ class VoucherController extends Controller {
         $id=!empty($_GET['id']) ? $_GET['id'] : $arr[0]['id'];
         $data=$m->where($where)->find($id);
         $this->assign('data',$data);
-
-        
-
         $this->display();
     }
 
     public function choujiang(){
-
         $m=D('as_tickets');
         $where=array("voucherid"=>$_GET['id']);
         $arr=$m->where($where)->field("id")->select();
@@ -52,7 +37,5 @@ class VoucherController extends Controller {
         }else{
             $this->error("失败！");
         }
-
-
     }
 }

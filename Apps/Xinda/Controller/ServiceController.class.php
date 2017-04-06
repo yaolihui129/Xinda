@@ -1,27 +1,16 @@
 <?php
 namespace Xinda\Controller;
-use Think\Controller;
-class ServiceController extends WebInfoController {
-    public function index(){
-
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(6);
-        $_SESSION['Xinda']=$data;
-        $_SESSION['Xinda']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        
-        $m=D('xd_prodservice');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-                
-        $this->display();
-    }
-    
+class ServiceController extends WebInfoController {    
     public function _empty(){
-    
         $this->display('index');
     }
-    
+    public function index(){
+        WebInfoController::getWebInfo(); //获取页面信息       
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        $arr=M('xd_prodservice')->find($_GET['id']);
+        $this->assign('arr',$arr);        
+        $this->display();
+    } 
 }

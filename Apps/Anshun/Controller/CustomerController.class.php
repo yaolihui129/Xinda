@@ -1,26 +1,13 @@
 <?php
 namespace Anshun\Controller;
-use Think\Controller;
-class CustomerController extends Controller {
-    
-    public function _empty(){
-    
+class CustomerController extends WebInfoController {   
+    public function _empty(){  
         $this->display('index');
-    }
-    
-    public function index(){
-        
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,desc,phone,tel,qz,qq,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();       
-        
+    }   
+    public function index(){             
+        WebInfoController::getWebInfo();  //获取页面信息          
         $this->display();
-    }
-    
+    }    
     public function checked(){        
         if($_POST['phone']){
             $m=D('tp_customer');
@@ -33,28 +20,13 @@ class CustomerController extends Controller {
             }
         }else{
             $this->error("您没有填写手机号");
-        }
-        
-        
-    }
-    
+        }                
+    }   
     public function register(){
-    
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs(); 
-        
-        $phone=$_GET['phone'];
-        $this->assign('phone',$phone);
-    
+        WebInfoController::getWebInfo();  //获取页面信息    
+        $this->assign('phone',$_GET['phone']);    
         $this->display();
-    }
-    
-    
+    }        
     public function insert(){
         $m=D('tp_customer');
         $_POST['password']=md5(123456);
@@ -67,23 +39,13 @@ class CustomerController extends Controller {
             $this->success("注册成功",U('Anshun/Index'));
         }else{
             $this->error("注册失败");
-        }
-    
-    }
-          
-    
+        }   
+    } 
     public function setpass(){
-        /* 接收参数*/
-        $id =  $_SESSION['id'];
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $user=$m->find($id);
-        $this->assign('user',$user);
-    
+        $user=M('tp_customer')->find($_SESSION['id']);
+        $this->assign('user',$user);  
         $this->display();
-    }
-    
-    
+    }        
     public function setp(){
         /* 接收参数*/
         $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
@@ -95,9 +57,7 @@ class CustomerController extends Controller {
         $user=$m->find($id);
         if (md5($pass1)==$user['password']) {
             if ($pass2==$pass3) {
-                $arr['id']=$id;
-                $arr['password']=md5($pass2);
-                $arr['moder']=$_SESSION['realname'];
+                $arr=array('id'=>$id,'password'=>md5($pass2),'moder'=>$_SESSION['realname']);
                 if ($m->save($arr)){
                     $this->success("密码修改成功！");
                 }else{
@@ -112,20 +72,14 @@ class CustomerController extends Controller {
     }
     
     public function mod(){
-        $id=$_GET['id'];
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->find($id);
-        $this->assign('arr',$arr);
-        
+        $arr=M('tp_customer')->find($_GET['id']);
+        $this->assign('arr',$arr);       
         $this->display();
     }
     
     public function update(){
-        /* 实例化模型*/
-        $db=D('tp_customer');
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (M('tp_customer')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
@@ -133,39 +87,41 @@ class CustomerController extends Controller {
     }
     
     public function personal(){
-        /* 接收参数*/
-        if($_SESSION['openid']){
-            $where['openid']=$_SESSION['openid'];
-        }else {
-            $where['id'] =  $_SESSION['userid'];
+        WebInfoController::getWebInfo(); //获取页面信息        
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        if($_SESSION['openid']){            
+            $where=array('openid'=>$_SESSION['openid']);
+        }elseif ($openid){
+            $map=array('wxOpenId'=>$openid);
+            $date=M('as_customer')->where($map)->select();
+            $where=array('id'=>$date[0]['tpid']);
+        }else {            
+            $where=array('id'=>$_SESSION['userid']);
         }
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->where($where)->select();
+        $arr=M('tp_customer')->where($where)->select();
         $this->assign('arr',$arr);
-
         $this->display();
-
     } 
-    
-    
+       
     public function yuyue() {
-        /* 接收参数*/
-        if($_SESSION['openid']){
-            $where['openid']=$_SESSION['openid'];
-        }else {
-            $where['id'] =  $_SESSION['userid'];
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        if($_SESSION['openid']){            
+            $where=array('openid'=>$_SESSION['openid']);
+        }elseif ($openid){
+            $map=array('wxOpenId'=>$openid);
+            $date=M('as_customer')->where($map)->select();
+            $where=array('id'=>$date[0]['tpid']);
+        }else {            
+            $where=array('id'=>$_SESSION['userid']);
         }
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->where($where)->select();
-        
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $map['phone']=$arr[0]['phone'];
-        $data=$m->where($map)->select();
-        $this->assign('data',$data);
-        
+        $arr=M('tp_customer')->where($where)->select();
+        $map=array(['phone']=>$arr[0]['phone']);
+        $data=M('order_serviccar')->where($map)->select();
+        $this->assign('data',$data);       
         $this->display();
     }
 

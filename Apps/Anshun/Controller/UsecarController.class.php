@@ -1,38 +1,20 @@
 <?php
 namespace Anshun\Controller;
-use Think\Controller;
-class UsecarController extends Controller {
+class UsecarController extends WebInfoController {
     
-    public function _empty(){
-    
+    public function _empty(){   
         $this->display('index');
-    }
-    
-    public function index(){
-       $m=D('product');
-       $data=$m->field('web,adress,keywords,desc,phone,tel,qq,qz,url,record,path,img')->find(4);
-       $_SESSION['Anshun']=$data;
-       $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-       $_SESSION['ip']=get_client_ip();
-       $_SESSION['browser']=GetBrowser();
-       $_SESSION['os']=GetOs();     
-
-        $m=D('dict');
+    }    
+    public function index(){       
+        WebInfoController::getWebInfo();  //获取页面信息   
         $where=array("type"=>"usecar","state"=>"正常");
-        $data=$m->where($where)->order('k')->select();
+        $data=M('dict')->where($where)->order('k')->select();
         $this->assign('data',$data);
-
-        $m=D('as_usecar');
         $type=!empty($_GET['type']) ? $_GET['type'] : 6;
+        $this->assign('type',$type);
         $where=array("type"=>$type);
-        $arr=$m->where($where)->order('utime desc')->select();
-        $this->assign('arr',$arr);
-        $this->assign('w',$where);
-
+        $arr=M('as_usecar')->where($where)->order('utime desc')->select();
+        $this->assign('arr',$arr);        
         $this->display();
     }
-
-
-
-
 }

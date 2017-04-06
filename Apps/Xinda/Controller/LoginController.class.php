@@ -2,36 +2,26 @@
 namespace Xinda\Controller;
 use Think\Controller;
 class LoginController extends Controller {
-
-public function qq_login(){
-
+    public function qq_login(){
         $qqobj=new \Org\Util\Qqconnect();              
         $qqobj->getAuthCode(); 
-
     }
-    
-   
-    public function qq_callback(){
-               
-        $_SESSION['state']=$_GET['state'];
-        
+    public function qq_callback(){              
+        $_SESSION['state']=$_GET['state'];       
         $qqobj=new \Org\Util\Qqconnect();       
         $result=$qqobj->getUsrInfo();
-        $cus=json_decode($result,true);
-       
+        $cus=json_decode($result,true);       
         $m=D('tp_customer');
-        $where['openid']=$_SESSION['openid'];
+        $where=array('openid'=>$_SESSION['openid']);
         $arr=$m->where($where)->select();
         if ($arr){
             $_SESSION['userid']=$arr['id'];
             $_SESSION['uphone']=$arr['phone'];
             $_SESSION['realname']=$cus['nickname'];
             $_SESSION['isCLogin']='Xinda';
-            $_SESSION['QC_userData']=$cus;
-            
+            $_SESSION['QC_userData']=$cus;            
             $this->redirect('/Xinda/Index');
-        }else {
-            
+        }else {           
             $_POST['openid']=$_SESSION['openid'];
             $_POST['realname']=$cus['nickname'];
             $_POST['password']=md5(123456);
@@ -46,7 +36,7 @@ public function qq_login(){
             if(!$m->create()){
                 $this->error($m->getError());
             }
-            $lastId=$m->add();
+            $m->add();
                         
             $arr=$m->where($where)->select();
             $_SESSION['userid']=$arr['id'];
@@ -62,11 +52,8 @@ public function qq_login(){
     }
        
     public function login(){
-         $m= D('tp_customer');
-         $where['phone']=$_POST['phone'];
-         $where['password']=md5($_POST['password']);
-         $data=$m->where($where)->field('id,phone,realname')->find();
-        
+        $where=array('phone'=>$_POST['phone'],['password']=>md5($_POST['password']));
+        $data=M('tp_customer')->where($where)->field('id,phone,realname')->find();        
         if ($data){            
             $_SESSION['userid']=$data['id'];
             $_SESSION['uphone']=$data['phone'];
@@ -75,21 +62,17 @@ public function qq_login(){
 //             $this->redirect('/Xinda/Index');
             $this->success("登录成功!");
         }else{
-
             $this->error('用户或密码错误，请重新登陆！');
         }
-
     }
 
     public function logout(){
         $username =$_SESSION['realname'];
         $_SESSION = array();
-
         if (isset($_COOKIE[session_name()])) {
             setcookie(session_name(),'',time()-3600,'/');
         }        
         session_destroy();// 销毁sesstion
-
         $this->success("再见 {$username}, 退出成功!",U('/Xinda/Index'));
 
     }

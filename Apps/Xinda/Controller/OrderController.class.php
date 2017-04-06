@@ -1,19 +1,19 @@
 <?php
 namespace Xinda\Controller;
-use Think\Controller;
-class OrderController extends WebInfoController {
-    
-    public function index(){
-        //获取页面信息
-        WebInfoController::getWebInfo();
-        //微信公众号免登陆
+class OrderController extends WebInfoController {    
+    public function _empty(){
+        $this->display('index');
+    }
+    public function index(){       
+        WebInfoController::getWebInfo();//获取页面信息       
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
-        WebInfoController::weiXinLogin($appid, $openid);
-        /* 实例化模型*/
-        $m=D('xd_order');
-    }
-    
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        $where=array();
+        $data=D('xd_order')->where($where)->select();
+        $this->assign("data",$data);
+        $this->display();
+    }   
     public function insert(){
         /* 实例化模型*/
         $m=D('xd_order');
@@ -28,43 +28,22 @@ class OrderController extends WebInfoController {
             $this->success("添加成功");
         }else{
             $this->error("添加失败");
-        }
-    
+        }   
     }
     
     public function mod(){
-        /* 接收参数*/
-        
-    
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('xd_order');
-        $case=$m->find($id);
-        $this->assign("case",$case);
-    
-        $this -> assign("state", formselect($case['state']));
-        
+        $data=M('xd_order')->find($_GET['id']);
+        $this -> assign("$data",$data);   
+        $this -> assign("state", formselect($data['state']));      
         $this->display();
     }
-    
-
-    
     public function update(){
-        /* 实例化模型*/
-        $db=D('xd_order');
-        $_POST['moder']=$_SESSION['realname'];
-        
-        if ($db->save($_POST)){
+        $_POST['moder']=$_SESSION['realname'];        
+        if (M('xd_order')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
         }
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-    
+ 
 }

@@ -1,20 +1,17 @@
 <?php
 namespace Xinda\Controller;
-use Think\Controller;
 class CustomerController extends WebInfoController {
-
-	public function index(){
-	     //获取页面信息
-        WebInfoController::getWebInfo();
-             
-	    $this->display();
+    public function _empty(){
+        $this->display('index');
     }
-    
+	public function index(){	     
+        WebInfoController::getWebInfo();    //获取页面信息        
+	    $this->display();
+    }   
     public function checked(){
         if($_POST['phone']){
-            $m=D('tp_customer');
-            $where['phone']=$_POST['phone'];
-            $data=$m->where($where)->select();
+            $where=array('phone'=>$_POST['phone']);
+            $data=M('tp_customer')->where($where)->select();
             if($data){
                 $this->error("这个号码已经注册，无需重复注册");
             }else{
@@ -22,23 +19,15 @@ class CustomerController extends WebInfoController {
             }
         }else{
             $this->error("您没有填写手机号");
-        }
-        
-    }
-    
-    public function register(){   
-         //获取页面信息
-        WebInfoController::getWebInfo();
-    
-        $phone=$_GET['phone'];
-        $this->assign('phone',$phone);
-    
+        }        
+    }    
+    public function register(){          
+        WebInfoController::getWebInfo(); //获取页面信息
+        $this->assign('phone',$_GET['phone']);   
         $this->display();
-    }
-    
-
+    }   
     public function insert(){
-        $m=D('tp_customer');
+        $m=M('tp_customer');
         $_POST['password']=md5(123456);
         $_POST['ctime']=time();
         if(!$m->create()){
@@ -49,90 +38,82 @@ class CustomerController extends WebInfoController {
             $this->success("注册成功",U('Xinda/Index'));
         }else{
             $this->error("注册失败");
-        }
-    
+        }   
     }
 
     public function mod(){
-        /* 接收参数*/
-        $id =  $_SESSION['userid'];
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->find($id);
-        $this->assign('arr',$arr);
-    
+        $arr=M('tp_customer')->find($_SESSION['userid']);
+        $this->assign('arr',$arr);   
         $this->display();
     }
    
- public function setpass(){
-        /* 接收参数*/
-        $id =  $_SESSION['userid'];
-        /* 实例化模型*/
-        $m=M('tp_customer');        
-        $user=$m->find($id);
+    public function setpass(){        
+        $user=M('tp_customer')->find($_SESSION['userid']);
         $this->assign('user',$user);
-
         $this->display();
     }
 
- public function set(){
+    public function set(){
        /* 接收参数*/
        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
        $pass1= $_POST['pass1'];
        $pass2= $_POST['pass2'];
        $pass3= $_POST['pass3'];
-       /* 实例化模型*/
-        $m=M('tp_customer');
-        
+        $m=M('tp_customer');        /* 实例化模型*/      
         $user=$m->find($id);
         if (md5($pass1)==$user['password']) {
             if ($pass2==$pass3) {
-                $arr['id']=$id;
-                $arr['password']=md5($pass2);
-                $arr['moder']=$_SESSION['realname'];
+                $arr=array('id'=>$id,'password'=>md5($pass2),'moder'=>$_SESSION['realname']);               
                 if ($m->save($arr)){
-                   $this->success("密码修改成功！",U('Tuocai/Index/index'));
+                   $this->success("密码修改成功！",U('Xinda/Index/index'));
                 }else{
                    $this->error("密码修改失败！");
                 }
-
             }else{
                 $this->error('新密码和确认面不一致');
             }
         }else{
             $this->error('原密码错误');
         }
- }
+    }
 
-
-public function personal(){
-        //获取页面信息
-        WebInfoController::getWebInfo();
-        //微信公众号免登陆
+    public function personal(){       
+        WebInfoController::getWebInfo(); //获取页面信息        
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
-        WebInfoController::weiXinLogin($appid, $openid);
-        if($_SESSION['openid']){
-            $where['openid']=$_SESSION['openid'];
-        }elseif ($appid){
-            
-        }else {
-            $where['id'] =  $_SESSION['userid'];
-        }    
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m->where($where)->select();
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        if($_SESSION['openid']){            
+            $where=array('openid'=>$_SESSION['openid']);
+        }elseif ($openid){
+            $map=array('wxOpenId'=>$openid);
+            $date=M('xd_customer')->where($map)->select();
+            $where=array('id'=>$date[0]['tpid']);
+        }else {            
+            $where=array('id'=>$_SESSION['userid']);
+        }           
+        $arr=M('tp_customer')->where($where)->select();
         $this->assign('arr',$arr);
-
         $this->display();
     }
-    
-    public function _empty(){
-    
-        $this->display('index');
+    public function yuyue() {
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        if($_SESSION['openid']){
+            $where=array('openid'=>$_SESSION['openid']);
+        }elseif ($openid){
+            $map=array('wxOpenId'=>$openid);
+            $date=M('xd_customer')->where($map)->select();
+            $where=array('id'=>$date[0]['tpid']);
+        }else {
+            $where=array('id'=>$_SESSION['userid']);
+        }
+        $arr=M('tp_customer')->where($where)->select();
+        $map=array(['phone']=>$arr[0]['phone']);
+        $data=M('order_serviccar')->where($map)->select();
+        $this->assign('data',$data);
+        $this->display();
     }
-
-
 }
  
 

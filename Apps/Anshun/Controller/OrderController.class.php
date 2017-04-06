@@ -1,54 +1,33 @@
 <?php
 namespace Anshun\Controller;
-use Think\Controller;
-class OrderController extends Controller {
+class OrderController extends WebInfoController {
     
-    public function _empty(){
-    
+    public function _empty(){   
         $this->display('index');
-    }
-    
-    
-    public function index(){
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,qz,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();      
-
+    }       
+    public function index(){        
+        WebInfoController::getWebInfo(); //获取页面信息     
         $this->display();
-    }
-  //检索车辆信息
-    public function search(){
+    }  
+    public function search(){//检索车辆信息
         /* 接收参数*/
         $search = !empty($_POST['search']) ? $_POST['search'] : $_GET['search'];        
         $this->assign('search',$search);
         /* 实例化模型*/
-        $m=D('car');
         $map['plateno|vim']=$search;
-        $arr=$m->where($map)->select();
-        $this->assign('arr',$arr);
-    
-        $this->display();
-         
-    } 
-    //预约
-    public function yuyue(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
+        $arr=M('car')->where($map)->select();
+        $this->assign('arr',$arr);   
+        $this->display();        
+    }    
+    public function yuyue(){//预约
         $yydate=date("Y-m-d",time()+1*24*3600);
         $this->assign("yydate", $yydate);
-        $this->assign("textservice", selectCate());
-        
+        $this->assign("textservice", selectCate());       
         $this->display();
     }
     
-    public function yyinsert(){
-       
-        //关联客户信息，客户信息不存在创建客户
-        if($_POST['phone']){
+    public function yyinsert(){              
+        if($_POST['phone']){//关联客户信息，客户信息不存在创建客户
            /* 实例化模型*/
            $m=M('tp_customer');
            $where=array("phone"=>$_POST['phone']);
@@ -70,10 +49,7 @@ class OrderController extends Controller {
        }else {
            $this->error('联系电话没有填写');
        }
-       
-       
-       //处理车辆信息    
-       if($_POST['plateno']){
+       if($_POST['plateno']){//处理车辆信息    
            /* 实例化模型*/
            $m=M('car');
            $where=array("plateno"=>$_POST['plateno']);
@@ -94,8 +70,7 @@ class OrderController extends Controller {
        }
            
            /* 实例化模型*/
-           $m=D('order_serviccar');
-           
+           $m=D('order_serviccar');          
            $_POST['adder']=$_SESSION['realname'];
            $_POST['moder']=$_SESSION['realname'];
            $_POST['sdate']=date("Y-m-d",time());
@@ -109,28 +84,18 @@ class OrderController extends Controller {
            }else{
                $this->error('失败');
            }
-      
-        
-        
     }
-    
-    
-    
-    //收车
-    public function receive(){
-        /* 实例化模型*/
-        $m=D('car');
-        $arr=$m->find($_GET['id']);
+
+    public function receive(){//收车
+        $arr=D('car')->find($_GET['id']);
         $this->assign('arr',$arr);
-        $this->assign("textservice", selectCate());
-        
+        $this->assign("textservice", selectCate());        
         $this->display();
         
     }
     
     public function insert(){
         if($_POST['phone']){
-            /* 实例化模型*/
             $m=M('tp_customer');
             $where=array("phone"=>$_POST['phone']);
             $arr=$m->where($where)->select();
@@ -148,8 +113,7 @@ class OrderController extends Controller {
                 $arr=$m->where($where)->select();
                 $_POST['uid']=$arr[0]['id'];
             }
-            
-            
+                      
             /* 实例化模型*/
             $m=D('order_serviccar');
             $carid=$_POST['carid'];
@@ -165,97 +129,58 @@ class OrderController extends Controller {
                 $this->success("成功",U('Anshun/Order/servicelist'));
             }else{
                 $this->error('失败');
-            }
-               
+            }              
         }else {
            $this->error('联系电话没有填写');
        }
-        
-        
-       
     }
     
-    public function servicelist(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(4);
-        $_SESSION['Anshun']=$data;
-        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        
-        /*接收参数*/
+    public function servicelist(){       
+        WebInfoController::getWebInfo();//获取页面信息               
         if($_GET['state']){
             $state=$_GET['state'];
         }else {
             $state='待维修';
-        }
-        
-        $this->assign('state',$state);
-        
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $where['state']=$state;
-        $arr=$m->where($where)->order('ctime desc')->select();
+        }       
+        $this->assign('state',$state);        
+        $where=array('state'=>$state);
+        $arr=M('order_serviccar')->where($where)->order('ctime desc')->select();
         $this->assign('arr',$arr);
-
         $this->display();
-    }
-    
-
-    
-    public function imgfront(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');       
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);       
-       
+    }        
+    public function imgfront(){    
+        $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);             
         $this->display();       
     }
     
     public function imgback(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-    
+       $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);    
         $this->display();   
     }
     
     public function imgleft(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-    
+        $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);    
         $this->display();   
     }
     
     public function imgright(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-    
+       $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);   
         $this->display();  
     }
     
     public function imgservice(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-    
+        $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);   
         $this->display();   
     }
     
     public function imgoil(){
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr=$m->find($_GET['id']);
-        $this->assign('arr',$arr);
-    
+        $arr=M('order_serviccar')->find($_GET['id']);
+        $this->assign('arr',$arr);   
         $this->display();  
     }
     
@@ -265,18 +190,14 @@ class OrderController extends Controller {
         $upload->maxSize  =     7145728 ;// 设置附件上传大小
         $upload->exts     =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
         $upload->rootPath =  './Upload/Anshun/';// 设置附件上传目录
-        $upload->savePath = '/Order/'; // 设置附件上传目录
-    
-        $info  =   $upload->upload();
-    
+        $upload->savePath = '/Order/'; // 设置附件上传目录  
+        $info  =   $upload->upload();  
         if(!$info) {// 上传错误提示错误信息
             $this->error($upload->getError());
         }else{// 上传成功 获取上传文件信息
             $_POST['path'.$_POST['place']]=$info['img']['savepath'];
             $_POST['img'.$_POST['place']]=$info['img']['savename'];
-            /* 实例化模型*/
-            $db=D('order_serviccar');
-            if ($db->save($_POST)){
+            if (D('order_serviccar')->save($_POST)){
                 $image = new \Think\Image();
                 $image->open('./Upload/Anshun'.$info['img']['savepath'].$info['img']['savename']);
                 $image->thumb(600, 400)->save('./Upload/Anshun'.$info['img']['savepath'].$info['img']['savename']);   //等比例缩放
@@ -286,59 +207,38 @@ class OrderController extends Controller {
             }
         }
     }
-    //修理
-    public function weixiu(){
-        $arr['id']=$_GET['id'];
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr['state']='修理中';
-        if ($m->save($arr)){
+    
+    public function weixiu(){//修理
+        $arr=array('id'=>$_GET['id'],'state'=>'修理中');
+        if (M('order_serviccar')->save($arr)){
             $this->success("开始修理");
         }else{
             $this->error("失败！");
         }
     }
-    
-    
-    //完工
-    public function wangong(){
-        $arr['id']=$_GET['id'];
-        /* 实例化模型*/        
-        $m=D('order_serviccar');
-        $arr['state']='已完工';
-        if ($m->save($arr)){
+    public function wangong(){//完工
+        $arr=array('id'=>$_GET['id'],'state'=>'已完工');
+        if (M('order_serviccar')->save($arr)){
             $this->success("已完工");
         }else{
             $this->error("失败！");
         }
     }
-    
-    
-    //交车
-    public function jiaoche(){
-        $arr['id']=$_GET['id'];
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr['state']='已交车';
-        if ($m->save($arr)){
+
+    public function jiaoche(){//交车
+        $arr=array('id'=>$_GET['id'],'state'=>'已交车');
+        if (M('order_serviccar')->save($arr)){
             $this->success("已交车");
         }else{
             $this->error("失败！");
         }
     }
-    
-    //交车
-    public function quxiao(){
-        $arr['id']=$_GET['id'];
-        /* 实例化模型*/
-        $m=D('order_serviccar');
-        $arr['state']='已取消';
-        if ($m->save($arr)){
+    public function quxiao(){//取消
+        $arr=array('id'=>$_GET['id'],'state'=>'已取消');
+        if (M('order_serviccar')->save($arr)){
             $this->success("已取消");
         }else{
             $this->error("失败！");
         }
     }
-      
-    
 }

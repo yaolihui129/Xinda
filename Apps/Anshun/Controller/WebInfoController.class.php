@@ -1,31 +1,36 @@
 <?php
-namespace Xinda\Controller;
+namespace Anshun\Controller;
 use Think\Controller;
-class WebInfoController extends Controller {    
-    public static function getProdId(){//获取ProdId
-        $proid=6;
+class WebInfoController extends Controller {
+   
+    function getProdId(){ //获取ProdId
+        $proid=4;
         return $proid;
     }
     function getWxid(){//配置wxId
-        return 4;
-    }   
-    public static function getWebInfo(){//获取页面信息
-        $data=M('product')->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(self::getProdId());
-        $_SESSION['Xinda']=$data;
-        $_SESSION['Xinda']['img']=$data['path'].$data['img'];
+        $wxid=2;
+        return $wxid;
+    }    
+    
+    //获取页面信息
+    public static function getWebInfo(){
+        $m=D('product');
+        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(self::getProdId());
+        $_SESSION['Anshun']=$data;
+        $_SESSION['Anshun']['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();       
     }
-    
-    public static function weiXinLogin($appid,$openid){//微信公众账号免登陆
+    //微信公众账号免登陆
+    public static function weiXinLogin($appid,$openid){
         if($openid){//如果有$_GET['wxOpenId']就直接登录
             $map=array('wxopenid'=>$openid);
-            $m=D('xd_customer');
+            $m=D('as_customer');
             $arr=$m->where($map)->select();
             if($arr){//如果用户表有值，直接登录
                 $_SESSION['userid']   = $arr[0]['tpid'];
-                $_SESSION['isCLogin'] = 'Xinda';
+                $_SESSION['isCLogin'] = 'Anshun';
                 if($arr[0]['tpid']==0){//如果绑定手机号
                     $_SESSION['realname'] = '未留手机';
                 }else{//如果未绑定手机号
@@ -41,12 +46,14 @@ class WebInfoController extends Controller {
                 if(!$m->create()){
                     $this->error($m->getError());
                 }
-                $m->add();
+                $lastId=$m->add();
                 $arr=$m->where($map)->select();
                 $_SESSION['userid']   = $arr[0]['tpid'];
-                $_SESSION['isCLogin'] = 'Xinda';
+                $_SESSION['isCLogin'] = 'Anshun';
                 $_SESSION['realname'] = '未留手机';
-            }        
-        }        
+            }
+        
+        }
+        
     }
 }

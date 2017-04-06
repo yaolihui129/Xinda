@@ -1,10 +1,7 @@
 <?php
 namespace Xinda\Controller;
-use Think\Controller;
 class WeixinController extends WebInfoController {    
-    
-    //验证消息接口
-    public function index(){
+    public function index(){//验证消息接口
         $nonce      = $_GET['nonce'];
         $token      = "123weixin";
         $timestamp  = $_GET['timestamp'];
@@ -22,24 +19,23 @@ class WeixinController extends WebInfoController {
         }
     }    
     
-    //接收事件推送并回复
-    public function reponseMsg(){       
+    
+    public function reponseMsg(){   //接收事件推送并回复    
         $postArr  = $GLOBALS['HTTP_RAW_POST_DATA'];                                  //1.获取到微信推送过来的post数据（xml格式）       
         $postObj  = simplexml_load_string( $postArr );                              //2.处理消息类型，并设置回复类型和内容
         $toUser   = $postObj->FromUserName;
         $fromUser = $postObj->ToUserName;               
         if(strtolower($postObj->MsgType) == 'event'){                                //判断该数据包是否是订阅的事件推送          
             if(strtolower($postObj->Event) == 'subscribe' ){                         //如果是关注subscrine事件
-                    //回复单图文消息
-                    $arr = array(
-                        array(
-                            'title'=>'北京智慧信达网络服务',
-                            'description'=>"北京智慧信达商贸有限公司",
-                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
-                        ),
-                    );
-                    wxReplyNews($toUser,$fromUser,$arr);
+               $arr = array(//回复单图文消息
+                   array(
+                     'title'=>'北京智慧信达网络服务',
+                     'description'=>"北京智慧信达商贸有限公司",
+                     'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                     'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                   ),
+                );
+               wxReplyNews($toUser,$fromUser,$arr);
             }            
             if(strtolower($postObj->Event) == 'click' ){//自定义菜单“推”事件                             
                 if(strtolower($postObj->EventKey) == 'item1' ){
@@ -152,14 +148,13 @@ class WeixinController extends WebInfoController {
         
         
         if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复           
-            if(trim($postObj->Content)=='智慧信达'){
-                //多图文回复                                             
-                $arr = array(
+            if(trim($postObj->Content)=='智慧信达'){                                                           
+                $arr = array(//多图文回复  
                     array(
-                            'title'=>'北京智慧信达网络服务',
-                            'description'=>"北京智慧信达商贸有限公司",
-                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                       'title'=>'北京智慧信达网络服务',
+                       'description'=>"北京智慧信达商贸有限公司",
+                       'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                       'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                     ),
                     array(
                         'title'=>'临城秀丽广告门市',
@@ -181,10 +176,9 @@ class WeixinController extends WebInfoController {
                    ),
                 );
                 wxReplyNews($toUser,$fromUser,$arr);          
-            }else {                              
-                $where['key']= trim($postObj->Content);
-                $m=D('wx_key');
-                $data=$m->where($where)->select();
+            }else {                                             
+                $where=array('key'=>trim($postObj->Content));
+                $data=M('wx_key')->where($where)->select();
                 if($data){
                     $content = $data[0]['content'];
                     wxReplyText($toUser,$fromUser,$content);
@@ -340,7 +334,7 @@ class WeixinController extends WebInfoController {
 //           'mpnews'=>array('media_id'=>''),
 //           'msgtype'=>'mpnews',
 //       );      
-     $res = wxSendMsgAll($this->getWxid(),$array,$type='preview');//生产环境群发$type='send'
+     $res = wxSendMsgAll($this->getWxid(),$array);//生产环境群发$type='send'
      $this->ajaxReturn($res);
    }
    
