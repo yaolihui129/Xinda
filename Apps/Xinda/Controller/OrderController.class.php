@@ -1,9 +1,15 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class OrderController extends Controller {
+class OrderController extends WebInfoController {
     
     public function index(){
+        //获取页面信息
+        WebInfoController::getWebInfo();
+        //微信公众号免登陆
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        WebInfoController::weiXinLogin($appid, $openid);
         /* 实例化模型*/
         $m=D('xd_order');
     }
@@ -52,21 +58,6 @@ class OrderController extends Controller {
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
-        }
-    }
-    
-
-    
-    public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('xd_order');
-        $count =$m->delete($id);
-        if ($count>0) {
-            $this->success('删除成功');
-        }else{
-            $this->error('删除失败');
         }
     }
     

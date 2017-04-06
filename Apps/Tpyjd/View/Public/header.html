@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="baidu-site-verification" content="GsgImQGMad" />
+    <title><{$_SESSION['Xinda']['web']}></title>
+    <meta name="keywords" content="<{$_SESSION['keywords']}>" />
+	  <meta name="description" content="" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <import type="css" file="css.home" />
+    <script>
+	//百度统计代码
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?4c790a1cf093e3632a695d5e82587605";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+    <script type="text/javascript">
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: 'wx3452e8086f5fefab', // 必填，公众号的唯一标识
+          timestamp: '<{$timestamp}>', // 必填，生成签名的时间戳
+          nonceStr: '<{$nonceStr}>', // 必填，生成签名的随机串
+          signature: '<{$signature}>',// 必填，签名，见附录1
+          jsApiList: [
+                'onMenuShareAppMessage',//分享给朋友
+                'onMenuShareTimeline',//分享到朋友圈
+                'onMenuShareQQ',//分享给ＱＱ好友
+                'onMenuShareQZone',//分享到QQ空间
+                'checkJsApi',
+
+          ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      });
+
+        wx.ready(function(){
+        	wx.checkJsApi({
+        	    jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+        	    success: function(res) {
+        	        // 以键值对的形式返回，可用的api值true，不可用为false
+        	        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+        	    }
+        	});
+        	
+            wx.onMenuShareTimeline({
+              title: '<{$_SESSION['Xinda']['web']}>', // 分享标题
+              link: '<{$link}>', // 分享链接
+              imgUrl: '<{$imgUrl}>', // 分享图标
+              success: function () { 
+
+                  // 用户确认分享后执行的回调函数
+              },
+
+              cancel: function () { 
+
+                  // 用户取消分享后执行的回调函数
+              }
+          });
+
+          wx.onMenuShareAppMessage({
+              title: '<{$_SESSION['Xinda']['web']}>', // 分享标题
+              desc: '', // 分享描述
+              link: '<{$link}>', // 分享链接
+              imgUrl: '<{$imgUrl}>', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () { 
+
+                  // 用户确认分享后执行的回调函数
+              },
+
+              cancel: function () { 
+
+                  // 用户取消分享后执行的回调函数
+              }
+
+          });
+
+          // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+
+      });
+        wx.error(function(res){
+
+          // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+      });
+    </script>
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="__APP__/Xinda"><{$_SESSION['Xinda']['web']}></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse ">
+        
+          <ul class="nav navbar-nav pull-right">                       
+            <li><a href="__APP__/Xinda/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
+           <!-- <li><a href="__APP__/Xinda/Successcase"><span class="glyphicon glyphicon-gift"> 成功案例</span></a></li>  -->
+            <li><a href="__APP__/Xinda/Hr"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>				
+                
+            <empty name="_SESSION['isCLogin']">
+           		<li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>
+           		<li><a  href="__APP__/Xinda/Customer" class="pull-right" >注册</a></li>	
+          	<else />
+          		<li>
+	          		<a href="__APP__/Xinda/Customer/personal">
+	          			<span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span>
+	          		</a>
+          		</li>         		         		        		             		
+          	</empty>
+          </ul>                  
+        </div>
+      </div>
+    </nav>

@@ -1,7 +1,7 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class ServiceController extends Controller {
+class ServiceController extends WebInfoController {
     public function index(){
 
         $m=D('product');

@@ -1,10 +1,8 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class WeixinController extends Controller {    
-    function getWxid(){//配置wxId
-        return 4;
-    }
+class WeixinController extends WebInfoController {    
+    
     //验证消息接口
     public function index(){
         $nonce      = $_GET['nonce'];

@@ -1,31 +1,13 @@
 <?php
 namespace Xinda\Controller;
 use Think\Controller;
-class HrController extends Controller {
+class HrController extends WebInfoController {
     
     public function index(){
     
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xinda']=$data;
-        $_SESSION['Xinda']['img']=$data['path'].$data['img'];
-        $_SESSION['Xinda']['web']='智慧信达-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        //微信所用的变量
-        $timestamp=time();
-        $nonceStr=getRandCode(16);//生成16位的随机数     
-        $jsapi_ticket=getJsApiTicket();//获取全局票据
-        $signature = "jsapi_ticket=".$jsapi_ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=http://mp.weixin.qq.com?params=value";
-        $signature = sha1($signature);
-        
-        
-//         dump(getWxAccessToken());
-        $this->assign('timestamp',$timestamp);
-        $this->assign('nonceStr',$nonceStr);
-        $this->assign('signature',$signature);
-    
+        //获取页面信息
+        WebInfoController::getWebInfo();
+
         $m=D('tp_hr');
         $where['prodid']=6;
         $where['istuij']=0;
@@ -35,14 +17,7 @@ class HrController extends Controller {
     
         $this->display();
     }
-    
-    
-    
-    
-
-    
-    
-    
+ 
     public function wodtuijian(){
         
         $where['tuij']=$_GET['phone'];
@@ -56,15 +31,9 @@ class HrController extends Controller {
     
     
     public function tuijhr(){
-    
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        //获取页面信息
+        WebInfoController::getWebInfo();
+        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';        
     
         $m=D('tp_hr');
         $where['prodid']=1;
@@ -77,38 +46,27 @@ class HrController extends Controller {
     }
     
     public  function baom(){
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-         
-         
+         //获取页面信息
+        WebInfoController::getWebInfo();
+        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';   
+                
         $m=D('tp_hr');
         $arr=$m->find($_GET['id']);
         $this->assign('arr',$arr);
-        //        dump($arr);
+        
         $this->display();
          
     }
     
     public function tuij(){
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+         //获取页面信息
+        WebInfoController::getWebInfo();
+        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';   
     
         $m=D('tp_hr');
         $arr=$m->find($_GET['id']);
         $this->assign('arr',$arr);
-        //         dump($_SESSION);
+        
         $this->display();
     
     }
