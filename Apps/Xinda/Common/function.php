@@ -2,8 +2,7 @@
 // 根据id获取分类名
 function getCatname($cateid){
     if ($cateid){
-        $m=M('xd_cate');
-        $data=$m->find($cateid);
+        $data=M('xd_cate')->find($cateid);
         $str=getCatname($data['pid'])."-".$data['catname'];
         return $str;
     }else {

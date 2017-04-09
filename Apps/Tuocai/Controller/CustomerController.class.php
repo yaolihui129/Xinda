@@ -1,22 +1,8 @@
 <?php
 namespace Tuocai\Controller;
-use Think\Controller;
-class CustomerController extends Controller {
-             //空方法容错处理
-            public function _empty(){           
-                $this->display('/Tuocai/Index');
-            }
-  
-         //前端师资力量展示
-    	public function index(){
-    	    /* 实例化模型*/
-    	    $m=D('product');
-            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-            $_SESSION['Tuocai']=$data;
-            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-            $_SESSION['ip']=get_client_ip();
-            $_SESSION['browser']=GetBrowser();
-            $_SESSION['os']=GetOs();
+class CustomerController extends WebInfoController {          
+    	public function index(){//前端师资力量展示
+    	   getWebInfo(C('PRODUCT'));//获取网页信息   
             /*接收参数*/
             $where['isteacher'] = !empty($_GET['isteacher']) ? $_GET['isteacher'] : 1;
             $where['state']="发布";
@@ -27,95 +13,52 @@ class CustomerController extends Controller {
             $this->assign('w',$where);
             
     	    $this->display();
-        }
-    
-        //课程列表（根据老师选课程）
-        public function teacher(){
-            /* 实例化模型*/
-            $m=D('product');
-            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-            $_SESSION['Tuocai']=$data;
-            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-            $_SESSION['ip']=get_client_ip();
-            $_SESSION['browser']=GetBrowser();
-            $_SESSION['os']=GetOs();           
-            /* 实例化模型*/
-            $m=D('tc_customer');
-            $where['isteacher']=1;
-            $arr=$m->where($where)->order('ctime desc')->select();
+        }   
+        public function teacher(){//课程列表（根据老师选课程）
+            getWebInfo(C('PRODUCT'));//获取网页信息              
+            $arr=D('tc_customer')->where(array('isteacher'=>1))->order('ctime desc')->select();
             $this->assign('arr',$arr);
-
             $this->display();       
         }
-    
-    
-        //人员列表
-        public function renylist(){
-            /* 实例化模型*/
-            $m=D('product');
-            $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-            $_SESSION['Tuocai']=$data;
-            $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-            $_SESSION['ip']=get_client_ip();
-            $_SESSION['browser']=GetBrowser();
-            $_SESSION['os']=GetOs();    
-            /*接收参数*/
+        public function renylist(){//人员列表
+           getWebInfo(C('PRODUCT'));//获取网页信息                 
             if($_GET['type']){
                 $type=$_GET['type'];
             }else {
                 $type='学生';
             }           
             $this->assign('type',$type);            
-            /* 实例化模型*/
-            $m=D('tc_customer');
-            $where['type']=$type;
-            $arr=$m->where($where)->order('ctime desc')->select();
+            $arr=M('tc_customer')->where(array('type'=>$type))->order('ctime desc')->select();
             $this->assign('arr',$arr);
-            
             $this->display();
         }
-    
-        //客户信息编辑
-        public function cusmod(){       
-            /* 实例化模型*/
-            $m=D('tc_customer');        
-            $arr=$m->find($_GET['id']);
+        public function cusmod(){  //客户信息编辑             
+            $arr=M('tc_customer')->find($_GET['id']);
             $this->assign('arr',$arr);
             $this->assign("selectCate", selectCate($arr['coursetype']));
-            $this->assign("selectType",formselect($arr['type'],"state","tcType"));       
-            
+            $this->assign("selectType",formselect($arr['type'],"state","tcType"));                 
             $this->display();
         }
-    
-        //添加人员
-        public function add(){
-           
+        public function add(){   //添加人员       
             $this->assign("type",  $_GET['type']);
             $this->assign("selectCate", selectCate());
             $this->assign("selectType",formselect("学生","state","tcType"));
-            
             $this->display();
         }
 
-        //个人注册
-        public function tianj(){       
-            //1.判断手机号是否填写                   
-            if($_POST['phone']){           
-                //2.检查登录表时候有该手机
-                $where['phone']=$_POST['phone'];
-                $m=D('tp_customer');            
-                $arr=$m->where($where)->select();
-                if($arr){
-                    //3.检查客户表是否有该手机
+        
+        public function tianj(){  //个人注册                                
+            if($_POST['phone']){       //1.判断手机号是否填写     
+                
+                $m=D('tp_customer');
+                $where=array('phone'=>$_POST['phone']);
+                $arr=$m->where($where)->find();
+                if($arr){//2.检查登录表时候有该手机                   
                     $m=D('tc_customer');
-                    $map['tpid']=$arr[0]['id'];
-                    $data=$m->where($map)->select();
-                    if($data){
-                        //如果客户表存在
+                    $data=$m->where(array('tpid'=>$arr['id']))->select();
+                    if($data){//3.检查客户表是否有该手机                       
                         $this->error("客户已经存在");
-                    }else {
-                        //如果客户表不存在，创建该客户                    
-                        $m=D('tc_customer');
+                    }else { //如果客户表不存在，创建该客户                                                                
                         $data['tpid']       =  $arr[0]['id'];
                         $data['type']       =  $_POST['type'];
                         if($_POST['type']=="学生"){
@@ -140,8 +83,7 @@ class CustomerController extends Controller {
                         }
                     }
                     
-                }else {
-                    //登录表没有，直接创建
+                }else {//登录表没有，直接创建                    
                     $arr['phone']      =  $_POST['phone'];
                     $arr['realname']   =  $_POST['realname'];
                     $arr['password']   =  md5(123456);
@@ -186,14 +128,9 @@ class CustomerController extends Controller {
     
         }
 
-     public function setpass(){
-            /* 接收参数*/
-            $id =  $_SESSION['userid'];          
-            /* 实例化模型*/
-            $m=M('tp_customer');        
-            $user=$m->find($id);
-            $this->assign('user',$user);
-    
+     public function setpass(){                
+            $user=M('tp_customer')->find($_SESSION['userid']);
+            $this->assign('user',$user);   
             $this->display();
         }
     
@@ -218,25 +155,12 @@ class CustomerController extends Controller {
     }
     //个人注册
     public function register(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-    
-        $phone=$_GET['phone'];
-        $this->assign('phone',$phone);
-    
+        getWebInfo(C('PRODUCT'));//获取网页信息   
+        $this->assign('phone',$_GET['phone']);   
         $this->display();
     }
-    //个人注册的插入
+
     public function insert(){
-       
-        
-        /* 实例化模型*/
         $m=D('tp_customer');
         $_POST['password']=md5(123456);
         $_POST['ctime']=time();
@@ -256,7 +180,7 @@ class CustomerController extends Controller {
 
      public function set(){
            /* 接收参数*/
-           $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
+           $id =  $_GET['id'];
            $pass1= $_POST['pass1'];
            $pass2= $_POST['pass2'];
            $pass3= $_POST['pass3'];
@@ -267,11 +191,9 @@ class CustomerController extends Controller {
             if (md5($pass1)==$user['password']) {
                 //判定两次新密码是否一致
                 if ($pass2==$pass3) {
-                    $arr['id']=$id;
-                    $arr['password']=md5($pass2);
-                    $arr['moder']=$_SESSION['realname'];
+                    $arr=array('id'=>$id,'password'=>md5($pass2),'moder'=>$_SESSION['realname']);
                     if ($m->save($arr)){
-                       $this->success("密码修改成功！请用新密码重新登录",U('Tuocai/Index/index'));
+                       $this->success("密码修改成功！请用新密码重新登录",U('Tuocai/Index'));
                        session_destroy();// 销毁sesstion
                     }else{
                        $this->error("密码修改失败！");
@@ -289,21 +211,14 @@ class CustomerController extends Controller {
 
 
      public function mod(){
-            /* 接收参数*/
-            $id =  $_SESSION['userid'];   
-            /* 实例化模型*/
-            $m=M('tp_customer');
-            $arr=$m->find($id);
-            $this->assign('arr',$arr);
-            
+            $arr=M('tp_customer')->find($_SESSION['userid']);
+            $this->assign('arr',$arr);            
             $this->display();
     }
     
     public function update(){
-        /* 实例化模型*/
-        $db=D('tp_customer');
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (D('tp_customer')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
@@ -320,9 +235,8 @@ class CustomerController extends Controller {
         $info  =   $upload->upload();
         /* 实例化模型*/
         $db=D('tc_customer');
-        $_POST['moder']=$_SESSION['realname'];
-        //判定是否有图片上传
-        if(!$info) {
+        $_POST['moder']=$_SESSION['realname'];      
+        if(!$info) {//判定是否有图片上传
             // 没有图片上传时,保存信息             
             $message=$db->save($_POST);
         }else{
@@ -348,6 +262,7 @@ class CustomerController extends Controller {
     }
     
     public function personal(){
+        getWebInfo(C('PRODUCT'));//获取网页信息
         /* 接收参数*/
         if($_SESSION['openid']){
             $where['openid']=$_SESSION['openid'];

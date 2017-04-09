@@ -1,11 +1,8 @@
 <?php
 namespace Xinda\Controller;
 class CustomerController extends WebInfoController {
-    public function _empty(){
-        $this->display('index');
-    }
 	public function index(){	     
-        WebInfoController::getWebInfo();    //获取页面信息        
+        getWebInfo(C('PRODUCT'));//获取网页信息      
 	    $this->display();
     }   
     public function checked(){
@@ -22,7 +19,7 @@ class CustomerController extends WebInfoController {
         }        
     }    
     public function register(){          
-        WebInfoController::getWebInfo(); //获取页面信息
+        getWebInfo(C('PRODUCT'));//获取网页信息 
         $this->assign('phone',$_GET['phone']);   
         $this->display();
     }   
@@ -78,10 +75,10 @@ class CustomerController extends WebInfoController {
     }
 
     public function personal(){       
-        WebInfoController::getWebInfo(); //获取页面信息        
+        getWebInfo(C('PRODUCT'));//获取网页信息       
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
-        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆      
         if($_SESSION['openid']){            
             $where=array('openid'=>$_SESSION['openid']);
         }elseif ($openid){
@@ -98,7 +95,7 @@ class CustomerController extends WebInfoController {
     public function yuyue() {
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
-        WebInfoController::weiXinLogin($appid, $openid);//微信公众号免登陆
+        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆      
         if($_SESSION['openid']){
             $where=array('openid'=>$_SESSION['openid']);
         }elseif ($openid){

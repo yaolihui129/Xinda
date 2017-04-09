@@ -1,12 +1,8 @@
 <?php
 namespace Anshun\Controller;
-class OrderController extends WebInfoController {
-    
-    public function _empty(){   
-        $this->display('index');
-    }       
+class OrderController extends WebInfoController {     
     public function index(){        
-        WebInfoController::getWebInfo(); //获取页面信息     
+        getWebInfo(C('PRODUCT'));//获取网页信息         
         $this->display();
     }  
     public function search(){//检索车辆信息
@@ -136,7 +132,7 @@ class OrderController extends WebInfoController {
     }
     
     public function servicelist(){       
-        WebInfoController::getWebInfo();//获取页面信息               
+        getWebInfo(C('PRODUCT'));//获取网页信息             
         if($_GET['state']){
             $state=$_GET['state'];
         }else {

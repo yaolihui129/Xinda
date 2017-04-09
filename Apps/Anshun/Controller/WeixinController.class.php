@@ -181,9 +181,8 @@ class WeixinController extends WebInfoController {
                 );
                 wxReplyNews($toUser,$fromUser,$arr);          
             }else {                              
-                $where['key']= trim($postObj->Content);
-                $m=D('wx_key');
-                $data=$m->where($where)->select();
+                $where=array('key'=>trim($postObj->Content));
+                $data=M('wx_key')->where($where)->select();
                 if($data){
                     $content = $data[0]['content'];
                     wxReplyText($toUser,$fromUser,$content);
@@ -339,7 +338,7 @@ class WeixinController extends WebInfoController {
 //           'mpnews'=>array('media_id'=>''),
 //           'msgtype'=>'mpnews',
 //       );      
-     $res = wxSendMsgAll($this->getWxid(),$array,$type='preview');//生产环境群发$type='send'
+     $res = wxSendMsgAll($this->getWxid(),$array,'preview');//生产环境群发$type='send'
      $this->ajaxReturn($res);
    }
    

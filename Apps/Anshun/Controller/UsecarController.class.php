@@ -1,12 +1,8 @@
 <?php
 namespace Anshun\Controller;
 class UsecarController extends WebInfoController {
-    
-    public function _empty(){   
-        $this->display('index');
-    }    
     public function index(){       
-        WebInfoController::getWebInfo();  //获取页面信息   
+        getWebInfo(C('PRODUCT'));//获取网页信息      
         $where=array("type"=>"usecar","state"=>"正常");
         $data=M('dict')->where($where)->order('k')->select();
         $this->assign('data',$data);

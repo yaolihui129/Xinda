@@ -9,4 +9,8 @@ return array(
         '__UPLOAD__'=>__ROOT__.'/Upload/Demo'
     ),
     
+    'PRODUCT'=>'Demo',    //定义产品编号   
+    'DBQZ'=>'dm_',        //表前缀    
+    'WEIXIN_APPID'=>'',   //定义微信APPID
+    
 );

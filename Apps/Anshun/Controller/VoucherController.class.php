@@ -1,12 +1,8 @@
 <?php
 namespace Anshun\Controller;
-class VoucherController extends WebInfoController {
-    
-    public function _empty(){   
-        $this->display('index');
-    }      
+class VoucherController extends WebInfoController {   
     public function index(){        
-        WebInfoController::getWebInfo();   //获取页面信息    
+        getWebInfo(C('PRODUCT'));//获取网页信息          
         $m=D('as_voucher');
         $where=array("state"=>"发布");
         $arr=$m->where($where)->order('end desc')->select();

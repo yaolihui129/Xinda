@@ -1,18 +1,9 @@
 <?php
 namespace Xiuli\Controller;
-use Think\Controller;
-class CustomerController extends Controller {
+class CustomerController extends WebInfoController {
     
-    public function index(){
-        
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();       
-        
+    public function index(){       
+        getWebInfo(C('PRODUCT'));//获取网页信息               
         $this->display();
     }
     
@@ -35,13 +26,7 @@ class CustomerController extends Controller {
     
     public function register(){
     
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs(); 
+        getWebInfo(C('PRODUCT'));//获取网页信息 
         
         $phone=$_GET['phone'];
         $this->assign('phone',$phone);
@@ -144,9 +129,6 @@ class CustomerController extends Controller {
         
     }   
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
+   
     
 }

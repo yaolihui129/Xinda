@@ -4,6 +4,46 @@
         $data=M('dict')->find($id);        
         return $data['v'];   
     }
+    //获取ProductID
+    function getProdId($qz){
+        $data=M('product')->where(array('qz'=>$qz))->find();
+        return $data['id'];
+    }
+    //获取页面信息
+    function getWebInfo($qz){//获取页面信息
+        $data=M('product')->where(array('qz'=>$qz))->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find();
+        $_SESSION[$qz]=$data;
+        $_SESSION[$qz]['img']=$data['path'].$data['img'];
+        $_SESSION['ip']=get_client_ip();
+        $_SESSION['browser']=GetBrowser();
+        $_SESSION['os']=GetOs();
+    }
+    
+
+   function login($qz,$phone,$password){
+        $where=array('phone'=>$phone,['password']=>md5($password));
+        $data=M('tp_customer')->where($where)->field('id,phone,realname')->find();
+        if ($data){
+            $_SESSION['userid']  = $data['id'];
+            $_SESSION['uphone']  = $data['phone'];
+            $_SESSION['realname']= $data['realname'];
+            $_SESSION['isCLogin']= $qz;           
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
+    function logout(){
+        
+        $_SESSION = array();
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(),'',time()-3600,'/');
+        }
+        session_destroy();// 销毁sesstion
+        
+    
+    }
 
     //根据id获取客户电话
     function getCusPhone($id){
@@ -18,8 +58,8 @@
     }
     
     //获取自定义菜单
-    function wxMenuGet($wxId) {
-        $token = wxGetAccessToken($wxId);
+    function wxMenuGet($appID) {
+        $token = wxGetAccessToken($appID);
         $url   = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$token;
         $res   = httpGet($url);
         $arr   = json_decode($res,true);
@@ -27,8 +67,8 @@
     }
     
     //创建自定义菜单
-    function wxMenuCreat($wxId,$postArr) {
-        $token    = wxGetAccessToken($wxId);
+    function wxMenuCreat($appID,$postArr) {
+        $token    = wxGetAccessToken($appID);
         $url      = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
         $postJson = urldecode(json_encode($postArr));
         $res      = httpPost($url,$postJson);
@@ -190,7 +230,7 @@
         				<MsgType><![CDATA[%s]]></MsgType>
         				<ArticleCount>".count($arr)."</ArticleCount>
         				<Articles>";
-        foreach($arr as $k=>$v){
+        foreach($arr as $v){
             $template .="<item>
         					<Title><![CDATA[".$v['title']."]]></Title>
         					<Description><![CDATA[".$v['description']."]]></Description>
@@ -281,8 +321,8 @@
     }
     
     //获取临时二维码
-    function getTimeQrCode($wxId,$scene_id,$expire=30){ 
-        $token = wxGetAccessToken($wxId);
+    function getTimeQrCode($appID,$scene_id,$expire=30){ 
+        $token = wxGetAccessToken($appID);
         $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;
         $expire = $expire*24*60*60;
         $postArr =array(                                                                //组装数组
@@ -298,8 +338,8 @@
     }
 
     //获取临时二维码
-    function getForeverQrCode($wxId,$scene_id){ 
-        $token = wxGetAccessToken($wxId);
+    function getForeverQrCode($appID,$scene_id){ 
+        $token = wxGetAccessToken($appID);
         $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;        
         $postArr =array(                                                                //1.组装数组
             'action_name'=>"QR_LIMIT_SCENE",
@@ -311,16 +351,46 @@
         $long_url='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$res['ticket']; //3.使用$ticket换去二维码图片
         return getShortUrl($token,$long_url);
     }
-
+    function wxLogin($qz,$db,$appid,$openid){//微信公众账号免登陆
+        if($openid){//如果有$_GET['wxOpenId']就直接登录
+            $map=array('wxopenid'=>$openid);
+            $m=D($db.'customer');
+            $arr=$m->where($map)->find();
+            if($arr){//如果用户表有值，直接登录
+                $_SESSION['userid']   = $arr['tpid'];
+                $_SESSION['isCLogin'] = $qz;
+                if($arr[0]['tpid']==0){//如果绑定手机号
+                    $_SESSION['realname'] = '游客';
+                }else{//如果未绑定手机号
+                    $_SESSION['uphone']   = getCusPhone($arr['tpid']);
+                    $_SESSION['realname'] = getCusName($arr['tpid']);
+                }
+            }else{//如果用户表没有值，向用户表插入数据
+                $_POST['wxopenid']=$_GET['wxOpenId'];
+                $_POST['wxappid']=$appid;
+                $_POST['adder']=$appid;
+                $_POST['moder']=$appid;
+                $_POST['ctime']=time();
+                $m->create();
+                $m->add();
+                $arr=$m->where($map)->select();
+                $_SESSION['userid']   = $arr['tpid'];
+                $_SESSION['isCLogin'] = $qz;
+                $_SESSION['realname'] = '游客';
+            }
+            return ;
+        }
+    
+    }
     //获取微信AccessToken
-    function wxGetAccessToken($wxId){
-        $arr=getWxinfo($wxId);        
+    function wxGetAccessToken($appID){
+        $arr=getWxinfo($appID);        
         if((time() - $arr['otime'])>0){                     //如果access_token过期，重新获取          
-            $appid     = $arr['appid'];
+            $appid     = $appID;
             $appsecret = $arr['appsecret'];
             $url       = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
             $arr       = json_decode(httpGet($url), true);
-            $data      = array('id'=> $wxId,'access_token' => $arr['access_token'],'otime'=> time()+7000);         
+            $data      = array('id'=> $arr['id'],'access_token' => $arr['access_token'],'otime'=> time()+7000);         
             M('wx_wechat')->save($data);                    //更新AccessToken            
             return $data['access_token'];    
         }else {                                             //如果access_token没有过期，直接从数据库中取值            
@@ -329,8 +399,8 @@
     }
     
     //群发接口
-    function wxSendMsgAll($wxId,$array,$type='preview'){        
-        $token=wxGetAccessToken($wxId); //1.获取Token
+    function wxSendMsgAll($appID,$array,$type='preview'){        
+        $token=wxGetAccessToken($appID); //1.获取Token
         if($type=='preview'){           //预览接口           
             $url='https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.$token;
             $postJson =urldecode(json_encode($array));
@@ -347,44 +417,45 @@
     }
     
     //获取微信公众号信息
-    function getWxinfo($wxId){
-        $data=D('wx_wechat')->find($wxId);
+    function getWxinfo($appID){
+        $data=D('wx_wechat')->where(array('appid'=>$appID))->find();
         return $data;
     }
     
     //拉取用户信息（认证后才可用）
-    function wxGetUsers($wxId){
-        $token      = wxGetAccessToken($wxId);         
-        $data       = getWxinfo($wxId);
+    function wxGetUsers($appID){
+        $token      = wxGetAccessToken($appID);         
+        $data       = getWxinfo($appID);
         $nextOpenid = $data['next_openid'];
         $url        = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$token.'&next_openid='.$nextOpenid;
         $res        = httpGet($url);
         $arr        = json_decode($res,true);
-        $data       = array('id'=>$wxId,'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
+        $data       = array('id'=>$data['id'],'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
         M('wx_wechat')->save($_POST);//更新数据
         return $arr;
     }
     
     //获取wxGetJsApiTicket全局票据
-    function wxGetJsApiTicket($id){ 
+    function wxGetJsApiTicket($appID){ 
         if ((time()-$_SESSION['jsapi_ticket_expire_time']) < 0){//从session中取值  jsapi_ticket         
             $jsapi_ticket = $_SESSION['jsapi_ticket'];        
         }else {//重新获取jsapi_ticket
-            $access_token = wxGetAccessToken($id);
+            $access_token = wxGetAccessToken($appID);
             $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
             $res =json_decode(httpGet($url),true);
             $_SESSION['jsapi_ticket']=$res['ticket'];
             $_SESSION['jsapi_ticket_expire_time']=time()+7000;
+            $jsapi_ticket=$res['ticket'];
         }
-        return $res['ticket'];
+        return $jsapi_ticket;
     }
 
     //获取微信服务器IP
-    function wxGetServerIp($wxIid){
+    function wxGetServerIp($appID){
         if($_SESSION['wx_ip_list']){
             //如果$_SESSION['wx_ip_list']有值，什么也不做
         }else {//如果$_SESSION['wx_ip_list']没有值，获取服务器清单并复制给$_SESSION['wx_ip_list']            
-            $token = wxGetAccessToken($wxIid);
+            $token = wxGetAccessToken($appID);
             $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$token;
             $res = httpGet($url);
             $_SESSION['wx_ip_list'] =json_decode($res,true);
@@ -392,8 +463,8 @@
         return $_SESSION['wx_ip_list'];
     }
     //发送微信模板消息
-    function wxSendTemplateMsg($wxId,$touser,$template_id,$call_url,$data){        
-        $token    =  wxGetAccessToken($wxId);   //1.获取Token
+    function wxSendTemplateMsg($appID,$touser,$template_id,$call_url,$data){        
+        $token    =  wxGetAccessToken($appID);   //1.获取Token
         $url      = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$token;               
         $Meg      = array('touser'=>$touser,'template_id'=>$template_id,'url'=>$call_url,'data'=>$data);   //2.组装数组      
         $postJson = json_encode($Meg);      //将数组转化成json
@@ -415,8 +486,8 @@
      }
     
     //根据funcid获取测试数据
-    function getTest($funcid){
-        $where['funcid']=$funcid;
+    function getTest($funcid){        
+        $where=array('funcid'=>$funcid);
         $arr=D('tp_exefunc')->where($where)->order('updateTime desc')->limit(15)->select();
         $str.='<ul class="list-group">';
                     foreach ($arr as $ar){
@@ -630,8 +701,8 @@
     }
 
     //根据secneid获取场景功能信息
-    function getSceneFunc($secneid){
-        $where['sceneid']=$secneid;
+    function getSceneFunc($secneid){      
+        $where=array('sceneid'=>$secneid);
         $arr=M('tp_scenefunc')->where($where)->order('sn,id')->select();
         foreach ($arr as $ar){
             $str.='<li class="list-group-item">';
@@ -692,8 +763,8 @@
     }
     
     //获取真实姓名
-    function getRealname($username){
-        $where['account']=$username;
+    function getRealname($username){       
+        $where=array('account'=>$username);
         $data=M('user')->where($where)->find();
         return $data['realname'];  
     }

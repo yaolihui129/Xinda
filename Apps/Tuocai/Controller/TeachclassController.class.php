@@ -1,27 +1,10 @@
 <?php
 namespace Tuocai\Controller;
-use Think\Controller;
-class TeachclassController extends Controller {
-    public function _empty(){
-
-        $this->display('Tuocai/Index');
-    }
-    
-    //课程列表（根据课程选老师）
-    public function index(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        //获取分类
-        $where['prodid']=2;
-        $where['state']='正常';
-        $m=D('tc_cate');
-        $arr=$m->where($where)->order('sn')->select();
+class TeachclassController extends WebInfoController {
+    public function index(){//课程列表（根据课程选老师）
+        getWebInfo(C('PRODUCT'));//获取网页信息   
+        $where=array('prodid'=>C('PRODUCT'),'state'=>'正常');
+        $arr=D('tc_cate')->where($where)->order('sn')->select();
         $this->assign('arr',$arr);
     
         //获取老师数据 
@@ -31,12 +14,9 @@ class TeachclassController extends Controller {
         $arr=$m->find($teacherid);
         $this->assign('tpid',$arr['tpid']);
         $_SESSION['type']=$arr['type'];
-        /* 实例化模型*/
-        $m=D('tc_cate');
         $where=array("catname"=>$arr['coursetype']);
-        $arr=$m->where($where)->select();
-        $pid=$arr[0]['id'];
-//     dump($arr);
+        $arr=M('tc_cate')->where($where)->find();
+        $pid=$arr['id'];
         //获取分类下的课程
         $m=D('tc_prodservice');
         $map['state']='发布';
@@ -94,14 +74,7 @@ class TeachclassController extends Controller {
     
     
     public function mycourse(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        getWebInfo(C('PRODUCT'));//获取网页信息   
     
         /* 接收参数*/
         $where['tpid'] =  $_SESSION['userid'];
@@ -144,12 +117,8 @@ class TeachclassController extends Controller {
     
     
     public function classlist(){
-        /* 实例化模型*/
-        $m=D('tc_teachclass');
-        $arr=$m->order('utime desc')->select();
-//         dump($arr);
-        $this->assign('arr',$arr);
-        
+        $arr=D('tc_teachclass')->order('utime desc')->select();
+        $this->assign('arr',$arr);      
         $this->display();
     }
     

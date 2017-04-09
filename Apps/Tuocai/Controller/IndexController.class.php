@@ -1,17 +1,8 @@
 <?php
 namespace Tuocai\Controller;
-use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends WebInfoController {
     public function index(){
-        
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,url,qz,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();  
-        
+        getWebInfo(C('PRODUCT'));//获取网页信息
         $m=D('tp_ad');
         $where['prodid']=2;
         $pic=$m->where($where)->order('utime desc')->select();
@@ -34,10 +25,5 @@ class IndexController extends Controller {
         $this->display();
     }
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
        
 }

@@ -1,18 +1,9 @@
 <?php
 namespace Tuocai\Controller;
-use Think\Controller;
-class PlanController extends Controller {
+class PlanController extends WebInfoController {
     
     public function index(){
-        /* 实例化模型*/
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(2);
-        $_SESSION['Tuocai']=$data;
-        $_SESSION['Tuocai']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-        
+        getWebInfo(C('PRODUCT'));//获取网页信息           
         $p=date("Y-m-d",time());
         $this->assign("p",$p);
         /* 实例化模型*/
@@ -53,7 +44,6 @@ class PlanController extends Controller {
         $map['riqi']=array('egt',$_POST['riqi']);
         $arr=$m->where($map)->order('riqi,sn')->limit(35)->select();
         $this->assign('arr',$arr);
-//         dump($arr);
         $where=$_POST['riqi'];
         $this->assign('p',$where);   
          

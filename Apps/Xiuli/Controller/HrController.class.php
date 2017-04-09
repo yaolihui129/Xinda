@@ -1,18 +1,9 @@
 <?php
 namespace Xiuli\Controller;
-use Think\Controller;
-class HrController extends Controller {
-    
+class HrController extends WebInfoController {    
     public function index(){
-    
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        getWebInfo(C('PRODUCT'));//获取网页信息       
+        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';       
     
         $m=D('tp_hr');
         $where['prodid']=1;
@@ -38,14 +29,7 @@ class HrController extends Controller {
     
     public function tuijhr(){
     
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        getWebInfo(C('PRODUCT'));//获取网页信息 
     
         $m=D('tp_hr');
         $where['prodid']=1;
@@ -58,14 +42,7 @@ class HrController extends Controller {
     }
     
     public  function baom(){
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        getWebInfo(C('PRODUCT'));//获取网页信息 
          
          
         $m=D('tp_hr');
@@ -77,14 +54,7 @@ class HrController extends Controller {
     }
     
     public function tuij(){
-        $m=D('product');
-        $data=$m->field('web,adress,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        getWebInfo(C('PRODUCT'));//获取网页信息 
     
         $m=D('tp_hr');
         $arr=$m->find($_GET['id']);
@@ -123,10 +93,5 @@ class HrController extends Controller {
     
     }
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
     
 }

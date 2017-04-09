@@ -1,17 +1,8 @@
 <?php
 namespace Xiuli\Controller;
-use Think\Controller;
-class ServicelistController extends Controller {
+class ServicelistController extends WebInfoController {
     public function index(){
-
-        $m=D('product');
-        $data=$m->field('web,adress,keywords,desc,phone,tel,qq,qz,url,record,path,img')->find(1);
-        $_SESSION['Xiuli']=$data;
-        $_SESSION['Xiuli']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
-                            
+        getWebInfo(C('PRODUCT'));//获取网页信息                             
         $where['prodid']=1;
         $where['state']='正常';
         $m=D('xl_cate');
@@ -38,9 +29,5 @@ class ServicelistController extends Controller {
         $this->display();
     }   
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
+   
 }

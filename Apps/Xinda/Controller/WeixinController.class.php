@@ -22,7 +22,7 @@ class WeixinController extends WebInfoController {
     
     public function reponseMsg(){   //接收事件推送并回复    
         $postArr  = $GLOBALS['HTTP_RAW_POST_DATA'];                                  //1.获取到微信推送过来的post数据（xml格式）       
-        $postObj  = simplexml_load_string( $postArr );                              //2.处理消息类型，并设置回复类型和内容
+        $postObj  = simplexml_load_string( $postArr );                               //2.处理消息类型，并设置回复类型和内容
         $toUser   = $postObj->FromUserName;
         $fromUser = $postObj->ToUserName;               
         if(strtolower($postObj->MsgType) == 'event'){                                //判断该数据包是否是订阅的事件推送          
@@ -133,18 +133,6 @@ class WeixinController extends WebInfoController {
             wxReplyNews($toUser,$fromUser,$arr);
         }        
         
-        if(strtolower($postObj->MsgType) == 'shortvideo'){//小视频消息回复
-            
-            $arr = array(
-                array(
-                    'title'=>'小视频上传成功',
-                    'description'=>"MediaId:".$postObj->MediaId,
-                    'picUrl'=>$postObj->ThumbMediaId,
-                    'url'=>'http://www.zhihuixinda.com',
-                ),
-            );
-            wxReplyNews($toUser,$fromUser,$arr); 
-        }
         
         
         if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复           
@@ -230,35 +218,30 @@ class WeixinController extends WebInfoController {
            ),           
        );
        
-       $res = wxMenuCreat($this->getWxid(), $postArr);      
+       $res = wxMenuCreat(C(WX_APPID), $postArr);      
        $this->ajaxReturn($res);     
    }
    
-   function info(){
-       $res=getWxinfo($this->getWxid());
-       dump($res);
-       dump($this->getWxid());
-   }
    function getMemu(){
-       $res=wxMenuGet($this->getWxid());
+       $res=wxMenuGet(C(WX_APPID));
        dump($res);      
    }
    //拉取用户信息
    function getUsers(){
-       $res = wxGetUsers($this->getWxid());
+       $res = wxGetUsers(C(WX_APPID));
        $this->ajaxReturn($res);
    }
    
 
    function qrCodeTime(){//getTimeQrCode($wxId,$scene_id,$expire=30)            
-       $url=getTimeQrCode($this->getWxid(),200,15); 
+       $url=getTimeQrCode(C(WX_APPID),200,15); 
        dump($url);
        echo "临时二维码";
        echo "<img src='".$url."'/>";      
    }
    
    function qrCodeForever(){//getForeverQrCode($wxId,$scene_id);       
-       $url=getForeverQrCode($this->getWxid(),300);            
+       $url=getForeverQrCode(C(WX_APPID),300);            
        echo "用久二维码";
        echo "<img src='".$url."'/>";  
    }
@@ -272,22 +255,21 @@ class WeixinController extends WebInfoController {
               'money'=>array('value'=>100,'color'=>"#173177"),
               'date'=>array('value'=>date('Y-m-d H:i:s')),'color'=>"#173177"       
             );
-       $res = wxSendTemplateMsg($this->getWxid(),$touser,$template_id,$call_url,$data);
+       $res = wxSendTemplateMsg(C(WX_APPID),$touser,$template_id,$call_url,$data);
        $this->ajaxReturn($res);      
    }
    
    //获取用户的openid
    function getBaseInfo(){
-       $data  = getWxinfo($this->getWxid());
-       $appid = $data['appid'];
+       $appid = C(WX_APPID);
        $redirect_uri = urlencode("http://www.zhihuixinda.com/index.php/Xinda/Weixin/getUserOpenid");
        $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
        header('Location:'.$url);
        
    }
    function getUserOpenid(){
-       $data      = getWxinfo($this->getWxid());
-       $appid     = $data['appid'];
+       $data      = getWxinfo(C(WX_APPID));
+       $appid     = C(WX_APPID);
        $appsecret = $data['appsecret'];
        $code = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
@@ -296,8 +278,7 @@ class WeixinController extends WebInfoController {
        dump($arr);
    }
    function getUserDetail(){      
-       $data         = getWxinfo($this->getWxid());
-       $appid        = $data['appid'];            
+       $appid        = C(WX_APPID);            
        $redirect_uri = urlencode("http://www.zhihuixinda.com/index.php/Xinda/Weixin/getUserInfo");
        $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
        header('Location:'.$url);
@@ -305,8 +286,8 @@ class WeixinController extends WebInfoController {
    }
    //获取用户的openid
    function getUserInfo(){
-       $data      = getWxinfo($this->getWxid());
-       $appid     = $data['appid'];
+       $data      = getWxinfo(C(WX_APPID));
+       $appid     = C(WX_APPID);
        $appsecret = $data['appsecret'];
        $code      = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
@@ -334,16 +315,15 @@ class WeixinController extends WebInfoController {
 //           'mpnews'=>array('media_id'=>''),
 //           'msgtype'=>'mpnews',
 //       );      
-     $res = wxSendMsgAll($this->getWxid(),$array);//生产环境群发$type='send'
+     $res = wxSendMsgAll(C(WX_APPID),$array);//生产环境群发$type='send'
      $this->ajaxReturn($res);
    }
    
-   public function jssdk(){      
-       $arr=getWxinfo($this->getWxid());
-       $this->assign('appid',$arr['appid']);       
+   public function jssdk(){             
+       $this->assign('appid',C(WX_APPID));       
        $timestamp=time();
        $nonceStr=getRandCode(16);//生成16位的随机数
-       $jsapi_ticket=wxGetJsApiTicket($this->getWxid());//获取全局票据
+       $jsapi_ticket=wxGetJsApiTicket(C(WX_APPID));//获取全局票据
        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
        $signature = "jsapi_ticket=".$jsapi_ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=".$url;

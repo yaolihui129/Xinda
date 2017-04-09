@@ -1,12 +1,12 @@
 <?php
 namespace Anshun\Controller;
 class IndexController extends WebInfoController {    
-    public function _empty(){    
-        $this->display('index');
-    }   
     public function index(){
-        WebInfoController::getWebInfo();  //获取页面信息                        
-        $where=array('prodid'=>$this->getProdId());
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
+        $where=array('prodid'=>C('PRODUCT'));
         $pic=M('tp_ad')->where($where)->order('utime desc')->select();
         $this->assign('pic',$pic);
         $map=array('istj'=>1);
