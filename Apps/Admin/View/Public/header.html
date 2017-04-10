@@ -1,45 +1,354 @@
+
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>网站后台</title>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <import type="css" file="css.admin" />
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>后台管理系统</title> 
+	  <meta name="keywords" content="#" />
+	  <meta name="description" content="#" />
+	  <import type="css" file="css.mac.bootstrap" />
+	  <import type="css" file="css.mac.font-awesome" />
+	  <import type="css" file="css.mac.jquery-ui" />
+	  <import type="css" file="css.mac.fullcalendar" /> 
+	  <import type="css" file="css.mac.prettyPhoto" />
+	  <import type="css" file="css.mac.rateit" />  
+	  <import type="css" file="css.mac.bootstrap-datetimepicker" />
+	  <import type="css" file="css.mac.jquery-cleditor" />
+	  <import type="css" file="css.mac.uniform.default" />
+	  <import type="css" file="css.mac.bootstrap-switch" />
+	  <import type="css" file="css.mac.style" />
+	  <import type="css" file="css.mac.widgets" />
+	  <style type="text/css">body{background-color: #fff;}</style>  
+	  <link rel="shortcut icon" href="img/favicon/favicon.png">
+	</head>
+	<body>
+	
+	<div class="navbar navbar-fixed-top bs-docs-nav" role="banner">	  
+	    <div class="conjtainer">	      
+	      <div class="navbar-header">
+			  <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+				<span>菜单</span>
+			  </button>			  
+			  <a href="index.html" class="navbar-brand hidden-lg">首页</a>
+			</div>
+	      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">         	
+	        <ul class="nav navbar-nav">  	         
+	          <li class="dropdown dropdown-big">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-success"><i class="icon-cloud-upload"></i></span> 上传到云服务器</a>	           
+	            <ul class="dropdown-menu">
+	              <li>	               
+	                <p>图片上传进度</p>	                
+	                <div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-info"  role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+							<span class="sr-only">完成40%</span>
+						</div>
+				    </div><hr />		               
+	                <p>视频上传进度</p>	                
+	                <div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+							<span class="sr-only">完成80%</span>
+						</div>
+				    </div><hr />             
+	                <div class="drop-foot">
+	                  <a href="#">查看所有</a>
+	                </div>	
+	              </li>
+	            </ul>
+	          </li>
+	          <li class="dropdown dropdown-big">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-danger"><i class="icon-refresh"></i></span> 同步到服务器</a>
+	            <ul class="dropdown-menu">
+	              <li>	               
+	                <p><span class="label label-info"><i class="icon-cloud"></i></span>同步会员到服务器</p><hr />
+	                <p><span class="label label-warning"><i class="icon-cloud"></i></span>同步书签到云端</p><hr />
+	                <div class="drop-foot"><a href="#">查看所有</a></div>	
+	              </li>
+	            </ul>
+	          </li>	
+	        </ul>
+	        <form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+			</form>
+	        <!-- Links -->
+	        <ul class="nav navbar-nav pull-right">
+	          <li class="dropdown pull-right">            
+	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	              <i class="icon-user"></i> 管理员 <b class="caret"></b>              
+	            </a>
+	            <ul class="dropdown-menu">
+	              <li><a href="#"><i class="icon-user"></i> 资料</a></li>
+	              <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
+	              <li><a href="__APP__/Admin/Login/logout"><i class="icon-off"></i> 退出</a></li>
+	            </ul>
+	          </li>	          
+	        </ul>
+	      </nav>
+	
+	    </div>
+	  </div>
+	  <header>
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-md-4">
+	          <!-- Logo. -->
+	          <div class="logo">
+	            <h1><a href="#">智慧信达<span class="bold"></span></a></h1>
+	            <p class="meta">后台管理系统</p>
+	          </div>	          
+	        </div>
+	
+	        <!-- Button section -->
+	        <div class="col-md-4">
+	
+	          <!-- Buttons -->
+	          <ul class="nav nav-pills">
+	
+	            <!-- Comment button with number of latest comments count -->
+	            <li class="dropdown dropdown-big">
+	              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+	                <i class="icon-comments"></i> 聊天 <span   class="label label-info">6</span> 
+	              </a>
+	
+	                <ul class="dropdown-menu">
+	                  <li>
+	                    <!-- Heading - h5 -->
+	                    <h5><i class="icon-comments"></i> 聊天</h5>
+	                    <!-- Use hr tag to add border -->
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <!-- List item heading h6 -->
+	                    <h6><a href="#">你好 :)</a> <span class="label label-warning pull-right">10:42</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">你怎么样?</a> <span class="label label-warning pull-right">20:42</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">你在干撒呢?</a> <span class="label label-warning pull-right">14:42</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>                  
+	                  <li>
+	                    <div class="drop-foot">
+	                      <a href="#">查看所有</a>
+	                    </div>
+	                  </li>                                    
+	                </ul>
+	            </li>
+	
+	            <!-- Message button with number of latest messages count-->
+	            <li class="dropdown dropdown-big">
+	              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+	                <i class="icon-envelope-alt"></i> 收件箱 <span class="label label-primary">6</span> 
+	              </a>
+	
+	                <ul class="dropdown-menu">
+	                  <li>
+	                    <!-- Heading - h5 -->
+	                    <h5><i class="icon-envelope-alt"></i> 消息</h5>
+	                    <!-- Use hr tag to add border -->
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <!-- List item heading h6 -->
+	                    <h6><a href="#">你好啊?</a></h6>
+	                    <!-- List item para -->
+	                    <p>最近咋样啊...</p>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">今天很好啊?</a></h6>
+	                    <p>相当好...</p>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <div class="drop-foot">
+	                      <a href="#">查看所有</a>
+	                    </div>
+	                  </li>                                    
+	                </ul>
+	            </li>		           
+	            <li class="dropdown dropdown-big">
+	              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+	                <i class="icon-user"></i> 用户 <span   class="label label-success">6</span> 
+	              </a>
+	
+	                <ul class="dropdown-menu">
+	                  <li>
+	                    <h5><i class="icon-user"></i> 用户</h5>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">Ravi Kumar</a> <span class="label label-warning pull-right">免费</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">Balaji</a> <span class="label label-important pull-right">高级</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>
+	                  <li>
+	                    <h6><a href="#">Kumarasamy</a> <span class="label label-warning pull-right">免费</span></h6>
+	                    <div class="clearfix"></div>
+	                    <hr />
+	                  </li>                  
+	                  <li>
+	                    <div class="drop-foot">
+	                      <a href="#">查看所有</a>
+	                    </div>
+	                  </li>                                    
+	                </ul>
+	            </li> 
+	
+	          </ul>
+	
+	        </div>
+	
+	        <!-- Data section -->
+	
+	        <div class="col-md-4">
+	          <div class="header-data">
+	
+	            <!-- Traffic data -->
+	            <div class="hdata">
+	              <div class="mcol-left">
+	                <!-- Icon with red background -->
+	                <i class="icon-signal bred"></i> 
+	              </div>
+	              <div class="mcol-right">
+	                <!-- Number of visitors -->
+	                <p><a href="#">7000</a> <em>访问</em></p>
+	              </div>
+	              <div class="clearfix"></div>
+	            </div>
+	
+	            <!-- Members data -->
+	            <div class="hdata">
+	              <div class="mcol-left">
+	                <!-- Icon with blue background -->
+	                <i class="icon-user bblue"></i> 
+	              </div>
+	              <div class="mcol-right">
+	                <!-- Number of visitors -->
+	                <p><a href="#">3000</a> <em>用户</em></p>
+	              </div>
+	              <div class="clearfix"></div>
+	            </div>
+	
+	            <!-- revenue data -->
+	            <div class="hdata">
+	              <div class="mcol-left">
+	                <!-- Icon with green background -->
+	                <i class="icon-money bgreen"></i> 
+	              </div>
+	              <div class="mcol-right">
+	                <!-- Number of visitors -->
+	                <p><a href="#">5000</a><em>订单</em></p>
+	              </div>
+	              <div class="clearfix"></div>
+	            </div>                        
+	
+	          </div>
+	        </div>
+	
+	      </div>
+	    </div>
+	  </header>
+	
+	<!-- Header ends -->
+	
+	<!-- Main content starts -->
+	
+	<div class="content">
+	
+	  	<!-- Sidebar -->
+	    <div class="sidebar">
+	        <div class="sidebar-dropdown"><a href="#">导航</a></div>
+	
+	        <!--- Sidebar navigation -->
+	        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
+	        <ul id="nav">
+	          <!-- Main menu with font awesome icon -->
+	          <li><a href="index.html" class="open"><i class="icon-home"></i> 首页</a>
+	            <!-- Sub menu markup 
+	            <ul>
+	              <li><a href="#">Submenu #1</a></li>
+	              <li><a href="#">Submenu #2</a></li>
+	              <li><a href="#">Submenu #3</a></li>
+	            </ul>-->
+	          </li>
+	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 后台入口 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li ><a target="_blank" href="http://www.xiuliguanggao.com/zentao/www">需求管理</a></li>
+					  <volist name='mume' id='st' empty="无后台权限">
+					  	<li ><a target="_blank" href="__APP__/Admin/Setting/index/id/<{$st.prodid}>"><{$st.prodid|getProd=###}></a></li>			  				  
+					  </volist>	  
+	            </ul>
+	          </li> 
+	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 插件页面  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="widgets1.html">插件页面 #1</a></li>
+	              <li><a href="widgets2.html">插件页面 #2</a></li>
+	              <li><a href="widgets3.html">插件页面 #3</a></li>
+	            </ul>
+	          </li>  
+	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 页面模块1 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="post.html">表单Post</a></li>
+	              <li><a href="login.html">登录页</a></li>
+	              <li><a href="register.html">注册页面</a></li>
+	              <li><a href="support.html">帮助页</a></li>
+	              <li><a href="invoice.html">购物清单</a></li>
+	              <li><a href="profile.html">个人资料</a></li>
+	              <li><a href="gallery.html">相册页面</a></li>
+	            </ul>
+	          </li> 
+	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 页面模块2  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="media.html">媒体</a></li>
+	              <li><a href="statement.html">描述</a></li>
+	              <li><a href="error.html">错误</a></li>
+	              <li><a href="error-log.html">错误日志</a></li>
+	              <li><a href="calendar.html">日历</a></li>
+	              <li><a href="grid.html">网格</a></li>
+	            </ul>
+	          </li>                             
+	          <li><a href="charts.html"><i class="icon-bar-chart"></i>图表</a></li> 
+	          <li><a href="tables.html"><i class="icon-table"></i>表格</a></li>
+	          <li><a href="forms.html"><i class="icon-tasks"></i>表单</a></li>
+	          <li><a href="ui.html"><i class="icon-magic"></i>UI图标</a></li>
+	          <li><a href="calendar.html"><i class="icon-calendar"></i>日历</a></li>
+	        </ul>
+	    </div>
+	
+	    <!-- Sidebar ends -->
+	<div class="mainbar">
+      
+	    <!-- Page heading -->
+	    <div class="page-head">
+	      <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
 
-     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="__APP__/Admin/Index/test">网站后台</a>
+        <!-- Breadcrumb -->
+        <div class="bread-crumb pull-right">
+          <a href="index.html"><i class="icon-home"></i> 首页</a> 
+          <!-- Divider -->
+          <span class="divider">/</span> 
+          <a href="#" class="bread-current">控制台</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-           <ul class="nav navbar-nav navbar-right">
-			 <li>
-				 <a href="__APP__/Admin/User/setpass">
-				 	<span class="glyphicon glyphicon-user"> <{$_SESSION.realname}></span>
-				 </a>
-			 </li>			 
-			 <li>
-				 <a href="__APP__/Admin/Login/logout" onclick="return confirm('你确定要退出系统吗？')" >
-				 	<span class="glyphicon glyphicon-log-out"> 退出</span>
-				 </a>		 
-			 </li>
-		  </ul>
-        </div>
-      </div>
-    </nav>
 
-    <div class="container">
+        <div class="clearfix"></div>
+
+	    </div>
+	    <!-- Page heading ends -->
+
+	
+	

@@ -1,17 +1,181 @@
 
-      	<div class="foot navbar-bottom list-inline text-center">
-         	Copyright <span class="num">&copy;</span> 2016-2017
-     		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
-     		<span>IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
-     		<p>咨询热线：<{$_SESSION['phone']}><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['qq']}>&amp;site=qq&amp;menu=yes" target="_blank">
-				<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['qq']}>:41"></a>　</p>
-     		</div>
-    	</div>
-    </div>
 
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
- </body>
+<!-- Footer starts -->
+	<footer>
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">	            
+	            <p class="copy">Copyright &copy; 2012 | <a href="#">智慧信达</a> </p>
+	      </div>
+	    </div>
+	  </div>
+	</footer> 	
+	
+	<!-- Footer ends -->
+	
+	<!-- Scroll to top -->
+	<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
+	
+	<!-- JS -->
+	<import type="js" file="js.mac.jquery" /><!-- jQuery -->
+	<import type="js" file="js.mac.bootstrap" /><!-- Bootstrap -->
+	<import type="js" file="js.mac.jquery-ui-custom" /></script> <!-- jQuery UI -->
+	<import type="js" file="js.mac.fullcalendar-min" /></script> <!-- Full Google Calendar - Calendar -->
+ 	<import type="js" file="js.mac.jquery-rateit-min" /><!-- RateIt - Star rating -->
+	<import type="js" file="js.mac.jquery-prettyPhoto" /><!-- prettyPhoto -->
+	
+	<!-- jQuery Flot -->
+	<import type="js" file="js.mac.excanvas-min" />
+	<import type="js" file="js.mac.jquery-flot" />
+	<import type="js" file="js.mac.jquery-flot-resize" />
+	<import type="js" file="js.mac.jquery-flot-pie" />
+	<import type="js" file="js.mac.jquery-flot-stack" />
+	
+	<!-- jQuery Notification - Noty -->
+	<import type="js" file="js.mac.jquery-noty" /><!-- jQuery Notify -->
+	<import type="js" file="js.mac.themes.default" /><!-- jQuery Notify -->
+	<import type="js" file="js.mac.layouts.bottom" /><!-- jQuery Notify -->
+	<import type="js" file="js.mac.layouts.topRight" /> <!-- jQuery Notify -->
+	<import type="js" file="js.mac.layouts.top" /><!-- jQuery Notify -->
+	<!-- jQuery Notification ends -->	
+	<import type="js" file="js.mac.sparklines" /> <!-- Sparklines -->
+	<import type="js" file="js.mac.jquery-cleditor-min" /> <!-- CLEditor -->
+	<import type="js" file="js.mac.bootstrap-datetimepicker-min" /><!-- Date picker -->
+	<import type="js" file="js.mac.jquery-uniform-min" /><!-- jQuery Uniform -->
+	<import type="js" file="js.mac.bootstrap-switch-min" /> <!-- Bootstrap Toggle -->
+	<import type="js" file="js.mac.filter" /><!-- Filter for support page -->
+	<import type="js" file="js.mac.custom" /><!-- Custom codes -->
+	<import type="js" file="js.mac.charts" /><!-- Charts & Graphs -->
+	
+	<!-- Script for this page -->
+	<script type="text/javascript">
+	$(function () {
+	
+	    /* Bar Chart starts */
+	
+	    var d1 = [];
+	    for (var i = 0; i <= 20; i += 1)
+	        d1.push([i, parseInt(Math.random() * 30)]);
+	
+	    var d2 = [];
+	    for (var i = 0; i <= 20; i += 1)
+	        d2.push([i, parseInt(Math.random() * 30)]);
+	
+	
+	    var stack = 0, bars = true, lines = false, steps = false;
+	    
+	    function plotWithOptions() {
+	        $.plot($("#bar-chart"), [ d1, d2 ], {
+	            series: {
+	                stack: stack,
+	                lines: { show: lines, fill: true, steps: steps },
+	                bars: { show: bars, barWidth: 0.8 }
+	            },
+	            grid: {
+	                borderWidth: 0, hoverable: true, color: "#777"
+	            },
+	            colors: ["#ff6c24", "#ff2424"],
+	            bars: {
+	                  show: true,
+	                  lineWidth: 0,
+	                  fill: true,
+	                  fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.8 } ] }
+	            }
+	        });
+	    }
+	
+	    plotWithOptions();
+	    
+	    $(".stackControls input").click(function (e) {
+	        e.preventDefault();
+	        stack = $(this).val() == "With stacking" ? true : null;
+	        plotWithOptions();
+	    });
+	    $(".graphControls input").click(function (e) {
+	        e.preventDefault();
+	        bars = $(this).val().indexOf("Bars") != -1;
+	        lines = $(this).val().indexOf("Lines") != -1;
+	        steps = $(this).val().indexOf("steps") != -1;
+	        plotWithOptions();
+	    });
+	
+	    /* Bar chart ends */
+	
+	});
+	
+	
+	/* Curve chart starts */
+	
+	$(function () {
+	    var sin = [], cos = [];
+	    for (var i = 0; i < 14; i += 0.5) {
+	        sin.push([i, Math.sin(i)]);
+	        cos.push([i, Math.cos(i)]);
+	    }
+	
+	    var plot = $.plot($("#curve-chart"),
+	           [ { data: sin, label: "sin(x)"}, { data: cos, label: "cos(x)" } ], {
+	               series: {
+	                   lines: { show: true, fill: true},
+	                   points: { show: true }
+	               },
+	               grid: { hoverable: true, clickable: true, borderWidth:0 },
+	               yaxis: { min: -1.2, max: 1.2 },
+	               colors: ["#1eafed", "#1eafed"]
+	             });
+	
+	    function showTooltip(x, y, contents) {
+	        $('<div id="tooltip">' + contents + '</div>').css( {
+	            position: 'absolute',
+	            display: 'none',
+	            top: y + 5,
+	            left: x + 5,
+	            border: '1px solid #000',
+	            padding: '2px 8px',
+	            color: '#ccc',
+	            'background-color': '#000',
+	            opacity: 0.9
+	        }).appendTo("body").fadeIn(200);
+	    }
+	
+	    var previousPoint = null;
+	    $("#curve-chart").bind("plothover", function (event, pos, item) {
+	        $("#x").text(pos.x.toFixed(2));
+	        $("#y").text(pos.y.toFixed(2));
+	
+	        if ($("#enableTooltip:checked").length > 0) {
+	            if (item) {
+	                if (previousPoint != item.dataIndex) {
+	                    previousPoint = item.dataIndex;
+	                    
+	                    $("#tooltip").remove();
+	                    var x = item.datapoint[0].toFixed(2),
+	                        y = item.datapoint[1].toFixed(2);
+	                    
+	                    showTooltip(item.pageX, item.pageY, 
+	                                item.series.label + " of " + x + " = " + y);
+	                }
+	            }
+	            else {
+	                $("#tooltip").remove();
+	                previousPoint = null;            
+	            }
+	        }
+	    }); 
+	
+	    $("#curve-chart").bind("plotclick", function (event, pos, item) {
+	        if (item) {
+	            $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+	            plot.highlight(item.series, item.datapoint);
+	        }
+	    });
+	
+	});
+	
+	/* Curve chart ends */
+	</script>
+	
+	</body>
 </html>
 
 

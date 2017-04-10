@@ -1,6 +1,5 @@
 <?php
 namespace Admin\Controller;
-
 class IndexController extends CommonController {
     public function index(){
         /* 接收参数*/
@@ -65,14 +64,7 @@ class IndexController extends CommonController {
     
     public function test(){
 
-        $m=D('tp_userprod');
-        $where['userid']=$_SESSION['id'];
-        $data=$m->where($where)->select();
-        $this->assign('data',$data);
-
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+        $this->getMume();//获取菜单权限
         
         
         $this->display();
