@@ -74,6 +74,7 @@
 				</div>
 			</form>
 	        <!-- Links -->
+	        
 	        <ul class="nav navbar-nav pull-right">
 	          <li class="dropdown pull-right">            
 	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -83,6 +84,18 @@
 	              <li><a href="#"><i class="icon-user"></i> 资料</a></li>
 	              <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
 	              <li><a href="__APP__/Admin/Login/logout"><i class="icon-off"></i> 退出</a></li>
+	            </ul>
+	          </li>	          
+	        </ul>
+	        <ul class="nav navbar-nav pull-right">
+	          <li class="dropdown pull-right">            
+	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	              <i class="icon-user"></i> <{$_SESSION['prodid']|getProduct=###}> <b class="caret"></b>              
+	            </a>
+	            <ul class="dropdown-menu">
+	              	<volist name='mume' id='st'>
+					  	<li ><a  href="__APP__/Admin/WebInfo/changeProd/prodid/<{$st.prodid}>"><{$st.prodid|getProd=###}></a></li>			  				  
+					</volist>
 	            </ul>
 	          </li>	          
 	        </ul>
@@ -96,7 +109,7 @@
 	        <div class="col-md-4">
 	          <!-- Logo. -->
 	          <div class="logo">
-	            <h1><a href="#">智慧信达<span class="bold"></span></a></h1>
+	            <h1><a href="#"><{$_SESSION['prodid']|getProduct=###}><span class="bold"></span></a></h1>
 	            <p class="meta">后台管理系统</p>
 	          </div>	          
 	        </div>
@@ -182,10 +195,7 @@
 	              </a>
 	
 	                <ul class="dropdown-menu">
-	                  <li>
-	                    <h5><i class="icon-user"></i> 用户</h5>
-	                    <hr />
-	                  </li>
+	                  <li><h5><i class="icon-user"></i> 用户</h5><hr /></li>
 	                  <li>
 	                    <h6><a href="#">Ravi Kumar</a> <span class="label label-warning pull-right">免费</span></h6>
 	                    <div class="clearfix"></div>
@@ -203,7 +213,7 @@
 	                  </li>                  
 	                  <li>
 	                    <div class="drop-foot">
-	                      <a href="#">查看所有</a>
+	                      <a href="__APP__/Admin/User">查看所有</a>
 	                    </div>
 	                  </li>                                    
 	                </ul>
@@ -278,22 +288,21 @@
 	        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
 	        <ul id="nav">
 	          <!-- Main menu with font awesome icon -->
-	          <li><a href="index.html" class="open"><i class="icon-home"></i> 首页</a>
-	            <!-- Sub menu markup 
-	            <ul>
-	              <li><a href="#">Submenu #1</a></li>
-	              <li><a href="#">Submenu #2</a></li>
-	              <li><a href="#">Submenu #3</a></li>
-	            </ul>-->
+	          <li><a href="index.html" class="open"><i class="icon-home"></i> 首页</a>	            
 	          </li>
 	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 后台入口 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li ><a target="_blank" href="http://www.xiuliguanggao.com/zentao/www">需求管理</a></li>
-					  <volist name='mume' id='st' empty="无后台权限">
-					  	<li ><a target="_blank" href="__APP__/Admin/Setting/index/id/<{$st.prodid}>"><{$st.prodid|getProd=###}></a></li>			  				  
-					  </volist>	  
+					  	  
 	            </ul>
-	          </li> 
+	          </li>
+	           <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 商品服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="__APP__/Admin/Cate/index/prodid/<{$st.prodid}>">分类管理</a></li>
+	              <li><a href="__APP__/Admin/Prodservice/index/prodid/<{$st.prodid}>">商品管理</a></li>
+	              
+	            </ul>
+	          </li>  
 	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 插件页面  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="widgets1.html">插件页面 #1</a></li>
@@ -333,22 +342,7 @@
 	    <!-- Sidebar ends -->
 	<div class="mainbar">
       
-	    <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
-
-        <!-- Breadcrumb -->
-        <div class="bread-crumb pull-right">
-          <a href="index.html"><i class="icon-home"></i> 首页</a> 
-          <!-- Divider -->
-          <span class="divider">/</span> 
-          <a href="#" class="bread-current">控制台</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-	    </div>
-	    <!-- Page heading ends -->
+	    
 
 	
 	

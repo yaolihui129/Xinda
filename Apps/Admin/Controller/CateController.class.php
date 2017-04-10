@@ -3,7 +3,6 @@ namespace Admin\Controller;
 class CateController extends CommonController {
     
     public function index(){
-        
         $where['prodid']=$_SESSION['prodid'];
         $where['pid']=!empty($_GET['pid']) ? $_GET['pid'] : 0;
         $m=D($_SESSION['db'].'cate');

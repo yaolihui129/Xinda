@@ -2,6 +2,7 @@
 namespace Admin\Controller;
 class IndexController extends CommonController {
     public function index(){
+        
         /* 接收参数*/
         $prodid=!empty($_GET['id']) ? $_GET['id'] : $_SESSION['prodid'];
        
@@ -64,7 +65,7 @@ class IndexController extends CommonController {
     
     public function test(){
 
-        $this->getMume();//获取菜单权限
+        
         
         
         $this->display();
