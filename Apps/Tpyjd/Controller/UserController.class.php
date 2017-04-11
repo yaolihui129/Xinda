@@ -6,5 +6,20 @@ class UserController extends WebInfoController {
         $this->display();
     }
     
+    public function add(){
+    
+        $this->display();
+    }
+    
+    public function mod(){
+    
+        $this->display();
+    }
+    
+    public function del(){
+    
+        
+    }
+    
        
 }
