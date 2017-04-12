@@ -1,0 +1,73 @@
+<layout name="layout" />     
+<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 class="pull-left"><i class="icon-tasks"></i> 省份-修改</h2>
+						
+	        <!-- Breadcrumb -->
+	        <div class="bread-crumb pull-right">
+	          <a href="index.html"><i class="icon-home"></i> 首页</a>
+	          <span class="divider">/</span> 
+	          <a href="__APP__/Tpyjd/Country" class="bread-current"> 国家</a> 
+	          <span class="divider">/</span> 
+	          <a href="__URL__" class="bread-current"> 省份</a>
+	          <span class="divider">/</span>  修改
+	        </div>
+	
+	        <div class="clearfix"></div>
+
+	    </div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                              
+                         <input type="hidden" name="ProvinceId" value="<{$data.provinceid}>" />                        
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">ProvinceId</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" value="<{$data.provinceid}>" readonly>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">ProvinceName</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='ProvinceName' value="<{$data.provincename}>" placeholder="ProvinceName">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">QuickCode</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='QuickCode' value="<{$data.quickcode}>" placeholder="QuickCode">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">CountryId</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control"  value="<{$data.countryid}>" readonly>
+                             </div>
+                         </div>
+                         
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Description</label>
+                             <div class="col-lg-8"><textarea class="cleditor" name="Description"><{$data.description}></textarea></div>
+                         </div> <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-9">
+                                 <button type="submit" class="btn btn-primary">提交</button>                       
+                             </div>
+                         </div>
+                     </form>
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->

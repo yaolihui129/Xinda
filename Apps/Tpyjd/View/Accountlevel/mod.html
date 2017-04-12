@@ -1,0 +1,99 @@
+<layout name="layout" />     
+<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 class="pull-left"><i class="icon-tasks"></i> 客户等级-修改</h2>
+						
+	        <!-- Breadcrumb -->
+	        <div class="bread-crumb pull-right">
+	          <a href="index.html"><i class="icon-home"></i> 首页</a> 
+	          <!-- Divider -->
+	          <span class="divider">/</span> 
+	          <a href="__URL__" class="bread-current">客户等级</a>
+	          <span class="divider">/</span> 修改
+	        </div>
+	
+	        <div class="clearfix"></div>
+
+	    </div>
+<!-- Page heading ends -->
+
+
+<!-- Matter -->
+
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                              
+                        <input type="hidden" name="accountLevelId" value="<{$data.accountlevelid}>" />
+                        <div class="form-group">
+                             <label class="col-lg-4 control-label">accountLevelId</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" value="<{$data.accountlevelid}>" readonly>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">levelName</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='levelName' value="<{$data.levelname}>" placeholder="levelName">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">discountPercentage</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='discountPercentage' value="<{$data.discountpercentage}>" placeholder="discountPercentage">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">annualTotalTradeAmount</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='annualTotalTradeAmount' value="<{$data.annualtotaltradeamount}>" placeholder="annualTotalTradeAmount">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">onceUpToAmount</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='onceUpToAmount' value="<{$data.onceuptoamount}>" placeholder="onceUpToAmount">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">requiredPoints</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='requiredPoints' value="<{$data.requiredpoints}>" placeholder="requiredPoints">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">timeType</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='timeType' value="<{$data.timetype}>" placeholder="timeType">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">timeSet</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='timeSet' value="<{$data.timeset}>" placeholder="timeSet">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">yearlyDecreasePercentage</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='yearlyDecreasePercentage' value="<{$data.yearlydecreasepercentage}>" placeholder="yearlyDecreasePercentage">
+                             </div>
+                         </div>
+                          <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-9">
+                                 <button type="submit" class="btn btn-primary">提交</button>                       
+                             </div>
+                         </div>
+                     </form>
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->

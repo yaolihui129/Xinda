@@ -1,0 +1,110 @@
+<layout name="layout" />     
+<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 class="pull-left"><i class="icon-tasks"></i> 企业-新增</h2>
+						
+	        <!-- Breadcrumb -->
+	        <div class="bread-crumb pull-right">
+	          <a href="index.html"><i class="icon-home"></i> 首页</a> 
+	          <span class="divider">/</span> 
+	          <a href="__URL__" class="bread-current"> 企业</a>
+	          <span class="divider">/</span>  添加
+	        </div>
+	
+	        <div class="clearfix"></div>
+
+	    </div>
+<!-- Page heading ends -->
+
+
+<!-- Matter -->
+
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                              
+                         <input type="hidden" name="VersionNumber" value="1" />
+                         <input type="hidden" name="isDeleted" value="0" />
+                         <input type="hidden" name="IsDisabled" value="0" />
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">ParentBusinessUnitId</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='ParentBusinessUnitId' value="<{$ParentBusinessUnitId}>" placeholder="ParentBusinessUnitId " readonly>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Name</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='Name' placeholder="Name">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">UnitCode</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='UnitCode' placeholder="UnitCode">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">CityId</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='CityId' placeholder="CityId">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Address</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='Address' placeholder="Address">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Phone</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='Phone' placeholder="Phone">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Fax</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='Fax' placeholder="Fax">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">WebSiteUrl</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='WebSiteUrl' placeholder="WebSiteUrl">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">EmailAddress</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='EmailAddress' placeholder="EmailAddress">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">servicePhone</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='servicePhone' placeholder="servicePhone">
+                             </div>
+                         </div>
+                         
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">Description</label>
+                             <div class="col-lg-8"><textarea class="cleditor" name="Description"></textarea></div>
+                         </div> <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-9">
+                                 <button type="submit" class="btn btn-primary">提交</button>                       
+                             </div>
+                         </div>
+                     </form>
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->
