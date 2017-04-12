@@ -14,20 +14,14 @@ function getProd($id){
 
 //根据pid获取分类数
 function countCate($pid){
-    if($pid){
-        $m=M($_SESSION['db'].'cate');
-        $where['pid']=$pid;
-        $data=$m->where($where)->count();
-        return $data;      
-    }else{
-        return ;
-    }
-    
+    $where=array('pid'=>$pid);
+    $data=M('tp_cate')->where($where)->count();
+    return $data;        
 }
 
 function getCatname($cateid){
     if ($cateid){
-        $m=M($_SESSION['db'].'cate');
+        $m=M('tp_cate');
         $data=$m->find($cateid);
         $str=getCatname($data['pid'])."-".$data['catname'];
         return $str;
@@ -55,13 +49,6 @@ function getXState($state){
     }
     
 }
-
-
-//根据id获取产品数数
-function countProdService($cate){
-
-}
-
 
 //获取手机号
 function getPhone($id){

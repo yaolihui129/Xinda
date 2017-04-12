@@ -9,7 +9,8 @@ return array(
         '__UPLOAD__'=>__ROOT__.'/Upload/Tpyjd'
     ),
     
-    'DB_HOST'=>'192.168.21.10',
+//     'DB_HOST'=>'192.168.21.10',
+    'DB_HOST'=>'127.0.0.1',
     'DB_NAME'=>'tpyjd_crm',
     'DB_PREFIX'=>'tpyjd_',
 );
