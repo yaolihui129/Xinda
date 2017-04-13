@@ -558,11 +558,11 @@
     }  
     //状态选择控件,@param $name 控件name;@param $value 选中值
     function formSV($value="正常",$name="state",$type="state") {
-        $where=array("type"=>$type,"state"=>"正常");
-        $cats = M('dict')->where($where)->order('k')->select();
+        $where=array("type"=>$type,"state"=>1);
+        $cats = M('tp_dict')->where($where)->order('k')->select();
         $html = '<select name="'.$name.'" class="form-control">';
                 foreach($cats as $v) {
-                    $selected = ($v['v']==$value) ? "selected" : "";
+                    $selected = ($v['k']==$value) ? "selected" : "";
                     $html .= '<option '.$selected.' value="'.$v['k'].'">'.$v['v'].'</option>';
                 }
         $html .='<select>';

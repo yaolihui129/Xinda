@@ -7,95 +7,75 @@ class DictController extends CommonController{
     	 $m=M('tp_dict');
          $arr=$m->field('type',false)->group('type')->select();
          $this->assign('arr',$arr);
+//          dump($arr);
          $type= !empty($_GET['type']) ?$_GET['type']:"state";
+         $_SESSION['dictType']=$type;
          $this->assign('type',$type);
-         $where = array('type'=>$type);
-    	 $data=$m->field('dictid,k,v,type,state,moder,utime',false)->where($where)->order('k')->select();
+
+    	 $data=$m->field('dictid,k,v,type,state,moder,utime',false)
+    	 ->where(array('type'=>$type))->order('k')->select();
 	     $this->assign('data',$data);
 	     
 	     $this->display();
     }
 
     public function add(){
-        /* 接收参数*/
-        $where = array("type"=>$_GET['type']);
-
-        /* 实例化模型*/
-        $m=M('dict');
-        /* 查询数据*/
-        $arr=$m->field('id,k,v,type,state,moder,utime',false)->where($where)->order('k')->select();
-        $this->assign('data',$arr);
-        $count=$m->where($where)->count()+1;
-        $this->assign("c",$count);
-        $this -> assign("state", formselect("","state"));
-        $this->assign('w',$where);
+        $type= $_SESSION['dictType'];
+        $this->assign("type",$type);
+        $where = array("type"=>$type);
+        $count=M('tp_dict')->where($where)->count()+1;
+        $this->assign("count",$count);
+        $this -> assign("state", formSV("","state"));
 
         $this->display();
     }
 
-    public function insert(){
-        /* 实例化模型*/
-        $m=D('dict');
-        $_POST['adder']=$_SESSION['realname'];
-        $_POST['moder']=$_SESSION['realname'];
-        $_POST['createTime']=date("Y-m-d H:i:s",time());
+    public function insert(){       
+        $m=D('tp_dict');     /* 实例化模型*/
+        do {//如果该ID在库中存在，则重新获取
+            $id=getRandCode(40);
+            $arr=$m->find($id);
+        } while ($arr);
+        $_POST['dictId']=$id;                 
+        $_POST['moder']=$_SESSION['realname'];       
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
-           $this->success("添加成功");
+        if($m->add()){
+           $this->success("成功",U('index'));
         }else{
-            $this->error("添加失败");
+            $this->error("失败");
         }
 
     }
 
     public function mod(){
-         /* 接收参数*/        
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('dict');
-        $where = array("type"=>$_GET['type']);
-        $arr=$m->field('id,k,v,type,state',false)->where($where)->order('k')->select();
-        $dic=$m->find($id);
-
-        $this->assign('data',$arr);
-        $this->assign('dic',$dic);
-        $this -> assign("state", formselect($dic['state'],"state"));
-        $this->assign('w',$where);
+        
+        $data=M('tp_dict')->find($_GET['id']);
+        $this->assign('data',$data);
+        $this->assign("state", formSV($data['state'],"state"));
 
         $this->display();
     }
 
     public function update(){
-        /* 实例化模型*/
-        $db=D('dict');
+dump($_POST);
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
-            $this->success("修改成功！");
+        if (D('tp_dict')->save($_POST)){
+            $this->success("成功!",U('index'));
         }else{
-            $this->error("修改失败！");
+            $this->error("失败!");
         }
     }
 
 
     public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('dict');
-        $count =$m->delete($id);
+        $count =M('tp_dict')->delete($_GET['id']);
         if ($count>0) {
             $this->success('删除成功');
         }else{
             $this->error('删除失败');
         }
-    }
-    
-    public function _empty(){
-    
-        $this->display('index');
     }
 
 }

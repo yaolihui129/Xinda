@@ -21,7 +21,7 @@
 	  <import type="css" file="css.mac.style" />
 	  <import type="css" file="css.mac.widgets" />
 	  <style type="text/css">body{background-color: #fff;}</style>  
-	  <link rel="shortcut icon" href="img/favicon/favicon.png">
+	  <!--  <link rel="shortcut icon" href="img/favicon/favicon.png">-->
 	</head>
 	<body>
 	
@@ -34,46 +34,20 @@
 			  <a href="index.html" class="navbar-brand hidden-lg">首页</a>
 			</div>
 	      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">         	
-	        <ul class="nav navbar-nav">  	         
-	          <li class="dropdown dropdown-big">
-	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-success"><i class="icon-cloud-upload"></i></span> 上传到云服务器</a>	           
-	            <ul class="dropdown-menu">
-	              <li>	               
-	                <p>图片上传进度</p>	                
-	                <div class="progress progress-striped active">
-						<div class="progress-bar progress-bar-info"  role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-							<span class="sr-only">完成40%</span>
-						</div>
-				    </div><hr />		               
-	                <p>视频上传进度</p>	                
-	                <div class="progress progress-striped active">
-						<div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-							<span class="sr-only">完成80%</span>
-						</div>
-				    </div><hr />             
-	                <div class="drop-foot">
-	                  <a href="#">查看所有</a>
-	                </div>	
-	              </li>
-	            </ul>
-	          </li>
-	          <li class="dropdown dropdown-big">
-	            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-danger"><i class="icon-refresh"></i></span> 同步到服务器</a>
-	            <ul class="dropdown-menu">
-	              <li>	               
-	                <p><span class="label label-info"><i class="icon-cloud"></i></span>同步会员到服务器</p><hr />
-	                <p><span class="label label-warning"><i class="icon-cloud"></i></span>同步书签到云端</p><hr />
-	                <div class="drop-foot"><a href="#">查看所有</a></div>	
-	              </li>
-	            </ul>
-	          </li>	
-	        </ul>
-	        <form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				</div>
-			</form>
+	   
 	        <!-- Links -->
+	        <ul class="nav navbar-nav pull-left">
+	          <li class="dropdown pull-right">            
+	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	              <i class="icon-retweet"></i> <{$_SESSION['prodid']|getProduct=###}> <b class="caret"></b>              
+	            </a>
+	            <ul class="dropdown-menu">
+	              	<volist name='mume' id='st'>
+					  	<li ><a  href="__APP__/Admin/WebInfo/changeProd/prodid/<{$st.prodid}>"><{$st.prodid|getProd=###}></a></li>			  				  
+					</volist>
+	            </ul>
+	          </li>	          
+	        </ul>
 	        
 	        <ul class="nav navbar-nav pull-right">
 	          <li class="dropdown pull-right">            
@@ -87,18 +61,7 @@
 	            </ul>
 	          </li>	          
 	        </ul>
-	        <ul class="nav navbar-nav pull-right">
-	          <li class="dropdown pull-right">            
-	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	              <i class="icon-user"></i> <{$_SESSION['prodid']|getProduct=###}> <b class="caret"></b>              
-	            </a>
-	            <ul class="dropdown-menu">
-	              	<volist name='mume' id='st'>
-					  	<li ><a  href="__APP__/Admin/WebInfo/changeProd/prodid/<{$st.prodid}>"><{$st.prodid|getProd=###}></a></li>			  				  
-					</volist>
-	            </ul>
-	          </li>	          
-	        </ul>
+	        
 	      </nav>
 	
 	    </div>
@@ -110,7 +73,7 @@
 	          <!-- Logo. -->
 	          <div class="logo">
 	            <h1><a href="#"><{$_SESSION['prodid']|getProduct=###}><span class="bold"></span></a></h1>
-	            <p class="meta">后台管理系统</p>
+	            <p class="meta">网站后台管理系统</p>
 	          </div>	          
 	        </div>
 	
@@ -191,7 +154,7 @@
 	            </li>		           
 	            <li class="dropdown dropdown-big">
 	              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-	                <i class="icon-user"></i> 用户 <span   class="label label-success">6</span> 
+	                <i class="icon-user"></i> 客户 <span   class="label label-success">6</span> 
 	              </a>
 	
 	                <ul class="dropdown-menu">
@@ -276,25 +239,17 @@
 	
 	<!-- Header ends -->
 	
-	<!-- Main content starts -->
-	
-	<div class="content">
-	
+	<!-- Main content starts -->	
+	<div class="content">	
 	  	<!-- Sidebar -->
 	    <div class="sidebar">
-	        <div class="sidebar-dropdown"><a href="#">导航</a></div>
-	
+	        <div class="sidebar-dropdown"><a href="#">导航</a></div>	
 	        <!--- Sidebar navigation -->
 	        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
 	        <ul id="nav">
-	          <!-- Main menu with font awesome icon -->
-	          
-	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 后台入口 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-	            <ul>
-	              <li ><a target="_blank" href="http://www.xiuliguanggao.com/zentao/www">需求管理</a></li>
-					  	  
-	            </ul>
-	          </li>
+	          <!-- Main menu with font awesome icon -->	
+	          <li><a  target="_blank" href="http://www.xiuliguanggao.com/zentao/www"><i class="icon-home"></i> 需求管理</a>
+	                    	          
 	           <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 商品服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="__APP__/Admin/Cate/index/prodid/<{$st.prodid}>">分类管理</a></li>
@@ -302,32 +257,22 @@
 	              
 	            </ul>
 	          </li>  
-	          <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 插件页面  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	          <li class="has_sub"><a href="#"><i class="icon-cog"></i> 设置  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
-	              <li><a href="widgets1.html">插件页面 #1</a></li>
-	              <li><a href="widgets2.html">插件页面 #2</a></li>
-	              <li><a href="widgets3.html">插件页面 #3</a></li>
+	              <li><a href="__APP__/Admin/Index">系统信息</a></li>
+	              <li><a href="__APP__/Admin/Dict">数据字典</a></li>	              
 	            </ul>
 	          </li>  
-	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 页面模块1 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	          <li class="has_sub"><a href="#"><i class="icon-wrench"></i> 车辆维修 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="post.html">表单Post</a></li>
-	              <li><a href="login.html">登录页</a></li>
-	              <li><a href="register.html">注册页面</a></li>
-	              <li><a href="support.html">帮助页</a></li>
-	              <li><a href="invoice.html">购物清单</a></li>
-	              <li><a href="profile.html">个人资料</a></li>
-	              <li><a href="gallery.html">相册页面</a></li>
+	              <li><a href="login.html">登录页</a></li>	              
 	            </ul>
 	          </li> 
-	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 页面模块2  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 课程信息  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="media.html">媒体</a></li>
-	              <li><a href="statement.html">描述</a></li>
-	              <li><a href="error.html">错误</a></li>
-	              <li><a href="error-log.html">错误日志</a></li>
-	              <li><a href="calendar.html">日历</a></li>
-	              <li><a href="grid.html">网格</a></li>
+	              <li><a href="statement.html">描述</a></li>	              
 	            </ul>
 	          </li>                             
 	          <li><a href="charts.html"><i class="icon-bar-chart"></i>图表</a></li> 

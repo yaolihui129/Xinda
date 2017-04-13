@@ -31,7 +31,7 @@ class LoginController extends Controller {
     }
 
     public function logout(){
-        $username =$_SESSION['username'];
+
         $_SESSION = array();
 
         if (isset($_COOKIE[session_name()])) {

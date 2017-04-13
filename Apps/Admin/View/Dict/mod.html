@@ -1,0 +1,65 @@
+<layout name="layout" />
+	<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 class="pull-left"><i class="icon-home"></i><a  href="__APP__/Admin/Dict"> 字典-修改  </a></h2>
+	      	
+	        <!-- Breadcrumb -->
+	        <div class="bread-crumb pull-right">
+	          <a href="__APP__/Admin"><i class="icon-home"></i> 设置</a> 
+	          <span class="divider">/</span> 
+	          <a href="__URL__" class="bread-current">字典</a> 
+	          <span class="divider">/</span> 修改        
+	        </div>
+	        <div class="clearfix"></div>
+	    </div>
+	<!-- Page heading ends -->
+
+
+<!-- Matter -->
+
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                     
+                         <input type="hidden" name="dictId" value="<{$data.dictid}>" />
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">k</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='k' value="<{$data.k}>" placeholder="k">
+                             </div>
+                         </div>
+                        
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">v</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='v' value="<{$data.v}>"  placeholder="v">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">type</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='type' value="<{$data.type}>"  placeholder="type">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">state</label>
+                             <div class="col-lg-8"><{$state}></div>
+                         </div>                         
+                         <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-9">
+                                 <button type="submit" class="btn btn-primary">提交</button>                       
+                             </div>
+                         </div>
+                     </form>
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->

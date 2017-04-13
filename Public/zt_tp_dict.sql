@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : mysql:3306
 Source Server Version : 50532
-Source Host           : localhost:3306
+Source Host           : localhost:3307
 Source Database       : xiuli
 
 Target Server Type    : MYSQL
 Target Server Version : 50532
 File Encoding         : 65001
 
-Date: 2017-04-13 18:22:13
+Date: 2017-04-14 00:18:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,3 +33,12 @@ CREATE TABLE `zt_tp_dict` (
 -- ----------------------------
 -- Records of zt_tp_dict
 -- ----------------------------
+INSERT INTO `zt_tp_dict` VALUES ('utsmkhVp', '1', '正常', 'state', '1', '腰立辉', '2017-04-13 23:22:19');
+INSERT INTO `zt_tp_dict` VALUES ('M6ZsJ6uq', '2', '待确认', 'state', '1', '腰立辉', '2017-04-13 23:22:20');
+INSERT INTO `zt_tp_dict` VALUES ('20kRAk8V', '3', '已搁置', 'state', '1', '腰立辉', '2017-04-13 23:22:21');
+INSERT INTO `zt_tp_dict` VALUES ('MkVUT3Tr', '4', '已作废', 'state', '1', '腰立辉', '2017-04-13 23:48:03');
+INSERT INTO `zt_tp_dict` VALUES ('4KgsdBPq', '1', '08:00-10:00', 'sktime', '1', '腰立辉', '2017-04-13 23:51:55');
+INSERT INTO `zt_tp_dict` VALUES ('nWf21MjO', '2', '10:10-12:10', 'sktime', '1', '腰立辉', '2017-04-14 00:13:39');
+INSERT INTO `zt_tp_dict` VALUES ('YqDTZQsW', '3', '13:30-15:30', 'sktime', '1', '腰立辉', '2017-04-14 00:14:55');
+INSERT INTO `zt_tp_dict` VALUES ('KoFi3CKO', '4', '15:40-17:40', 'sktime', '1', '腰立辉', '2017-04-14 00:16:28');
+INSERT INTO `zt_tp_dict` VALUES ('3YJ1NXgd', '5', '18:00-20:00', 'sktime', '1', '腰立辉', '2017-04-14 00:16:45');
