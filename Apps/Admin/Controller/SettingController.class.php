@@ -4,14 +4,11 @@ use Think\Controller;
 class SettingController extends Controller {
     public function index(){
         /* 接收参数*/
-        $prodid=!empty($_GET['id']) ? $_GET['id'] : $_SESSION['prodid'];
+        $prodid=$_SESSION['prodid'];
          
         $m=D('product');
         $data=$m->find($prodid);
-        //重置SESSION
-        $_SESSION['prodid']=$prodid;
-        $_SESSION['qz']=$data['qz'];
-        $_SESSION['db']=$data['db'];               
+                  
         $this->assign('arr',$data);
          
         $this->display();

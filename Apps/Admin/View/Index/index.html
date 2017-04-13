@@ -1,17 +1,83 @@
-<layout name="layout" />     
+<layout name="layout" />
 <!-- Page heading -->
 	    <div class="page-head">
-	      <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
+	      <h2 class="pull-left"><i class="icon-home"></i><a  href="__APP__/Admin/Cate">系统信息</a></h2>
 
         <!-- Breadcrumb -->
         <div class="bread-crumb pull-right">
-          <a href="index.html"><i class="icon-home"></i> 首页</a> 
-          <!-- Divider -->
+          <a href="__APP__/Admin"><i class="icon-home"></i> 首页</a> 
           <span class="divider">/</span> 
-          <a href="#" class="bread-current">控制台</a>
+          <a href="__URL__/test" class="bread-current">系统信息</a>
+          
         </div>
 
         <div class="clearfix"></div>
 
 	    </div>
 <!-- Page heading ends -->
+
+<!-- Matter -->
+	  <div class="matter">
+        <div class="container">
+        	<div class="row">         
+	            <div class="col-md-4">
+	            	       
+				        <table class="table table-striped table-bordered table-hover" >
+						    <tr><th width="30%" bgcolor="#ccc" >操作系统</th> <td><?php echo PHP_OS;?></td></tr>
+						    <tr><th bgcolor="#ccc">PHP版本</th><td><?php echo PHP_VERSION;?></td></tr>
+						    <tr><th bgcolor="#ccc">运行方式</th><td><?php echo PHP_SAPI;?></td></tr>
+						    <tr><th bgcolor="#ccc">数据库服务器</th><td><{$Think.config.DB_HOST}></td></tr>
+						    <tr><th bgcolor="#ccc">数据库名字</th><td><{$Think.config.DB_NAME}></td></tr>
+						    <tr><th bgcolor="#ccc">数据库端口</th><td><{$Think.config.DB_PORT}></td></tr>			    
+						    <tr><th bgcolor="#ccc">开发团队</th><td>yaolh</td></tr>
+						    <tr><th bgcolor="#ccc">客户端IP</th><td><{$_SESSION['ip']}></td></tr>
+						    <tr><th bgcolor="#ccc">客户端浏览器</th><td><{$_SESSION['browser']}></td></tr>
+						    <tr><th bgcolor="#ccc">客户端系统</th><td><{$_SESSION['os']}></td></tr>
+					    </table>	             			                	
+				    
+	            </div>
+	             <div class="col-md-4">
+	             	<div class="widget-content">
+	                  <div class="padd">
+	                    <!-- Form starts.  -->
+	                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
+	                         <input type="hidden" name="id" value="<{$arr.id}>" />                        
+	                         <div class="form-group">
+	                             <label class="col-lg-4 control-label">网站：</label>
+	                             <div class="col-lg-8">
+	                                 <input type="text" class="form-control" value="<{$arr.web}>" placeholder="网站" readonly>
+	                             </div>
+	                         </div>
+	                        
+	                         <div class="form-group">
+	                             <label class="col-lg-4 control-label">catname</label>
+	                             <div class="col-lg-8">
+	                                 <input type="text" class="form-control" name='catname' value="<{$arr.catname}>" placeholder="catname">
+	                             </div>
+	                         </div>
+	                         <div class="form-group">
+	                             <label class="col-lg-4 control-label">state</label>
+	                             <div class="col-lg-8">
+	                                 <input type="text" class="form-control" name='state' value="<{$arr.state}>" placeholder="state">
+	                             </div>
+	                         </div>                         
+	                         <hr />
+	                         <div class="form-group">
+	                             <div class="col-lg-offset-1 col-lg-9">
+	                                 <button type="submit" class="btn btn-primary">提交</button>                       
+	                             </div>
+	                         </div>
+	                     </form>
+	                  </div>
+	                </div>
+	             
+	             </div>
+	            
+            </div>
+        
+        </div>
+      </div>  
+	
+	<!-- Matter ends -->
+
+	   

@@ -13,4 +13,6 @@ return array(
     'DB_HOST'=>'127.0.0.1',
     'DB_NAME'=>'tpyjd_crm',
     'DB_PREFIX'=>'tpyjd_',
+    'CRMURL'=>'http://app5.cloudcc.com/distributor.action',
+    
 );

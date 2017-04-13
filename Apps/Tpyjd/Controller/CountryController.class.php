@@ -95,5 +95,38 @@ class CountryController extends WebInfoController {
     
     }
     
+    public function postCountry(){
+        $url=C('CRMURL');   
+        $m=M('country');
+        $arr=$m->select();
+        foreach ($arr as $a){
+        
+           $data="[{ "
+               ."'countryname':".$a['countryname']
+               .",'countrycode':".$a['countrycode']
+               .",'quickcode':".$a['quickcode']
+               .",'description':".$a['description']
+               .",'versionnumber':".$a['versionnumber']
+               .",'countryid':".$a['countryid']
+                   ."}]";
+           $url=$url."?serviceName=insert&objectApiName=country&data=".$data."&binding".getBinding();
+           dump($url);
+           $res=httpGet($url);
+           
+//            dump($data);
+//            $postArr=array(
+//                "serviceName"=>"insert",
+//                "objectApiName"=>"country",
+//                "data"=>urldecode($data),
+//                "binding"=>getBind(),
+//            );
+           
+//            $postJson=json_encode($postArr);
+//            dump($postJson);
+//            $res=httpPost($url, $postJson);
+//            echo $res."<br>";
+        }
+        
+    }
        
 }

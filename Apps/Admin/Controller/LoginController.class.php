@@ -11,11 +11,10 @@ class LoginController extends Controller {
         $m=D('user');
         $where=array('account'=>$_POST['username'],'password'=>md5($_POST['password']));
         $user=$m->where($where)->find();
-        dump($_POST);
         if($user){           
             $_SESSION=$user;
             $_SESSION['isLogin']=9;
-            $this->redirect('/Admin/Index/test');
+            $this->redirect('/Admin/Index/index');
         }else {
             $m = D('tp_admin');
             $where=array('username'=>$_POST['username'],'password'=>md5($_POST['password']));
