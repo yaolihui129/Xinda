@@ -13,7 +13,6 @@ return array(
     'TMPL_L_DELIM'=>'<{',
     'TMPL_R_DELIM'=>'}>',   
     'DB_TYPE'=>'mysql',
-//     'DB_HOST'=>'192.168.21.10',
     'DB_HOST'=>'127.0.0.1',
     'DB_NAME'=>'xiuli',
     'DB_USER'=>'root',

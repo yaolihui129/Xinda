@@ -10,10 +10,15 @@ class LoginController extends Controller {
     public function login(){
         $m=D('user');
         $where=array('account'=>$_POST['username'],'password'=>md5($_POST['password']));
-        $user=$m->where($where)->find();
+        $user=$m->where($where)->field('id,account,realname,usergp,path,img')->find();
+        
         if($user){           
             $_SESSION=$user;
-            $_SESSION['isLogin']=9;
+            $_SESSION['isLogin']='Admin';
+            $where=array('userid'=>$user['id']);
+            $m=M('tp_userprod');
+            $arr=$m->where($where)->select();
+            $_SESSION['prodid']=$arr[0]['prodid'];
             $this->redirect('/Admin/Index/index');
         }else {
             $m = D('tp_admin');
@@ -22,9 +27,8 @@ class LoginController extends Controller {
             if ($user){               
                 $_SESSION=$user;
                 $_SESSION['isLogin']=2;
-                $this->redirect('/Admin/Prodservice');
-            }else{
-            
+                $this->redirect('/Admin/Product');
+            }else{           
                 $this->error('用户或密码错误，请重新登陆！', "index");
             }
         }                              
@@ -38,8 +42,7 @@ class LoginController extends Controller {
             setcookie(session_name(),'',time()-3600,'/');
         }       
         session_destroy();// 销毁sesstion
-
-        $this->success("退出成功!", "index");
-
+        $this->redirect('index'); //重定向到登录页
+  
     }
 }

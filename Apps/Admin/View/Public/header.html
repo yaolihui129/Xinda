@@ -5,7 +5,7 @@
 	  <meta charset="utf-8">
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <title>后台管理系统</title> 
+	  <title>网站后台管理系统</title> 
 	  <meta name="keywords" content="#" />
 	  <meta name="description" content="#" />
 	  <import type="css" file="css.mac.bootstrap" />
@@ -21,7 +21,7 @@
 	  <import type="css" file="css.mac.style" />
 	  <import type="css" file="css.mac.widgets" />
 	  <style type="text/css">body{background-color: #fff;}</style>  
-	  <!--  <link rel="shortcut icon" href="img/favicon/favicon.png">-->
+	  <link rel="shortcut icon" href="__IMAGES__/favicon.ico">
 	</head>
 	<body>
 	
@@ -34,12 +34,16 @@
 			  <a href="index.html" class="navbar-brand hidden-lg">首页</a>
 			</div>
 	      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">         	
-	   
+	    <ul class="nav navbar-nav pull-left">
+	     <li class="dropdown pull-right"> 
+	      <a data-toggle="dropdown" class="dropdown-toggle" > <i class="icon-retweet"> 切换平台</i>  :</a>	    
+	     </li>
+	    </ul>
 	        <!-- Links -->
 	        <ul class="nav navbar-nav pull-left">
 	          <li class="dropdown pull-right">            
 	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	              <i class="icon-retweet"></i> <{$_SESSION['prodid']|getProduct=###}> <b class="caret"></b>              
+	              <{$_SESSION['prodid']|getProduct=###}> <b class="caret"></b>              
 	            </a>
 	            <ul class="dropdown-menu">
 	              	<volist name='mume' id='st'>
@@ -50,16 +54,23 @@
 	        </ul>
 	        
 	        <ul class="nav navbar-nav pull-right">
-	          <li class="dropdown pull-right">            
-	            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-	              <i class="icon-user"></i> 管理员 <b class="caret"></b>              
-	            </a>
-	            <ul class="dropdown-menu">
-	              <li><a href="#"><i class="icon-user"></i> 资料</a></li>
-	              <li><a href="#"><i class="icon-cogs"></i> 设置</a></li>
-	              <li><a href="__APP__/Admin/Login/logout"><i class="icon-off"></i> 退出</a></li>
-	            </ul>
-	          </li>	          
+	          <li class="dropdown"> 
+	          		<a  class="dropdown-toggle" href="#">
+		              <i class="icon-user"> &nbsp; <{$_SESSION['realname']}></i>               
+		            </a>
+	          </li>
+	          <li class="dropdown"> 
+	          		<a  class="dropdown-toggle" href="__APP__/Admin">
+		              <i class="icon-cogs"></i> 设置              
+		            </a>
+	          </li>
+	           <li class="dropdown"> 
+	          		<a  class="dropdown-toggle" href="__APP__/Admin/Login/logout" onclick="return confirm('你确定要退出登录吗？')">
+		              <i class="icon-off">  退出 </i>              
+		            </a>
+	          </li>
+	          
+	          	          
 	        </ul>
 	        
 	      </nav>
@@ -212,7 +223,20 @@
 	              </div>
 	              <div class="mcol-right">
 	                <!-- Number of visitors -->
-	                <p><a href="#">3000</a> <em>用户</em></p>
+	                <p><a href="#">3000</a> <em>客户</em></p>
+	              </div>
+	              <div class="clearfix"></div>
+	            </div>
+	            
+	            <!-- Members data -->
+	            <div class="hdata">
+	              <div class="mcol-left">
+	                <!-- Icon with blue background -->
+	                <i class="icon-user bblue"></i> 
+	              </div>
+	              <div class="mcol-right">
+	                <!-- Number of visitors -->
+	                <p><a href="#">3000</a> <em>线索</em></p>
 	              </div>
 	              <div class="clearfix"></div>
 	            </div>
@@ -248,38 +272,62 @@
 	        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
 	        <ul id="nav">
 	          <!-- Main menu with font awesome icon -->	
-	          <li><a  target="_blank" href="http://www.xiuliguanggao.com/zentao/www"><i class="icon-home"></i> 需求管理</a>
-	                    	          
-	           <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 商品服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	          <li><a  target="_blank" href="http://www.xiuliguanggao.com/zentao/www"><i class="icon-credit-card"></i> 需求管理</a>	                    	          
+	           <li class="has_sub"><a href="#"><i class="icon-shopping-cart"></i> 商品服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
-	              <li><a href="__APP__/Admin/Cate/index/prodid/<{$st.prodid}>">分类管理</a></li>
-	              <li><a href="__APP__/Admin/Prodservice/index/prodid/<{$st.prodid}>">商品管理</a></li>
+	              <li><a href="__APP__/Admin/Cate">分类管理</a></li>
+	              <li><a href="__APP__/Admin/Product">商品&服务管理</a></li>
 	              
 	            </ul>
-	          </li>  
+	          </li>
+	          <li class="has_sub"><a href="#"><i class="icon-gift"></i> 优惠促销 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="__APP__/Admin/Ad">广告管理</a></li>
+	              <li><a href="__APP__/Admin/Page">促销活动</a></li>	
+	              <li><a href="#">优惠券</a></li>              
+	              <li><a href="#">线索管理</a></li>	              
+	            </ul>
+	          </li> 
+	          <li class="has_sub"><a href="#"><i class="icon-user"></i> 客户管理 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="#">会员分类</a></li>
+	              <li><a href="#">客户管理</a></li>
+	              <li><a href="#">员工管理</a></li>
+	              <li><a href="#">征信查询</a></li>
+	              
+	            </ul>
+	          </li> 
+	          <li><a  href="__APP__/Admin/Admin"><i class="icon-file-alt"></i> 订单管理</a>
+	          <li class="has_sub"><a href="#"><i class="icon-phone"></i> 售后服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="#">线索管理</a></li>
+	              <li><a href="#">客户管理</a></li>
+	              <li><a href="#">员工管理</a></li>
+	              
+	              
+	            </ul>
+	          </li> 	 	          
+	          <li class="has_sub"><a href="#"><i class="icon-wrench"></i> 车辆维修 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="#">预约</a></li>
+	              <li><a href="#">维修</a></li>	              
+	            </ul>
+	          </li> 
+	          <li class="has_sub"><a href="#"><i class="icon-book"></i> 课程信息  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="#">课程表</a></li>
+	              <li><a href="#">开班</a></li>
+	              <li><a href="#">排课</a></li>	              
+	            </ul>
+	          </li>	          	
 	          <li class="has_sub"><a href="#"><i class="icon-cog"></i> 设置  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="__APP__/Admin/Index">系统信息</a></li>
-	              <li><a href="__APP__/Admin/Dict">数据字典</a></li>	              
+	              <li><a href="__APP__/Admin/Dict">数据字典</a></li>
+	              <li><a href="__APP__/Admin/User">用户管理</a></li>
+	              <li><a href="__APP__/Admin/Setting">表ID设计</a></li>	              
 	            </ul>
-	          </li>  
-	          <li class="has_sub"><a href="#"><i class="icon-wrench"></i> 车辆维修 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-	            <ul>
-	              <li><a href="post.html">表单Post</a></li>
-	              <li><a href="login.html">登录页</a></li>	              
-	            </ul>
-	          </li> 
-	          <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 课程信息  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-	            <ul>
-	              <li><a href="media.html">媒体</a></li>
-	              <li><a href="statement.html">描述</a></li>	              
-	            </ul>
-	          </li>                             
-	          <li><a href="charts.html"><i class="icon-bar-chart"></i>图表</a></li> 
-	          <li><a href="tables.html"><i class="icon-table"></i>表格</a></li>
-	          <li><a href="forms.html"><i class="icon-tasks"></i>表单</a></li>
-	          <li><a href="ui.html"><i class="icon-magic"></i>UI图标</a></li>
-	          <li><a href="calendar.html"><i class="icon-calendar"></i>日历</a></li>
+	          </li>                               	          
 	        </ul>
 	    </div>
 	

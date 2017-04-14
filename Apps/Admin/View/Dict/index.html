@@ -1,9 +1,16 @@
 <layout name="layout" />
 	<!-- Page heading -->
 	    <div class="page-head">
-	      	<h2 class="pull-left">	      	
-		      	<a href="__URL__/add" type="button" class="btn btn-success "><i class="icon-plus"> 添加</i></a>
-		      	<ul class="nav navbar-nav ">
+	      	<h2 >
+		      	<!-- Breadcrumb -->
+		        <div class="bread-crumb pull-left">
+		          <a href="__APP__/Admin"><i class="icon-home"></i> 设置</a> 
+		          <span class="divider">/</span> 
+		          <a href="__URL__" class="bread-current">字典</a>          
+		        </div>	      	
+		      	
+		      	<ul class="nav navbar-nav pull-right">
+			          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
 			          <li class="dropdown pull-right">            
 			            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 			              <i class="icon-retweet"></i> <{$_SESSION['dictType']}> <b class="caret"></b>              
@@ -13,17 +20,9 @@
 							  	<li ><a  href="__URL__/index/type/<{$st.type}>"><{$st.type}></a></li>			  				  
 							</volist>
 			            </ul>
-			          </li>	          
-		        </ul>
-	       
-	      	</h2>
-	      	
-	        <!-- Breadcrumb -->
-	        <div class="bread-crumb pull-right">
-	          <a href="__APP__/Admin"><i class="icon-home"></i> 设置</a> 
-	          <span class="divider">/</span> 
-	          <a href="__URL__" class="bread-current">字典</a>          
-	        </div>
+			          </li>			          	          
+		        </ul>	       
+	      	</h2>	      		        
 	        <div class="clearfix"></div>
 	    </div>
 	<!-- Page heading ends -->

@@ -1,7 +1,8 @@
 <?php
     // 根据id获取状态
-    function getState($id){
-        $data=M('dict')->find($id);        
+    function getState($key){
+        $where=array('type'=>'state','k'=>$key);
+        $data=M('tp_dict')->where($where)->find();        
         return $data['v'];   
     }
     //获取ProductID

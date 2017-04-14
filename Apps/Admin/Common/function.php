@@ -3,9 +3,7 @@
 //根据id获取产品名
 function getProd($id){
     if ($id){
-        $m=M('product');
-        $data=$m->find($id);
-        //dump($data);
+        $data=M('product')->find($id);
         return $data['name'];
     }else {
         return ;
@@ -13,8 +11,8 @@ function getProd($id){
 }
 
 //根据pid获取分类数
-function countCate($pid){
-    $where=array('pid'=>$pid);
+function countCate($pidCateId){
+    $where=array('pidCateId'=>$pidCateId);
     $data=M('tp_cate')->where($where)->count();
     return $data;        
 }
@@ -23,7 +21,7 @@ function getCatname($cateid){
     if ($cateid){
         $m=M('tp_cate');
         $data=$m->find($cateid);
-        $str=getCatname($data['pid'])."-".$data['catname'];
+        $str=getCatname($data['pidcateid'])."-".$data['catname'];
         return $str;
     }else {
         return "|-";

@@ -10,79 +10,69 @@ class CateController extends CommonController {
         $maxPageNum=10;
         
         $where['prodid']=$_SESSION['prodid'];
-        $where['catname']=array('like','%'.$search.'%');
-        if($_GET['ParentBusinessUnitId']){
-            $where['pid']=$_GET['pid'];            
+        $where['catName']=array('like','%'.$search.'%');
+        if($_GET['pidCateId']){
+            $where['pidCateId']=$_GET['pidCateId'];            
         }else{
-            $where['pid']=0;
+            if(!$search){
+                $where['pidCateId']=000000;
+            }           
         }
-        $this->assign('pid',$_GET['pid']);
+        $this->assign('pidCateId',$_GET['pidCateId']);
         $m=D('tp_cate');
         $data=$m->where($where)->order('sn')->page($page,$maxPageNum)->select();
-        $this->assign('data',$data);
-        
-        
+        $this->assign('data',$data);              
         
         $this->display();
     }
     
-    public function add(){
-        /*接收参数*/
-        $pid=!empty($_GET['pid']) ? $_GET['pid'] : 0; 
-        $this->assign("pid",$pid);
-        /*实例化模型*/
-        $m=D('tp_cate');
-//         $where=array('prodid'=>$_SESSION['prodid']);
-//         $data=$m->where($where)->order('sn')->select();
-//         $this->assign('data',$data);
-
-        $map=array('prodid'=>$_SESSION['prodid'],'pid'=>$pid);
-        $count=$m->where($map)->count()+1;
-        $this->assign("count",$count);
+    public function add(){       
+        $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : 000000; 
+        $this->assign("pidCateId",$pidCateId);
+        $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId);
+        $count=M('tp_cate')->where($map)->count()+1;
+        $this->assign("count",$count);  
+        $this -> assign("state", formSV("","state"));
         
-        
-        $this->display();
-        
+        $this->display();        
     }
     
-    public function insert(){
-    
+    public function insert(){   
         $m=D('tp_cate');
-         
+        do {//如果该ID在库中存在，则重新获取
+            $id=getRandCode(40);
+            $arr=$m->find($id);
+        } while ($arr);
+        $_POST['cateId']=$id;
         $_POST['moder']=$_SESSION['realname'];
-        $_POST['prodid']=$_SESSION['prodid'];
-    
+        $_POST['prodid']=$_SESSION['prodid'];   
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
-            $this->success("成功");
+        if($m->add()){
+            $this->success("成功",U('index'));
         }else{
             $this->error('失败');
         }
     }
     
     public function order(){
-        /* 实例化模型*/
-        $db = D('tp_cate');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
+//             dump(array("id"=>$id, "sn"=>$sn));
+            $num += D('tp_cate')->save(array("cateId"=>$id, "sn"=>$sn));
         }
         if($num) {
-            $this->success("排序成功!");
-    
+            $this->success("排序成功!");   
         }else{
             $this->error("排序失败...");
         }
     }
     
     public function mod(){
-        $m=D('tp_cate');
-        $arr=$m->order('sn')->find($_GET[id]);
-        $this->assign('arr',$arr);
-               
+        $arr=D('tp_cate')->order('sn')->find($_GET[id]);
+        $this->assign('arr',$arr);  
+        $this->assign("state", formSV($arr['state'],"state"));
     
         $this->display();
     }
@@ -91,22 +81,19 @@ class CateController extends CommonController {
     public function update(){
         $_POST['moder']=$_SESSION['realname'];
         if (D('tp_cate')->save($_POST)){
-            $this->success("修改成功！");
+            $this->success("修改成功！",U('index'));
         }else{
             $this->error("修改失败！");
         }
-    }
-      
+    }     
     
     public function del(){
-
         $count =D('tp_cate')->delete($_GET['id']);
         if ($count>0) {
             $this->success('删除成功');
         }else{
             $this->error('删除失败');
-        }
-    
+        }   
     }
 
 }
