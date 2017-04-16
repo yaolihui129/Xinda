@@ -1,0 +1,91 @@
+<layout name="layout" />
+	<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 >	      	
+	      		<div class="row">
+		      		<div class="col-md-3">
+		      			<!-- Breadcrumb -->
+		        <div class="bread-crumb pull-left">
+		          <a href="__APP__/Admin"><i class="icon-home"></i> 优惠促销</a> 
+		          <span class="divider">/</span> 
+		          <a href="__URL__" class="bread-current"> 抽奖活动</a>          
+		        </div>	
+		      		</div>
+		      		<div class="col-md-4">
+		      			<form class="form-inline " action="__URL__/index" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+							</div>
+								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+				       </form>  
+		      		</div>
+		      		<div class="col-md-5">
+			      		<ul class="nav navbar-nav pull-right">
+					          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
+					          <li class="dropdown pull-right">            
+					            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					              <i class="icon-retweet"></i> <{$_SESSION['prodCate']|getCatname=###}> <b class="caret"></b>              
+					            </a>
+					            <ul class="dropdown-menu">
+					              	<volist name='arr' id='st'>
+									  	<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.catname}></a></li>			  				  
+									</volist>
+					            </ul>
+					          </li>			          	          
+				        </ul>
+		      		</div>
+		      	</div>
+	      	</h2>	      		        
+	        <div class="clearfix"></div>
+	    </div>
+	<!-- Page heading ends -->
+   <div class="content">
+       <div class="main">
+             
+              <div class="midd">
+                 <table border="1" width="100%" align="center">
+                     <tr>
+                       <th width=5% align="center" bgcolor="#ccc">类型</th>
+                       <th width=14% align="left" bgcolor="#ccc">优惠活动
+                           <span style="float:right;margin-right:5px;">
+                             <a href="__URL__/add/" > &nbsp;添加 &nbsp;</a>
+                           </span>
+                       </th>
+                       <th width=3% align="center" bgcolor="#ccc">奖券</th>
+                       <th width=3% align="center" bgcolor="#ccc">特等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">一等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">二等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">三等奖</th>
+                       <th width=3% align="center" bgcolor="#ccc">参与奖</th>
+                       <th width=5% align="center" bgcolor="#ccc">开始</th>
+                       <th width=5% align="center" bgcolor="#ccc">结束</th>
+                       <th width=3% align="center" bgcolor="#ccc">状态</th>
+                       <th width=3% align="center" bgcolor="#ccc">维护</th>
+                       <th width=7% align="center" bgcolor="#ccc">最后更新</th>
+                     </tr>
+                     <volist name='arr' id='vo' empty="没有数据">
+                     <tr>
+                       <td align="center"><{$vo.voucher}></td>
+                       <td align="left"><{$vo.title}>
+                           <span style="float:right;margin-right:5px;">
+                               <a href="__URL__/photo/id/<{$st.id}>">图片</a>
+                               <a href="__URL__/mod/id/<{$vo.id}>">修改</a>
+                         </span>
+                       </td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.total}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.specia}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.first}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.second}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.third}></a></td>
+                       <td align="center"><a href="__APP__/Admin/Tickets/index/id/<{$vo.id}>"><{$vo.canyu}></a></td>
+                       <td align="center"><{$vo.start}></td>
+                       <td align="center"><{$vo.end}></td>
+                       <td align="center"><{$vo.state}></td>
+
+                       <td align="center"><{$vo.moder}></td>
+                       <td align="center"><{$vo.updatetime}></td>
+                    </tr>
+                  </volist>
+                 </table>
+        </div><!-- midd -->
+     </div><!-- main -->
