@@ -1,8 +1,47 @@
 <layout name="layout" />
-   <div class="place"> 所在位置：优惠活动</div>
+	<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 >	      	
+	      		<div class="row">
+		      		<div class="col-md-3">
+		      			<!-- Breadcrumb -->
+		        <div class="bread-crumb pull-left">
+		          <a href="__APP__/Admin"><i class="icon-home"></i> 优惠促销</a> 
+		          <span class="divider">/</span> 
+		          <a href="__URL__" class="bread-current"> 抽奖活动</a>          
+		        </div>	
+		      		</div>
+		      		<div class="col-md-4">
+		      			<form class="form-inline " action="__URL__/index" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+							</div>
+								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+				       </form>  
+		      		</div>
+		      		<div class="col-md-5">
+			      		<ul class="nav navbar-nav pull-right">
+					          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
+					          <li class="dropdown pull-right">            
+					            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					              <i class="icon-retweet"></i> <{$_SESSION['prodCate']|getCatname=###}> <b class="caret"></b>              
+					            </a>
+					            <ul class="dropdown-menu">
+					              	<volist name='arr' id='st'>
+									  	<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.catname}></a></li>			  				  
+									</volist>
+					            </ul>
+					          </li>			          	          
+				        </ul>
+		      		</div>
+		      	</div>
+	      	</h2>	      		        
+	        <div class="clearfix"></div>
+	    </div>
+	<!-- Page heading ends -->
    <div class="content">
        <div class="main">
-              <div class="top">优惠活动</div>
+             
               <div class="midd">
                  <table border="1" width="100%" align="center">
                      <tr>

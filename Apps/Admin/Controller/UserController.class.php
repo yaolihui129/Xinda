@@ -2,11 +2,9 @@
 namespace Admin\Controller;
 class UserController extends CommonController {
     public function index(){
-        $where['state']="在职";
-        $where['prodid']=$_SESSION['prodid'];
-        $m=M('tp_admin');
-
-        $arr=$m->where($where)->select();
+        $where['deleted']=1;
+//         $where['dept']=$_SESSION['prodid'];
+        $arr=M('user')->where($where)->select();
         $this->assign('data',$arr);
         $this->display();
     }

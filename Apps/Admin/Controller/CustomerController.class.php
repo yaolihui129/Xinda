@@ -3,10 +3,15 @@ namespace Admin\Controller;
 class CustomerController extends CommonController {
 
 	public function index(){
+	    /* 接收参数*/
+	    $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
+	    $page=!empty($_GET['page']) ? $_GET['page'] : 1;
+	    $this->assign('search',$search);
+	    $maxPageNum=10;	    
+	    $where['prodid']=$_SESSION['prodid'];
+	    $where['phone|pincodes|realname']=array('like','%'.$search.'%');
 	    $m=D('tp_customer');
-	    $data=$m
-	    ->join('zt_'.$_SESSION['db'].'customer ON zt_tp_customer.id =zt_'.$_SESSION['db'].'customer.tpid')
-	    ->select();
+	    $data=$m->where($where)->page($page,$maxPageNum)->select();
 	    
         $this->assign('data',$data);
          

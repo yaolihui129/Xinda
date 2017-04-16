@@ -20,16 +20,16 @@
 	            <div class="col-md-4">
 	            	       
 				        <table class="table table-striped table-bordered table-hover" >
-						    <tr><th width="30%" bgcolor="#ccc" >操作系统</th> <td><?php echo PHP_OS;?></td></tr>
+						    <tr><th width="30%" bgcolor="#ccc" >网站</th> <td><{$arr.web}><{$arr.version}></td></tr>
+						    <tr><th bgcolor="#ccc" >备案</th> <td><{$arr.record}></td></tr>
+						    <tr><th bgcolor="#ccc" >网址：</th> <td><{$arr.web}></td></tr>
+						    <tr><th bgcolor="#ccc" >百度搜索：</th> <td><{$arr.keywords}></td></tr>
+						    <tr><th bgcolor="#ccc" >服务器系统</th> <td><?php echo PHP_OS;?></td></tr>
 						    <tr><th bgcolor="#ccc">PHP版本</th><td><?php echo PHP_VERSION;?></td></tr>
 						    <tr><th bgcolor="#ccc">运行方式</th><td><?php echo PHP_SAPI;?></td></tr>
-						    <tr><th bgcolor="#ccc">数据库服务器</th><td><{$Think.config.DB_HOST}></td></tr>
-						    <tr><th bgcolor="#ccc">数据库名字</th><td><{$Think.config.DB_NAME}></td></tr>
-						    <tr><th bgcolor="#ccc">数据库端口</th><td><{$Think.config.DB_PORT}></td></tr>			    
+						    <tr><th bgcolor="#ccc">数据库服务器</th><td><{$Think.config.DB_HOST}>:<{$Think.config.DB_PORT}>:<{$Think.config.DB_NAME}></td></tr>	    
 						    <tr><th bgcolor="#ccc">开发团队</th><td>yaolh</td></tr>
-						    <tr><th bgcolor="#ccc">客户端IP</th><td><{$_SESSION['ip']}></td></tr>
-						    <tr><th bgcolor="#ccc">客户端浏览器</th><td><{$_SESSION['browser']}></td></tr>
-						    <tr><th bgcolor="#ccc">客户端系统</th><td><{$_SESSION['os']}></td></tr>
+						    <tr><th bgcolor="#ccc">客户端</th><td><{$_SESSION['os']}>:<{$_SESSION['browser']}>:<{$_SESSION['ip']}></td></tr>
 					    </table>	             			                	
 				    
 	            </div>
@@ -38,21 +38,11 @@
 	                  <div class="padd">
 	                    <!-- Form starts.  -->
 	                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
-	                         <input type="hidden" name="id" value="<{$arr.id}>" />                        
-	                         <div class="form-group">
-	                             <label class="col-lg-2 control-label">网站：</label>
-	                             <div class="col-lg-4">
-	                                 <input type="text" class="form-control" value="<{$arr.web}>" placeholder="网站" readonly>
-	                             </div>
-	                             <label class="col-lg-2 control-label">版本：</label>
-	                             <div class="col-lg-4">
-	                                 <input type="text" class="form-control" value="<{$arr.version}>" placeholder="版本号" readonly>
-	                             </div>
-	                         </div>
+	                         <input type="hidden" name="id" value="<{$arr.id}>" />                        	                         
 	                          <div class="form-group">
-	                             <label class="col-lg-2 control-label">备案：</label>
+	                             <label class="col-lg-2 control-label">地址：</label>
 	                             <div class="col-lg-4">
-	                                 <input type="text" class="form-control" value="<{$arr.record}>" placeholder="备案号" readonly>
+	                                 <input type="text" class="form-control" value="<{$arr.adress}>" placeholder="地址" >
 	                             </div>
 	                             <label class="col-lg-2 control-label">电话：</label>
 	                             <div class="col-lg-4">
@@ -69,27 +59,10 @@
 	                                 <input type="text" class="form-control"  name="qq" value="<{$arr.qq}>" placeholder="QQ" >
 	                             </div>
 	                         </div> 
-	                         
 	                         <div class="form-group">
-	                             <label class="col-lg-4 control-label">网址：</label>
-	                             <div class="col-lg-8">
-	                                 <input type="text" class="form-control" value="<{$arr.url}>" placeholder="网址" readonly>
-	                             </div>
-	                         </div> 
-	                        
-	                         <div class="form-group">
-	                             <label class="col-lg-4 control-label">Keys：</label>
-	                             <div class="col-lg-8">
-	                                 <input type="text" class="form-control" value="<{$arr.keywords}>" placeholder="关键字" readonly>
-	                             </div>
-	                         </div> 
-	                         
-	                         <div class="form-group">
-	                             <label class="col-lg-4 control-label">地址：</label>
-	                             <div class="col-lg-8">
-	                                 <input type="text" class="form-control" name="adress" value="<{$arr.adress}>" placeholder="地址" >
-	                             </div>
-	                         </div>  
+	                             <label class="col-lg-4 control-label">主营业务：</label>
+	                             <div class="col-lg-8"><textarea class="cleditor" name="desc"><{$arr.desc}></textarea></div>
+	                         </div>   
 	                                                 
 	                         <hr />
 	                         <div class="form-group">

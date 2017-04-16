@@ -2,8 +2,19 @@
 namespace Admin\Controller;
 class VoucherController extends CommonController {
     public function index(){
-        $m=D('xl_voucher');
-        $arr=$m->order('end desc')->select();
+        /* 接收参数*/
+        $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
+        $page=!empty($_GET['page']) ? $_GET['page'] : 1;
+        $this->assign('search',$search);
+        $maxPageNum=10;
+        
+        $where['prodid']=$_SESSION['prodid'];
+        $where['title']=array('like','%'.$search.'%');
+        $this->assign('voucher',$_GET['voucher']);
+        $m=D('tp_voucher');
+        $arr=$m
+        ->where($where)
+        ->page($page,$maxPageNum)->order('end desc')->select();
         $this->assign('arr',$arr);
         
         $this->display();

@@ -1,21 +1,14 @@
 <?php
 namespace Admin\Controller;
-class ProdserviceController extends CommonController {
-    public function index(){
-        /*实例化模型*/        
-        $m=D($_SESSION['db'].'cate');
-        $where['prodid']=$_SESSION['prodid'];
-        $where['state']='正常';
-        $arr=$m->where($where)->order('sn')->select();
+class ProductController extends CommonController {
+    public function index(){      
+        $where=array('prodid'=>$_SESSION['prodid'],'state'=>1);
+        $arr=M('tp_cate')->where($where)->order('sn')->select();
         $this->assign('arr',$arr);
-        /*实例化模型*/
-        $cate=!empty($_GET['cate']) ? $_GET['cate'] : $arr['0']['id'];
-        $m=D($_SESSION['db'].'prodservice');
-        $map[cate]=$cate;
-        $data=$m->where($map)->order('sn')->select();
-        $this->assign('data',$data);
-
-        $this->assign('cate',$cate);       
+        $_SESSION['prodCate']=!empty($_GET['cate']) ? $_GET['cate'] : $arr['0']['cateid'];
+        $where=array('cate'=>$_SESSION['prodCate']);
+        $data=D('tp_product')->where($where)->order('sn')->select();
+        $this->assign('data',$data);           
         
         $this->display();
     }
@@ -36,7 +29,7 @@ class ProdserviceController extends CommonController {
         
         
         /*实例化模型*/
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
         $map['cate']=$_GET['cate'];        
         $count=$m->where($map)->count()+1;
         $this->assign("c",$count);
@@ -54,7 +47,7 @@ class ProdserviceController extends CommonController {
     
     public function insert(){
     
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
          
         $_POST['moder']=$_SESSION['realname'];
         $_POST['prodid']=$_SESSION['prodid'];
@@ -72,7 +65,7 @@ class ProdserviceController extends CommonController {
     
     public function order(){
         /* 实例化模型*/
-        $db = D($_SESSION['db'].'prodservice');
+        $db = D('tp_product');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
             $num += $db->save(array("id"=>$id, "sn"=>$sn));
@@ -87,7 +80,7 @@ class ProdserviceController extends CommonController {
     
     public function mod(){
         /* 实例化模型*/
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
         $arr=$m->find($_GET[id]);
         $this->assign('arr',$arr);
         $this->assign("cate",$arr['cate']);
@@ -108,7 +101,7 @@ class ProdserviceController extends CommonController {
     
     public function update(){
         /* 实例化模型*/
-        $db=M($_SESSION['db'].'prodservice');
+        $db=M('tp_product');
 //         dump($_POST);
         $_POST['moder']=$_SESSION['realname'];
         if ($db->save($_POST)){
@@ -142,7 +135,7 @@ class ProdserviceController extends CommonController {
         /* 接收参数*/
         $arr['id']=$_GET['id'];
         /* 实例化模型*/
-        $db=D($_SESSION['db'].'prodservice');
+        $db=D('tp_product');
         if ($_GET['istj']==1){
             $arr['istj']=0;
         }else{
@@ -162,7 +155,7 @@ class ProdserviceController extends CommonController {
         $search=$_POST['search'];
         $map['name|mark|content|money|smoney']=array('like','%'.$search.'%');
         /* 实例化模型*/
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
         $arr=$m->where($map)->order('utime desc')->select();
         $this->assign('data',$arr);
         $search=array("search"=>$search);
@@ -174,7 +167,7 @@ class ProdserviceController extends CommonController {
     
     public function img(){
         /* 实例化模型*/
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
         $arr=$m->find($_GET[id]);
         $this->assign('arr',$arr);
         $this->assign("cate",$arr['cate']);
@@ -222,7 +215,7 @@ class ProdserviceController extends CommonController {
         /* 接收参数*/
         $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
         /* 实例化模型*/
-        $m=D($_SESSION['db'].'prodservice');
+        $m=D('tp_product');
         $count =$m->delete($id);
         if ($count>0) {
             $this->success('删除成功');

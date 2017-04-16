@@ -80,7 +80,7 @@
 	  <header>
 	    <div class="container">
 	      <div class="row">
-	        <div class="col-md-4">
+	        <div class="col-md-2">
 	          <!-- Logo. -->
 	          <div class="logo">
 	            <h1><a href="#"><{$_SESSION['prodid']|getProduct=###}><span class="bold"></span></a></h1>
@@ -199,7 +199,7 @@
 	
 	        <!-- Data section -->
 	
-	        <div class="col-md-4">
+	        <div class="col-md-6">
 	          <div class="header-data">
 	
 	            <!-- Traffic data -->
@@ -284,25 +284,31 @@
 	            <ul>
 	              <li><a href="__APP__/Admin/Ad">广告管理</a></li>
 	              <li><a href="__APP__/Admin/Page">促销活动</a></li>	
-	              <li><a href="#">优惠券</a></li>              
+	              <li><a href="__APP__/Admin/Voucher">抽奖活动</a></li>	
+	              <li><a href="__APP__/Admin/Coupon">优惠券</a></li>              
 	              <li><a href="#">线索管理</a></li>	              
 	            </ul>
 	          </li> 
 	          <li class="has_sub"><a href="#"><i class="icon-user"></i> 客户管理 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
 	              <li><a href="#">会员分类</a></li>
-	              <li><a href="#">客户管理</a></li>
-	              <li><a href="#">员工管理</a></li>
-	              <li><a href="#">征信查询</a></li>
+	              <li><a href="__APP__/Admin/Customer">客户管理</a></li>
+	              <li><a href="__APP__/Admin/Admin">员工管理</a></li>
+	              <li><a href="__APP__/Admin/Bill">挂账管理</a></li>
+	              <li><a href="__APP__/Admin/Credit">征信查询</a></li>
 	              
 	            </ul>
 	          </li> 
-	          <li><a  href="__APP__/Admin/Admin"><i class="icon-file-alt"></i> 订单管理</a>
+	          <li><a  href="__APP__/Admin/Dingdan"><i class="icon-money bgreen"></i> 订单管理</a>
 	          <li class="has_sub"><a href="#"><i class="icon-phone"></i> 售后服务 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 	            <ul>
-	              <li><a href="#">线索管理</a></li>
-	              <li><a href="#">客户管理</a></li>
-	              <li><a href="#">员工管理</a></li>
+	              <li><a href="__APP__/Admin/Bill">挂账管理</a></li>
+	              <li><a href="#">维修申请</a></li>
+	            </ul>
+	          </li> 
+	          <li class="has_sub"><a href="#"><i class="icon-user"></i> 人员招聘 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+	            <ul>
+	              <li><a href="__APP__/Admin/Hr">招聘信息</a></li>
 	              
 	              
 	            </ul>
@@ -325,7 +331,7 @@
 	              <li><a href="__APP__/Admin/Index">系统信息</a></li>
 	              <li><a href="__APP__/Admin/Dict">数据字典</a></li>
 	              <li><a href="__APP__/Admin/User">用户管理</a></li>
-	              <li><a href="__APP__/Admin/Setting">表ID设计</a></li>	              
+	              <li><a href="__APP__/Admin/Setting/otable">表ID设计</a></li>	              
 	            </ul>
 	          </li>                               	          
 	        </ul>

@@ -74,18 +74,7 @@ class CreditController extends CommonController {
             $this->error("失败！");
         }
     }
-    public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $count =$m->delete($id);
-        if ($count>0) {
-            $this->success('成功');
-        }else{
-            $this->error('失败');
-        }
-    }
+    
     
     
     

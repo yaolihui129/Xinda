@@ -19,15 +19,14 @@ class CateController extends CommonController {
             }           
         }
         $this->assign('pidCateId',$_GET['pidCateId']);
-        $m=D('tp_cate');
-        $data=$m->where($where)->order('sn')->page($page,$maxPageNum)->select();
+        $data=M('tp_cate')->where($where)->order('sn')->page($page,$maxPageNum)->select();
         $this->assign('data',$data);              
         
         $this->display();
     }
     
     public function add(){       
-        $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : 000000; 
+        $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : '000000'; 
         $this->assign("pidCateId",$pidCateId);
         $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId);
         $count=M('tp_cate')->where($map)->count()+1;
