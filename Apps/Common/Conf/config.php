@@ -11,13 +11,20 @@ return array(
     'ONLINE'=>0,                   //是否为线上环境，0：测试环境；1：生产环境
     //修改定界符
     'TMPL_L_DELIM'=>'<{',
-    'TMPL_R_DELIM'=>'}>',   
+    'TMPL_R_DELIM'=>'}>', 
+    //数据库设置（云端）
     'DB_TYPE'=>'mysql',
-    'DB_HOST'=>'127.0.0.1',
-    'DB_NAME'=>'xiuli',
-    'DB_USER'=>'root',
-    'DB_PWD'=>'root',
-    'DB_PORT'=>'3306',   
+    'DB_HOST'=>'yikv6hh5.2296.dnstoo.com',
+    'DB_NAME'=>'xinda123',
+    'DB_USER'=>'xinda123_f',
+    'DB_PWD'=>'xinda123',
+    'DB_PORT'=>'5510',
+    //数据库设置（本地）
+//     'DB_HOST'=>'127.0.0.1',
+//     'DB_NAME'=>'xiuli',
+//     'DB_USER'=>'root',
+//     'DB_PWD'=>'root',
+//     'DB_PORT'=>'3306',   
     'DB_PREFIX'=>'zt_',
     'DB_CHARSET'=> 'utf8', // 字符集
 
