@@ -20,4 +20,9 @@ class IndexController extends CommonController {
         }
     }
     
+    public function calendar(){
+        
+        $this->display();
+    }
+    
 }

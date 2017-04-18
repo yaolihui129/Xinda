@@ -1,0 +1,58 @@
+<layout name="layout" />
+<!-- Page heading -->
+	    <div class="page-head">
+	      <h2 >
+	      		<!-- Breadcrumb -->
+		      <div class="bread-crumb pull-left">
+		      	<div class="row">
+		      		<div class="col-md-4">
+		      			<a href="#"><i class="icon-home"></i> 首页</a> 
+			          	<span class="divider">/</span> 
+			          	<a href="__URL__/calendar" class="bread-current">日历</a> 
+		      		</div>
+		      		<div class="col-md-7">
+		      			<form class="form-inline " action="__URL__/calendar" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+							</div>
+								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+				       </form>  
+		      		</div>
+		      		<div class="col-md-1">
+		      			<a href="__URL__/add" type="button" class="btn btn-success"><i class="icon-plus"> 添加</i></a>
+		      		</div>
+		      	</div>
+				       	       
+       		  </div>     
+	      </h2>
+        <div class="clearfix"></div>
+	    </div>
+<!-- Page heading ends -->
+
+ <!-- Matter -->
+
+	    <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- Widget -->
+              <div class="widget">
+                <!-- Widget title -->
+                <div class="widget-head">
+                  <div class="pull-left">Calendar</div>                  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-content">
+                  <!-- Widget content -->
+                  <div class="padd">
+                    <!-- Below line produces calendar. I am using FullCalendar plugin. -->
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+		  </div>
+
+		<!-- Matter ends -->

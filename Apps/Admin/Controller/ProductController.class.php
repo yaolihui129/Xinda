@@ -16,7 +16,7 @@ class ProductController extends CommonController {
     
     public function add(){
         /*实例化模型*/
-        $m=D($_SESSION['db'].'cate');
+        $m=D('tp_cate');
         $arr=$m->find($_GET['cate']);
         if ($arr){
             $where['pid']=$arr['pid'];             
