@@ -1,23 +1,16 @@
 <?php
 namespace Runzhu\Controller;
-use Think\Controller;
-class ServicelistController extends Controller {
+class ServicelistController extends WebInfoController {
     public function index(){
-
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(7);
-        $_SESSION['Runzhu']=$data;
-        $_SESSION['Runzhu']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs(); 
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息
             
-        $where['prodid']=7;            
-        $m=D('rz_cate');
-        $arr=$m->where($where)->order('sn')->select();                        
+        $where=array('prodid'=>$_SESSION[$JC]['id']);      
+        $arr=D('tp_cate')->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);
             
-        $m=D('rz_prodservice');
+        $m=D('tp_product');
         $map['state']='发布';
         if($_GET['cate']){
           $map['cate']=$_GET['cate'];
@@ -33,13 +26,5 @@ class ServicelistController extends Controller {
                   
         $this->display();
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-    
-    
     
 }

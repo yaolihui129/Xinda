@@ -2,13 +2,17 @@
 namespace Admin\Controller;
 class ProductController extends CommonController {
     public function index(){  
-        $q=getQz($_SESSION['prodid']);
-        dump($q);
         //获取分类信息
+        dump($_SESSION);
         $where=array('prodid'=>$_SESSION['prodid'],'state'=>1);
         $arr=M('tp_cate')->where($where)->order('sn')->select();
-        $this->assign('arr',$arr);               
-        $_SESSION['prodCate']=!empty($_GET['cate']) ? $_GET['cate'] : $arr['0']['cateid'];
+        $this->assign('arr',$arr);
+        if($_GET['cate']){//如果有参数用参数的信息
+            $_SESSION['prodCate']=$_GET['cate'];
+        }elseif ($_SESSION['prodCate']){//没参数，SESSION中有值，什么也不做            
+        }else {//没有参数，SESSION中也没有值用查询中的第一个             
+            $_SESSION['prodCate']=$arr['0']['cateid'];
+        }        
         //查询信息
         $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
         $page=!empty($_GET['page']) ? $_GET['page'] : 1;

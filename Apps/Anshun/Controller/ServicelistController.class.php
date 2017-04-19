@@ -2,7 +2,9 @@
 namespace Anshun\Controller;
 class ServicelistController extends WebInfoController {
     public function index(){          
-        getWebInfo(C('PRODUCT'));//获取网页信息      
+       $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息 
         $where=array('prodid'=>C('PRODUCT'),'state'=>'正常');
         $arr=M('as_cate')->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);

@@ -2,7 +2,9 @@
 namespace Anshun\Controller;
 class OrderController extends WebInfoController {     
     public function index(){        
-        getWebInfo(C('PRODUCT'));//获取网页信息         
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息       
         $this->display();
     }  
     public function search(){//检索车辆信息
@@ -132,7 +134,9 @@ class OrderController extends WebInfoController {
     }
     
     public function servicelist(){       
-        getWebInfo(C('PRODUCT'));//获取网页信息             
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息           
         if($_GET['state']){
             $state=$_GET['state'];
         }else {

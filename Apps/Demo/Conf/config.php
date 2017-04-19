@@ -11,6 +11,6 @@ return array(
     
     'PRODUCT'=>'Demo',    //定义产品编号   
     'DBQZ'=>'dm_',        //表前缀    
-    'WEIXIN_APPID'=>'',   //定义微信APPID
+    'WEIXIN_APPID'=>'wx3452e8086f5fefab',   //定义微信APPID
     
 );

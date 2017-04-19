@@ -1,38 +1,24 @@
 <?php
 namespace Demo\Controller;
-use Think\Controller;
-class IndexController extends Controller {
-    public function index(){
-           
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(12);
-        $_SESSION['Demo']=$data;
-        $_SESSION['Demo']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();           
-                
-        $m=D('tp_ad');
-        $where['prodid']=12;
-        $pic=$m->where($where)->order('utime desc')->select();
-        $this->assign('pic',$pic);
+class IndexController extends WebInfoController {
+    public function index(){ 
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息  
+        $appid  = $_GET['wxAppId'];
+        $openid = $_GET['wxOpenId'];
+        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
+        $where=array('prodid'=>$_SESSION[$JC]['id']);
+        $pic=D('tp_ad')->where($where)->order('utime desc')->select();
+        $this->assign('pic',$pic); 
         
-        $m=D('xl_prodservice');
-        $where['istj']=1;
-        $where['state']='发布';
-        $data=$m->where($where)
-                ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+        $where=array('prodid'=>$_SESSION[$JC]['id'],'istj'=>1,'state'=>5);
+        $data=D('tp_product')->where($where)
+                ->field("productId,mark,name,state,money,smoney,num,istj,utime")
                 ->order('utime desc')
                 ->select();
         $this->assign('data',$data);
-     
+
         $this->display();
-        
-        
-    }
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
+    }  
 }

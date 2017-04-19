@@ -12,7 +12,7 @@
     }
     //获取页面信息
     function getWebInfo($qz){//获取页面信息
-        $data=M('product')->where(array('qz'=>$qz))->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find();
+        $data=M('product')->where(array('qz'=>$qz))->field('id,web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find();
         $_SESSION[$qz]=$data;
         $_SESSION[$qz]['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();

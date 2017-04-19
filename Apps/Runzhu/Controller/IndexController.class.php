@@ -1,7 +1,7 @@
 <?php
 namespace Runzhu\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends WebInfoController {
     public function index(){               
 
         $m=D('product');

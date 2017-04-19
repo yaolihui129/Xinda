@@ -2,7 +2,9 @@
 namespace Anshun\Controller;
 class CarController extends WebInfoController {
     public function index(){       
-        getWebInfo(C('PRODUCT'));//获取网页信息       
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息      
         $this->display();
     }        
     public function add(){

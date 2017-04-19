@@ -1,7 +1,6 @@
 <?php
 namespace Runzhu\Controller;
-use Think\Controller;
-class LoginController extends Controller {
+class LoginController extends WebInfoController {
     private static $data;
     private $app_id='101388431';
     private $app_key="768d78094c5a2f4e9df3fe7f108c877e";

@@ -5,7 +5,7 @@
 	      		<div class="row">
 		      		<div class="col-md-3">
 		      			<!-- Breadcrumb -->
-		        <div class="bread-crumb pull-left">
+		        <div class="bread-crumb">
 		          <a href="__APP__/Admin"><i class="icon-home"></i> 商品服务</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current"> 商品&服务管理</a>          
@@ -21,14 +21,18 @@
 		      		</div>
 		      		<div class="col-md-5">
 			      		<ul class="nav navbar-nav pull-right">
-					          <li> <a href="__URL__/add/cateId/<{$_SESSION['prodCate']}>" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
-					          <li class="dropdown pull-right">            
+					          <li> 
+					          	<a href="__URL__/add/cateId/<{$_SESSION['prodCate']}>" class="btn">
+					          		<i class="icon-plus"> 添加</i>
+					          	</a>
+					          </li>
+					          <li class="dropdown">            
 					            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					              <i class="icon-retweet"></i> <{$_SESSION['prodCate']|getCatname=###}> <b class="caret"></b>              
 					            </a>
 					            <ul class="dropdown-menu">
 					              	<volist name='arr' id='st'>
-									  	<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.catname}></a></li>			  				  
+									  	<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.cateid|getCatname=###}></a></li>			  				  
 									</volist>
 					            </ul>
 					          </li>			          	          

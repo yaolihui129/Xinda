@@ -1,32 +1,18 @@
 <?php
 namespace Mtsh\Controller;
-use Think\Controller;
-class IndexController extends Controller {
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-    
-    public function index(){        
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(3);
-        $_SESSION['Mtsh']=$data;
-        $_SESSION['Mtsh']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs();
+class IndexController extends WebInfoController {
 
-         
-        $m=D('tp_ad');
-        $where['prodid']=3;
-        $pic=$m->where($where)->order('utime desc')->select();
+    public function index(){        
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息
+        $where=array('prodid'=>$_SESSION[$JC]['id']);
+        $pic=D('tp_ad')->where($where)->order('utime desc')->select();
         $this->assign('pic',$pic);
-        
-        $m=D('mt_prodservice');
-        $where['istj']=1;
-        $data=$m->where($where)
-        ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+
+        $map=array('prodid'=>$_SESSION[$JC]['id'],'istj'=>1,'state'=>5);
+        $data=D('tp_product')->where($map)
+        ->field("productId,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
         ->order('utime desc')
         ->select();
         $this->assign('data',$data);

@@ -2,9 +2,11 @@
 namespace Anshun\Controller;
 class VoucherController extends WebInfoController {   
     public function index(){        
-        getWebInfo(C('PRODUCT'));//获取网页信息          
-        $m=D('as_voucher');
-        $where=array("state"=>"发布");
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息        
+        $m=D('tp_voucher');
+        $where=array("state"=>5);
         $arr=$m->where($where)->order('end desc')->select();
         $this->assign('arr',$arr);
 
@@ -15,7 +17,7 @@ class VoucherController extends WebInfoController {
     }
 
     public function choujiang(){
-        $m=D('as_tickets');
+        $m=D('tp_tickets');
         $where=array("voucherid"=>$_GET['id']);
         $arr=$m->where($where)->field("id")->select();
         $count=$m->where($where)->count();

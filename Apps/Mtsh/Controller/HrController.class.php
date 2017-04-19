@@ -1,26 +1,16 @@
 <?php
 namespace Mtsh\Controller;
-use Think\Controller;
-class HrController extends Controller {
-    
-    public function _empty(){
-    
-        $this->display('/Mtsh/Index');
-    }
-    
+class HrController extends WebInfoController {
+
     public function index(){
-        $m=D('product');
-        $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(3);
-        $_SESSION['Mtsh']=$data;
-        $_SESSION['Mtsh']['img']=$data['path'].$data['img'];
-        $_SESSION['ip']=get_client_ip();
-        $_SESSION['browser']=GetBrowser();
-        $_SESSION['os']=GetOs(); 
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息
         
         $m=D('tp_hr');
         $data=$m->select();
         $this->assign('data',$data);
-//         dump($data);
+        
         $this->display();
         
     }
@@ -30,7 +20,6 @@ class HrController extends Controller {
         $m=D('tp_hr');
         $arr=$m->find($_GET['id']);
         $this->assign('arr',$arr);
-//         dump($arr);
         $this->display();
     }
     
@@ -52,15 +41,16 @@ class HrController extends Controller {
     }
     
     public function insert(){
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
         $m=D('tp_hr');
-        $_POST['prodid']="3";
+        $_POST['prodid']=$_SESSION[$JC]['id'];
         $_POST['moder']=$_SESSION['realname'];       
         
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
+        if($m->add()){
             $this->success("成功");
         }else{
             $this->error('失败');

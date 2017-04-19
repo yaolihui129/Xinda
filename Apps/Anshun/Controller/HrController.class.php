@@ -2,8 +2,10 @@
 namespace Anshun\Controller;
 class HrController extends WebInfoController {
     public function index(){
-        getWebInfo(C('PRODUCT'));//获取网页信息      
-        $where=array('prodid'=>$this->getProdId(),'istuij'=>0,'state'=>'招聘中');
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息   
+        $where=array('prodid'=>$_SESSION[$JC]['id'],'istuij'=>0,'state'=>'招聘中');
         $data=M('tp_hr')->where($where)->order('sn,id')->select();
         $this->assign('data',$data);    
         $this->display();
@@ -18,16 +20,20 @@ class HrController extends WebInfoController {
     
     
     public function tuijhr(){       
-        getWebInfo(C('PRODUCT'));//获取网页信息      
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息   
         $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';        
-        $where=array('prodid'=>$this->getProdId(),'istuij'=>1,'state'=>'招聘中');
+        $where=array('prodid'=>$_SESSION[$JC]['id'],'istuij'=>1,'state'=>'招聘中');
         $data=M('tp_hr')->where($where)->order('sn,id')->select();
         $this->assign('data',$data);    
         $this->display();
     }
     
     public  function baom(){        
-        getWebInfo(C('PRODUCT'));//获取网页信息      
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息
         $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';   
         $arr=M('tp_hr')->find($_GET['id']);
         $this->assign('arr',$arr);        
@@ -35,7 +41,9 @@ class HrController extends WebInfoController {
     }
     
     public function tuij(){         
-        getWebInfo(C('PRODUCT'));//获取网页信息      
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息      
         $_SESSION['Xiuli']['web']='临城秀丽广告-招聘';   
         $arr=M('tp_hr')->find($_GET['id']);
         $this->assign('arr',$arr);       
@@ -68,8 +76,5 @@ class HrController extends WebInfoController {
         }
     
     }
-    
-    
-    
-    
+      
 }

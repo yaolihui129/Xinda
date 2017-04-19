@@ -78,6 +78,7 @@ class CateController extends CommonController {
     
     
     public function update(){
+        dump($_POST);
         $_POST['moder']=$_SESSION['realname'];
         if (D('tp_cate')->save($_POST)){
             $this->success("修改成功！",U('index'));

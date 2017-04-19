@@ -50,7 +50,7 @@ function getIstj($istj){
 }
 
 
-// 显示是否该尕布
+// 显示是否该发布
 function getXState($state){
     if ($state=='发布'){
         return "下线";

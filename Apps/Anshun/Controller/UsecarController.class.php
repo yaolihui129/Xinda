@@ -2,8 +2,10 @@
 namespace Anshun\Controller;
 class UsecarController extends WebInfoController {
     public function index(){       
-        getWebInfo(C('PRODUCT'));//获取网页信息      
-        $where=array("type"=>"usecar","state"=>"正常");
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息     
+        $where=array("type"=>"usecar","state"=>1);
         $data=M('dict')->where($where)->order('k')->select();
         $this->assign('data',$data);
         $type=!empty($_GET['type']) ? $_GET['type'] : 6;
