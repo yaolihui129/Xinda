@@ -116,24 +116,7 @@
             }
             return $br;
         }else{return "获取浏览器信息失败！";}
-    }
-    
-    //获得访客浏览器语言
-    function GetLang(){
-        if(!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
-            $lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-            $lang = substr($lang,0,5);
-            if(preg_match("/zh-cn/i",$lang)){
-                $lang = "简体中文";
-            }elseif(preg_match("/zh/i",$lang)){
-                $lang = "繁体中文";
-            }else{
-                $lang = "English";
-            }
-            return $lang;
-        }else{return "获取浏览器语言失败！";}
-    }
-
+    }     
     //获取访客操作系统
     function GetOs(){
         if(!empty($_SERVER['HTTP_USER_AGENT'])){
@@ -471,6 +454,11 @@
         $postJson = json_encode($Meg);      //将数组转化成json
         $res      = httpPost($url, $postJson);
         return $res;
+    }
+    //截取字符串最后的“。”（不管几个一并截取）用于语音识别结果
+    function wxRtrim($arr,$a='。'){
+        $arr=rtrim($arr, $a);
+        return $arr;
     }
 
     //根据日期获取星期

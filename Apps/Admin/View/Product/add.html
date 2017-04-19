@@ -1,0 +1,107 @@
+<layout name="layout" />
+<!-- Page heading -->
+	    <div class="page-head">
+	      <h2 class="pull-left">
+			<!-- Breadcrumb -->
+		      <div class="bread-crumb pull-left">
+		      	<div class="row">
+		      		<div class="col-md-12">
+		      			<a href="__APP__/Admin"><i class="icon-home"></i> 商品服务</a> 
+			            <span class="divider">/</span> 
+			            <a href="__URL__" class="bread-current"> 商品&服务管理</a>   
+			          	<span class="divider">/</span> 新增
+		      		</div>
+		      	</div>	          
+	      </h2>       
+        <div class="clearfix"></div>
+	    </div>
+<!-- Page heading ends -->
+
+
+<!-- Matter -->
+
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
+                         <input type="hidden" name="cateId" value="<{$cateId}>" />
+                         <input type="hidden" name="pidCateId" value="<{$cateId|getCatePid}>" />                        
+                         <div class="form-group">
+                             <label class="col-lg-1 control-label">顺序:</label>
+                             <div class="col-lg-1">
+                                 <input type="number" class="form-control" name='sn' value="<{$count}>" placeholder="sn">
+                             </div>
+                             <label class="col-lg-1 control-label">条码号:</label>
+                             <div class="col-lg-1">
+                                 <input type="text" class="form-control" name='mark' value="<{$arr.mark}>" placeholder="mark">
+                             </div>
+                             <label class="col-lg-1 control-label">产品:</label>
+                             <div class="col-lg-2">
+                                 <input type="text" class="form-control" name='name' value="" placeholder="产品名称">
+                             </div>
+                             <label class="col-lg-1 control-label">分类:</label>
+                             <div class="col-lg-2">
+                                 <input type="text" class="form-control" value="<{$cateId|getCatname=###}>"readonly>
+                             </div>
+                             
+                             <label class="col-lg-1 control-label">状态:</label>
+                             <div class="col-lg-1"><{$state}></div>
+                             
+                         </div> 
+                         <div class="form-group">
+                             <label class="col-lg-1 control-label">市场格(￥):</label>
+                             <div class="col-lg-1">
+                                 <input type="text" class="form-control" name='smoney' value="0.00" placeholder="市场价">
+                             </div>
+                             <label class="col-lg-1 control-label">优惠格(￥):</label>
+                             <div class="col-lg-1">
+                                 <input type="text" class="form-control" name='money' value="0.00" placeholder="优惠价">
+                             </div>
+                             <label class="col-lg-1 control-label">制作周期:</label>
+                             <div class="col-lg-2">
+                                 <input type="text" class="form-control" name='zhouqi' value="一周" placeholder="制作周期">
+                             </div> 
+                             <label class="col-lg-1 control-label">商品尺寸:</label>
+                             <div class="col-lg-2">
+                                 <input type="text" class="form-control" name='weight' value="" placeholder="商品尺寸">
+                             </div>                                                                                    
+                             <label class="col-lg-1 control-label">库存数量:</label>
+                             <div class="col-lg-1">
+                                 <input type="number" class="form-control" name='num' value="999" placeholder="库存数量">
+                             </div>                            
+                         </div>                                                                                              
+                         <div class="form-group">	                          	                        
+	                          <label class="col-lg-4 control-label">产品简述：</label>
+	                          <div class="col-lg-8"><textarea class="cleditor" name="content"><{$arr.content}></textarea></div>	                          
+	                      </div> 
+	                      <div class="form-group">
+	                      	<label class="col-lg-4 control-label">产品照片：</label>
+	                      	<div class="col-lg-8">
+	                      		<input id="input-1" type="file" class="file form-control" name="img">
+	                      	</div>
+	                      </div>
+                         <div class="form-group">
+	                          <label class="col-lg-4 control-label">产品详情：</label>
+	                          <div class="col-lg-8"><textarea class="cleditor" name="productDesc"><{$arr.productDesc}></textarea></div>
+	                      </div> 
+
+                                                  
+                         <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-9">
+                                 <button type="submit" class="btn btn-primary">提交</button>  
+                                 <a href="__URL__" class="btn btn-warning pull-right" style="margin-right:400px;">返回</a>                      
+                             </div>                             
+                         </div>
+                     </form>
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->

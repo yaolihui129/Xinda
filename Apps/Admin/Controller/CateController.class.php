@@ -39,7 +39,7 @@ class CateController extends CommonController {
     public function insert(){   
         $m=D('tp_cate');
         do {//如果该ID在库中存在，则重新获取
-            $id=getRandCode(40);
+            $id=getRandCode(6);
             $arr=$m->find($id);
         } while ($arr);
         $_POST['cateId']=$id;

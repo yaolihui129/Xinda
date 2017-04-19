@@ -1,5 +1,4 @@
 ﻿<?php
-
 //根据id获取产品名
 function getProd($id){
     if ($id){
@@ -9,18 +8,24 @@ function getProd($id){
         return ;
     }
 }
-
+function getQz($id){
+    if ($id){
+        $data=M('product')->find($id);
+        return $data['qz'];
+    }else {
+        return ;
+    }
+}
 //根据pid获取分类数
 function countCate($pidCateId){
     $where=array('pidCateId'=>$pidCateId);
     $data=M('tp_cate')->where($where)->count();
     return $data;        
 }
-
+//获取分类名字
 function getCatname($cateid){
     if ($cateid){
-        $m=M('tp_cate');
-        $data=$m->find($cateid);
+        $data=M('tp_cate')->find($cateid);
         $str=getCatname($data['pidcateid'])."-".$data['catname'];
         return $str;
     }else {
@@ -28,6 +33,13 @@ function getCatname($cateid){
     }
 }
 
+//获取父级分类ID
+function getCatePid($cateId){
+    $m=M('tp_cate');
+    $data=$m->find($cateId);
+    return $data['pidcateid'];
+    
+}
 //显示是否在首页展示信息
 function getIstj($istj){
     if ($istj==1){

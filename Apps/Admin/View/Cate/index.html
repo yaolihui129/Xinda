@@ -66,7 +66,10 @@
                           <td><{$st.utime}></td>
                           <td>
                               <a href="__URL__/add/pidCateId/<{$st.cateid}>" type="button" class="btn btn-success">
-                              	<i class="icon-plus"> 添加子分类</i>
+                              	<i class="icon-plus"> 子分类</i>
+                              </a>
+                              <a href="__APP__/Admin/Product/index/cate/<{$st.cateid}>" type="button" class="btn btn-primary">
+                              	<i class="icon-plus"> 产品</i>
                               </a>
                               <a href="__URL__/mod/id/<{$st.cateid}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
                               <a href="__URL__/del/id/<{$st.cateid}>" class="btn  btn-danger" onclick="return confirm('你确定要删除？')">
