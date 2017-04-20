@@ -14,7 +14,7 @@ class AdController extends CommonController {
     }
     
     public function insert(){
-        $m=D('tp_ad');       
+            
         $_POST['moder']=$_SESSION['realname'];
         $_POST['prodid']=$_SESSION['prodid'];
         //处理上传图片
@@ -24,6 +24,7 @@ class AdController extends CommonController {
         $upload->rootPath =  './Upload/'.getQz($_SESSION['prodid']).'/';// 设置附件上传目录
         $upload->savePath = '/Ad/'; // 设置附件上传目录
         $info  =   $upload->upload();
+        $m=D('tp_ad');
         if(!$info) {// 上传错误提示错误信息或没有上传图片
             if(!$m->create()){
                 $this->error($m->getError());
@@ -83,6 +84,28 @@ class AdController extends CommonController {
                 $this->error("修改失败！");
             }
         }
+    }
+    
+    public function fabu(){
+        /* 接收参数*/
+        $arr['id']=$_GET['id'];
+        $arr['moder']=$_SESSION['realname'];
+        if ($_GET['state']=='5'){
+            $arr['state']="1";
+            if (D('tp_ad')->save($arr)){
+                $this->success("下线成功！");
+            }else{
+                $this->error("失败！");
+            }          
+        }else{
+            $arr['state']="5";
+            if (D('tp_ad')->save($arr)){
+                $this->success("发布成功！");
+            }else{
+                $this->error("失败！");
+            }
+        }   
+
     }
 
     public function del(){
