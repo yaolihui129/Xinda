@@ -10,17 +10,47 @@
         $data=M('product')->where(array('qz'=>$qz))->find();
         return $data['id'];
     }
+    //根据id获取产品名
+    function getProd($id){
+        $data=M('product')->find($id);
+        return $data['name'];
+    }
+    
+    function getQz($id){
+        $data=M('product')->find($id);
+        return $data['qz'];
+    }
+    //根据pid获取分类数
+    function countCate($pidCateId){
+        $where=array('pidCateId'=>$pidCateId);
+        $data=M('tp_cate')->where($where)->count();
+        return $data;
+    }
+    //获取分类名字
+    function getCatname($cateid){
+        if ($cateid){
+            $data=M('tp_cate')->find($cateid);
+            $str=getCatname($data['pidcateid'])."-".$data['catname'];
+            return $str;
+        }else {
+            return "|-";
+        }
+    }   
+    //获取父级分类ID
+    function getCatePid($cateId){
+        $data=M('tp_cate')->find($cateId);
+        return $data['pidcateid'];    
+    }
     //获取页面信息
     function getWebInfo($qz){//获取页面信息
-        $data=M('product')->where(array('qz'=>$qz))->field('id,web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find();
+        $data=M('product')->where(array('qz'=>$qz))->field('id,web,adress,desc,phone,tel,qq,qz,url,record')->find();
         $_SESSION[$qz]=$data;
-        $_SESSION[$qz]['img']=$data['path'].$data['img'];
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
     }
     
-
+   //登录
    function login($qz,$phone,$password){
         $where=array('phone'=>$phone,['password']=>md5($password));
         $data=M('tp_customer')->where($where)->field('id,phone,realname')->find();
@@ -34,16 +64,13 @@
             return 0;
         }
     }
-    
-    function logout(){
-        
+    //注销
+    function logout(){       
         $_SESSION = array();
         if (isset($_COOKIE[session_name()])) {
             setcookie(session_name(),'',time()-3600,'/');
         }
         session_destroy();// 销毁sesstion
-        
-    
     }
 
     //根据id获取客户电话
@@ -51,13 +78,11 @@
         $arr=M('tp_customer')->find($id);        
         return $arr['phone'];        
     }
-
-    //根据id获取客户姓名
-    function getCusName($id){
-       $arr=M('tp_customer')->find($id);
-       return $arr['realname'];        
+    //获取姓名
+    function getCRealname($id){
+        $data=M('tp_customer')->find($id);
+        return $data['realname'];
     }
-    
     //获取自定义菜单
     function wxMenuGet($appID) {
         $token = wxGetAccessToken($appID);
@@ -76,7 +101,6 @@
         $res      = json_decode($postJson,true);
         return $res;       
     }
-
     //根据id获取活动信息
     function getVoucher($id){
         $arr=M('voucher')->find($id);
@@ -96,7 +120,6 @@
         $c=M('tickets')->where($where)->count();
         return $c;  
     }
-
     //获得访客浏览器类型
     function GetBrowser(){
         if(!empty($_SERVER['HTTP_USER_AGENT'])){
@@ -335,10 +358,11 @@
         $long_url='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$res['ticket']; //3.使用$ticket换去二维码图片
         return getShortUrl($token,$long_url);
     }
-    function wxLogin($qz,$db,$appid,$openid){//微信公众账号免登陆
+    //微信公众账号免登陆
+    function wxLogin($qz,$db,$appid,$openid){
         if($openid){//如果有$_GET['wxOpenId']就直接登录
             $map=array('wxopenid'=>$openid);
-            $m=D($db.'customer');
+            $m=D('tp_customer');
             $arr=$m->where($map)->find();
             if($arr){//如果用户表有值，直接登录
                 $_SESSION['userid']   = $arr['tpid'];
@@ -436,14 +460,12 @@
 
     //获取微信服务器IP
     function wxGetServerIp($appID){
-        if($_SESSION['wx_ip_list']){
-            //如果$_SESSION['wx_ip_list']有值，什么也不做
-        }else {//如果$_SESSION['wx_ip_list']没有值，获取服务器清单并复制给$_SESSION['wx_ip_list']            
+        if(!$_SESSION['wx_ip_list']){
             $token = wxGetAccessToken($appID);
             $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$token;
             $res = httpGet($url);
             $_SESSION['wx_ip_list'] =json_decode($res,true);
-        } 
+        }
         return $_SESSION['wx_ip_list'];
     }
     //发送微信模板消息
@@ -507,8 +529,7 @@
     //根据funcid获取功能结果
     function getFResult($funcid){
         $data=M('tp_func')->find($funcid);
-        return $data['result'];
-        
+        return $data['result'];       
     }
 
     //更具funcid获取项目用例
@@ -845,8 +866,7 @@
         $count=M("tp_func")->where($where)->count();
         return $count;
     }
-    
-    
+       
   //根据$proid获取测试范围数量
   function countRange($proid){
       $where=array('zt_tp_func.fproid'=>$proid,'zt_tp_func.state'=>'正常','zt_module.state'=>'正常');

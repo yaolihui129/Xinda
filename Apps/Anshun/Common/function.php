@@ -1,17 +1,4 @@
 <?php
-// 根据id获取分类名
-function getCatname($cateid){
-    if ($cateid){
-        $m=M('as_cate');
-        $data=$m->find($cateid);
-        $str=getCatname($data['pid'])."-".$data['catname'];
-        return $str;
-    }else {
-        return "|-";
-    }
-}
-
-
 //根据车辆ID获取维修记录
 function getServicelist($carid){
     $m=M('order_serviccar');

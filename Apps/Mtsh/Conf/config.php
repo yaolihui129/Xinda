@@ -8,11 +8,7 @@ return array(
         '__IMG__'=>__ROOT__.'/Public/images',
         '__UPLOAD__'=>__ROOT__.'/Upload/Mtsh'
     ),
-    //定义产品编号
-    'PRODUCT'=>'Mtsh',
-    //表前缀
-    'DBQZ'=>'mt_',
-    //定义微信APPID
-    'WEIXIN_APPID'=>'wx0a29084c1bf1b6dc',
-    
+    'PRODID'        =>   3,    //定义产品编号
+    'PRODUCT'       =>  'Mtsh',//定义产品编号
+    'WEIXIN_APPID'  =>  'wx0a29084c1bf1b6dc',//定义微信APPID
 );

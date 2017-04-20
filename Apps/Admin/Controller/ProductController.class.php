@@ -3,7 +3,6 @@ namespace Admin\Controller;
 class ProductController extends CommonController {
     public function index(){  
         //获取分类信息
-        dump($_SESSION);
         $where=array('prodid'=>$_SESSION['prodid'],'state'=>1);
         $arr=M('tp_cate')->where($where)->order('sn')->select();
         $this->assign('arr',$arr);

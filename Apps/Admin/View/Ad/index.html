@@ -5,33 +5,23 @@
 	      		<div class="row">
 		      		<div class="col-md-3">
 		      			<!-- Breadcrumb -->
-		        <div class="bread-crumb pull-left">
+		        <div class="bread-crumb">
 		          <a href="__APP__/Admin"><i class="icon-home"></i> 优惠促销</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current"> 广告轮播</a>          
 		        </div>	
 		      		</div>
-		      		<div class="col-md-4">
-		      			<form class="form-inline " action="__URL__/index" method="post">
+		      		<div class="col-md-8">
+		      			<form class="form-inline pull-right" action="__URL__/index" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
 							</div>
 								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
 				       </form>  
 		      		</div>
-		      		<div class="col-md-5">
-			      		<ul class="nav navbar-nav pull-right">
-					          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
-					          <li class="dropdown pull-right">            
-					            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-					              <i class="icon-retweet"></i> <{$_SESSION['prodCate']|getCatname=###}> <b class="caret"></b>              
-					            </a>
-					            <ul class="dropdown-menu">
-					              	<volist name='arr' id='st'>
-									  	<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.catname}></a></li>			  				  
-									</volist>
-					            </ul>
-					          </li>			          	          
+		      		<div class="col-md-1">
+			      		<ul class="nav navbar-nav navbar-right">
+					          <li> <a href="__URL__/add" type="button" class="btn btn-default pull-right"><i class="icon-plus"> 添加</i></a></li>					          		          	          
 				        </ul>
 		      		</div>
 		      	</div>
@@ -54,8 +44,7 @@
 		                    <tr>
 		                      <th width=20% align="center" bgcolor="#ccc">图片</th>
 		                      <th width=10% align="center" bgcolor="#ccc">标题</th>
-	                          <th width=10% align="center" bgcolor="#ccc">跳转</th>
-	                          <th width=10% align="center" bgcolor="#ccc">路径</th>
+	                          <th width=10% align="center" bgcolor="#ccc">跳转</th>	                          
 	                          <th width=15% align="center" bgcolor="#ccc">描述</th>                                                                             
 	                          <th width=10% align="center" bgcolor="#ccc">更新时间</th>
 	                          <th width=20% align="center" bgcolor="#ccc">操作</th>
@@ -66,8 +55,7 @@
 		                        <tr>                          
 		                          <td><img src="__UPLOAD__/<{$_SESSION['qz']}><{$st.path}><{$st.img}>"  style="width:160px;max-width: 160px;"/></td>
 		                          <td><{$st.title}></td>
-		                          <td><{$st.url}></td>
-		                          <td><{$st.path}></td>
+		                          <td><{$st.url}></td>		                          
 		                          <td><{$st.remark}></td>
 		                          <td><{$st.utime}></td>                         
 		                          <td>                              

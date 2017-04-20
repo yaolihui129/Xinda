@@ -3,26 +3,18 @@ namespace Demo\Controller;
 use Think\Controller;
 class ServicelistController extends Controller {
     public function index(){
-
-        $JC=C('PRODUCT');
-        $this->assign('JC',$JC);
-        getWebInfo($JC);//获取网页信息
-            
-        $where=array('prodid'=>$_SESSION[$JC]['id']);
-        $m=D('tp_cate');
-        $arr=$m->where($where)->order('sn')->select();                        
-        $this->assign('arr',$arr);
-            
-        $m=D('tp_product');
-        $map['state']=5;
+        //获取网页信息
+        getWebInfo(C('PRODUCT')); 
+        $this->assign('JC',C('PRODUCT'));           
+        $where=array('prodid'=>C('PRODID'),'state'=>1);
+        $arr=M('tp_cate')->where($where)->order('sn')->select();                        
+        $this->assign('arr',$arr);            
         if($_GET['cate']){
-           $map['cate']=$_GET['cate'];
-           $data=$m->where($map)
-                ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-                ->order('utime desc')->select();
+           $map=array('state'=>5,'cateId'=>$_GET['cate']);         
+           $data=D('tp_product')->where($map)->field("productId,name,state,money,smoney,num,cateId,productImg,utime")->order('utime desc')->select();
         }else {
-           $data=$m->where($map)->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-                ->order('utime desc')->limit(12)->select();
+           $map=array('state'=>5);
+           $data=D('tp_product')->where($map)->field("productId,name,state,money,smoney,num,cateId,productImg,utime")->order('utime desc')->limit(12)->select();
         }                  
         $this->assign('data',$data);
                   

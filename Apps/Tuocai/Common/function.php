@@ -1,15 +1,4 @@
 <?php
-// 根据id获取分类名
-function getCatname($cateid){
-    if ($cateid){
-        $m=M('tc_cate');
-        $data=$m->find($cateid);
-        $str=getCatname($data['pid'])."-".$data['catname'];
-        return $str;
-    }else {
-        return "|-";
-    }
-}
 
 function selectCate($value="小学课程") {
     $html = '<select name="coursetype" class="form-control">';
@@ -83,10 +72,6 @@ function getTeachclassInfo($teachclassid){
     return $str;
     
 }
-
-
-
-
 //根据dateid 获取排课信息
 function getPlan($dateid){
     $m=D('tc_plan');

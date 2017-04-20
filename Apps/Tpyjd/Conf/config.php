@@ -14,5 +14,8 @@ return array(
     'DB_NAME'=>'tpyjd_crm',
     'DB_PREFIX'=>'tpyjd_',
     'CRMURL'=>'http://app5.cloudcc.com/distributor.action',
+    'PRODID'        =>   13,    //定义产品编号
+    'PRODUCT'       =>  'Tpyjd',//定义产品编号
+    'WEIXIN_APPID'  =>  '',//定义微信APPID
     
 );

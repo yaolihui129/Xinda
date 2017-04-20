@@ -3,38 +3,34 @@
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<{$arr.cate|getCatname=###}>-<b><{$arr.name}></b>
-				<a href="__APP__/Demo/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
+				<{$arr.cateid|getCatname=###}>-<b><{$arr.name}></b>
+				<a href="__APP__/<{$Think.config.PRODUCT}>/Servicelist/index/cate/<{$arr.cateid}>" class="pull-right">返回分类</a>
 			</h3>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-3 ">
-				<img src="__UPLOAD__<{$arr.path}><{$arr.img}>" alt="<{$arr.img}>"  height="180px">		
+				<img src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.productimg}>"  height="180px">		
 			</div>
 			<div class="col-md-7 ">
-				<h5>编号：<{$arr.mark}></h5>
+				<notempty name="arr.mark">
+					<h5>编号：<{$arr.mark}></h5>
+				</notempty>				
 				<h4>名称：<{$arr.name}></h4>
 				<switch name="arr.money">
 				    <case value="0"><br></case>				    
-				    <default /><h4>价格：<b>￥<{$arr.money}></b>(市场价：<s><em>￥<{$arr.smoney}></em></s>)</h4>
-								<!--<h4>运费：￥<{$arr.wlmoney}></h4>-->
-								<h5>规格：<{$arr.weight}></h5>
+				    <default /><h4>价格：<b>￥<{$arr.money}></b>(市场价：<s><em>￥<{$arr.smoney}></em></s>)</h4>				
 				</switch>
-				
-				<a href="#" class="btn btn-info btn-xs">咨询预约</a>
-				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
-					<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['qq']}>:41">
-				</a>
-	
+				<notempty name="arr.weight">
+					<h5>规格：<{$arr.weight}></h5>
+				</notempty>
+				<p><{$arr.content}></p>
+				<a href="#" class="btn btn-info btn-block">下单</a>					
 			</div>
-
 		</div>
 	</div>
 	<div class="panel panel-info">
 		<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
-		<div class="panel-body"><p><{$arr.content}></p></div>
-			
-			
+		<div class="panel-body"><p><{$arr.productdesc}></p></div>		
 	</div>
 </div>
 
