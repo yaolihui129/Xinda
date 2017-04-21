@@ -1,10 +1,7 @@
 <?php
 namespace Tpyjd\Controller;
-class IndexController extends WebInfoController {
+class ActivityController extends WebInfoController {
     public function index(){
-        $m=D('city');
         $this->display();
     }
-    
-       
 }

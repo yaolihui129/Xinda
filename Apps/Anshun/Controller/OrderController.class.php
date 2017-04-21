@@ -26,12 +26,11 @@ class OrderController extends WebInfoController {
     
     public function yyinsert(){              
         if($_POST['phone']){//关联客户信息，客户信息不存在创建客户
-           /* 实例化模型*/
            $m=M('tp_customer');
            $where=array("phone"=>$_POST['phone']);
-           $arr=$m->where($where)->select();
+           $arr=$m->where($where)->find();
            if($arr){
-               $_POST['uid']=$arr[0]['id'];
+               $_POST['uid']=$arr['id'];
            }else {
                $data['phone']=$_POST['phone'];
                $data['password']=md5(123456);
@@ -42,18 +41,17 @@ class OrderController extends WebInfoController {
                }
                $lastId=$m->add($data);
                $arr=$m->where($where)->select();
-               $_POST['uid']=$arr[0]['id'];
+               $_POST['uid']=$arr['id'];
            }
        }else {
            $this->error('联系电话没有填写');
        }
        if($_POST['plateno']){//处理车辆信息    
-           /* 实例化模型*/
            $m=M('car');
            $where=array("plateno"=>$_POST['plateno']);
-           $arr=$m->where($where)->select();
+           $arr=$m->where($where)->find();
            if($arr){
-               $_POST['carid']=$arr[0]['id'];
+               $_POST['carid']=$arr['id'];
            }else {
                $data['plateno']=$_POST['plateno'];               
                $data['ctime']=time();
@@ -63,7 +61,7 @@ class OrderController extends WebInfoController {
                }
                $lastId=$m->add($data);
                $arr=$m->where($where)->select();
-               $_POST['carid']=$arr[0]['id'];
+               $_POST['carid']=$arr['id'];
            }
        }
            
@@ -85,7 +83,7 @@ class OrderController extends WebInfoController {
     }
 
     public function receive(){//收车
-        $arr=D('car')->find($_GET['id']);
+        $arr=M('car')->find($_GET['id']);
         $this->assign('arr',$arr);
         $this->assign("textservice", selectCate());        
         $this->display();
@@ -122,8 +120,7 @@ class OrderController extends WebInfoController {
             if(!$m->create()){
                 $this->error($m->getError());
             }
-            $lastId=$m->add();
-            if($lastId){
+            if($m->add()){
                 $this->success("成功",U('Anshun/Order/servicelist'));
             }else{
                 $this->error('失败');

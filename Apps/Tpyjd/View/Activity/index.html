@@ -4,18 +4,18 @@
 	      	<h2 >
 		      	<!-- Breadcrumb -->
 		        <div class="bread-crumb pull-left">
-		          <a href="__APP__/Admin"><i class="icon-home"></i> 基础信息</a> 
+		          <a href="__APP__/Admin"><i class="icon-cog"></i> 设置</a> 
 		          <span class="divider">/</span> 
-		          <a href="__URL__" class="bread-current">字典</a>          
+		          <a href="__URL__" class="bread-current">新CRM对象API</a>          
 		        </div>	      			      	
 		      	<ul class="nav navbar-nav pull-right">			          
 			          <li class="dropdown pull-right">            
 			            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-			              <i class="icon-retweet"></i> <{$_SESSION['FieldName']}> <b class="caret"></b>              
+			              <i class="icon-retweet"></i> <{$_SESSION['otable']}> <b class="caret"></b>              
 			            </a>
 			            <ul class="dropdown-menu">
 			              	<volist name='arr' id='st'>
-							  	<li ><a  href="__URL__/index/FieldName/<{$st.fieldname}>"><{$st.fieldname}></a></li>			  				  
+							  	<li ><a  href="__URL__/index/otable/<{$st.otable}>"><{$st.otable}></a></li>			  				  
 							</volist>
 			            </ul>
 			          </li>			          	          
