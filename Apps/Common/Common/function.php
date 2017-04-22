@@ -42,7 +42,7 @@
         return $data['pidcateid'];    
     }
     //获取页面信息
-    function getWebInfo($qz){//获取页面信息
+    function getWebInfo($qz){
         $data=M('product')->where(array('qz'=>$qz))->field('id,web,adress,desc,phone,tel,qq,qz,url,record')->find();
         $_SESSION[$qz]=$data;
         $_SESSION['ip']=get_client_ip();

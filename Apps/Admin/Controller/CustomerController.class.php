@@ -9,10 +9,9 @@ class CustomerController extends CommonController {
 	    $this->assign('search',$search);
 	    $maxPageNum=10;	    
 	    $where['prodid']=$_SESSION['prodid'];
-	    $where['phone|pincodes|realname']=array('like','%'.$search.'%');
-	    $m=D('tp_customer');
+// 	    $where['wxopenid']=array('like','%'.$search.'%');
+	    $m=M('tp_cus');
 	    $data=$m->where($where)->page($page,$maxPageNum)->select();
-	    
         $this->assign('data',$data);
          
 	    $this->display();

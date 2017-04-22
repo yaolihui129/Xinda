@@ -3,9 +3,9 @@ namespace Demo\Controller;
 use Think\Controller;
 class ServicelistController extends Controller {
     public function index(){
-        //获取网页信息
-        getWebInfo(C('PRODUCT')); 
-        $this->assign('JC',C('PRODUCT'));           
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息          
         $where=array('prodid'=>C('PRODID'),'state'=>1);
         $arr=M('tp_cate')->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);            

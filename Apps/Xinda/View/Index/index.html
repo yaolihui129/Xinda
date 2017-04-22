@@ -4,8 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="baidu-site-verification" content="6L4Zs1G6f0" />
-    <title><{$_SESSION['Xinda']['web']}></title>
-	<meta name="keywords" content="<{$_SESSION['keywords']}>" />	
+    <title><{$_SESSION[$JC]['web']}></title>
+	<meta name="keywords" content="<{$_SESSION[$JC]['keywords']}>" />	
     <import type="css" file="css.xd_home" />	
     <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
@@ -53,16 +53,16 @@
 		    &#9776;
 		  </button>
 		
-		  <a class="navbar-brand" href="__APP__/Xinda"><{$_SESSION['Xinda']['web']}></a>
+		  <a class="navbar-brand" href="__APP__/<{$JC}>"><{$_SESSION[$JC]['web']}></a>
 		  <div class="collapse navbar-collapse" id="navbar-collapse">
 		    <ul class="navbar-nav ml-auto">
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/Xinda/Login/qq_login"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Login/qq_login"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>
 		      
 		      <empty name="_SESSION['isCLogin']">
 		      	  <li class="nav-item"><a data-toggle="modal" href="#Login" class="nav-link">登录</a></li>
 		      <else />
-			      <li class="nav-item"><a href="__APP__/Xinda/Customer/personal" class="nav-link"> <span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span></a></li>			      
+			      <li class="nav-item"><a href="__APP__/<{$JC}>/Customer/personal" class="nav-link"> <span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span></a></li>			      
 		      </empty>
 		    </ul>
 		  </div>
@@ -77,17 +77,17 @@
 		      <div class="container banner-area">
 		        <ul class="slides clearfix">
 		          <li>
-		            <h1><{$_SESSION['Xinda']['web']}></h1>
+		            <h1><{$_SESSION[$JC]['web']}></h1>
 		            <h5>主营业务：
-		            	<a href="__APP__/Xinda/Servicelist/Xinda/Servicelist/index/cate/22" title="计算机硬件及外围设备" target="_blank">计算机硬件及外围设备</a>
-		            	<a href="__APP__/Xinda/Servicelist/Xinda/Servicelist/index/cate/21" title="通讯器材及配件" target="_blank">通讯器材及配件、</a><br><br>
-		            	<a href="__APP__/Xinda/Servicelist/index/cate/20" title="中小企业软件解决方案" target="_blank">中小企业软件解决方案</a>
-		            	<a href="__APP__/Xinda/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">微信公众号+微站宣传与服务方案</a>
-		            	<a href="__APP__/Xinda/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">阿里钉钉+微网站企业管理方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/Xinda/Servicelist/index/cate/22" title="计算机硬件及外围设备" target="_blank">计算机硬件及外围设备</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/Xinda/Servicelist/index/cate/21" title="通讯器材及配件" target="_blank">通讯器材及配件、</a><br><br>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/20" title="中小企业软件解决方案" target="_blank">中小企业软件解决方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">微信公众号+微站宣传与服务方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">阿里钉钉+微网站企业管理方案</a>
 		            </h5>
 		            <br><br>
 		            <div>
-		              <a class="large-button" href="__APP__/Xinda/Servicelist">更多详细</a>
+		              <a class="large-button" href="__APP__/<{$JC}>/Servicelist">更多详细</a>
 		            </div>
 		            <br><br>
 		          </li>
@@ -139,7 +139,7 @@
 		          <p class="text-center my-span" title="<{$ar.content}>"><{$ar.content}></p>
 		        </div>
 		        <div class="col-lg-7">
-		          <a href="__APP__/Xinda/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="List" /></a>
+		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="List" /></a>
 		        </div>
 		      </div>
 		      <div class="divider_line"></div>
@@ -153,7 +153,7 @@
 		          <p class="text-center"><{$ar.content}></p>
 		        </div>
 		        <div class="col-lg-7 pull-lg-5">
-		          <a href="__APP__/Xinda/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="Campaign" /></a>
+		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="Campaign" /></a>
 		        </div>
 		      </div>
 		      <div class="divider_line"></div>
@@ -192,13 +192,13 @@
 		  <div class="container text-center">
 		    <p class="links">Copyright <span class="num">&copy;</span> 2016-2017
 		      |
-		      <a target="_blank" href="http://www.xiuliguanggao.com/index.php/Xinda"><b>北京-智慧信达</b></a> 版权所有
+		      <a target="_blank" href="http://www.zhihuixinda.com/index.php/Xinda"><b>北京-智慧信达</b></a> 版权所有
 		      |
-		      	备案号：<{$_SESSION['Xinda']['record']}>
+		      	备案号：<{$_SESSION[$JC]['record']}>
 		      |
 		      <{$_SESSION['ip']}>;<{$_SESSION['os']}>-<{$_SESSION['browser']}>
 		      |
-		      	咨询热线：<{$_SESSION['Xinda']['phone']}>
+		      	咨询热线：<{$_SESSION[$JC]['phone']}>
 		    </p>				    
 		  </div>
    </footer>
@@ -206,7 +206,6 @@
 
     
     <import file="js.xd" />
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
     <script type="text/javascript">
 	    $(document).scroll(function() {
@@ -223,11 +222,9 @@
 	<div class="modal fade " id="Login" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
-	    	<div class="modal-header">	        
-		        <h4 class="modal-title pull-left" id="myModalLabel">登录</h4>
-		    </div>
+	    	<div class="modal-header"><h4 class="modal-title pull-left" id="myModalLabel">登录</h4></div>
 		    <div class="modal-body">
-		      	<form action="__APP__/Xinda/Login/login" method="post" class="form-horizontal" role="form" >	      	
+		      	<form action="__APP__/<{$JC}>/Login/login" method="post" class="form-horizontal" role="form" >	      	
 					<input type="text" class="form-control" name="phone" value="" placeholder="用户名">
 					<input type="password" class="form-control" name="password" value="" placeholder="密码">						
 			</div>

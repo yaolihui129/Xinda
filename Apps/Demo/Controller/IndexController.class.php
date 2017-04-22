@@ -2,9 +2,9 @@
 namespace Demo\Controller;
 class IndexController extends WebInfoController {
     public function index(){        
-        //获取网页信息
-        getWebInfo(C('PRODUCT')); 
-        $this->assign('JC',C('PRODUCT'));
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
 //         wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆

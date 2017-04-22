@@ -1,7 +1,6 @@
 <?php
 namespace Mtsh\Controller;
 class IndexController extends WebInfoController {
-
     public function index(){        
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);
