@@ -6,27 +6,67 @@
 		      		<div class="col-md-3">
 		      			<!-- Breadcrumb -->
 		        <div class="bread-crumb pull-left">
-		          <a href="__APP__/Admin"><i class="icon-home"></i> 订单管理</a> 
-		          <span class="divider">/</span> 
-		          <a href="__URL__" class="bread-current"> 已下单</a>          
+		          <a href="__APP__/Admin"><i class="icon-home"></i> 订单管理</a> 		                   
 		        </div>	
 		      		</div>
-		      		<div class="col-md-4">
-		      			<form class="form-inline " action="__URL__/index" method="post">
+		      		<div class="col-md-9">
+		      			
+		      			
+		      			<form class="form-inline pull-right" action="__URL__/index" method="post">
 							<div class="form-group">
 								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
 							</div>
 								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-				       </form>  
+								<a href="__URL__/add" type="button" class="btn "><i class="icon-plus"> 添加</i></a>
+				       </form> 
+				         
 		      		</div>
-		      		<div class="col-md-5">
-			      		<ul class="nav navbar-nav pull-right">
-					          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
-					          		          	          
-				        </ul>
-		      		</div>
+		      		
 		      	</div>
 	      	</h2>	      		        
 	        <div class="clearfix"></div>
 	    </div>
 	<!-- Page heading ends -->
+	
+	<!-- Matter -->
+	<div class="matter">
+        <div class="container">         
+          <div class="row">         
+            <div class="col-md-12">           
+              
+                	<ul id="myTab" class="nav nav-tabs">
+                      <li class="active"><a href="#daifk" data-toggle="tab">待付款</a></li>
+                      <li><a href="#daifh" data-toggle="tab">待发货</a></li>
+                      <li><a href="#yifh" data-toggle="tab">已发货</a></li>
+                      <li><a href="#tuikz" data-toggle="tab">退款中</a></li>
+                      <li><a href="#yiwc" data-toggle="tab">已完成</a></li>
+                      <li><a href="#yigb" data-toggle="tab">已关闭</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                      <div class="tab-pane fade in active" id="daifk">                    
+                			<p>待付款</p>
+                      </div>
+                      <div class="tab-pane fade" id="daifh">
+                      		<p>待发货</p>
+                      </div>
+                      <div class="tab-pane fade" id="yifh">
+                      		<p>已发货</p>
+                      </div>
+                      <div class="tab-pane fade" id="tuikz">
+                      		<p>退款中</p>
+                      </div>
+                      <div class="tab-pane fade" id="yiwc">
+                      		<p>已完成</p>
+                      </div>
+                      <div class="tab-pane fade" id="yigb">
+                      		<p>已关闭</p>
+                      </div>
+                    </div>
+                
+            </div>
+          </div>
+        </div>
+    </div>        
+	
+					
+	

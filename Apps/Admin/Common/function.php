@@ -7,13 +7,21 @@
             return "非首页";
         }
     }
-    // 显示是否该发布
+    //发布状态
     function getXState($state){
         if ($state=='5'){
-            return "下线";
+            return '<span class="label label-success pull-right">已发布</span>';
+        }elseif ($state=='1'){
+            return '<span class="label label-info pull-right">未发布</span>';
         }else{
-            return "发布";
+            return '<span class="label label-default pull-right">已下线</span>';
         }       
+    }
+    //分类下的产品数
+    function getCatePordNum($cateid){
+        $where=array('cateId'=>$cateid);
+        $data=M('tp_product')->where($where)->count();
+        return $data;
     }
     
     

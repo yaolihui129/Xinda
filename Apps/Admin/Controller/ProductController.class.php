@@ -37,6 +37,7 @@ class ProductController extends CommonController {
         $count=$m->where($map)->count()+1;
         $this->assign("count",$count);
         $this -> assign("state", formSV("","state"));
+        $this -> assign("zhouqi", formSV("","zhouqi","zhouqi"));
         
         $this->display();    
     } 
@@ -105,6 +106,7 @@ class ProductController extends CommonController {
         $arr=$m->find($_GET[id]);
         $this->assign('arr',$arr);
         $this -> assign("state", formSV($arr['state'],"state"));
+        $this -> assign("zhouqi", formSV($arr['zhouqi'],"zhouqi","zhouqi"));
 
         $this->display();
     }

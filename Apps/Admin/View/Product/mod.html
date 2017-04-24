@@ -60,9 +60,7 @@
                                  <input type="text" class="form-control" name='money' value="<{$arr.money}>" placeholder="优惠价">
                              </div>
                              <label class="col-lg-1 control-label">制作周期:</label>
-                             <div class="col-lg-2">
-                                 <input type="text" class="form-control" name='zhouqi' value="<{$arr.zhouqi}>" placeholder="制作周期">
-                             </div> 
+                             <div class="col-lg-2"><{$zhouqi}></div> 
                              <label class="col-lg-1 control-label">商品尺寸:</label>
                              <div class="col-lg-2">
                                  <input type="text" class="form-control" name='weight' value="<{$arr.weight}>" placeholder="商品尺寸">
@@ -73,13 +71,11 @@
                              </div>                            
                          </div>                                                                                              
                          <div class="form-group">	                          
-	                          <label class="col-lg-2 control-label">产品简介：</label>	                          	                          
-	                          <div class="col-lg-8"><textarea class="cleditor" name="content"><{$arr.content}></textarea></div>
-	                          <div class="col-lg-2">
-	                          		<div class="panel-body">
-	                          			<img  src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.productimg}>"  height="170px;">					 																					
-	                          		</div>
-	                          </div>	                          
+	                          <label class="col-lg-4 control-label">产品简介：</label>	                          	                          
+	                          <div  class=" col-lg-8">			                        
+			                        <textarea name="content" class="form-control"><{$arr.content}></textarea>
+			                    </div>	
+	                          	                          
 	                      </div>
 	                      <div class="form-group">	                          
 	                          <label class="col-lg-4 control-label">产品照片：</label>
@@ -88,8 +84,13 @@
 	                          </div>
 	                      </div> 
                          <div class="form-group">
-	                          <label class="col-lg-4 control-label">产品详情：</label>
+	                          <label class="col-lg-2 control-label">产品详情：</label>
 	                          <div class="col-lg-8"><textarea class="cleditor" name="productDesc"><{$arr.productdesc}></textarea></div>
+	                          <div class="col-lg-2">
+	                          		<div class="panel-body">
+	                          			<img  src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.productimg}>"  height="170px;">					 																					
+	                          		</div>
+	                          </div>
 	                      </div>                                                   
                          <hr />
                          <div class="form-group">

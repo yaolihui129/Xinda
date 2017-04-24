@@ -62,9 +62,7 @@
                                  <input type="text" class="form-control" name='money' value="0.00" placeholder="优惠价">
                              </div>
                              <label class="col-lg-1 control-label">制作周期:</label>
-                             <div class="col-lg-2">
-                                 <input type="text" class="form-control" name='zhouqi' value="一周" placeholder="制作周期">
-                             </div> 
+                             <div class="col-lg-2"><{$zhouqi}></div> 
                              <label class="col-lg-1 control-label">商品尺寸:</label>
                              <div class="col-lg-2">
                                  <input type="text" class="form-control" name='weight' value="" placeholder="商品尺寸">
@@ -74,9 +72,12 @@
                                  <input type="number" class="form-control" name='num' value="999" placeholder="库存数量">
                              </div>                            
                          </div>                                                                                              
+                        
                          <div class="form-group">	                          	                        
-	                          <label class="col-lg-4 control-label">产品简述：</label>
-	                          <div class="col-lg-8"><textarea class="cleditor" name="content"><{$arr.content}></textarea></div>	                          
+	                          <label class="col-lg-4 control-label">产品简述：</label>	                          
+	                          <div  class=" col-lg-8">			                        
+			                        <textarea name="content" class="form-control"><{$arr.content}></textarea>
+			                    </div>	                                                   
 	                      </div> 
 	                      <div class="form-group">
 	                      	<label class="col-lg-4 control-label">产品照片：</label>

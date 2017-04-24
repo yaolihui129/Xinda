@@ -5,6 +5,18 @@
         $data=M('tp_dict')->where($where)->find();        
         return $data['v'];   
     }
+    // 根据id获取周期
+    function getZhouqi($key){
+        $where=array('type'=>'zhouqi','k'=>$key);
+        $data=M('tp_dict')->where($where)->find();
+        return $data['v'];
+    }
+    //获取字典值
+    function getDictV($key,$type){
+        $where=array('type'=>'state','k'=>$key);
+        $data=M('tp_dict')->where($where)->find();
+        return $data['v'];
+    }
     //获取ProductID
     function getProdId($qz){
         $data=M('product')->where(array('qz'=>$qz))->find();
@@ -578,6 +590,7 @@
         $html .='<select>';
         return $html;
     }
+    
 
     // 根据id获取项目信息
     function getPro($projectid){
