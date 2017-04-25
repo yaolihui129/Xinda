@@ -1,28 +1,36 @@
 <?php
 namespace Admin\Controller;
-class CateController extends CommonController {
-    
-    public function index(){
-        /* 接收参数*/
-        
-        $page=!empty($_GET['page']) ? $_GET['page'] : 1;
-        
-        $maxPageNum=10;
-        
-        $where['prodid']=$_SESSION['prodid'];
-        $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
-        $this->assign('search',$search);
-        $where['catName']=array('like','%'.$search.'%');
+class CateController extends CommonController {   
+    public function index(){        
+        if(IS_POST){//查询信息
+            if($_POST['search']){//储存当前查询信息
+                $_SESSION['cateSearch']=$_POST['search'];
+            }else {
+                $_SESSION['cateSearch']='';
+            }
+        }
+        $this->assign('search',$_SESSION['cateSearch']);    
+        $where['catName']=array('like','%'.$_SESSION['cateSearch'].'%');
         if($_GET['pidCateId']){
             $where['pidCateId']=$_GET['pidCateId'];            
         }else{
-            if(!$search){
+            if(!$_SESSION['cateSearch']){
                 $where['pidCateId']=000000;
             }           
         }
         $this->assign('pidCateId',$_GET['pidCateId']);
-        $data=M('tp_cate')->where($where)->order('sn')->page($page,$maxPageNum)->select();
-        $this->assign('data',$data);              
+        $where['prodid']=$_SESSION['prodid'];
+        $maxPageNum=10;
+        if ($_GET['p']){//储存当前翻页
+            $_SESSION['catePage']=$_GET['p'];
+        }
+        $m=M('tp_cate');
+        $data=$m->where($where)->order('sn')->page($_SESSION['catePage'],$maxPageNum)->select();
+        $this->assign('data',$data); 
+        $count      = $m->where($where)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,$maxPageNum);// 实例化分页类 传入总记录数和每页显示的记录数
+        $show       = $Page->show();// 分页显示输出
+        $this->assign('page',$show);// 赋值分页输出
         
         $this->display();
     }

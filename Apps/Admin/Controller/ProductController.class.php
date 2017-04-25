@@ -19,9 +19,9 @@ class ProductController extends CommonController {
         //查询信息
         if(IS_POST){
             if($_POST['search']){//储存当前查询信息
-                $_SESSION['AccountSearch']=$_POST['search'];
+                $_SESSION['productSearch']=$_POST['search'];
             }else {
-                $_SESSION['AccountSearch']='';
+                $_SESSION['productSearch']='';
             }
         }     
         $this->assign('search',$_SESSION['productSearch']);       

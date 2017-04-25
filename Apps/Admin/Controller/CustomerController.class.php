@@ -1,7 +1,6 @@
 <?php
 namespace Admin\Controller;
 class CustomerController extends CommonController {
-
 	public function index(){
 	    /* 接收参数*/
 	    $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
@@ -10,7 +9,7 @@ class CustomerController extends CommonController {
 	    $maxPageNum=10;	    
 	    $where['prodid']=$_SESSION['prodid'];
 // 	    $where['wxopenid']=array('like','%'.$search.'%');
-	    $m=M('tp_cus');
+	    $m=M('tp_customer');
 	    $data=$m->where($where)->page($page,$maxPageNum)->select();
         $this->assign('data',$data);
          

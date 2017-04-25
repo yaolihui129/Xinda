@@ -25,11 +25,10 @@ class VoucherController extends CommonController {
         $m=M('xl_voucher');
         $arr=$m->order('end desc')->select();
         $this->assign('arr',$arr);
-        $this->assign("remark",PublicController::editor("remark",$arr['desc']));
+
         $this->assign("start", PublicController::date("start",$start));
         $this->assign("end", PublicController::date("end"));
-        $this->assign("state", PublicController::stateSelect("正常","state","state"));
-        $this->assign("voucher", PublicController::stateSelect("抽奖","voucher","voucher"));
+
     
         $this->display();
     }

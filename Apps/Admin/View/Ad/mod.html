@@ -1,68 +1,51 @@
 <layout name="layout" />
 <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 class="pull-left">
-			<!-- Breadcrumb -->
-		      <div class="bread-crumb pull-left">
-		      	<div class="row">
-		      		<div class="col-md-12">
-		      			<a href="__APP__/Admin"><i class="icon-home"></i> 优惠促销</a> 
-			            <span class="divider">/</span> 
-			            <a href="__URL__" class="bread-current"> 广告轮播</a>   
-			          	<span class="divider">/</span> 修改
-		      		</div>
-		      	</div>	          
-	      </h2>       
-        <div class="clearfix"></div>
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a href="__APP__/Admin"><i class="icon-gift"></i> 优惠促销</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current"> 广告轮播</a>   
+		<span class="divider">/</span> 修改
+		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	         
+	</h2>       
+    <div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->
-
-
 <!-- Matter -->
-
-	 <div class="matter">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-                <div class="widget-content">
-                  <div class="padd">
-                    <!-- Form starts.  -->
-                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                 
-                        <input type="hidden" name="id" value="<{$arr.id}>" /> 
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">标题:</label>
-                             <div class="col-lg-8">
-                                 <input type="text" class="form-control" name='title' value="<{$arr.title}>" placeholder="title">
-                             </div>                                                        
-                         </div> 
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">跳转链接:</label>
-                             <div class="col-lg-8">
-                                 <input type="text" class="form-control" name='url' value="<{$arr.url}>" placeholder="http://www.zhihuixinda.com">
-                             </div>                                                
-                         </div>                                                                                                                      
-	                      <div class="form-group">
-	                      	<label class="col-lg-4 control-label">宣传图片:</label>
-	                      	<div class="col-lg-8">
-	                      		<input id="input-1" type="file" class="file form-control" name="img">
-	                      	</div>
-	                      </div>
-                         <div class="form-group">
-	                          <label class="col-lg-4 control-label">详情介绍:</label>
-	                          <div class="col-lg-8"><textarea class="cleditor" name="remark"><{$arr.remark}></textarea></div>
-	                      </div>                      
-                         <hr />
-                         <div class="form-group">
-                             <div class="col-lg-offset-1 col-lg-9">
-                                 <button type="submit" class="btn btn-primary">提交</button>  
-                                 <a href="__URL__" class="btn btn-warning pull-right" style="margin-right:400px;">返回</a>                      
-                             </div>                             
-                         </div>
-                     </form>
-                  </div>
-                </div>                
-            </div>  
-          </div>
-        </div>
-    </div>
+<div class="matter">
+   <div class="container">
+		<div class="widget-content">
+		<form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                 
+             <input type="hidden" name="id" value="<{$arr.id}>" /> 
+             <div class="form-group">
+                 <label class="col-lg-4 control-label">标题:</label>
+                 <div class="col-lg-8">
+                     <input type="text" class="form-control" name='title' value="<{$arr.title}>" placeholder="title">
+                 </div>                                                        
+             </div> 
+             <div class="form-group">
+                 <label class="col-lg-4 control-label">跳转链接:</label>
+                 <div class="col-lg-8">
+                     <input type="text" class="form-control" name='url' value="<{$arr.url}>" placeholder="http://www.zhihuixinda.com">
+                 </div>                                                
+             </div>                                                                                                                      
+	         <div class="form-group">
+	            <label class="col-lg-4 control-label">宣传图片:</label>
+	            <div class="col-lg-8">
+	                <input id="input-1" type="file" class="file form-control" name="img">
+	            </div>
+	         </div>
+             <div class="form-group">
+	             <label class="col-lg-4 control-label">详情介绍:</label>
+	             <div class="col-lg-8"><textarea class="cleditor" name="remark"><{$arr.remark}></textarea></div>
+	         </div><hr />
+             <div class="form-group">
+                 <div class="col-lg-offset-1 col-lg-8">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                                  
+                 </div>                             
+             </div>
+      	</form>
+      </div>                
+   </div>
+</div>
 <!-- Matter ends -->

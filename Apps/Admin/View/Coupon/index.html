@@ -1,31 +1,18 @@
 <layout name="layout" />
 <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 >
-		      <!-- Breadcrumb -->
-		      <div class="bread-crumb pull-left">
-		      	<div class="row">
-		      		<div class="col-md-4">
-		      			<a href="#"><i class="icon-home"></i> 优惠活动</a> 
-			          	<span class="divider">/</span> 
-			          	<a href="__URL__" class="bread-current">优惠券管理</a> 
-		      		</div>
-		      		<div class="col-md-7">
-		      			<form class="form-inline " action="__URL__/index" method="post">
-							<div class="form-group">
-								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
-							</div>
-								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-				       </form>  
-		      		</div>
-		      		<div class="col-md-1">
-		      			<a href="__URL__/add" type="button" class="btn btn-success"><i class="icon-plus"> 添加</i></a>
-		      		</div>
-		      	</div>
-				       	       
-       		  </div>       		
-		                 
-	      </h2>
-        <div class="clearfix"></div>
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a href="#"><i class="icon-gift"></i> 优惠活动</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">优惠券管理</a> 
+		<form class="form-inline pull-right" action="__URL__/index" method="post">
+			<div class="form-group">
+				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+			</div>
+			<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+			<a href="__URL__/add" type="button" class="btn"><i class="icon-plus"> 添加</i></a>
+		</form>  
+	</h2>
+	<div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->

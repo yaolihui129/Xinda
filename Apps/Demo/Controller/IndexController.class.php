@@ -7,7 +7,7 @@ class IndexController extends WebInfoController {
         getWebInfo($JC);//获取网页信息
         $appid  = $_GET['wxAppId'];
         $openid = $_GET['wxOpenId'];
-//         wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
+        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
         $where=array('prodid'=>C('PRODID'));
         $pic=D('tp_ad')->where($where)->order('utime desc')->select();
         $this->assign('pic',$pic); 

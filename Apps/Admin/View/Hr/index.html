@@ -1,38 +1,25 @@
 <layout name="layout" />
 <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 >
-		      <!-- Breadcrumb -->
-		      <div class="bread-crumb">
-		      	<div class="row">
-		      		<div class="col-md-4">
-		      			<a href="#"><i class="icon-user"></i> 人员招聘</a> 
-			          	<span class="divider">/</span> 
-			          	<a href="__URL__" class="bread-current">招聘信息</a> 
-		      		</div>
-		      		<div class="col-md-7">
-		      			<form class="form-inline pull-right" action="__URL__/index" method="post">
-							<div class="form-group">
-								<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
-							</div>
-								<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-				       </form>  
-		      		</div>
-		      		<div class="col-md-1">
-		      			<a href="__URL__/add" type="button" class="btn"><i class="icon-plus"> 添加</i></a>
-		      		</div>
-		      	</div>				       	       
-       		  </div>       				                 
-	      </h2>
-        <div class="clearfix"></div>
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a href="#"><i class="icon-group"></i> 人员管理</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">招聘信息</a> 
+		<form class="form-inline pull-right" action="__URL__/index" method="post">
+			<div class="form-group">
+				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+			</div>
+			<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+			<a href="__URL__/add" type="button" class="btn"><i class="icon-plus"> 添加</i></a>
+		</form>  
+	</h2>
+	<div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->
 
 <!-- Matter -->
-	  <div class="matter">
-        <div class="container">        
-          <div class="row">        
-            <div class="col-md-12">            
+<div class="matter">
+        <div class="container">                   
               <div class="widget">
                 <div class="widget-content medias">                  
                   <ul class="list-group">
@@ -55,20 +42,11 @@
 					</ul>
 
                     <div class="widget-foot">
-                        <ul class="pagination pull-right">
-                          <li><a href="#">Prev</a></li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">Next</a></li>
-                        </ul>                     
+                        <ul class="pagination pull-right"><{$page}></ul>                     
                       <div class="clearfix"></div> 
                     </div>
                 </div>
               </div>                
-            </div>
-          </div>
         </div>
 	</div>
 	<!-- Matter ends -->

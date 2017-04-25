@@ -1,28 +1,20 @@
 <layout name="layout" />
- <!-- Page heading -->
-	    <div class="page-head">
-	      <h2>			
-		      <div class="bread-crumb">
-		      	<a ><i class="icon-group"></i> 人员管理</a> 
-			    <span class="divider">/</span> 
-			    <a href="__URL__" class="bread-current">招聘信息</a> 
-			    <span class="divider">/</span> 修改			    
-			    <a href="__URL__"  class="btn pull-right" >返 回</a>
-			  </div>
-	      </h2>       
-        <div class="clearfix"></div>
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">					     
+		<a href="#"><i class="icon-group"></i> 人员管理</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">招聘信息</a> 
+		<span class="divider">/</span> 修改
+		<a href="__URL__"  class="btn pull-right" >返 回</a>			  
+	</h2>       
+  	<div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->
 
 <!-- Matter -->
-
-	 <div class="matter">
+<div class="matter">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12">
                 <div class="widget-content">
-                  <div class="padd">
-                    <!-- Form starts.  -->
                      <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
                          <input type="hidden" name="id" value="<{$data.id}>" />
                          <div class="form-group">
@@ -67,10 +59,7 @@
                              </div>
                          </div>
                      </form>
-                  </div>
                 </div>                
-            </div>  
-          </div>
         </div>
     </div>
 <!-- Matter ends -->

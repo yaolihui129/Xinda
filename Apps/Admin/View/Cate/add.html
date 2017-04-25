@@ -1,69 +1,52 @@
 <layout name="layout" />
 <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 class="pull-left">
-			<!-- Breadcrumb -->
-		      <div class="bread-crumb pull-left">
-		      	<div class="row">
-		      		<div class="col-md-12">
-		      			<a ><i class="icon-home"></i> 商品服务</a> 
-			          	<span class="divider">/</span> 
-			          	<a href="__URL__" class="bread-current">分类管理</a> 
-			          	<span class="divider">/</span> 新增
-		      		</div>
-		      	</div>	          
-	      </h2>       
-        <div class="clearfix"></div>
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a ><i class="icon-shopping-cart"></i> 商品服务</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">分类管理</a> 
+		<span class="divider">/</span> 新增
+		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	          
+	</h2>       
+    <div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->
-
-
 <!-- Matter -->
-
-	 <div class="matter">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-                <div class="widget-content">
-                  <div class="padd">
-                    <!-- Form starts.  -->
-                     <form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
-                         <input type="hidden" name="pidCateId" value="<{$pidCateId}>" />
-                         <input type="hidden" name="prodid" value="<{$_SESSION['prodid']}>" />
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">顺序</label>
-                             <div class="col-lg-8">
-                                 <input type="text" class="form-control" name='sn' value="<{$count}>" placeholder="sn">
-                             </div>
-                         </div>
-                        
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">分类</label>
-                             <div class="col-lg-8">
-                                 <input type="text" class="form-control" name='catName' placeholder="分类名">
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">分类</label>
-                             <div class="col-lg-8">
-                                 <input type="text" class="form-control"  value="<{$pidCateId|getCatname=###}>" readonly>
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             <label class="col-lg-4 control-label">状态</label>
-                             <div class="col-lg-8"><{$state}></div>
-                         </div>                         
-                         <hr />
-                         <div class="form-group">
-                             <div class="col-lg-offset-1 col-lg-9">
-                                 <button type="submit" class="btn btn-primary">提交</button>                       
-                             </div>
-                         </div>
-                     </form>
-                  </div>
-                </div>                
-            </div>  
-          </div>
-        </div>
-    </div>
+<div class="matter">
+   <div class="container">
+       <div class="widget-content">
+			<form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
+                 <input type="hidden" name="pidCateId" value="<{$pidCateId}>" />
+                 <input type="hidden" name="prodid" value="<{$_SESSION['prodid']}>" />
+                 <div class="form-group">
+                     <label class="col-lg-4 control-label">顺序</label>
+                     <div class="col-lg-8">
+                         <input type="text" class="form-control" name='sn' value="<{$count}>" placeholder="sn">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="col-lg-4 control-label">分类</label>
+                     <div class="col-lg-8">
+                        <input type="text" class="form-control" name='catName' placeholder="分类名">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="col-lg-4 control-label">分类</label>
+                     <div class="col-lg-8">
+                        <input type="text" class="form-control"  value="<{$pidCateId|getCatname=###}>" readonly>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="col-lg-4 control-label">状态</label>
+                     <div class="col-lg-8"><{$state}></div>
+                 </div><hr />
+                 <div class="form-group">
+                     <div class="col-lg-offset-1 col-lg-9">
+                         <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                       
+                     </div>
+                 </div>
+              </form>               
+          </div>                
+     </div>
+</div>
 <!-- Matter ends -->

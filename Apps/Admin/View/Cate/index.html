@@ -2,22 +2,22 @@
 <!-- Page heading -->
 	    <div class="page-head">
 		      <h2 class="bread-crumb">
-			      <a href="#"><i class="icon-home"></i> 商品服务</a> 
+			      <a href="#"><i class="icon-shopping-cart"></i> 商品服务</a> 
 				  <span class="divider">/</span> 
 				  <a href="__URL__" class="bread-current">分类管理</a> 
 				  <form class="form-inline pull-right" action="__URL__/index" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="分类名称">
 					</div>
 					<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-					<a href="__URL__/add"  class="btn "><i class="icon-plus"> 添加</i></a>
+					<a href="__URL__/add/pidCateId/<{$pidCateId}>"  class="btn "><i class="icon-plus"> 添加</i></a>
 				 </form>      				                 
 		      </h2>
         	<div class="clearfix"></div>
 	    </div>
 <!-- Page heading ends -->
 
-	<!-- Matter -->
+<!-- Matter -->
 	  <div class="matter">
         <div class="container">                  
               <div class="widget">
@@ -36,51 +36,40 @@
                       </thead>
                       <tbody>
                 <form action="__URL__/order" method="post" >
-				<volist name='data' id='st' empty="没有数据">
-                        <tr>
-                          <td><input type="text" name="sn[<{$st.cateid}>]" value="<{$st.sn}>"  class="input40"/></td>
-                          <td><{$st.pidcateid|getCatname=###}></td>
-                          <td>
-                          	<a href="__URL__/index/pidCateId/<{$st.cateid}>"><{$st.catname}></a> 
-                          		<span class="badge"><{$st.cateid|getCatePordNum=###}></span>
-                          		<span class="badge pull-right">子类：<{$st.cateid|countCate=###}></span>
-                          </td>                         
-                          <td><{$st.state|getState=###}></td>
-                          <td><{$st.prodid|getProduct=###}></td>
-                          <td><{$st.utime}></td>
-                          <td>
-                              <a href="__URL__/add/pidCateId/<{$st.cateid}>" type="button" class="btn btn-success">
-                              	<i class="icon-plus"> 子分类</i>
-                              </a>
-                              <a href="__APP__/Admin/Product/index/cate/<{$st.cateid}>" type="button" class="btn btn-primary">
-                              	<i class="icon-plus"> 产品</i>
-                              </a>
-                              <a href="__URL__/mod/id/<{$st.cateid}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
-                              <a href="__URL__/del/id/<{$st.cateid}>" class="btn  btn-danger" onclick="return confirm('你确定要删除？')">
-                              	<i class="icon-remove"> 删除</i>
-                              </a>
-                          </td>
-                        </tr>
-				</volist>				
+							<volist name='data' id='st' empty="没有数据">
+			                        <tr>
+			                          <td><input type="text" name="sn[<{$st.cateid}>]" value="<{$st.sn}>"  class="input40"/></td>
+			                          <td><{$st.pidcateid|getCatname=###}></td>
+			                          <td>
+			                          	<a href="__APP__/Admin/Product/index/cate/<{$st.cateid}>"><{$st.catname}> 
+			                          		<span class="badge"><{$st.cateid|getCatePordNum=###}></span></a>
+			                          		<span class="badge pull-right">
+			                          			<a href="__URL__/index/pidCateId/<{$st.cateid}>" >子类：<{$st.cateid|countCate=###}></a>
+			                          		</span>
+			                          </td>                         
+			                          <td><{$st.state|getState=###}></td>
+			                          <td><{$st.prodid|getProduct=###}></td>
+			                          <td><{$st.utime}></td>
+			                          <td>                           
+			                              <a href="__URL__/mod/id/<{$st.cateid}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
+			                              <a href="__URL__/del/id/<{$st.cateid}>" class="btn  btn-danger" onclick="return confirm('你确定要删除？')">
+			                              	<i class="icon-remove"> 删除</i>
+			                              </a>
+			                          </td>
+			                        </tr>
+							</volist>				
                       </tbody>
                     </table>
                     <div class="widget-foot">
                       	<div class="uni pull-left">
                       		<input type="submit" name="do_submit" value="批量排序" class="btn btn-info">                      		
                       	</div>                 
-				</form>
-                        <ul class="pagination pull-right">
-                          <li><a href="#">Prev</a></li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">Next</a></li>
-                        </ul>                     
+					</form>
+                        <ul class="pagination pull-right"><{$page}></ul>                     
                       <div class="clearfix"></div>
                     </div>
                 </div>
               </div>                
         </div>
 	</div>
-	<!-- Matter ends -->
+<!-- Matter ends -->
