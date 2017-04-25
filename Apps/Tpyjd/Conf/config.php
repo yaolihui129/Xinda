@@ -6,7 +6,7 @@ return array(
         '__IMG__'=>__ROOT__.'/Public/images',
         '__UPLOAD__'=>__ROOT__.'/Upload/Tpyjd'
     ),    
-    'DB_HOST'=>'127.0.0.1',
+    'DB_HOST'=>'192.168.21.10',
     'DB_NAME'=>'tpyjd_crm',
     'DB_USER'=>'root',
     'DB_PWD'=>'root',
@@ -15,7 +15,7 @@ return array(
     'CRMURL'=>'http://app5.cloudcc.com/distributor.action',
     'PRODID'        =>   13,    //定义产品编号
     'PRODUCT'       =>  'Tpyjd',//定义产品编号
-    'WEIXIN_APPID'  =>  'wx6f84e073cbc00639',//定义微信APPID
+    'WEIXIN_APPID'  =>  'wx3090bf31097834ac',//定义微信APPID
     
     
 );

@@ -1,17 +1,16 @@
 <layout name="layout" />     
 <!-- Page heading -->
 	    <div class="page-head">
-	      	<h2 >
-		      	<!-- Breadcrumb -->
-		        <div class="bread-crumb pull-left">
+	      	<h2 class="bread-crumb">
+		      
 		          <a href="__APP__/Admin"><i class="icon-home"></i> 基础信息</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current">字典</a>          
-		        </div>	      			      	
+		           			      	
 		      	<ul class="nav navbar-nav pull-right">			          
-			          <li class="dropdown pull-right">            
+			          <li class="dropdown">            
 			            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-			              <i class="icon-retweet"></i> <{$_SESSION['FieldName']}> <b class="caret"></b>              
+			               <{$_SESSION['FieldName']}> <i class="icon-retweet"></i>              
 			            </a>
 			            <ul class="dropdown-menu">
 			              	<volist name='arr' id='st'>
@@ -19,7 +18,14 @@
 							</volist>
 			            </ul>
 			          </li>			          	          
-		        </ul>	       
+		        </ul>
+		        
+		        <form class="form-inline pull-right" action="__URL__/index" method="post">
+					<div class="form-group">
+						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="fieldname">
+					</div>
+					<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>					
+				 </form> 	       
 	      	</h2>	      		        
 	        <div class="clearfix"></div>
 	    </div>

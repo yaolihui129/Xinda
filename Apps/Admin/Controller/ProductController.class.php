@@ -8,19 +8,36 @@ class ProductController extends CommonController {
         $this->assign('arr',$arr);
         if($_GET['cate']){//如果有参数用参数的信息
             $_SESSION['prodCate']=$_GET['cate'];
+            $_SESSION['productSearch']='';
+            $_SESSION['productPage']='';
         }elseif ($_SESSION['prodCate']){//没参数，SESSION中有值，什么也不做            
         }else {//没有参数，SESSION中也没有值用查询中的第一个             
             $_SESSION['prodCate']=$arr['0']['cateid'];
+            $_SESSION['productSearch']='';
+            $_SESSION['productPage']='';
         }        
         //查询信息
-        $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
-        $page=!empty($_GET['page']) ? $_GET['page'] : 1;
-        $this->assign('search',$search);
-        $maxPageNum=10;
-        $map['name|money|smoney|productDesc|weight|zhouqi']=array('like','%'.$search.'%');
-        $map['cateId']=$_SESSION['prodCate'];        
-        $data=D('tp_product')->where($map)->order('sn')->page($page,$maxPageNum)->select();
-        $this->assign('data',$data);           
+        if(IS_POST){
+            if($_POST['search']){//储存当前查询信息
+                $_SESSION['AccountSearch']=$_POST['search'];
+            }else {
+                $_SESSION['AccountSearch']='';
+            }
+        }     
+        $this->assign('search',$_SESSION['productSearch']);       
+        $map['name|money|smoney|productDesc|weight|zhouqi']=array('like','%'.$_SESSION['productSearch'].'%');
+        $map['cateId']=$_SESSION['prodCate'];
+        $m=M('tp_product');
+        if ($_GET['p']){//储存当前翻页
+            $_SESSION['productPage']=$_GET['p'];
+        }        
+        $maxPageNum=3;
+        $data=$m->where($map)->order('sn')->page($_SESSION['productPage'],$maxPageNum)->select();
+        $this->assign('data',$data); 
+        $count      = $m->where($map)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,$maxPageNum);// 实例化分页类 传入总记录数和每页显示的记录数       
+        $show       = $Page->show();// 分页显示输出
+        $this->assign('page',$show);// 赋值分页输出       
         
         $this->display();
     }

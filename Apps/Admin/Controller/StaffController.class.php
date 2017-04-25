@@ -1,6 +1,6 @@
 <?php
 namespace Admin\Controller;
-class AdminController extends CommonController {
+class StaffController extends CommonController {
     public function index(){
         /* 接收参数*/
         $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
@@ -11,7 +11,7 @@ class AdminController extends CommonController {
         $where['prodid']=$_SESSION['prodid'];
 //         $where['type|credit|debit|desc']=array('like','%'.$search.'%');
         
-        $data=M('tp_admin')->where($where)->page($page,$maxPageNum)->select();
+        $data=M('tp_staff')->where($where)->page($page,$maxPageNum)->select();
         $this->assign('data',$data);
         
         

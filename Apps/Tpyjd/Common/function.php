@@ -32,3 +32,31 @@ function getBinding(){
     return $res['binding'];
 
 }
+
+function getC__c_a4($key){
+    $m=M('dictmap');
+    $where=array('FieldValue'=>$key,'FieldName'=>'c__c_a4');
+    $date=$m->where($where)->find();
+    return $date['displaytext'];
+}
+
+function getC__c_q31($key){
+    $m=M('dictmap');
+    $where=array('FieldValue'=>$key,'FieldName'=>'c__c_q31');
+    $date=$m->where($where)->find();
+    return $date['displaytext'];
+}
+
+function getCustomerTypeCode($key){
+    $m=M('dictmap');
+    $where=array('FieldValue'=>$key,'FieldName'=>'CustomerTypeCode');
+    $date=$m->where($where)->find();
+    return $date['displaytext'];
+}
+
+function getSystemObjectTypeCode($key){
+    $m=M('dictmap');
+    $where=array('FieldValue'=>$key,'FieldName'=>'systemObjectTypeCode');
+    $date=$m->where($where)->find();
+    return $date['displaytext'];
+}

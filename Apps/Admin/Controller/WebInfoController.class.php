@@ -15,6 +15,12 @@ class WebInfoController extends Controller {
     }
     function changeProd(){ //更换产品      
         $_SESSION['prodid']=$_GET['prodid'];
+        $where=array('prodid'=>$_SESSION['prodid'],'state'=>1);
+        $arr=M('tp_cate')->where($where)->order('sn')->select();
+        $this->assign('arr',$arr);
+        $_SESSION['prodCate']=$arr['0']['cateid'];
+        $_SESSION['productSearch']='';//清空查询条件属性
+        $_SESSION['productPage']='';
         $this->redirect('/Admin/Index');
     }
     
