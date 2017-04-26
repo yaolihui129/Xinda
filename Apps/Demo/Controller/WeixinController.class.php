@@ -233,15 +233,15 @@ class WeixinController extends WebInfoController {
    }
    
 
-   function qrCodeTime(){//getTimeQrCode($wxId,$scene_id,$expire=30)            
-       $url=getTimeQrCode(C(WX_APPID),200,15); 
+   function qrCodeTime($id,$day=30){//getTimeQrCode($wxId,$scene_id,$expire=30)            
+       $url=getTimeQrCode(C(WX_APPID),$id,$day); 
        dump($url);
        echo "临时二维码";
        echo "<img src='".$url."'/>";      
    }
    
-   function qrCodeForever(){//getForeverQrCode($wxId,$scene_id);       
-       $url=getForeverQrCode(C(WX_APPID),300);            
+   function qrCodeForever($id){//getForeverQrCode($wxId,$scene_id);       
+       $url=getForeverQrCode(C(WX_APPID),$id);            
        echo "用久二维码";
        echo "<img src='".$url."'/>";  
    }
@@ -268,9 +268,8 @@ class WeixinController extends WebInfoController {
        
    }
    function getUserOpenid(){
-       $data      = getWxinfo(C(WX_APPID));
        $appid     = C(WX_APPID);
-       $appsecret = $data['appsecret'];
+       $appsecret = C(WX_APPSECRET);
        $code = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
        $res = httpGet($url);
@@ -286,9 +285,8 @@ class WeixinController extends WebInfoController {
    }
    //获取用户的openid
    function getUserInfo(){
-       $data      = getWxinfo(C(WX_APPID));
        $appid     = C(WX_APPID);
-       $appsecret = $data['appsecret'];
+       $appsecret = C(WX_APPSECRET);
        $code      = $_GET['code'];
        $url= 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
        $res = httpGet($url);
@@ -298,10 +296,6 @@ class WeixinController extends WebInfoController {
        $url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
        $res = httpGet($url); 
        
-       dump($arr);
-       dump($openid);
-       dump($url);
-       dump($res);
    }
    //群发接口
    function sendMsgAll(){           
@@ -331,7 +325,6 @@ class WeixinController extends WebInfoController {
        $this->assign('timestamp',$timestamp);
        $this->assign('nonceStr',$nonceStr);
        $this->assign('signature',$signature);
-       dump($_SESSION);
         
        $this->display();
    }

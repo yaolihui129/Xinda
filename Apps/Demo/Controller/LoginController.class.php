@@ -7,6 +7,7 @@ class LoginController extends Controller {
     private $app_key="768d78094c5a2f4e9df3fe7f108c877e";
     //     private $callBackUrl="http://www.zhihuixinda.com/index.php/Xinda/Login/qq_callback";//回调地址
     private $callBackUrl="http://localhost/Xinda/index.php/Xinda/Login/qq_callback";//回调地址
+    
     private $code="";
     private $accessToken="";
     public function qq_login(){
@@ -29,7 +30,7 @@ class LoginController extends Controller {
         $result=$this->getUsrInfo();
         $cus=json_decode($result,true);
         $m=D('tp_customer');
-        $where=array('openid'=>$_SESSION['openid']);
+        $where=array('qqopenid'=>$_SESSION['openid'],'prodid'=>C(PRODID));
         $arr=$m->where($where)->select();
         if ($arr){
             $_SESSION['userid']=$arr['id'];
@@ -39,9 +40,8 @@ class LoginController extends Controller {
             $_SESSION['QC_userData']=$cus;
             $this->redirect(C('PRODUCT').'/Index');
         }else {
-            $_POST['openid']=$_SESSION['openid'];
-            $_POST['realname']=$cus['nickname'];
-            $_POST['password']=md5(123456);
+            $_POST['qqopenid']=$_SESSION['openid'];
+            $_POST['name']=$cus['nickname'];           
             $_POST['gender']=$cus['gender'];
             $_POST['province']=$cus['province'];
             $_POST['city']=$cus['city'];
@@ -119,6 +119,18 @@ class LoginController extends Controller {
         $password=$_POST['password'];
         $data=login(C('PRODUCT'), $phone, $password);
         if ($data){
+            $m=M('tp_customer');
+            $where=array('creditid'=>$data['id'],'prodid'=>C(PRODID));
+            $arr=$m->where($where)->find();
+            dump($where);
+            if(!$arr){//插入记录 
+                $_POST['prodid']=C(PRODID);
+                $_POST['name']=$data['realname'];
+                $_POST['creditid']=$data['id'];
+                $_POST['ctime']=time;
+                $m->create();
+                $m->add();
+            }
             $this->success("登录成功!");
         }else{
             $this->error('用户或密码错误，请重新登陆！');
@@ -126,7 +138,7 @@ class LoginController extends Controller {
     }   
     public function logout(){
         logout();
-        $this->success("退出成功!",U(C('PRODUCT').'/Index'));
+        $this->success("退出成功!",U('Index/index'));
     
     }
 }

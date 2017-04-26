@@ -61,17 +61,20 @@
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
     }
-    
+    function getCreditidPhone($creditId){
+        $data=M('tp_credit')->find($creditId);
+        return $data['phone'];
+    }
    //登录
    function login($qz,$phone,$password){
         $where=array('phone'=>$phone,['password']=>md5($password));
-        $data=M('tp_customer')->where($where)->field('id,phone,realname')->find();
+        $data=M('tp_credit')->where($where)->find();
         if ($data){
             $_SESSION['userid']  = $data['id'];
             $_SESSION['uphone']  = $data['phone'];
             $_SESSION['realname']= $data['realname'];
             $_SESSION['isCLogin']= $qz;           
-            return 1;
+            return $data;
         }else{
             return 0;
         }

@@ -4,38 +4,37 @@ class CustomerController extends CommonController {
 	public function index(){
 	    /* 接收参数*/
 	    $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
-	    $page=!empty($_GET['page']) ? $_GET['page'] : 1;
 	    $this->assign('search',$search);
+	    $page=!empty($_GET['p']) ? $_GET['p'] : 1;
+	    
 	    $maxPageNum=10;	    
 	    $where['prodid']=$_SESSION['prodid'];
 // 	    $where['wxopenid']=array('like','%'.$search.'%');
 	    $m=M('tp_customer');
 	    $data=$m->where($where)->page($page,$maxPageNum)->select();
         $this->assign('data',$data);
-         
+
 	    $this->display();
     }
     
    public function add(){
        /* 接收参数*/
-       $tpid=$_GET['tpid'];
-       $m=D($_SESSION['db'].'customer');
-       $where['tpid']=$tpid;
+       $m=D('tp_customer');
+       $where['creditId']=$_GET['creditId'];
        $data=$m->where($where)->find();
        if ($data){
            $this->error("TA已经是你的客户，无需重复添加");
        }else {
-           $this->assign('tpid',$tpid);           
+           $this->assign('creditId',$_GET['creditId']);           
            $this->display();
        }
-       
-      
+
    }
 
     public function insert(){
 
         /* 实例化模型*/
-        $m=D($_SESSION['db'].'customer');     
+        $m=D($_SESSION['tp_customer']);     
         $_POST['adder']=$_SESSION['realname'];
         $_POST['moder']=$_SESSION['realname'];
         $_POST['ctime']=time();
@@ -51,73 +50,22 @@ class CustomerController extends CommonController {
 
     }
     
-    public function search(){
-        /* 接收参数*/
-        $search=$_POST['search'];
-        $map['realname|phone']=array('like','%'.$search.'%');
-        /* 实例化模型*/
-        $m=M('tp_customer');
-        $arr=$m
-        ->join('zt_'.$_SESSION['db'].'customer ON zt_tp_customer.id =zt_'.$_SESSION['db'].'customer.tpid')
-        ->where($map)->order('zt_'.$_SESSION['db'].'customer.utime desc')->select();
-        $this->assign('data',$arr);
-        $search=array("search"=>$search);
-        $this->assign('w',$search);
-         
-        $this->display('index');
-         
-    }
-    
-
     public function mod(){
-
-        /* 实例化模型*/
-		$m=D($_SESSION['db'].'customer');
- 
-        $arr=$m->find($_GET[id]);
-        $this->assign('arr',$arr);
-        $this->assign('w',$where);
-        $this->assign("state", PublicController::stateSelect($arr['state'],"state","state"));
-        
+        $arr=D('tp_customer')->find($_GET[id]);
+        $this->assign('arr',$arr);      
 
         $this->display();
     }
 
     public function update(){
-        /* 实例化模型*/
-        $db=D($_SESSION['db'].'customer');
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (D('tp_customer')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
         }
     }
-    public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M($_SESSION['db'].'customer');
-        $count =$m->delete($id);
-        if ($count>0) {
-            $this->success('数据删除成功');
-        }else{
-            $this->error('数据删除失败');
-        }
-    }
-
-    public function photo(){
-        /* 接收参数*/
-        $id=$_GET['id'];
-        /* 实例化模型*/
-        $m=M($_SESSION['db'].'customer');
-        $arr=$m->find($id);
-        $this->assign('user',$arr);
-         
-        $this->display();
-    
-    }
-    
+     
     public function img(){
         $upload = new \Think\Upload();// 实例化上传类
         $upload->maxSize   =     9145728 ;// 设置附件上传大小
@@ -133,7 +81,7 @@ class CustomerController extends CommonController {
             $_POST['path']=$info['img']['savepath'];
             $_POST['img']=$info['img']['savename'];
             /* 实例化模型*/
-            $db=D($_SESSION['db'].'customer');
+            $db=D('tp_customer');
             if ($db->save($_POST)){
                 $image = new \Think\Image();
                 $image->open('./Upload/'.$_SESSION['qz'].$info['img']['savepath'].$info['img']['savename']);               
@@ -144,11 +92,5 @@ class CustomerController extends CommonController {
             }
         }
     }
-    
-    public function create(){
-        
-        $this->display();
-    }
-
 
 }
