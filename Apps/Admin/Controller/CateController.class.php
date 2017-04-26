@@ -20,6 +20,7 @@ class CateController extends CommonController {
         }
         $this->assign('pidCateId',$_GET['pidCateId']);
         $where['prodid']=$_SESSION['prodid'];
+        $where['isDelete']=0;
         $maxPageNum=10;
         if ($_GET['p']){//储存当前翻页
             $_SESSION['catePage']=$_GET['p'];
@@ -38,7 +39,7 @@ class CateController extends CommonController {
     public function add(){       
         $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : '000000'; 
         $this->assign("pidCateId",$pidCateId);
-        $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId);
+        $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId,'isDelete'=>0);
         $count=M('tp_cate')->where($map)->count()+1;
         $this->assign("count",$count);  
         $this -> assign("state", formSV("","state"));
@@ -94,9 +95,19 @@ class CateController extends CommonController {
         }else{
             $this->error("修改失败！");
         }
-    }     
+    }  
     
     public function del(){
+        $_GET['cateId']=$_GET['id'];
+        $_GET['isDelete']=1;
+        if (D('tp_cate')->save($_GET)){
+            $this->success("删除成功！");
+        }else{
+            $this->error("删除失败！");
+        }
+    }
+    
+    public function shanchu(){
         $count =D('tp_cate')->delete($_GET['id']);
         if ($count>0) {
             $this->success('删除成功');

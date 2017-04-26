@@ -31,7 +31,7 @@ class ProductController extends CommonController {
         if ($_GET['p']){//储存当前翻页
             $_SESSION['productPage']=$_GET['p'];
         }        
-        $maxPageNum=3;
+        $maxPageNum=12;
         $data=$m->where($map)->order('sn')->page($_SESSION['productPage'],$maxPageNum)->select();
         $this->assign('data',$data); 
         $count      = $m->where($map)->count();// 查询满足要求的总记录数
@@ -168,7 +168,6 @@ class ProductController extends CommonController {
         }
         
         $arr['moder']=$_SESSION['realname'];
-        dump($_GET);
         if (D('tp_product')->save($arr)){
             $this->success("成功！");
         }else{
@@ -180,25 +179,19 @@ class ProductController extends CommonController {
         /* 接收参数*/
         $arr['productId']=$_GET['id'];
         /* 实例化模型*/
-        $db=D('tp_product');
         if ($_GET['istj']==1){
             $arr['istj']=0;
         }else{
             $arr['istj']=1;
-        }
-        
+        }        
         $arr['moder']=$_SESSION['realname'];
-        if ($db->save($arr)){
+        if (D('tp_product')->save($arr)){
             $this->success("成功！");
         }else{
             $this->error("失败！");
         }
     }
-         
 
-    
-   
-    
     public function del(){
         $count =M('tp_product')->delete($_GET['id']);
         if ($count>0) {

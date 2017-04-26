@@ -1,25 +1,29 @@
 <?php
 namespace Anshun\Controller;
 class ServicelistController extends WebInfoController {
-    public function index(){          
-       $JC=C('PRODUCT');
+    public function index(){
+        $JC=C('PRODUCT');
         $this->assign('JC',$JC);
-        getWebInfo($JC);//获取网页信息 
-        $where=array('prodid'=>C('PRODUCT'),'state'=>'正常');
-        $arr=M('as_cate')->where($where)->order('sn')->select();                        
+        getWebInfo($JC);//获取网页信息    
+        $where=array('prodid'=>C('PRODID'),'state'=>1); 
+        $arr=M('tp_cate')->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);
-        $m=D('as_prodservice');
-        if($_GET['cate']){           
-           $map=array('state'=>'发布','cate'=>$_GET['cate']);
-           $data=$m->where($map)
-                ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-                ->order('sn')->select();
+        $map['prodid']=C('PRODID');
+        $map['state']=5;
+        $m=M('tp_product');
+        if($_GET['cate']){
+           $map['cateId|pidCateId']=$_GET['cate'];
+           $this->assign('cate',getCatname($_GET['cate']));
+           $data=$m->where($map)->order('sn,utime desc')
+                ->field("productId,name,money,smoney,num,productImg,utime")
+                ->select();
         }else {
-           $data=$m->where(array('state'=>'发布'))->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-                ->order('utime desc')->limit(12)->select();
-        }
-        $this->assign('data',$data);
-        $this->assign('cate',$_GET['cate']);                  
+           $data=$m->where($map)->field("productId,name,money,smoney,num,productImg,utime")
+           ->order('utime desc')->limit(12)->select();
+           $this->assign('cate','钣金喷漆');
+        }                   
+        $this->assign('data',$data);   
+
         $this->display();
-    }  
+    }
 }

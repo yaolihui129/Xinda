@@ -4,15 +4,19 @@ class IndexController extends WebInfoController {
     public function index(){
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);
-        getWebInfo($JC);//获取网页信息              
+        getWebInfo($JC);//获取网页信息
         $appid  = $_GET['wxAppId'];
-        $openid = $_GET['wxOpenId'];               
-        wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆        
-        $where=array('istj'=>1,'state'=>'发布');
-        $data=D('xd_prodservice')->where($where)->order('utime desc')
-            ->field("id,mark,name,state,content,money,smoney,num,istj,cate,path,img,utime")        
-            ->select();
-        $this->assign('data',$data);        
+        $openid = $_GET['wxOpenId'];
+//         wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
+        $where=array('prodid'=>C('PRODID'));
+//         $pic=D('tp_ad')->where($where)->order('utime desc')->select();
+//         $this->assign('pic',$pic); 
+        
+        $m=M('tp_product');
+        $where=array('prodid'=>C('PRODID'),'istj'=>1,'state'=>5);
+        $data=$m->where($where)->order('utime desc')->field("productId,name,money,smoney,num,productImg,utime")->select();
+        $this->assign('data',$data);
+        
         $this->display();
     }               
 }

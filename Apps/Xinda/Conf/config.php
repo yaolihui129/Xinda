@@ -6,7 +6,7 @@ return array(
         '__JS__'=>__ROOT__.'/Public/js/',
         '__IMAGES__'=>__ROOT__.'/Public/images/Xinda',
         '__IMG__'=>__ROOT__.'/Public/images',
-        '__UPLOAD__'=>__ROOT__.'/Upload/Xinda'
+        '__UPLOAD__'=>__ROOT__.'/Upload'
     ),
     'PRODID'        =>  6,                                  //定义产品编号
     'PRODUCT'       =>  'Xinda',                            //定义产品编号            

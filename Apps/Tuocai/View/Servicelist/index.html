@@ -1,28 +1,29 @@
 <layout name="layout" />
 <div class="row">
-	<div class="col-md-3 ">
+	<div class="col-md-12 ">
 		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">分类</h3></div>
-			<ul class="list-group">
-			 		<volist name='arr' id='st' empty="暂无分类">            
-			            <li class="list-group-item">
-			                <a href="__URL__/index/cate/<{$st.id}>" title="<{$st.pid|getCatname=###}>-<{$st.catname}>">
-			                	<{$st.pid|getCatname=###}>-<{$st.catname}>
-			                </a>			                
-			            </li>
-					</volist>    
-				</ul>
-		</div>
-	</div>
-	<div class="col-md-9 ">
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">产品&服务</h3></div>
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<{$cate}>
+					<div class="btn-group pull-right" role="group">					  
+					    <button type="button" class="btn btn-info btn-xs  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <{$cate}>
+					      <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu">
+					    	<volist name='arr' id='st'>
+					    		<li ><a  href="__URL__/index/cate/<{$st.cateid}>"><{$st.pidcateid|getCatname=###}>-<{$st.catname}></a></li>	
+					    	</volist>					      
+					    </ul>
+					  </div>
+				</h3>
+			</div>
 			<div class="panel-body">
 			<volist name='data' id='ar' empty="没有数据">
 	      	<div class="col-xs-12 col-md-3">
 				<div class="thumbnail" >
-					<a href="__APP__/Tuocai/Service/index/id/<{$ar.id}>" >
-						<img data-src="holder.js/100%x180" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="<{$ar.img}>"  height="180px">
+					<a href="__APP__/<{$JC}>/Service/index/id/<{$ar.productid}>" >
+						<img data-src="holder.js/100%x180" src="__UPLOAD__/<{$ar.productimg}>" alt="<{$ar.productimg}>"  height="180px">
 					</a>
 					<div class="caption"><h5><{$ar.name}></h5></div>
 				</div>

@@ -88,10 +88,6 @@
           // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
       });
     </script>
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
 
@@ -106,12 +102,10 @@
           </button>
           <a class="navbar-brand" href="__APP__/Xinda"><{$_SESSION['Xinda']['web']}></a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse ">
-        
+        <div id="navbar" class="collapse navbar-collapse ">      
           <ul class="nav navbar-nav pull-right">                       
-            <li><a href="__APP__/Xinda/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
-           <!-- <li><a href="__APP__/Xinda/Successcase"><span class="glyphicon glyphicon-gift"> 成功案例</span></a></li>  -->
-            <li><a href="__APP__/Xinda/Login/qq_login"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>				
+            <li><a href="__APP__/<{$JC}>/Servicelist/index/cate/0CxikF""><span class="glyphicon glyphicon-th-list"> 软件业务</span></a></li>
+            <li><a href="__APP__/<{$JC}>/Servicelist/index/cate/fKAKiC"><span class="glyphicon glyphicon-user"> 硬件业务</span></a></li>				
                 
             <empty name="_SESSION['isCLogin']">
            		<li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>
@@ -127,3 +121,5 @@
         </div>
       </div>
     </nav>
+    
+    <div class="container">

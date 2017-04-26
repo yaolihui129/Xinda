@@ -4,13 +4,13 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<{$arr.cate|getCatname=###}>-<b><{$arr.name}></b>
-				<a href="__APP__/Anshun/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
+				<{$arr.cateid|getCatname=###}>-<b><{$arr.name}></b>
+				<a href="__APP__/<{$JC}>/Servicelist/index/cate/<{$arr.cateid}>" class="pull-right">返回分类</a>
 			</h3>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-4 ">
-				<img src="__UPLOAD__<{$arr.path}><{$arr.img}>" alt="<{$arr.img}>"  height="180px">		
+				<img src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.img}>"  height="180px">		
 			</div>
 			<div class="col-md-7 ">
 				<h5><{$arr.mark}></h5>
@@ -35,18 +35,17 @@
 					<a class="jiathis_button_qzone">QQ空间</a>
 					<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>				
 				</div><hr>
-				
-				
-				
-				
-					
 			</div>	
 		</div>
 	</div>
-	<div class="panel panel-primary">
-		<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
-		<div class="panel-body"><p><{$arr.content}></p></div>						
-	</div>
+	
+	<notempty name="arr.content">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
+			<div class="panel-body"><p><{$arr.content}></p></div>						
+		</div>
+	</notempty>
+	
 </div>
 </div>
 	

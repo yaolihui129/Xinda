@@ -1,15 +1,15 @@
 <layout name="layout" />     
 <!-- Page heading -->
 	    <div class="page-head">
-	      	<h2 >
-		      	<!-- Breadcrumb -->
-		        <div class="bread-crumb pull-left">
+	      	<h2 class="bread-crumb ">
+		       
 		          <a href="__APP__/Admin"><i class="icon-cog"></i> 设置</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current">老CRM表结构</a>          
-		        </div>	      			      	
+		        
+		        	      			      	
 		      	<ul class="nav navbar-nav pull-right">			          
-			          <li class="dropdown pull-right">            
+			          <li class="dropdown">            
 			            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 			              <i class="icon-retweet"></i> <{$_SESSION['otable']}> <b class="caret"></b>              
 			            </a>
@@ -19,7 +19,13 @@
 							</volist>
 			            </ul>
 			          </li>			          	          
-		        </ul>	       
+		        </ul>
+		         <form class="form-inline pull-right" action="__URL__/index" method="post">
+					<div class="form-group">
+						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="ID/姓名/手机号">
+					</div>
+					<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>					
+				 </form> 	       
 	      	</h2>	      		        
 	        <div class="clearfix"></div>
 	    </div>

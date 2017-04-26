@@ -2,9 +2,9 @@
     //显示是否在首页展示信息
     function getIstj($istj){
         if ($istj==1){
-            return "首页";
+            return '【<i class="icon-thumbs-up"> 推荐</i>】';
         }else {
-            return "非首页";
+            return ;
         }
     }
     //发布状态

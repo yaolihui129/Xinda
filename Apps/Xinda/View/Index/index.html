@@ -56,8 +56,9 @@
 		  <a class="navbar-brand" href="__APP__/<{$JC}>"><{$_SESSION[$JC]['web']}></a>
 		  <div class="collapse navbar-collapse" id="navbar-collapse">
 		    <ul class="navbar-nav ml-auto">
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist"><span class="glyphicon glyphicon-th-list"> 主营业务</span></a></li>
-		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Login/qq_login"><span class="glyphicon glyphicon-user"> 诚聘人才</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist/index/cate/0CxikF"><span class="glyphicon glyphicon-th-list"> 软件业务</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist/index/cate/fKAKiC"><span class="glyphicon glyphicon-th-list"> 硬件业务</span></a></li>
+		      
 		      
 		      <empty name="_SESSION['isCLogin']">
 		      	  <li class="nav-item"><a data-toggle="modal" href="#Login" class="nav-link">登录</a></li>
@@ -79,11 +80,11 @@
 		          <li>
 		            <h1><{$_SESSION[$JC]['web']}></h1>
 		            <h5>主营业务：
-		            	<a href="__APP__/<{$JC}>/Servicelist/Xinda/Servicelist/index/cate/22" title="计算机硬件及外围设备" target="_blank">计算机硬件及外围设备</a>
-		            	<a href="__APP__/<{$JC}>/Servicelist/Xinda/Servicelist/index/cate/21" title="通讯器材及配件" target="_blank">通讯器材及配件、</a><br><br>
-		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/20" title="中小企业软件解决方案" target="_blank">中小企业软件解决方案</a>
-		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">微信公众号+微站宣传与服务方案</a>
-		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/7" title="中小企业软件解决方案" target="_blank">阿里钉钉+微网站企业管理方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/fKAKiC" title="计算机硬件及外围设备" target="_blank">计算机硬件及外围设备</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/DGePKX" title="通讯器材及配件" target="_blank">通讯器材及配件、</a><br><br>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/0CxikF" title="中小企业软件解决方案" target="_blank">中小企业软件解决方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/cowNUk" title="中小企业软件解决方案" target="_blank">微信公众号+微站宣传与服务方案</a>
+		            	<a href="__APP__/<{$JC}>/Servicelist/index/cate/oe1Wcu" title="中小企业软件解决方案" target="_blank">阿里钉钉+微网站企业管理方案</a>
 		            </h5>
 		            <br><br>
 		            <div>
@@ -139,7 +140,7 @@
 		          <p class="text-center my-span" title="<{$ar.content}>"><{$ar.content}></p>
 		        </div>
 		        <div class="col-lg-7">
-		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="List" /></a>
+		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.productid}>"><img class="img-fluid" src="__UPLOAD__/<{$ar.productimg}>" alt="List" /></a>
 		        </div>
 		      </div>
 		      <div class="divider_line"></div>
@@ -153,7 +154,7 @@
 		          <p class="text-center"><{$ar.content}></p>
 		        </div>
 		        <div class="col-lg-7 pull-lg-5">
-		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.id}>"><img class="img-fluid" src="__UPLOAD__<{$ar.path}><{$ar.img}>" alt="Campaign" /></a>
+		          <a href="__APP__/<{$JC}>/Service/index/id/<{$ar.productid}>"><img class="img-fluid" src="__UPLOAD__/<{$ar.productimg}>" alt="Campaign" /></a>
 		        </div>
 		      </div>
 		      <div class="divider_line"></div>

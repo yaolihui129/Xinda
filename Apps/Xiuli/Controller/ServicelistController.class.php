@@ -2,30 +2,27 @@
 namespace Xiuli\Controller;
 class ServicelistController extends WebInfoController {
     public function index(){
-        getWebInfo(C('PRODUCT'));//获取网页信息                             
-        $where['prodid']=1;
-        $where['state']='正常';
-        $m=D('xl_cate');
-        $arr=$m->where($where)->order('sn')->select();                        
+        $JC=C('PRODUCT');
+        $this->assign('JC',$JC);
+        getWebInfo($JC);//获取网页信息    
+        $where=array('prodid'=>C('PRODID'),'state'=>1); 
+        $arr=M('tp_cate')->where($where)->order('sn')->select();                        
         $this->assign('arr',$arr);
-
-        $m=D('xl_prodservice');
-        $map['state']='发布';
+        $map['prodid']=C('PRODID');
+        $map['state']=5;
         if($_GET['cate']){
-            $map['cate']=$_GET['cate'];               
-            $data=$m->where($map)
-            ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-            ->order('sn,id')->select();
+           $map['cateId|pidCateId']=$_GET['cate'];
+           $this->assign('cate',getCatname($_GET['cate']));
+           $data=M('tp_product')->where($map)
+                ->field("productId,name,money,smoney,num,productImg,utime")
+                ->order('utime desc')->select();
         }else {
-            $map['istj']=1;
-            $data=$m->where($map)
-            ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
-            ->order('utime desc')->select();
-        }
-                   
-            $this->assign('data',$data);
-            $this->assign('cate',$_GET['cate']);
-                  
+           $data=M('tp_product')->where($map)->field("productId,name,money,smoney,num,productImg,utime")
+           ->order('utime desc')->limit(12)->select();
+           $this->assign('cate','推荐服务');
+        }                   
+        $this->assign('data',$data);  
+        
         $this->display();
     }   
     
