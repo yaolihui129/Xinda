@@ -8,13 +8,15 @@ class NewcrmapiController extends WebInfoController {
         if ($_GET['otable']){//如果有URL参数，从参数取值
             $_SESSION['newOtable']=$_GET['otable'];
         }else {//如果都没有，给默认值
-            if($_SESSION['newOtable']){
+            if(!$_SESSION['newOtable']){
                 $_SESSION['newOtable']="潜客表";
             }            
         }
         $this->assign('otable',$_SESSION['newOtable']);
-               
-        $data=$m->where(array('otable'=>$_SESSION['newOtable']))->select();
+        $where['otable']=$_SESSION['newOtable'];
+        $this->assign("search",$_POST['search']);
+        $where['name|nameApi|remark|type']=array('like','%'.$_POST['search'].'%');
+        $data=$m->where($where)->select();
         $this->assign('data',$data);
         
         $this->display();
@@ -23,7 +25,8 @@ class NewcrmapiController extends WebInfoController {
     public function guanl(){
         if ($_GET['id']){
             $_SESSION['newcrmapiId']=$_GET['id'];
-        }             
+        } 
+        $this->assign("source",$_GET['source']);
         $arr=M("newcrmapi")->find($_SESSION['newcrmapiId']);
         $this->assign("arr",$arr);      
         $this->assign("search",$_POST['search']);

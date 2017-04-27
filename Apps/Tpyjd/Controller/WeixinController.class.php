@@ -1,5 +1,5 @@
 <?php
-namespace Demo\Controller;
+namespace Tpyjd\Controller;
 class WeixinController extends WebInfoController {    
     public function index(){//验证消息接口
         $token      = "123weixin";
@@ -13,7 +13,7 @@ class WeixinController extends WebInfoController {
         }else{
             $this->reponseMsg();
         }
-    }    
+    }     
     
     
     public function reponseMsg(){   //接收事件推送并回复    
@@ -92,13 +92,37 @@ class WeixinController extends WebInfoController {
             }
         }
               
-        if(strtolower($postObj->MsgType) == 'voice'){  //语音回复          
-                //回复用户消息(纯文本格式)                
-//                 $content   = "您说的是：“".$postObj->Recognition."”MediaId:".$postObj->MediaId;               
-//                 wxReplyText($toUser,$fromUser,$content);
+        if(strtolower($postObj->MsgType) == 'voice'){  //语音回复                         
+                $text=rtrim($postObj->Recognition,'。');//截取最后的“。”
+                //图文的形式回复
+                $m=M('tp_product');
+                $map['name']=array('like','%'.$text.'%');
+                $data=$m->where($map)->order('sn')->limit(10)->select();
+                if($data){
+                    foreach ($data as $st){
+                        $arr[$key]['title']=$st.name;
+                        $arr[$key]['description']=$st.name;
+                        $arr[$key]['picUrl']=$st.name;
+                        $arr[$key]['url']=$st.name;
+                    }
+                }else{//没找到你要的商品或服务
+                    $arr = array(
+                        array(
+                            'title'=>'没有找到与“'.$text.'”相关的商品或服务',
+                            'description'=>"北京智慧信达商贸有限公司",
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    );
+                }
+                
+                wxReplyNews($toUser,$fromUser,$arr);
+                //回复用户消息(纯文本格式)
+                $content   = "您说的是：“".$text."”MediaId:".$postObj->MediaId;               
+                wxReplyText($toUser,$fromUser,$content);
                 //回复用户语音消息（语音）
-                $mediaId = $postObj->MediaId; 
-                wxReplyVoice($toUser,$fromUser,$mediaId);
+//                 $mediaId = $postObj->MediaId; 
+//                 wxReplyVoice($toUser,$fromUser,$mediaId);
         }
                
         if(strtolower($postObj->MsgType) == 'image'){ //图片消息回复
@@ -114,7 +138,6 @@ class WeixinController extends WebInfoController {
                 ),
             );
             wxReplyNews($toUser,$fromUser,$arr);
-
         }
                 
         if(strtolower($postObj->MsgType) == 'video'){       //视频消息回复    
@@ -132,95 +155,110 @@ class WeixinController extends WebInfoController {
         
         
         if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复           
-            if(trim($postObj->Content)=='智慧信达'){                                                           
-                $arr = array(//多图文回复  
-                    array(
-                       'title'=>'北京智慧信达网络服务',
-                       'description'=>"北京智慧信达商贸有限公司",
-                       'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                       'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
-                    ),
-                    array(
-                        'title'=>'临城秀丽广告门市',
-                        'description'=>"临城秀丽广告门市",
-                        'picUrl'=>'http://www.xiuliguanggao.com/Upload/Xiuli/Ad/2017-02-11/589e8ee8d99c9.png',
-                        'url'=>'http://www.xiuliguanggao.com',
-                    ),
-                    array(
-                        'title'=>'安顺汽车服务中心',
-                        'description'=>"临城安顺汽车服务中心",
-                        'picUrl'=>'http://www.xiuliguanggao.com/Public/images/Anshun/banner.jpg',
-                        'url'=>'http://www.xiuliguanggao.com/index.php/Anshun',
-                    ),
-                   array(
-                       'title'=>'石家庄拓才教育',
-                       'description'=>"石家庄拓才教育",
-                       'picUrl'=>'http://www.tuocaijiaoyu.com/Upload/Tuocai/Ad/2017-02-04/5895819138465.png',
-                       'url'=>'http://www.tuocaijiaoyu.com',
-                   ),
-                );
-                wxReplyNews($toUser,$fromUser,$arr);          
-            }else {                                             
-                $where=array('key'=>trim($postObj->Content));
-                $data=M('wx_key')->where($where)->select();
+            $text=trim($postObj->Content);          
+            if($text=='活动名称'){//从活动表查找相关
+                $map['name']=array('like','%'.$text.'%');
+                $map['proid']=C(PRODID);
+                $data=M('tp_page')->where($map)->order('sn')->limit(10)->select();
                 if($data){
-                    $content = $data[0]['content'];
-                    wxReplyText($toUser,$fromUser,$content);
-                }else {
-                    //回复图文消息                   
-                    $arr = array(                        
+                    foreach ($data as $st){
+                        $arr[$key]['title']=$st.name;
+                        $arr[$key]['description']=$st.name;
+                        $arr[$key]['picUrl']=$st.name;
+                        $arr[$key]['url']=$st.name;
+                    }
+                }
+            }else {//从产品表查找相关
+                $map['name']=array('like','%'.$text.'%');
+                $map['proid']=C(PRODID);
+                $data=M('tp_product')->where($map)->order('sn')->limit(10)->select();
+                if($data){
+                    foreach ($data as $st){
+                        $arr[$key]['title']=$st.name;
+                        $arr[$key]['description']=$st.name;
+                        $arr[$key]['picUrl']=$st.name;
+                        $arr[$key]['url']=$st.name;
+                    }
+                }else{//没找到你要的商品或服务
+                    $arr = array(
                         array(
-                            'title'=>'没有找到与“'.$where['key'].'”相关的内容',
+                            'title'=>'没有找到与“'.$text.'”相关的商品或服务',
                             'description'=>"北京智慧信达商贸有限公司",
                             'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
                             'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                         ),
                     );
-                    wxReplyNews($toUser,$fromUser,$arr);
-                }
-            }                        
-        }                               
+                } 
+            }
+            wxReplyNews($toUser,$fromUser,$arr);
+                                           
     }
        
    //创建自定义菜单
-   function creatCaidan() {      
+   function memuCreat() {      
        $postArr = array(  //组装数组                                     
            'button'=>array(
                array(//第一个一级菜单
-                   'name' => urlencode('信达官网'),
-                   'type' => 'click',
-                   'key'  => 'item1',
+                   'name' => urlencode('移民官网'),
+                   'type' => 'view',
+                   'url'  => 'http://gupeng.tunnel.qydev.com/',
                ),
                array(//第二个一级菜单
-                    'name'=>urlencode('产品介绍'),
+                    'name'=>urlencode('项目活动'),
                     'sub_button'=>array(
                         array(//第一个二级菜单
-                            'name' => urlencode('硬件产品'),
-                            'type' => 'click',
-                            'key'  => 'songs',
+                            'name' => urlencode('专享活动'),
+                            'type' => 'view',
+                            'url'  => 'http://gupeng.tunnel.qydev.com/exclusive',
                         ),
                         array(//第二个二级菜单
-                            'name' => urlencode('软件产品'),
+                            'name' => urlencode('移民项目'),
                             'type' => 'view',
-                            'url'  => 'http://www.zhihuixinda.com',
+                            'url'  => 'http://gupeng.tunnel.qydev.com/project',
                         ),
                     ),
                ),
                array(//第三个一级菜单
                    'name' => urlencode('专属服务'),
-                   'type' => 'view',
-                   'url'  => 'http://www.zhihuixinda.com',
+                   'sub_button'=>array(
+                       array(//第1个二级菜单
+                           'name' => urlencode('定制方案'),
+                           'type' => 'view',
+                           'url'  => 'http://gupeng.tunnel.qydev.com/estimate',
+                       ),
+                       array(//第2个二级菜单
+                           'name' => urlencode('生活体验'),
+                           'type' => 'view',
+                           'url'  => 'http://gupeng.tunnel.qydev.com/lifeExperience',
+                       ),
+                       array(//第3个二级菜单
+                           'name' => urlencode('商务合作1'),
+                           'type' => 'view',
+                           'url'  => 'http://gupeng.tunnel.qydev.com/business-personal',
+                       ),
+                       array(//第4个二级菜单
+                           'name' => urlencode('公司名片'),
+                           'type' => 'view',
+                           'url'  => 'http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0ed91c537a52303b&redirect_uri=http://gupeng.tunnel.qydev.com/card/oath&response_type=code&scope=snsapi_base&state=wx#wechat_redirect',
+                       ),
+                       array(//第5个二级菜单
+                           'name' => urlencode('个人中心'),
+                           'type' => 'view',
+                           'url'  => 'http://gupeng.tunnel.qydev.com/person',
+                       ),
+                   ),
                ),
            ),           
        );
        
-       $res = wxMenuCreat(C(WX_APPID), $postArr);      
+       $res = wxMenuCreat($this->getAccessToken(),$postArr);      
        $this->ajaxReturn($res);     
    }
    
-   function getMemu(){
-       $res=wxMenuGet(C(WX_APPID));
-       dump($res);      
+   function memu(){
+       dump(wxGetMenu($this->getAccessToken()));
+       $this->assign('arr',wxGetMenu($this->getAccessToken())); 
+       $this->display();
    }
    //拉取用户信息
    function getUsers(){
@@ -230,14 +268,14 @@ class WeixinController extends WebInfoController {
    
 
    function qrCodeTime($id,$day=30){//getTimeQrCode($wxId,$scene_id,$expire=30)            
-       $url=getTimeQrCode(C(WX_APPID),$id,$day); 
+       $url=getTimeQrCode($this->getAccessToken(),$id,$day); 
        dump($url);
        echo "临时二维码";
        echo "<img src='".$url."'/>";      
    }
    
    function qrCodeForever($id){//getForeverQrCode($wxId,$scene_id);       
-       $url=getForeverQrCode(C(WX_APPID),$id);            
+       $url=getForeverQrCode($this->getAccessToken(),$id);            
        echo "用久二维码";
        echo "<img src='".$url."'/>";  
    }
@@ -251,7 +289,7 @@ class WeixinController extends WebInfoController {
               'money'=>array('value'=>100,'color'=>"#173177"),
               'date'=>array('value'=>date('Y-m-d H:i:s')),'color'=>"#173177"       
             );
-       $res = wxSendTemplateMsg(C(WX_APPID),$touser,$template_id,$call_url,$data);
+       $res = wxSendTemplateMsg($this->getAccessToken(),$touser,$template_id,$call_url,$data);
        $this->ajaxReturn($res);      
    }
    
@@ -305,21 +343,54 @@ class WeixinController extends WebInfoController {
 //           'mpnews'=>array('media_id'=>''),
 //           'msgtype'=>'mpnews',
 //       );      
-     $res = wxSendMsgAll(C(WX_APPID),$array);//生产环境群发$type='send'
+     $res = wxSendMsgAll($this->getAccessToken(),$array);//生产环境群发$type='send'
      $this->ajaxReturn($res);
    }
+   
+   //获取微信AccessToken
+   function getAccessToken(){
+       $m=D('wx_wechat');
+       $var=$m->where(array('appid'=>C(WX_APPID)))->find();
+       if(time()>$var['otime']){//如果access_token过期，重新获取
+           $appid     = C(WX_APPID);
+           $appsecret = C(WX_APPSECRET);
+           $url       = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
+           $arr       = json_decode(httpGet($url), true);
+           $data      = array('id'=> $var['id'],'access_token' => $arr['access_token'],'otime'=> (time()+7000));
+           $m->save($data);//更新AccessToken
+           return $arr['access_token'];           
+       }else {//如果access_token没有过期，直接从数据库中取值
+           return $var['access_token'];          
+       }            
+   }
+   
+
+   
+   //拉取用户信息（认证后才可用）
+   function getWXUsers(){
+       $token= $this->getAccessToken();
+       $m=D('wx_wechat');
+       $var=$m->where(array('appid'=>C(WX_APPID)))->find();
+       $nextOpenid = $data['next_openid'];
+       $url        = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$token.'&next_openid='.$nextOpenid;
+       $res        = httpGet($url);
+       $arr        = json_decode($res,true);
+       $data       = array('id'=>$var['id'],'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
+       $m->save($data);//更新数据
+   }
+
    
    public function jssdk(){             
        $this->assign('appid',C(WX_APPID));       
        $timestamp=time();
+       $this->assign('timestamp',$timestamp);
        $nonceStr=getRandCode(16);//生成16位的随机数
-       $jsapi_ticket=wxGetJsApiTicket(C(WX_APPID));//获取全局票据
+       $this->assign('nonceStr',$nonceStr);
+       $jsapi_ticket=$this->getJsApiTicket();//获取全局票据
        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
        $signature = "jsapi_ticket=".$jsapi_ticket."&noncestr=".$nonceStr."&timestamp=".$timestamp."&url=".$url;
-       $signature = sha1($signature);
-       $this->assign('timestamp',$timestamp);
-       $this->assign('nonceStr',$nonceStr);
+       $signature = sha1($signature);         
        $this->assign('signature',$signature);
         
        $this->display();

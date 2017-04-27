@@ -3,7 +3,12 @@
 <div class="page-head">
 	<h2 class="bread-crumb">
 		<a href="__URL__"><i class="icon-gift"></i> 数据关系整理</a> 		
-		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	         
+		<switch name="source">
+		    <case value="1"><a href="__APP__/Tpyjd" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	</case>
+		    <case value="2"><a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	</case>
+		    <default /><a href="__APP__/Tpyjd" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>
+		</switch>
+		         
 	</h2>       
     <div class="clearfix"></div>
 </div>
@@ -20,12 +25,15 @@
                  <div class="col-lg-1">
                      <input type="text" class="form-control"  value="<{$arr.type}>" >
                  </div> 
+                 <div class="col-lg-3">
+                     <input type="text" class="form-control"  value="<{$arr.remark}>" >
+                 </div>
                  <label class="col-lg-1 control-label">新/老字段:</label>
-                 <div class="col-lg-1">
-                     <input type="text" class="form-control"  value="<{$arr.nameapi}>" >
+                 <div class="col-lg-2">
+                     <input type="text" class="form-control"  value="<{$arr.nameapi}>【<{$arr.otable}>】" >
                  </div>              
-                 <div class="col-lg-1">
-                     <input type="text" class="form-control" value="<{$arr.oldcrm}>" >
+                 <div class="col-lg-2">
+                     <input type="text" class="form-control" value="<{$arr.oldcrm|getOldCrmInfo=###}>" >
                  </div>                                                         
              </div> <br><hr><br>
              

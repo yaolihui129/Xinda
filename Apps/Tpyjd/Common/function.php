@@ -21,6 +21,34 @@ function getBind(){
     return $_SESSION['binding'];
 }
 
+function getOldCrmInfo($id){
+    if($id){
+        $arr=M('oldcrm')->find($id);       
+        return "【".$arr['otable']."】".$arr['nameapi'];
+    }else {
+        return ;
+    }  
+}
+
+function getOldCrmRemark($id){
+    if($id){
+        $arr=M('oldcrm')->find($id);
+        return $arr['remark'];
+    }else {
+        return ;
+    }
+}
+function getOldCrmDemo($id){
+    if($id){
+        $arr=M('oldcrm')->find($id);
+        return $arr['demo'];
+    }else {
+        return ;
+    }
+}
+
+
+
 function getBinding(){
     $serviceName="clogin";
     $username="test@yimin.la";

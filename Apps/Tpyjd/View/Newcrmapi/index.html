@@ -3,7 +3,7 @@
 	    <div class="page-head">
 	      	<h2 class="bread-crumb ">
 		        
-		          <a href="__APP__/Admin"><i class="icon-cog"></i> 设置</a> 
+		          <a href="__APP__/Tpyjd"><i class="icon-cog"></i> 数据对象</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current">新CRM对象API</a>          
 		              			      	
@@ -22,7 +22,7 @@
 		        
 		        <form class="form-inline pull-right" action="__URL__/index" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="ID/姓名/手机号">
+						<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="name/nameApi/remark/type">
 					</div>
 					<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>					
 				 </form> 	       
@@ -53,9 +53,9 @@
                       <tbody>              
 					<volist name='data' id='st'>
                         <tr>                          
-                          <td><a href="__URL__/guanl/id/<{$st.id}>"><{$st.name}></a></td>                        
+                          <td><a href="__URL__/guanl/id/<{$st.id}>/source/2"><{$st.name}></a></td>                        
                           <td><b><{$st.nameapi}></b></td>
-                          <td><b><{$st.oldcrm}></b></td>
+                          <td><b><{$st.oldcrm|getOldCrmInfo=###}></b></td>
                           <td><{$st.type}></td>
                           <td><b><{$st.isnull}></b></td>
                           <td><{$st.otable}></td> 

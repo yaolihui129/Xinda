@@ -98,24 +98,8 @@
         $data=M('tp_customer')->find($id);
         return $data['realname'];
     }
-    //获取自定义菜单
-    function wxMenuGet($appID) {
-        $token = wxGetAccessToken($appID);
-        $url   = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$token;
-        $res   = httpGet($url);
-        $arr   = json_decode($res,true);
-        return $arr;
-    }
     
-    //创建自定义菜单
-    function wxMenuCreat($appID,$postArr) {
-        $token    = wxGetAccessToken($appID);
-        $url      = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
-        $postJson = urldecode(json_encode($postArr));
-        $res      = httpPost($url,$postJson);
-        $res      = json_decode($postJson,true);
-        return $res;       
-    }
+    
     //根据id获取活动信息
     function getVoucher($id){
         $arr=M('voucher')->find($id);
@@ -343,8 +327,7 @@
     }
     
     //获取临时二维码
-    function getTimeQrCode($appID,$scene_id,$expire=30){ 
-        $token = wxGetAccessToken($appID);
+    function getTimeQrCode($token,$scene_id,$expire=30){ 
         $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;
         $expire = $expire*24*60*60;
         $postArr =array(                                                                //组装数组
@@ -360,8 +343,7 @@
     }
 
     //获取临时二维码
-    function getForeverQrCode($appID,$scene_id){ 
-        $token = wxGetAccessToken($appID);
+    function getForeverQrCode($token,$scene_id){ 
         $url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$token;        
         $postArr =array(                                                                //1.组装数组
             'action_name'=>"QR_LIMIT_SCENE",
@@ -405,26 +387,10 @@
         }
     
     }
-    //获取微信AccessToken
-    function wxGetAccessToken($appID){
-        $arr=getWxinfo($appID);        
-        if((time() - $arr['otime'])>0){                     //如果access_token过期，重新获取          
-            $appid     = $appID;
-            $appsecret = $arr['appsecret'];
-            $url       = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
-            $arr       = json_decode(httpGet($url), true);
-            $data      = array('id'=> $arr['id'],'access_token' => $arr['access_token'],'otime'=> time()+7000);         
-            M('wx_wechat')->save($data);                    //更新AccessToken            
-            return $data['access_token'];    
-        }else {                                             //如果access_token没有过期，直接从数据库中取值            
-            return $arr['access_token'];           
-        }
-    }
     
     //群发接口
-    function wxSendMsgAll($appID,$array,$type='preview'){        
-        $token=wxGetAccessToken($appID); //1.获取Token
-        if($type=='preview'){           //预览接口           
+    function wxSendMsgAll($token,$array,$type='preview'){
+        if($type=='preview'){           //预览接口
             $url='https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.$token;
             $postJson =urldecode(json_encode($array));
             $res = httpPost($url, $postJson);
@@ -436,35 +402,25 @@
             return $res;
         }else {
             return '发送类型不合规！';
-        }       
+        }
     }
     
-    //获取微信公众号信息
-    function getWxinfo($appID){
-        $data=D('wx_wechat')->where(array('appid'=>$appID))->find();
-        return $data;
-    }
-    
-    //拉取用户信息（认证后才可用）
-    function wxGetUsers($appID){
-        $token      = wxGetAccessToken($appID);         
-        $data       = getWxinfo($appID);
-        $nextOpenid = $data['next_openid'];
-        $url        = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$token.'&next_openid='.$nextOpenid;
-        $res        = httpGet($url);
-        $arr        = json_decode($res,true);
-        $data       = array('id'=>$data['id'],'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
-        M('wx_wechat')->save($_POST);//更新数据
-        return $arr;
+    //获取微信服务器IP
+    function wxGetServerIp($token){
+        if(!$_SESSION['wx_ip_list']){
+            $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$token;
+            $res = httpGet($url);
+            $_SESSION['wx_ip_list'] =json_decode($res,true);
+        }
+        return $_SESSION['wx_ip_list'];
     }
     
     //获取wxGetJsApiTicket全局票据
-    function wxGetJsApiTicket($appID){ 
-        if ((time()-$_SESSION['jsapi_ticket_expire_time']) < 0){//从session中取值  jsapi_ticket         
-            $jsapi_ticket = $_SESSION['jsapi_ticket'];        
+    function wxGetJsApiTicket($token){
+        if ((time()-$_SESSION['jsapi_ticket_expire_time']) < 0){//从session中取值  jsapi_ticket
+            $jsapi_ticket = $_SESSION['jsapi_ticket'];
         }else {//重新获取jsapi_ticket
-            $access_token = wxGetAccessToken($appID);
-            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$access_token."&type=jsapi";
+            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".$token."&type=jsapi";
             $res =json_decode(httpGet($url),true);
             $_SESSION['jsapi_ticket']=$res['ticket'];
             $_SESSION['jsapi_ticket_expire_time']=time()+7000;
@@ -472,26 +428,32 @@
         }
         return $jsapi_ticket;
     }
-
-    //获取微信服务器IP
-    function wxGetServerIp($appID){
-        if(!$_SESSION['wx_ip_list']){
-            $token = wxGetAccessToken($appID);
-            $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$token;
-            $res = httpGet($url);
-            $_SESSION['wx_ip_list'] =json_decode($res,true);
-        }
-        return $_SESSION['wx_ip_list'];
-    }
+    
     //发送微信模板消息
-    function wxSendTemplateMsg($appID,$touser,$template_id,$call_url,$data){        
-        $token    =  wxGetAccessToken($appID);   //1.获取Token
-        $url      = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$token;               
-        $Meg      = array('touser'=>$touser,'template_id'=>$template_id,'url'=>$call_url,'data'=>$data);   //2.组装数组      
+    function wxSendTemplateMsg($token,$touser,$template_id,$call_url,$data){
+        $url      = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$token;
+        $Meg      = array('touser'=>$touser,'template_id'=>$template_id,'url'=>$call_url,'data'=>$data);   //2.组装数组
         $postJson = json_encode($Meg);      //将数组转化成json
         $res      = httpPost($url, $postJson);
         return $res;
     }
+    
+    //创建自定义菜单
+    function wxMenuCreat($token,$postArr) {
+        $url      = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
+        $postJson = urldecode(json_encode($postArr));
+        $res      = httpPost($url,$postJson);
+        return $res;
+    }
+    
+    //获取自定义菜单
+    function wxGetMenu($token) {
+        $url   = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$token;
+        $res   = httpGet($url);
+        $arr   = json_decode($res,true);
+        return $arr;
+    }
+    
     //截取字符串最后的“。”（不管几个一并截取）用于语音识别结果
     function wxRtrim($arr,$a='。'){
         $arr=rtrim($arr, $a);

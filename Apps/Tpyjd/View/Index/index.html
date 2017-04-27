@@ -1,77 +1,78 @@
 <layout name="layout" />     
 <!-- Page heading -->
-	    <div class="page-head">
-	      <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
-
-        <!-- Breadcrumb -->
-        <div class="bread-crumb pull-right">
-          <a href="index.html"><i class="icon-home"></i> 首页</a> 
-          <!-- Divider -->
-          <span class="divider">/</span> 
-          <a href="#" class="bread-current">控制台</a>
-        </div>
-
-        <div class="clearfix"></div>
-
-	    </div>
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a href="index.html"><i class="icon-home"></i> 首页</a> 
+        <span class="divider">/</span> 
+        <a href="#" class="bread-current">CRM新旧字段对照表</a>
+        
+        <ul class="nav navbar-nav pull-right">			          
+			<li class="dropdown pull-right">            
+			    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+			              <i class="icon-retweet"></i> <{$_SESSION['newOtable']}> <b class="caret"></b>              
+			    </a>
+			    <ul class="dropdown-menu">
+			       <volist name='arr' id='st'>
+						<li ><a  href="__URL__/index/otable/<{$st.otable}>"><{$st.otable}></a></li>			  				  
+					</volist>
+			     </ul>
+			 </li>			          	          
+		  </ul>
+     </h2>
+     <div class="clearfix"></div>
+</div>
 <!-- Page heading ends -->
-
 <!-- Matter -->
 	  <div class="matter">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <!-- Bar Chart -->
+        <div class="container">                   
               <div class="widget">
-                <div class="widget-head">
-                  <div class="pull-left">Bar Chart</div>
-                  <div class="widget-icons pull-right">
-                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
-                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
-                  </div>  
-                  <div class="clearfix"></div>
-                </div>             
-                <div class="widget-content">
-                  <div class="padd">
-                    <!-- Barchart. jQuery Flot plugin used. -->
-                    <div id="bar-chart"></div>
-                    <hr />
-                    <!--Bar chart stuffs -->
-                    <div class="btn-group stackControls">
-                        <input type="button" value="With stacking" class="btn btn-default">
-                        <input type="button" value="Without stacking" class="btn btn-default">
-                    </div>            
-                    <div class="btn-group graphControls">
-                        <input type="button" value="Bars" class="btn btn-default">
-                        <input type="button" value="Lines" class="btn btn-default">
-                        <input type="button" value="Lines with steps" class="btn btn-default">
-                    </div>
-                  </div>
+                <div class="widget-content medias">                 
+                  <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>                                                    
+                          <th width=3% align="center" bgcolor="#ccc">otable</th>
+                          <th width=10% align="center" bgcolor="#ccc">name</th>                          
+                          <th width=10% align="center" bgcolor="#ccc">新字段</th>
+                          <th width=10% align="center" bgcolor="#ccc">旧字段</th>
+                          <th width=10% align="center" bgcolor="#ccc">备注</th>
+                          <th width=10% align="center" bgcolor="#ccc">举例</th>
+                          <th width=5% align="center" bgcolor="#ccc">type</th>
+                          <th width=3% align="center" bgcolor="#ccc">isNull</th>
+                          <th width=10% align="center" bgcolor="#ccc">操作</th>
+                                                                          
+                                                                          
+                        </tr>
+                      </thead>
+                      <tbody>              
+					<volist name='data' id='st'>
+                        <tr>                          
+                          <td><{$st.otable}></td> 
+                          <td>
+                          		<empty name="st.newcrm">
+									<{$st.name}>
+								<else /> 
+									<a href="__APP__/Tpyjd/Newcrmapi/guanl/id/<{$st.newcrm}>/source/1"><{$st.name}></a>
+								</empty> 
+                          </td>                        
+                          <td><b><{$st.nameapi}></b></td>
+                          <td><b><{$st.oldcrm|getOldCrmInfo=###}></b></td>
+                          <td><b><{$st.remark}></b></td>
+                          <td><b><{$st.oldcrm|getOldCrmDemo=###}></b></td>
+                          <td><{$st.type}></td>
+                          <td><b><{$st.isnull}></b></td>
+                          <td>
+                          	<empty name="st.id">
+                          		<a href="__APP__/Tpyjd/Newcrmapi/index/otable/<{$st.otable}>" class="btn"><i class="icon-pencil"> 去绑定</i></a>
+                          	<else />
+                          	  <a href="__URL__/mod/id/<{$st.id}>" class="btn"><i class="icon-pencil"> 编辑</i></a>
+                          	</empty>
+                          </td>                                               
+                        </tr>
+					</volist>				
+                      </tbody>
+                    </table>
                 </div>
-              </div>
-              <!-- Bar chart ends -->
-              <!-- Curve chart starts -->
-              <div class="widget">
-                <div class="widget-head">
-                  <div class="pull-left">Curve Chart</div>
-                  <div class="widget-icons pull-right">
-                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a> 
-                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
-                  </div>  
-                  <div class="clearfix"></div>
-                </div>             
-                <div class="widget-content">
-                  <div class="padd">
-                    <div id="curve-chart"></div>
-                    <hr />
-                    <div id="hoverdata">Mouse hovers at
-                    (<span id="x">0</span>, <span id="y">0</span>). <span id="clickdata"></span></div>          
-                  </div>
-                </div>
-              </div>
-                <!-- Curve chart ends -->
-            </div>
-          </div>
+              </div>                
         </div>
 	</div>
-<!-- Matter ends -->
+	<!-- Matter ends -->

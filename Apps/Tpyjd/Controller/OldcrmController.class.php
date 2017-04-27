@@ -8,7 +8,7 @@ class OldcrmController extends WebInfoController {
         if ($_GET['otable']){//如果有URL参数，从参数取值
              $_SESSION['otable']=$_GET['otable'];
         }else {//如果都没有，给默认值
-            if($_SESSION['otable']){
+            if(!$_SESSION['otable']){
                 $_SESSION['otable']="Account";
             }            
         }

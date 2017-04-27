@@ -15,7 +15,7 @@ return array(
     'CRMURL'=>'http://app5.cloudcc.com/distributor.action',
     'PRODID'        =>   13,    //定义产品编号
     'PRODUCT'       =>  'Tpyjd',//定义产品编号
-    'WEIXIN_APPID'  =>  'wx3090bf31097834ac',//定义微信APPID
-    
+    'WX_APPID'      =>  'wx0ed91c537a52303b',//定义微信APPID
+    'WX_APPSECRET'  =>  'b8633e9ce9c957993f908cad1b91fd93',     //定义微信APPID
     
 );

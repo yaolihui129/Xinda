@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50630
 File Encoding         : 65001
 
-Date: 2017-04-26 18:32:51
+Date: 2017-04-27 18:12:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3286,24 +3286,23 @@ CREATE TABLE `tpyjd_newoldcrm` (
   `oldcrm` smallint(3) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tpyjd_newoldcrm
 -- ----------------------------
-INSERT INTO `tpyjd_newoldcrm` VALUES ('2', '1', '2', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('3', '10', '158', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('4', '11', '14', null);
+INSERT INTO `tpyjd_newoldcrm` VALUES ('3', '10', '158', '字段边转换成文本');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('4', '11', '14', '文本直接对接');
 INSERT INTO `tpyjd_newoldcrm` VALUES ('5', '54', '127', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('6', '54', '221', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('7', '29', '151', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('8', '15', '164', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('9', '16', '214', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('10', '16', '169', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('11', '17', '17', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('12', '18', '213', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('13', '19', '198', null);
-INSERT INTO `tpyjd_newoldcrm` VALUES ('14', '20', '9', null);
+INSERT INTO `tpyjd_newoldcrm` VALUES ('9', '16', '214', '有两个字段，二选一或者做或关系匹配');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('10', '16', '169', '	有两个字段，二选一或者做或关系匹配');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('11', '17', '17', '文本字段直接匹配');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('12', '18', '213', '外键关联（用户表）');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('13', '19', '198', '老CRM文本，新CRM需要外键关联');
+INSERT INTO `tpyjd_newoldcrm` VALUES ('14', '20', '9', '外键关联（国家表），转换成文本');
 INSERT INTO `tpyjd_newoldcrm` VALUES ('15', '21', '237', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('16', '22', '10', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('17', '24', '222', null);
@@ -3347,6 +3346,7 @@ INSERT INTO `tpyjd_newoldcrm` VALUES ('54', '58', '18', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('55', '59', '19', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('56', '7', '134', null);
 INSERT INTO `tpyjd_newoldcrm` VALUES ('57', '6', '38', null);
+INSERT INTO `tpyjd_newoldcrm` VALUES ('58', '1', '2', '文本直接对接');
 
 -- ----------------------------
 -- Table structure for `tpyjd_oldcrm`
@@ -3935,3 +3935,36 @@ INSERT INTO `tpyjd_user` VALUES ('027-209d3c47-43e1-4d9f-9e4e-2feed0b9ef0a', 'NU
 INSERT INTO `tpyjd_user` VALUES ('027-22439307-14ba-4adc-9702-850a5aa54b73', 'NULL', '030-ef9f8677-15d5-4623-a2aa-725177d994a8', 'NULL', 'Suri', '06D20A13397B80AB4019D3B905759610', '北京李丹', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', '0', '0', '0', 'NULL', null, null, '0000-00-00 00:00:00', 'NULL', '0', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', null, 'NULL', '023-2985cf08-5139-4c0b-8b7b-278d785f1e4e', '10', '0');
 INSERT INTO `tpyjd_user` VALUES ('027-22465c55-3c8e-4594-bd2b-c5a80f573aa3', 'NULL', '030-8d9768a8-9db3-4b60-a7a9-e335389428ad', 'NULL', 'Sarah_wu', 'C999A21AA88C5710A1329443CE436C58', '北京吴双平', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', '1', '888000', '0', 'NULL', null, null, '0000-00-00 00:00:00', 'NULL', '0', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', null, 'NULL', '023-949ab131-85ec-4973-9765-7de0c0d50edd', '10', '0');
 INSERT INTO `tpyjd_user` VALUES ('027-227f4a0b-52e0-4118-9423-7b7394ebbc8d', 'NULL', '030-ef9f8677-15d5-4623-a2aa-725177d994a8', 'NULL', 'Doria', '8E65774266B05115', '沈阳吕柯臻', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', '0', '0', '0', 'NULL', null, null, '0000-00-00 00:00:00', 'NULL', '0', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', null, 'NULL', '023-e45f3ce5-c4bb-4d60-a7dc-1ef771360156', '10', '0');
+
+-- ----------------------------
+-- Table structure for `tpyjd_wx_wechat`
+-- ----------------------------
+DROP TABLE IF EXISTS `tpyjd_wx_wechat`;
+CREATE TABLE `tpyjd_wx_wechat` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类编号',
+  `email` varchar(50) DEFAULT NULL,
+  `passwd` varchar(50) DEFAULT NULL,
+  `wechat` varchar(30) DEFAULT NULL COMMENT '分类名称',
+  `weburl` varchar(100) DEFAULT NULL,
+  `type` varchar(5) DEFAULT NULL,
+  `appid` char(18) DEFAULT NULL,
+  `appsecret` char(32) DEFAULT NULL,
+  `dindappid` char(36) DEFAULT NULL,
+  `CorpSecret` char(66) DEFAULT NULL,
+  `SSOsecret` char(66) DEFAULT NULL,
+  `ChannelSecret` char(66) DEFAULT NULL,
+  `access_token` char(138) DEFAULT NULL,
+  `otime` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
+  `next_openid` char(28) DEFAULT NULL,
+  `utime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='公众号记录表';
+
+-- ----------------------------
+-- Records of tpyjd_wx_wechat
+-- ----------------------------
+INSERT INTO `tpyjd_wx_wechat` VALUES ('1', null, null, 'yaolh129测试接口号', 'Demo', '微信测试号', 'wx3452e8086f5fefab', 'df38233db1ca1150fa34d42dabf8f5cc', null, null, null, null, 'mp4ySryfxWLR_6x0Vu9SVCSqs52szyU4SM44PaBiTZDjHMwcmqiwCP1CB-6sWtNZ1dDrX7WhTaOvL_-MeMwMIiQeOp1HuUt3dC3iSaLBR4VHtwBRrF74pvsk84b3yxVnKHIiACAVST', '1491325328', '5', '0', '', '2017-04-26 23:57:34');
+INSERT INTO `tpyjd_wx_wechat` VALUES ('7', null, null, 'yaolihui129测试接口号', 'CS_Tpyjd', '微信测试号', 'wx3090bf31097834ac', '0f05798e9e7f2740706846aeba86308d', null, null, null, null, null, null, null, null, null, '2017-04-27 12:05:36');
+INSERT INTO `tpyjd_wx_wechat` VALUES ('14', null, null, 'ioke接口测试号', 'FZ_Tpyjd', '微信测试号', 'wx0ed91c537a52303b', 'b8633e9ce9c957993f908cad1b91fd93', null, null, null, null, 'z-IfeObWtkMASy2_oEuGpNenLUgnaiiNSTOep_ts5NOzTJzu_D_yri2B6ve0pMRsPdbs98o9wtNlg7coL4ABAKWIivhgFA41ERjAGvzhIuHfdHOUNw8FFGIny9ODagNIMRJaADABGY', '1493279944', null, null, null, '2017-04-27 13:59:14');
