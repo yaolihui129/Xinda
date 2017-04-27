@@ -193,7 +193,7 @@ class WeixinController extends WebInfoController {
             wxReplyNews($toUser,$fromUser,$arr);
                                            
     }
-       
+}       
    //创建自定义菜单
    function memuCreat() {      
        $postArr = array(  //组装数组                                     
