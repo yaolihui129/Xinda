@@ -99,14 +99,32 @@ class WeixinController extends WebInfoController {
             //图文的形式回复
             $m=M('tp_product');
             $map['name']=array('like','%'.$text.'%');
-            $data=$m->where($map)->order('sn')->limit(10)->select();
+            $map['prodid']=C(PRODID);
+            $map['state']=5;
+            $data=$m->where($map)->field('name, content, productImg,productId')->order('sn')->limit(10)->select();
             if($data){
-                foreach ($data as $st){
-                    $arr[$key]['title']=$st.name;
-                    $arr[$key]['description']=$st.name;
-                    $arr[$key]['picUrl']=$st.name;
-                    $arr[$key]['url']=$st.name;
-                }
+                $arr=array(
+                    array(
+                        'title'=>$data[0]['name'],
+                        'description'=>$data[0]['content'],
+                        'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                        'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                    ),
+                    array(
+                        'title'=>$data[1]['name'],
+                        'description'=>$data[1]['content'],
+                        'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                        'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                    ),
+                    array(
+                        'title'=>$data[2]['name'],
+                        'description'=>$data[2]['content'],
+                        'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[2]['productimg'],
+                        'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[2]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                    ),
+                    
+                    
+                );
             }else{//没找到你要的商品或服务
                 $arr = array(
                     array(
@@ -126,7 +144,122 @@ class WeixinController extends WebInfoController {
             //                 $mediaId = $postObj->MediaId;
             //                 wxReplyVoice($toUser,$fromUser,$mediaId);
         }
-         
+        
+        if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复
+            $text=trim($postObj->Content);           
+            if($text=='活动名称'){//从活动表查找相关               
+                $data=M('tp_page')->field('name, content,img,id')->where($map)->order('sn')->limit(10)->select();
+                if($data){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['img'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                     );
+                }
+            }else {//从产品表查找相关
+                $map['name']=array('like','%'.$text.'%');
+                $map['prodid']=C(PRODID);
+                $map['state']=5;
+                $data=M('tp_product')->field('name, content , productImg,productId')->where($map)->order('sn')->limit(10)->select();
+                if(sizeof($data)==1){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),                      
+                    );
+                }elseif (sizeof($data)==2){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[1]['name'],
+                            'description'=>$data[1]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    );
+                }elseif (sizeof($data)==3){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[1]['name'],
+                            'description'=>$data[1]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[2]['name'],
+                            'description'=>$data[2]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[2]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[2]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    
+                    );
+                }elseif (sizeof($data)==4){
+                    
+                }elseif (sizeof($data)==5){
+                    
+                }elseif (sizeof($data)==6){
+                    
+                }elseif (sizeof($data)==7){
+                    
+                }elseif (sizeof($data)==8){
+                    
+                }elseif (sizeof($data)==9){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[1]['name'],
+                            'description'=>$data[1]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[2]['name'],
+                            'description'=>$data[2]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[2]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[2]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    
+                    );
+                }elseif (sizeof($data)==10){
+                    
+                }else{//没找到你要的商品或服务
+                    $arr = array(
+                        array(
+                            'title'=>'没有找到与“'.$text.'”相关的商品或服务',
+                            'description'=>"北京智慧信达商贸有限公司",
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                    );
+                }
+            }
+            wxReplyNews($toUser,$fromUser,$arr);
+             
+        }
+        
+        
         if(strtolower($postObj->MsgType) == 'image'){ //图片消息回复
             //图片回复
             //             $mediaId=$postObj->MediaId;
@@ -156,45 +289,7 @@ class WeixinController extends WebInfoController {
     
     
     
-        if ( strtolower($postObj->MsgType) == 'text'){    //关键字回复
-            $text=trim($postObj->Content);
-            if($text=='活动名称'){//从活动表查找相关
-                $map['name']=array('like','%'.$text.'%');
-                $map['proid']=C(PRODID);
-                $data=M('tp_page')->where($map)->order('sn')->limit(10)->select();
-                if($data){
-                    foreach ($data as $st){
-                        $arr[$key]['title']=$st.name;
-                        $arr[$key]['description']=$st.name;
-                        $arr[$key]['picUrl']=$st.name;
-                        $arr[$key]['url']=$st.name;
-                    }
-                }
-            }else {//从产品表查找相关
-                $map['name']=array('like','%'.$text.'%');
-                $map['proid']=C(PRODID);
-                $data=M('tp_product')->where($map)->order('sn')->limit(10)->select();
-                if($data){
-                    foreach ($data as $st){
-                        $arr[$key]['title']=$st.name;
-                        $arr[$key]['description']=$st.name;
-                        $arr[$key]['picUrl']=$st.name;
-                        $arr[$key]['url']=$st.name;
-                    }
-                }else{//没找到你要的商品或服务
-                    $arr = array(
-                        array(
-                            'title'=>'没有找到与“'.$text.'”相关的商品或服务',
-                            'description'=>"北京智慧信达商贸有限公司",
-                            'picUrl'=>'http://www.zhihuixinda.com/Upload/Xinda/Product/2017-03-04/58ba72d2a8ee0.jpg',
-                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Index/index/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
-                        ),
-                    );
-                }
-            }
-            wxReplyNews($toUser,$fromUser,$arr);
-             
-        }
+        
     }
     //创建自定义菜单
     function memuCreat() {

@@ -13,10 +13,39 @@ class OldcrmController extends WebInfoController {
             }            
         }
         $this->assign('otable', $_SESSION['otable']);
-               
-        $data=$m->where(array('otable'=> $_SESSION['otable']))->select();
+        $this->assign("search",$_POST['search']);
+        $where['otable']=$_SESSION['otable'];
+        $where['name|nameApi|remark|type|usestate']=array('like','%'.$_POST['search'].'%');
+        $data=$m->where($where)->select();
         $this->assign('data',$data);
         
         $this->display();
     }
+    
+    function unuse(){
+        
+        if (D('oldcrm')->save($_GET)){
+            $this->success("修改成功！",U('index'));
+        }else{
+            $this->error("修改失败！");
+        }
+    }
+    
+    public function mod(){
+        $arr=D('oldcrm')->find($_GET[id]);
+        $this->assign('arr',$arr);
+    
+        $this->display();
+    }
+    
+    
+    public function update(){
+        if (D('oldcrm')->save($_POST)){
+            $this->success("修改成功！",U('index'));
+        }else{
+            $this->error("修改失败！");
+        }
+    }
+    
+    
 }
