@@ -211,9 +211,67 @@ class WeixinController extends WebInfoController {
                     
                     );
                 }elseif (sizeof($data)==4){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[1]['name'],
+                            'description'=>$data[1]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[2]['name'],
+                            'description'=>$data[2]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[2]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[2]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[3]['name'],
+                            'description'=>$data[3]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[3]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[3]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
                     
+                    );
                 }elseif (sizeof($data)==5){
+                    $arr=array(
+                        array(
+                            'title'=>$data[0]['name'],
+                            'description'=>$data[0]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[0]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[0]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[1]['name'],
+                            'description'=>$data[1]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[1]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[1]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[2]['name'],
+                            'description'=>$data[2]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[2]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[2]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[3]['name'],
+                            'description'=>$data[3]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[3]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[3]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
+                        array(
+                            'title'=>$data[4]['name'],
+                            'description'=>$data[4]['content'],
+                            'picUrl'=>'http://www.zhihuixinda.com/Upload/'.$data[4]['productimg'],
+                            'url'=>'http://www.zhihuixinda.com/index.php/Xinda/Service/index/id/'.$data[4]['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                        ),
                     
+                    );
                 }elseif (sizeof($data)==6){
                     
                 }elseif (sizeof($data)==7){
