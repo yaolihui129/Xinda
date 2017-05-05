@@ -12,6 +12,8 @@ return array(
     'DB_PWD'=>'root',
     'DB_PORT'=>'3306',
     'DB_PREFIX'=>'tpyjd_',
+    
+    
     'CRMURL'=>'http://app5.cloudcc.com/distributor.action',
     'PRODID'        =>   13,    //定义产品编号
     'PRODUCT'       =>  'Tpyjd',//定义产品编号
