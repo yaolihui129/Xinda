@@ -21,13 +21,13 @@ class LoginController extends Controller {
             $_SESSION['prodid']=$arr[0]['prodid'];
             $this->redirect('/Admin/Index/index');
         }else {
-            $m = D('tp_admin');
+            $m = D('tp_staff');
             $where=array('username'=>$_POST['username'],'password'=>md5($_POST['password']));
-            $user=$m->where($where)->field('id,username,realname,prodid,path,photo',false)->find();
-            if ($user){               
-                $_SESSION=$user;
-                $_SESSION['isLogin']=2;
-                $this->redirect('/Admin/Product');
+            $staff=$m->where($where)->field('id,creditid,username,prodid,img',false)->find();
+            if ($staff){               
+                $_SESSION=$staff;
+                $_SESSION['isLogin']='staff';
+                $this->redirect('/Admin/Index/index');
             }else{           
                 $this->error('用户或密码错误，请重新登陆！', "index");
             }
