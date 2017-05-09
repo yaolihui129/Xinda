@@ -1,59 +1,44 @@
 <layout name="layout" />
-<div class="panel panel-default">		  
-	<div class="panel-body">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="__URL__/add">征信系统</a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">			      			      
-				<ul class="nav navbar-nav">		      	
-					<form action="__URL__/add " method="post" class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-						    <div class="input-group">
-								<input type="text" name="search" class="form-control" value="<{$w.search}>" placeholder="姓名、手机号、身份证号">
-								<span class="input-group-btn">
-								    <button type="submit" class="btn btn-default" type="button">查询</button>
-								    <a href="__APP__/Admin/Customer" type="button" class="btn btn-info">返回客户管理</a>
-								</span>
-							</div>										        					          
-						 </div>				        
-					</form>										
-				</ul>
-			</div>					  
-		</nav>
-		<empty name="data">			
-			<div class="btn-group">
-				<a href="__URL__/create" class="btn btn-info">添加客户</a>																								    										    									    										    											
-			</div>
-		<else /> 
-			<ul class="list-group">
-				<volist name='data' id='ar' empty="没有相关信息">
-					<li class="list-group-item">
-						<div class="row">								  												  	
-							<div class="col-md-3"><{$ar.realname}></div>	
-							<div class="col-md-2"><{$ar.phone}></div>							  
-							<div class="col-md-2">&nbsp;</div>	
-							<div class="col-md-2">&nbsp;</div>
-							<div class="col-md-3">
-								<div class="btn-group pull-right">
-									<a href="#" class="btn btn-info">合作</a>
-									<a href="#" class="btn btn-info">详情</a>																    										    									    										    											
-								</div>
-							</div>
-						</div>					  		
-					</li>
-				</volist>					
-			</ul>
-		</empty> 
-		
-		
-		
-		
-		</div>
-</div>		
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">					     
+		<a href="#"><i class="icon-group"></i> 人员管理</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">客户管理</a> 
+		<span class="divider">/</span> 新增
+		<a href="__URL__"  class="btn pull-right" >返 回</a>			  
+	</h2>       
+  	<div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+<!-- Matter -->
+<div class="matter">
+    <div class="container">
+        <div class="widget-content">
+			<form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                        
+               <div class="form-group">
+                   <label class="col-lg-4 control-label">电话:</label>
+                   <div class="col-lg-4">
+                       <input type="tel" class="form-control" name="phone" value="" placeholder="电话" >
+                   </div>
+                   <label class="col-lg-2 control-label">姓名:</label>
+                   <div class="col-lg-2">
+                       <input type="text" class="form-control" name="name" value="" placeholder="姓名" >
+                   </div>
+                </div>                               
+                <div class="form-group">
+	                <label class="col-lg-4 control-label">描述:</label>
+	                <div class="col-lg-8">
+	                    <textarea class="cleditor" name="remark"><{$arr.remark}></textarea>		                                   
+	                </div>
+	            </div><hr />
+                <div class="form-group">
+                     <div class="col-lg-offset-1 col-lg-8">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                       
+                     </div>
+                </div>
+           </form>
+       </div>                
+   </div>
+</div>
+<!-- Matter ends -->

@@ -2,52 +2,80 @@
 namespace Admin\Controller;
 class CustomerController extends CommonController {
 	public function index(){
-	    /* 接收参数*/
 	    $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
-	    $this->assign('search',$search);
-	    $page=!empty($_GET['p']) ? $_GET['p'] : 1;
-	    
+	    $this->assign('search',$search);	    
 	    $maxPageNum=10;	    
-	    $where['prodid']=$_SESSION['prodid'];
-// 	    $where['wxopenid']=array('like','%'.$search.'%');
+	    $where['zt_tp_customer.prodid']=$_SESSION['prodid'];
+	    $where['zt_tp_credit.realname|zt_tp_credit.phone']=array('like','%'.$search.'%');
 	    $m=M('tp_customer');
-	    $data=$m->where($where)->page($page,$maxPageNum)->select();
+	    $data=$m->where($where)
+	    ->join('zt_tp_credit ON zt_tp_customer.creditid =zt_tp_credit.creditid')
+	    ->page($page,$maxPageNum)->select();
         $this->assign('data',$data);
 
 	    $this->display();
     }
     
    public function add(){
-       /* 接收参数*/
-       $m=D('tp_customer');
-       $where['creditId']=$_GET['creditId'];
-       $data=$m->where($where)->find();
-       if ($data){
-           $this->error("TA已经是你的客户，无需重复添加");
-       }else {
-           $this->assign('creditId',$_GET['creditId']);           
-           $this->display();
-       }
 
+       $this->display();
    }
 
     public function insert(){
-
-        /* 实例化模型*/
-        $m=D($_SESSION['tp_customer']);     
-        $_POST['adder']=$_SESSION['realname'];
-        $_POST['moder']=$_SESSION['realname'];
-        $_POST['ctime']=time();
-        if(!$m->create()){
-            $this->error($m->getError());
+        $where=array('phone'=>$_POST['phone']);
+        $m=D('tp_credit');
+        $arr=$m->where($where)->find();
+        if($arr){//检查征信表
+            $m=D('tp_customer');
+            $where=array('creditid'=>$arr['creditid'],'prodid'=>$_SESSION['prodid']);
+            $cus=$m->where($where)->find();
+            if($cus){//检查客户表
+                $this->error("Ta已经是您的客户了，无需重复添加");
+            }else {//向客户表插入数据
+                $_POST['creditid']=$arr['creditid'];
+                $_POST['prodid']=$_SESSION['prodid'];
+                $_POST['adder']=$_SESSION['realname'];
+                $_POST['moder']=$_SESSION['realname'];
+                $_POST['ctime']=time();
+                if(!$m->create()){
+                    $this->error($m->getError());
+                }
+                if($m->add()){
+                    $this->success("成功,Ta原来是XX的客户",U('index'));
+                }else{
+                    $this->error("失败");
+                }
+            }
+        }else {//向征信表插入数据
+            do {//如果该ID在库中存在，则重新获取
+                $id=getRandCode(9);
+                $arr=$m->find($id);
+            } while ($arr);
+            $_POST['creditid']=$id;
+            $_POST['realname']=$_POST['name'];
+            $_POST['password']=md5('123456');
+            $_POST['adder']=$_SESSION['realname'];
+            $_POST['moder']=$_SESSION['realname'];
+            $_POST['ctime']=time();
+            $m->create();
+            $m->add();
+            $arr=$m->where($where)->find();
+            //向客户表插入数据
+            $m=D('tp_customer');
+            $_POST['creditid']=$arr['creditid'];
+            $_POST['prodid']=$_SESSION['prodid'];
+            $_POST['adder']=$_SESSION['realname'];
+            $_POST['moder']=$_SESSION['realname'];
+            $_POST['ctime']=time();
+            if(!$m->create()){
+                $this->error($m->getError());
+            }
+            if($m->add()){
+                $this->success("成功，新用户",U('index'));
+            }else{
+                $this->error("失败");
+            }        
         }
-        $lastId=$m->add();
-        if($lastId){
-            $this->success("成功");
-        }else{
-            $this->error("失败");
-        }
-
     }
     
     public function mod(){

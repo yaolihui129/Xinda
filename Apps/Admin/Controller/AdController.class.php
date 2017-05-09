@@ -87,7 +87,6 @@ class AdController extends CommonController {
     }
     
     public function fabu(){
-        /* 接收参数*/
         $arr['id']=$_GET['id'];
         $arr['moder']=$_SESSION['realname'];
         if ($_GET['state']=='5'){

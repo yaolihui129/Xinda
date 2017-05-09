@@ -1,38 +1,45 @@
 <layout name="layout" />
-<h3 >人员-修改</h3>
-<div class="panel panel-default">
-
-     <div class="panel-body addmod">
-         <form action="__URL__/update" method="post" enctype='multipart/form-data' role="form">
-         <input type="hidden" name="wid" value="<{$arr.wid}>" />
-                  <div class="form-group input-group-lg">
-                      <label for="exampleInputusername">手机：</label>
-                      <input type="text" class="form-control" value="<{$arr.tpid|getPhone=###}>" readonly>  
-                  </div>
-                  <div class="form-group input-group-lg">
-                      <label for="exampleInputusername">姓名：</label>
-                      <input type="text" class="form-control"  value="<{$arr.tpid|getCRealname=###}>"  readonly>  
-                  </div>
-                  <div class="form-group input-group-lg">
-                      <label for="exampleInputusername">分类：</label>
-                      <input type="text" class="form-control" name="type" value="<{$arr.type}>" placeholder="分类" >                         
-                  </div>                  
-                   <div class="form-group input-group-lg">
-                      <label for="exampleInputusername">状态：</label>
-                      <{$state}>
-                  </div>
-                  <div class="form-group ">
-                      <label for="exampleInputusername">科目：</label>
-                      <input type="text" class="form-control" name="course" value="<{$arr.course}>" placeholder="科目" >  
-                  </div>
-                  
-                  
-                  <button type="submit" class="btn btn-info  pull-left" >提 交</button>
-                </form>
-                  <a href="__URL__/index"><button  class="btn btn-warning pull-right" >返 回</button></a>                      
-                 
-            </div>
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">					     
+		<a href="#"><i class="icon-group"></i> 人员管理</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">客户管理</a> 
+		<span class="divider">/</span> 编辑
+		<a href="__URL__"  class="btn pull-right" >返 回</a>			  
+	</h2>       
+  	<div class="clearfix"></div>
 </div>
-   
-
-     
+<!-- Page heading ends -->
+<!-- Matter -->
+<div class="matter">
+    <div class="container">
+        <div class="widget-content">
+			<form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                        
+               <input type="hidden" name="id" value="<{$arr.id}>" />
+               <div class="form-group">
+                   <label class="col-lg-4 control-label">电话:</label>
+                   <div class="col-lg-4">
+                       <input type="tel" class="form-control" name="phone" value="<{$arr.creditid}>" readonly >
+                   </div>
+                   <label class="col-lg-2 control-label">姓名:</label>
+                   <div class="col-lg-2">
+                       <input type="text" class="form-control" name="name" value="<{$arr.creditid}>" readonly >
+                   </div>
+                </div>                               
+                <div class="form-group">
+	                <label class="col-lg-4 control-label">描述:</label>
+	                <div class="col-lg-8">
+	                    <textarea class="cleditor" name="remark"><{$arr.remark}></textarea>		                                   
+	                </div>
+	            </div><hr />
+                <div class="form-group">
+                     <div class="col-lg-offset-1 col-lg-8">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                       
+                     </div>
+                </div>
+           </form>
+       </div>                
+   </div>
+</div>
+<!-- Matter ends -->
