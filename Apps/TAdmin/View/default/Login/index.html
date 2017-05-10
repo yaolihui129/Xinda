@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>测试管理后台</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <import type="css" file="css.home" />
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+		.login{
+			width: 300px;
+			margin: 0px auto;
+			border: 1px solid #cccccc;
+			padding: 15px;
+			background-color: #fff;
+			border-radius: 8px;
+			-webkit-box-shadow:inset 0 0 10px #0CC;  
+			-moz-box-shadow:inset 0 0 10px #0CC;  
+			box-shadow:inset 0 0 10px #0CC;  
+		}
+		.lgbg{
+			padding-top: 80px;
+			width: 100%;
+			height: 100%;
+			background: url(__IMAGES__/bg.jpg);
+		}
+	</style>
+  </head>
+  <body>
+   	<div class="container">
+   	<div class="lgbg">
+		<div class="login">
+	    	<form method="post" action="__URL__/login">
+	        	<h4 class="nomargin">JDQC</h4>
+	        	<p class="mt5 mb20"><em>欢迎使用测试管理系统</em></p>	    
+	        	<input type="text" class="form-control" placeholder="账号" name="username"><br />
+	       		<input type="password" class="form-control" placeholder="密码" name="password"><br />
+	        	<!--  <a href="#"><small>忘记密码？</small></a>--><br /><br />
+	        	<button class="btn btn-success btn-block">登录</button>
+	    	</form>
+		</div>
+    </div>
+       
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>  
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ </body>
+</html>

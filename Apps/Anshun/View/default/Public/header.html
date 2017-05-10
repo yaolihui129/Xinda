@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><{$_SESSION['Anshun']['web']}></title>
+    <meta name="keywords" content="<{$_SESSION['keywords']}>" />
+	<meta name="description" content="" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/css/fileinput.css" rel="stylesheet">
+    <import type="css" file="css.home" />       
+  </head>
+  <body>
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="__APP__/Anshun"><{$_SESSION['Anshun']['web']}></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse ">       
+	          <ul class="nav navbar-nav pull-right">                       		           
+		            <li><a href="__APP__/<{$JC}>/Servicelist/index/cate/8Roxs2"><span class="glyphicon glyphicon-th-list"> 钣金喷漆</span></a></li>
+		            <li><a href="__APP__/Anshun/Servicelist/index/cate/dH3Pph"><span class="glyphicon glyphicon-gift"> 汽车用品</span></a></li>          
+		            <empty name="_SESSION['isCLogin']">
+		           		<li><a data-toggle="modal" href="#Login" class="pull-right" >登录</a></li>
+		           		<!--<li><a href="__APP__/Anshun/Login/qq_login"  ><img alt="" src="__IMG__/bt_white_76X24.png" class="hidden-xs"></a></li>  -->           		
+		           		<li><a href="__APP__/Anshun/Customer" class="pull-right" >注册</a></li>	
+		          	<else />
+		          		<li>
+			          		<a href="__APP__/Anshun/Customer/personal">
+			          			<span class="glyphicon glyphicon-user"> <{$_SESSION['realname']}></span>
+			          		</a>
+		          		</li>         		         		        		             		
+		          	</empty>
+	          </ul>                  
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">    

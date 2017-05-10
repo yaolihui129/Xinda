@@ -6,6 +6,7 @@ return array(
         '__IMG__'=>__ROOT__.'/Public/images',
         '__UPLOAD__'=>__ROOT__.'/Upload'
     ),
+    'DEFAULT_THEME' =>  'default',//开启模板
     'PRODID'        =>   4,    //定义产品编号
     'PRODUCT'       =>  'Anshun',//定义产品编号   
     'WEIXIN_APPID'  =>  'wx0638761c98101e1f',//定义微信APPID

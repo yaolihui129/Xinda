@@ -1,0 +1,49 @@
+
+     	<div class="foot navbar-bottom list-inline text-center">
+         	Copyright <span class="num">&copy;</span> 2016-2017
+     		<a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a> 版权所有<br>
+     		IP:<{$_SESSION['ip']}>;浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></span>
+     		<p>咨询热线：<a href="tel:<{$_SESSION['Anshun']['phone']}>"><{$_SESSION['Anshun']['phone']}></a></p>    	
+    	</div>
+     </div>
+
+	
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>    
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/js/fileinput.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>       
+    
+<!-- 添加-模态框 -->
+<div class="modal fade " id="Login" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">登录</h4>
+	    </div>
+	    <div class="modal-body">
+	      	<form action="__APP__/Anshun/Login/login" method="post" class="form-horizontal" role="form" >	      	
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">手机:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="phone" value="" placeholder="用户名">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="product" class="col-sm-2 control-label">密码:</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" name="password" value="" placeholder="密码">
+					</div>
+				</div>
+										
+		</div>
+		<div class="modal-footer">
+		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>		     
+		     <button type="submit" class="btn btn-primary">登录</button></form>
+		</div>
+    </div>
+
+    
+ </body>
+</html>

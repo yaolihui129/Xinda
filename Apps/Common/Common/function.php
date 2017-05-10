@@ -736,7 +736,6 @@
         return $data['title']."(".$data['id'].")";        
     }
     
-    
     //获取项目状态
     function getProst($value){
         if($value=='doing'){
@@ -745,10 +744,14 @@
             return '已完成';
         }elseif ($value=='wait'){
             return '未开始';
+        }elseif ($value=='suspended'){
+            return '已挂起';
         }else{
             return ;
-        }        
-    }
+        }
+    } 
+    
+
     
     //获取真实姓名
     function getRealname($username){       

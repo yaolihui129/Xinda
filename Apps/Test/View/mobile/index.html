@@ -1,0 +1,20 @@
+<layout name="layout" />
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><{$w.proid|getPro=###}></h3>
+  </div>
+  <div class="panel-body table-responsive">
+  
+  
+    	<ul class="nav nav-tabs" role="tablist">
+		  <li role="presentation" ><a href="__APP__/Test/Stage/index/proid/<{$w.proid}>">里程碑<span class="badge"><{$w.proid|countStage=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/Test/Risk/index/proid/<{$w.proid}>">风险<span class="badge"><{$w.proid|countRisk=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/Test/Func/func/proid/<{$w.proid}>">功能点</a></li>
+		  <li role="presentation" class="active"><a href="__APP__/Test/Func/range/proid/<{$w.proid}>">范围<span class="badge"><{$w.proid|countRange=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/Test/Scene/index/proid/<{$w.proid}>">场景<span class="badge"><{$w.proid|countScene=###}></span></a></li>
+		  <li role="presentation"><a href="__APP__/Test/Case/procase/proid/<{$w.proid}>">用例<span class="badge"><{$w.proid|countCase=###}></span></a></li>
+		  <li role="presentation"><a href="#">上线结果</a></li>
+		</ul>
+		
+   </div>
+</div>

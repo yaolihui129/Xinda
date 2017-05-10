@@ -1,0 +1,42 @@
+<layout name="layout" />
+<div class="container">
+     <p class="text-center">
+		<empty name="arr[0]['figureurl_qq_2']">
+			<img src="__IMG__/toux.jpg" alt="__IMG__/头像.jpg" width="100%">
+		<else /> 
+			<img src="<{$arr[0]['figureurl_qq_2']}>" alt="<{$arr[0]['figureurl_qq_2']}>" class="img-circle">
+		</empty> 
+		
+	 </p>
+     <p class="text-center">
+		<{$arr[0]['realname']}>&nbsp;-&nbsp;
+		<{$arr[0]['gender']}>&nbsp;-&nbsp;	<{$arr[0]['phone']}>
+	</p>
+	<p class="text-center">
+		<{$arr[0]['province']}>&nbsp;-&nbsp;
+		<{$arr[0]['city']}>
+	</p>
+     
+	<ul class="list-group">  
+	  <li class="list-group-item"><a href="__URL__/mod">我的资料 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>	  
+	  </li>
+	  	 
+	  <!-- <li class="list-group-item"><a href="#">我的推荐 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"> </span></a>
+	  </li> -->
+	  
+      <li class="list-group-item"><a href="__APP__/Tuocai/Course/mycourse">我的课程
+      		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>	       
+      </li>
+      
+	  <!--<li class="list-group-item"><a href="#">我的预约 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>-->
+	  <li class="list-group-item"><a href="__APP__/Tuocai/Customer/setpass">修改密码 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>	  
+	</ul>	
+	<a href="__APP__/Tuocai/Login/logout" class="btn btn-primary btn-lg btn-block">退出</a>
+	<br><br>
+</div>

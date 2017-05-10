@@ -1,0 +1,35 @@
+<layout name="layout" />
+<div class="container"> 
+<p class="text-center">
+	<img src="<{$arr[0]['figureurl_qq_2']}>" alt="<{$arr[0]['figureurl_qq_2']}>" class="img-circle">
+</p>
+<p class="text-center">
+	<{$arr[0]['realname']}>&nbsp;-&nbsp;
+	<{$arr[0]['gender']}>&nbsp;-&nbsp;	<{$arr[0]['phone']}>
+</p>
+<p class="text-center">
+	<{$arr[0]['province']}>&nbsp;-&nbsp;
+	<{$arr[0]['city']}>
+</p>
+
+	<ul class="list-group">
+	  <li class="list-group-item">
+	  	<a href="__URL__/mod/id/<{$arr[0][id]}>">我的资料
+	  		<span class="glyphicon glyphicon-chevron-right pull-right">
+	  		</span>
+	  	</a>
+	  </li>	  
+	  <!--<li class="list-group-item"><a href="__APP__/Anshun/Hr/wodtuijian/phone/<{$arr[0]['phone']}>">我的推荐 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"> </span></a>
+	  </li>  -->
+ 
+	  <li class="list-group-item"><a href="#">我的预约 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>
+	  <li class="list-group-item"><a href="__APP__/Anshun/Customer/setpass">修改密码 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>	  
+	</ul>	
+	<a href="__APP__/Anshun/Login/logout" class="btn btn-primary btn-lg btn-block">退出</a>
+	<br><br>
+</div>

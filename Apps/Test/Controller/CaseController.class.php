@@ -1,7 +1,7 @@
 <?php
 namespace Test\Controller;
 use Think\Controller;
-class CaseController extends Controller {
+class CaseController extends WebInfoController {
    public function index(){
         /* 接收参数*/
          $funcid=$_GET['funcid'];

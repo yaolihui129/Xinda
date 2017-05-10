@@ -1,0 +1,39 @@
+<layout name="layout" />
+<div class="row"> 
+  <div class="col-md-8">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	      <{$arr.id|getSPFunc=###}>需求规则
+	      <div class="badge pull-right"><{$_SESSION['proid']|getProNo=###}></div>	     
+	  </div>  
+	  <ul class="list-group">	  
+	         <volist name='rules' id='rule' empty="没有规则">
+	            <li class="list-group-item">
+	               <{$rule.sn}>.<{$rule.id}>:【<{$rule.state}>】<{$rule.rules}>(<{$rule.fproid|getProNo=###}>)
+	                <span class="badge"><{$rule.source}></span>
+	            </li>
+	        </volist>
+	  </ul>
+	</div>
+    
+  </div>
+  <div class="col-md-4 hidden-xs">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><{$arr.pathid|getSPath=###}></h3>
+	  </div>
+	  <ul class="list-group">
+	    <volist name='data' id='vo' empty="没有数据"> 			
+           <switch name="vo.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+		 </switch> 
+            <a href="__URL__/index/funcid/<{$vo.id}>">
+            	<{$vo.sn}>.<{$vo.func}></a><span class="badge"><{$vo.id|countFRules=###}></span></li>
+        </volist>
+      </ul>	  
+	</div>
+  	 
+  </div>
+  
+</div> 
