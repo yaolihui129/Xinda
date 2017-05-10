@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class StageController extends Controller {
+class StageController extends WebInfoController {
     public function index(){
         /* 接收参数*/
         $proid=$_GET['proid'];
@@ -18,8 +17,4 @@ class StageController extends Controller {
         $this->display();
     }
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
 }

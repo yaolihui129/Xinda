@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class FuncController extends Controller {
+class FuncController extends WebInfoController {
 
     public function func(){
         /* 接收参数*/
@@ -63,16 +62,10 @@ class FuncController extends Controller {
         //         $where=array("fproid"=>$proid,"state"=>'正常');
         //         $data=$m->where($where)->select();
         $this->assign("data",$data);
-//         dump($data);
         
         $this->display();
 
     }
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
 
 }

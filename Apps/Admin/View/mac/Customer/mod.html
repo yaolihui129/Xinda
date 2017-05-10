@@ -20,11 +20,11 @@
                <div class="form-group">
                    <label class="col-lg-4 control-label">电话:</label>
                    <div class="col-lg-4">
-                       <input type="tel" class="form-control" name="phone" value="<{$arr.creditid}>" readonly >
+                       <input type="tel" class="form-control"  value="<{$arr.creditid|getCreditidPhone=###}>" readonly >
                    </div>
                    <label class="col-lg-2 control-label">姓名:</label>
                    <div class="col-lg-2">
-                       <input type="text" class="form-control" name="name" value="<{$arr.creditid}>" readonly >
+                       <input type="text" class="form-control" value="<{$arr.creditid|getCreditName=###}>" readonly >
                    </div>
                 </div>                               
                 <div class="form-group">

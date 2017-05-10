@@ -1,6 +1,5 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
 class CaseController extends WebInfoController {
    public function index(){
         /* 接收参数*/
@@ -41,17 +40,13 @@ class CaseController extends WebInfoController {
         $map['fproid']=$proid;
         $map['state']='正常';
         $var=$m->where($map)->field("adder,count(id)")->group('adder')->select();
-//         dump($var);
+
         $this->assign('var',$var);
 
         $this->display();
 
     }
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
-
+  
  
 }

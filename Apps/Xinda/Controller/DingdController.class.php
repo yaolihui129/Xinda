@@ -18,7 +18,7 @@ class DingdController extends WebInfoController {
         return $arr['access_token'];     
     }
     
-    function getChannelToken(){//ChannelToken
+    function getChannelToken(){//获取ChannelToken
         $corpid      = C(DD_CorpID);
         $corpsecret  = C(DD_ChannelSecret);
         $url         = 'https://oapi.dingtalk.com/channel/get_channel_token?corpid='.$corpid.'&channel_secret='.$corpsecret;
@@ -26,7 +26,7 @@ class DingdController extends WebInfoController {
         return $arr['access_token'];        
     }  
     
-    function getCode(){
+    function getCode(){//获取Code
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/sns/get_persistent_code?access_token='.$token;
         $arr     =  json_decode(httpGet($url), true);
@@ -201,17 +201,17 @@ class DingdController extends WebInfoController {
         return $res;
     }
     
-    function sendRobotMeg(){
+    function sendRobotMeg(){//发送机器人消息
         $token    =  $this->getToken();
         $url      = 'https://oapi.dingtalk.com/robot/send?access_token=6203882eef6a7057fd8c68dfdf97e484df252f6c55a9532380337ce0ca989cce';
         $Meg      = array("content"=>"张珊的请假申请");
         $Meg      = json_encode($Meg);
         $Arr      = array(
-            "sender"=>"UserID1",
-            "isAtAll"=>"PartyID1",
-            "msgtype"=>"text",
-            "text"=>$Meg,
-        );   //2.组装数组
+                        "sender"    =>  "UserID1",
+                        "isAtAll"   =>  "PartyID1",
+                        "msgtype"   =>  "text",
+                        "text"      =>  $Meg,
+                    );   //2.组装数组
         $postJson = json_encode($Arr);      //将数组转化成json
         $res      = httpPost($url, $postJson);
         return $res;

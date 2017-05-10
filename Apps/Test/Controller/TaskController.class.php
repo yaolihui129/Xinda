@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class TaskController extends Controller {
+class TaskController extends WebInfoController {
     public function index(){
 
         $m=D('task');
@@ -11,7 +10,6 @@ class TaskController extends Controller {
         $data=$m->where($where)
         ->order("assignedTo,finishedBy,project,type,story")
         ->select();
-//         dump($data);
         $this->assign('data',$data);
         
         $this->display();
@@ -68,11 +66,6 @@ class TaskController extends Controller {
     
         $this->display();
     
-    }
-    
-    public function _empty(){
-    
-        $this->display('index');
     }
     
     

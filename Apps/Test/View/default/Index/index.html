@@ -9,7 +9,7 @@
 				<div class="panel-heading" role="tab" id="heading<{$pro.id}>">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#<{$pro.id}>" aria-expanded="true" aria-controls="<{$pro.id}>">
-					<{$pro.code}>:<{$pro.name}>(<{$pro.end}>上线)<span class="badge"><{$pro.status|getProst=###}></span></a>						
+					<{$pro.name}>(<{$pro.end}>上线)<span class="badge"><{$pro.status|getProst=###}></span></a>						
 					<div class="btn-group pull-right">
 					    <a href="__APP__/Test/Func/range/proid/<{$pro.id}>"  class="btn btn-warning btn-xs ">范围 
 					    <span class="badge"><{$pro.id|countRange=###}></span> </a>

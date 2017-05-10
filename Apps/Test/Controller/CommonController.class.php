@@ -1,6 +1,5 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
 class CommonController extends WebInfoController{
     Public function _initialize(){
         // 初始化的时候检查用户权限

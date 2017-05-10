@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class RulesController extends Controller {
+class RulesController extends WebInfoController {
 
   public function index(){
      /* 接收参数*/
@@ -42,10 +41,6 @@ class RulesController extends Controller {
       
   }
   
-  public function _empty(){
-  
-      $this->display('index');
-  }
 
 
 }

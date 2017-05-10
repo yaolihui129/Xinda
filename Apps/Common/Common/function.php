@@ -1,12 +1,12 @@
 <?php
-    // 根据id获取状态
-    function getState($key){
+    
+    function getState($key){// 根据id获取状态
         $where=array('type'=>'state','k'=>$key);
         $data=M('tp_dict')->where($where)->find();        
         return $data['v'];   
     }
-    // 根据id获取周期
-    function getZhouqi($key){
+    
+    function getZhouqi($key){// 根据id获取周期
         $where=array('type'=>'zhouqi','k'=>$key);
         $data=M('tp_dict')->where($where)->find();
         return $data['v'];
@@ -17,21 +17,14 @@
         $data=M('tp_dict')->where($where)->find();
         return $data['v'];
     }
-    //获取ProductID
-    function getProdId($qz){
-        $data=M('product')->where(array('qz'=>$qz))->find();
-        return $data['id'];
-    }
+ 
     //根据id获取产品名
     function getProd($id){
         $data=M('product')->find($id);
         return $data['name'];
     }
     
-    function getQz($id){
-        $data=M('product')->find($id);
-        return $data['qz'];
-    }
+  
     //根据pid获取分类数
     function countCate($pidCateId){
         $where=array('pidCateId'=>$pidCateId);
@@ -47,7 +40,8 @@
         }else {
             return "|-";
         }
-    }   
+    } 
+    
     //获取父级分类ID
     function getCatePid($cateId){
         $data=M('tp_cate')->find($cateId);
@@ -61,9 +55,17 @@
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
     }
+    //获取征信电话
     function getCreditidPhone($creditId){
         $data=M('tp_credit')->find($creditId);
-        return $data['phone'];
+        $str = substr_replace($data['phone'],'****',3,4);
+        return $str;
+    }
+    
+    //获取征信姓名
+    function getCreditName($creditId){
+        $data=M('tp_credit')->find($creditId);
+        return $data['realname'];
     }
    //登录
    function login($qz,$phone,$password){
@@ -87,38 +89,8 @@
         }
         session_destroy();// 销毁sesstion
     }
-
-    //根据id获取客户电话
-    function getCusPhone($id){
-        $arr=M('tp_customer')->find($id);        
-        return $arr['phone'];        
-    }
-    //获取姓名
-    function getCRealname($id){
-        $data=M('tp_customer')->find($id);
-        return $data['realname'];
-    }
     
-    
-    //根据id获取活动信息
-    function getVoucher($id){
-        $arr=M('voucher')->find($id);
-        $str.=$arr['title']."：";
-            $str.="奖券数【".$arr['total']."】"
-                  ."特等奖【".$arr['specia']."】，"
-                  ."一等奖【".$arr['first']."】，" 
-                  ."二等奖【".$arr['second']."】，"
-                  ."三等奖【".$arr['third']."】，"
-                  ."参与奖【".$arr['canyu']."】";       
-        return $str;
-    }
-    
-    // 根据id获取奖券数
-    function countTickets($id){
-        $where=array("voucherid"=>$id);
-        $c=M('tickets')->where($where)->count();
-        return $c;  
-    }
+  
     //获得访客浏览器类型
     function GetBrowser(){
         if(!empty($_SERVER['HTTP_USER_AGENT'])){
@@ -367,8 +339,8 @@
                 if($arr[0]['tpid']==0){//如果绑定手机号
                     $_SESSION['realname'] = '游客';
                 }else{//如果未绑定手机号
-                    $_SESSION['uphone']   = getCusPhone($arr['tpid']);
-                    $_SESSION['realname'] = getCusName($arr['tpid']);
+                    $_SESSION['uphone']   = getCreditidPhone($arr['tpid']);
+                    $_SESSION['realname'] = getCreditName($arr['tpid']);
                 }
             }else{//如果用户表没有值，向用户表插入数据
                 $_POST['wxopenid']=$_GET['wxOpenId'];
@@ -461,7 +433,7 @@
     }
 
     //根据日期获取星期
-    function   wk($date) {
+    function wk($date) {
             $datearr = explode("-",$date);     //将传来的时间使用“-”分割成数组
             $year = $datearr[0];       //获取年份
             $month = sprintf('%02d',$datearr[1]);  //获取月份
@@ -717,11 +689,20 @@
     function getModuleName($pathid){
        $data=M('module')->find($pathid);
             if ($data['parent']){
-                $str=$data['parent'].$data['name'];
+                $str=getModuleName($data['parent']).'-'.$data['name'];
             }else {
                 $str=$data['name'];                              
             }            
         return $str;      
+    }
+    //获取需求详情
+    function getStorySpec($storyId){
+        $where=array('story'=>$storyId);
+        $arr=M('storyspec')->where($where)->order('version desc')->select();
+            foreach ($arr as $ar){
+               $str.='<li class="list-group-item">#'.$ar['version'].'<hr><p>'.$ar['spec'].'</p></li>';
+            }
+        return $str;
     }
     
     //获取平台名称

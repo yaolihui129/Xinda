@@ -1,98 +1,36 @@
  <layout name="layout" />
  <div class="container">
- <div class="row"> 
-  <div class="col-md-8">
   	<div class="panel panel-info">
-	  <div class="panel-heading">需求规则（<{$_SESSION['proid']|getProNo=###}> ）-<{$arr.id|getSPFunc=###}>(<{$arr.sn}>)
-	  <a data-toggle="modal" href="#tianjrule" class=" btn btn-info btn-xs pull-right" >
-  		<span class="glyphicon glyphicon-plus">添加</span></a>
-	  </div>  
-	  <ul class="list-group">
-	   <form action="__URL__/order" method="post" >
-	         <volist name='rules' id='rule' empty="没有规则">
-	            <li class="list-group-item">
-	            <span>	            
-	                <input type="text" name="sn[<{$rule.id}>]" value="<{$rule.sn}>"  class="input40"/>	                
-	                <{$rule.id}>:【<{$rule.state}>】
-			        <span class="label label-warning"><{$rule.source}></span>  
-		         	<span class="badge"><{$rule.updatetime}></span><br>
-		         	<div class="btn-group pull-right">
-			            <a href="__URL__/mod/id/<{$rule.id}>/funcid/<{$arr.id}>" type="button" class="btn btn-info btn-xs">
-			            <span class="glyphicon glyphicon-edit">修改</span></a>
-			            <a href="__URL__/mod/id/<{$rule.id}>" type="button" class="btn btn-danger btn-xs">
-			            <span class="glyphicon glyphicon-remove">作废</span></a>		               		               
-			        </div>	
-		         	<{$rule.rules}>(<{$rule.fproid|getProNo=###}>)	                	                  	         	                	                
-	            </span>
-	            </li>
-	        </volist>	        
-	    </form>
-	  </ul>
-	  <input type="submit" name="do_submit" value="批量排序" class="btn">
+	  <div class="panel-heading">项目规则（<{$_SESSION['proid']|getProNo=###}> ）</div>
+	  
+	    <div class="starter-template">             
+	        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+	         	<volist name='data' id='st' empty="没有规则">
+	            <div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
+						    	                                
+			                <{$st.id}>:<b><{$st.branch}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+					        <span class='pull-right'>
+					        <span class="label label-info"><{$st.status}></span> 
+					        <span class="label label-warning"><{$st.openedby}></span>  
+				         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+			           		</span>															      
+					 </h4>
+					 </div>
+						<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
+						    <div class="panel-body">
+							    <ul class="list-group">
+							    <{$st.id|getStorySpec=###}>
+							    </ul>
+							    
+						    </div>
+						</div>
+	  			</div>                     
+	            </volist>
+	        </div>
+	     </div> 
 	</div>
-    
-  </div>
-  <div class="col-md-4 hidden-xs">
-  	<div class="panel panel-primary">
-	  <div class="panel-heading">
-	    <h3 class="panel-title"><{$arr.pathid|getSPath=###}></h3>
-	  </div>
-	  <ul class="list-group">
-	    <volist name='data' id='vo' empty="没有数据"> 			
-           <switch name="vo.id">
-				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
-				<default /><li class="list-group-item ">
-		 </switch> 
-            <a href="__URL__/index/funcid/<{$vo.id}>">
-            	<{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】</a>
-            	<span class="badge"><{$vo.id|countFRules=###}></span>
-            </li>
-        </volist>
-      </ul>	  
-	</div>
-  	 
-  </div>
-  
-</div> 
 </div>
-
-<!-- 添加-模态框 -->
-<div class="modal fade " id="tianjrule" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-    	<div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">规则-添加</h4>
-	    </div>
-	    <div class="modal-body">
-	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
-	      	<input type="hidden" name="funcid" value="<{$arr.id}>" />
-	      	<input type="hidden" name="fproid" value="<{$_SESSION['proid']}>" />
-				<div class="form-group">
-					<label for="short" class="col-sm-2 control-label">顺序:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="sn" value="<{$c}>" placeholder="顺序"></div>
-				</div>
-				<div class="form-group">
-					<label for="product" class="col-sm-2 control-label">规则:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="rules" value=" " placeholder="规则"></div>
-				</div>
-				
-				<div class="form-group">
-					<label for="product" class="col-sm-2 control-label">来源:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="source" value="禅道项目需求 " placeholder="来源"></div>
-				</div>
-				<div class="form-group">
-					<label for="state" class="col-sm-2 control-label">状态:</label>
-					<div class="col-sm-10"><{$state}></div>
-				</div>
-				<div class="form-group">
-					<label for="state" class="col-sm-2 control-label">备注:</label>
-					<div class="col-sm-10"><{$beizhu}></div>
-				</div>							
-		</div>
-		<div class="modal-footer">
-		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		     <button type="submit" class="btn btn-primary">提交</button></form>
-		</div>
-    </div>       
-  </div>  
+    

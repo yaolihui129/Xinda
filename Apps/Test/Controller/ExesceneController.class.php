@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class ExesceneController extends Controller {
+class ExesceneController extends WebInfoController {
     public function index(){
         /* 接收参数*/
         $id=$_GET['id'];
@@ -12,12 +11,5 @@ class ExesceneController extends Controller {
         dump($arr);
         
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-        
-        
+       
 }

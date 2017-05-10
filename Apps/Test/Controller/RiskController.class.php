@@ -1,7 +1,6 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class RiskController extends Controller {
+class RiskController extends WebInfoController {
   public function index(){
         /* 接收参数*/
         $proid=$_GET['proid'];
@@ -19,10 +18,5 @@ class RiskController extends Controller {
 
         $this->display();
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
+
 }

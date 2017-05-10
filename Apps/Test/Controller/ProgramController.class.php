@@ -1,9 +1,7 @@
 <?php
 namespace Test\Controller;
-use Think\Controller;
-class ProgramController extends Controller {
+class ProgramController extends WebInfoController {
    public function index(){
-
         /* 接收参数*/
         $testgp=!empty($_GET['testgp']) ? $_GET['testgp'] :"PJD";
         $m=M('dict');
@@ -12,7 +10,6 @@ class ProgramController extends Controller {
         ->field("id,k,v,state")       
         ->select();
         $this->assign('data',$data);
-
         /* 实例化模型*/
         $m=M('project');
         $where=array("testgp"=>$testgp);
@@ -55,9 +52,4 @@ class ProgramController extends Controller {
 
     }
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
 }

@@ -6,7 +6,7 @@
 		<a href="__URL__" class="bread-current">客户管理</a> 
 		<form class="form-inline pull-right" action="__URL__/index" method="post">
 			<div class="form-group">
-				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="手机号/姓名">
 			</div>
 			<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
 			<a href="__URL__/add" type="button" class="btn"><i class="icon-plus"> 添加</i></a>
@@ -30,22 +30,23 @@
                  <th width=10% align="center" bgcolor="#ccc">出生年</th> 
                  <th width=10% align="center" bgcolor="#ccc">城市</th>                                                                               
                  <th width=15% align="center" bgcolor="#ccc">更新时间</th>
-                 <th width=10% align="center" bgcolor="#ccc">操作</th>
+                 
                </tr>
              </thead>
              <tbody>
 				<volist name='data' id='st' empty="没有数据">
                     <tr>
-                       <td><img alt="" src="<{$st.figureurl_qq_2}>" ></td>
+                       <td><img src="<{$st.figureurl_qq_2}>" ></td>
                        <td><{$st.creditid|getCreditidPhone=###}></td>
-                       <td><a href="__URL__/mod/creditId/<{$st.creditid}>"><{$st.name}></a></td>                         
+                       <td>
+                       		<a href="__URL__/mod/id/<{$st.id}>"><{$st.realname}></a>
+                       		<a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default pull-right"><i class="icon-pencil"> 编辑</i></a>
+                       </td>                         
                        <td><{$st.gender}></td>
                        <td><{$st.year}></td>
                        <td><{$st.province}>-<{$st.city}></td>
                        <td><{$st.utime}></td>
-                       <td>
-                         <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
-                       </td>
+                       
                     </tr>
 				</volist>
 			</tbody>
