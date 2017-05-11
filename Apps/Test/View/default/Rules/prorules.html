@@ -28,27 +28,30 @@
 				  <span class="badge">
 				  <{$arr.id|countPRules=###}></span></a></li>		  
 				</ul>
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">          
-		              <volist name='data' id='st' empty="没有数据">
-		              <div class="panel panel-default">              
-						<div class="panel-heading" role="tab" id="heading<{$st.id}>">
-							<h4 class="panel-title">
-							    <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
-							      <span class="label label-default"><{$st.branch|getBranchName=###}></span>
-			                	  <span class="label label-info"><{$st.parent|getModuleName=###}></span>
-			                	  <span class="label label-info"><{$st.name}></span>
-			                	  <b><{$st.func}>(ID:<{$st.id}>)</b>【<{$st.id|countFRules=###}>】
-							      <span class="badge pull-right"><{$st.state}></span>
-							    </a>
-							  </h4>
-						</div>
-						<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">
-							<div class="panel-body"><ul class="list-group"><{$st.id|getRules=###}></ul></div>
-						</div>
-						
-		  			 </div>
-		           </volist>
-		      </div>				
+				<div class="starter-template">             
+			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+			         	<volist name='data' id='st' empty="没有规则">
+				            <div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+									<h5 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
+							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+									        <span class='pull-right'>
+									        <span class="label label-info"><{$st.status}></span> 
+									        <span class="label label-warning"><{$st.openedby}></span>  
+								         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+							           		</span>															      
+									 </h5>
+								 </div>
+								 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
+									    <div class="panel-body">
+										    <ul class="list-group"><{$st.id|getStorySpec=###}></ul>
+									    </div>
+								</div>
+				  			</div>                     
+			            </volist>
+			        </div>
+			     </div> 				
 		   </div>
 		</div>
 	

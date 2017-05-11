@@ -61,8 +61,11 @@ public function index(){
         $data=$m->where($where)->order('sn,id')->select();
         $this->assign('data',$data); 
         
-        $m=D('tp_rules');
-        $rules=$m->where($where)->order('sn,id')->select();
+         
+        //获取模块
+        $m=D('story');
+        $where=array("module"=>$this->getModuleid($case['funcid']), 'deleted'=>'0');
+        $rules=$m->where($where)->field('id,branch,module,title,status,stage,openedBy,lastEditedDate,version')->select();
         $this->assign('rules',$rules);
         
         
@@ -72,6 +75,13 @@ public function index(){
 
         $this->display();
     }
+    
+    function getModuleid($funcid){
+        $m=D('tp_func');
+        $date=$m->find($funcid);
+        return $date['pathid'];
+    }
+    
     
     public function data(){
         

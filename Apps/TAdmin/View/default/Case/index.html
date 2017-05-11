@@ -62,7 +62,7 @@
 				<default /><li class="list-group-item ">
 		 </switch> 
             <a href="__URL__/index/funcid/<{$vo.id}>">
-            	<{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】</a><span class="badge"><{$vo.id|countFCase=###}></span></li>
+            	<{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】<{$vo.fproid|getProNo=###}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
         </volist>
       </ul>	  
 	</div>

@@ -32,7 +32,7 @@
 		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
 		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
 		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Element/library/proid/<{$arr.id}>">控件库</a></li>
+		  <li role="presentation"><a href="__APP__/TAdmin/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
 	</ul>
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 		    <volist name='data' id='st' empty="没有数据">
@@ -53,9 +53,7 @@
 		              </a>
 		              <div class="btn-group pull-right">
 			             <a target="_blank" href="__APP__/TAdmin/Case/index/funcid/<{$st.id}>" class="btn btn-success btn-xs">用例
-			               <{$st.id|countFCase=###}></a>        
-			            <a target="_blank" href="__APP__/TAdmin/Rules/index/funcid/<{$st.id}>" class="btn btn-info btn-xs">规则
-			              <{$st.id|countFRules=###}></a>
+			               <{$st.id|countFCase=###}></a>        			           
 			            <a target="_blank" href="__APP__/TAdmin/Element/index/funcid/<{$st.id}>" class="btn btn-warning btn-xs">模板</a>			            
 			          </div>
 		            </h4>

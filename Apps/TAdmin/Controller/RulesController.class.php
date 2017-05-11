@@ -2,19 +2,28 @@
 namespace TAdmin\Controller;
 class RulesController extends CommonController {
     public function index(){
+            /* 接收参数*/
+            $proid=$_GET['proid'];
+            $_SESSION['proid']=$proid;
+            /* 实例化模型*/
+            $m= D("project");
+            $where=array("testgp"=>$_SESSION['testgp']);
+            $pros=$m->where($where)->order("end desc")->select();
+            $this->assign("pros",$pros);
+        
+            $arr=$m->find($proid);
+            $this->assign("arr",$arr);
+        
+        
         //获取模块
-        $m=D('tp_prosys');
-        $where=array("zt_projectstory.project"=>$_GET['proid'],'zt_module.state'=>'正常',' zt_story.deleted'=>'0');
-        $data=$m->where($where)->join('zt_branch ON zt_tp_prosys.branch =zt_branch.id')
-                ->join('zt_module ON zt_module.branch =zt_branch.id')
-                ->join('zt_story ON zt_story.module =zt_module.id')
+        $m=D('module');
+        $where=array("zt_projectstory.project"=>$_GET['proid'], 'zt_story.deleted'=>'0');
+        $data=$m->where($where)->join('zt_story ON zt_story.module =zt_module.id')
                 ->join('zt_projectstory ON zt_projectstory.story =zt_story.id')
                 ->field('
                         zt_story.id as id,
-                        zt_branch.name as branch,
-                        zt_module.id as moduleid,
-                        zt_module.parent as parent,
-                        zt_module.name as module,
+                        zt_story.branch as branch,
+                        zt_story.module as moduleid,
                         zt_story.title as title,
                         zt_story.status as status,
                         zt_story.stage as stage,
@@ -22,7 +31,7 @@ class RulesController extends CommonController {
                         zt_story.lastEditedDate as lastEditedDate,
                         zt_story.version as version
                 ')
-                ->order('zt_branch.sysno')->select();
+                ->order('zt_story.branch,zt_module.order,zt_module.id')->select();
         $this->assign("data",$data);
 //         dump($data);
 
