@@ -1,0 +1,58 @@
+<layout name="layout" />
+<!-- Page heading -->
+	    <div class="page-head">
+	      <h2 class="bread-crumb">
+			<a href="#"><i class="icon-gift"></i> 人员管理</a> 
+			<span class="divider">/</span> 
+			<a href="__URL__" class="bread-current">员工管理</a>  
+			<span class="divider">/</span> 修改
+			<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>       		          
+	      </h2>       
+        <div class="clearfix"></div>
+	    </div>
+<!-- Page heading ends -->
+<!-- Matter -->
+<div class="matter">
+    <div class="container">
+        <div class="widget-content">
+            <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                       
+                 <input type="hidden" name="id" value="<{$arr.id}>" />                                        
+                 <div class="form-group">
+                   <label class="col-lg-4 control-label">登录名</label>
+                   <div class="col-lg-8">
+                        <input type="text" class="form-control" name='username' value="" placeholder="登录名">
+                   </div>                         
+                </div> 
+                <div class="form-group">
+                   <label class="col-lg-4 control-label">姓名</label>
+                   <div class="col-lg-8">
+                        <input type="text" class="form-control" name='realname' value="" placeholder="姓名">
+                   </div>                         
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">手机号</label>
+                    <div class="col-lg-8">
+                        <input type="tel" class="form-control" name='phone' value="" placeholder="手机号">
+                    </div>                                        
+               </div>
+               <div class="form-group">
+                    <label class="col-lg-4 control-label">类型</label>
+                    <div class="col-lg-8">
+                        <input type="tel" class="form-control" name='type' value="" placeholder="类型">
+                    </div>                                        
+               </div> 
+	              <div class="form-group">	                          
+	                  <label class="col-lg-4 control-label">产品照片：</label>
+	                  <div class="col-lg-8"><input id="input-1" type="file" class="file form-control" name="img"></div>
+	              </div> 
+                 <hr />
+                  <div class="form-group">
+                      <div class="col-lg-offset-1 col-lg-8">
+                             <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                                                                   
+                      </div>                             
+                  </div>
+               </form>
+          </div>                
+     </div>
+</div>
+<!-- Matter ends -->

@@ -24,4 +24,9 @@
         return $data;
     }
     
+    function getQz($prodid){
+        $data=M('product')->find($prodid);
+        return $data['qz'];
+    }
+    
     

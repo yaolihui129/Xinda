@@ -16,3 +16,62 @@
 	<div class="clearfix"></div>
 </div>
 <!-- Page heading ends -->
+
+<div class="matter">
+   <div class="container">                  
+      <div class="widget">
+          <div class="widget-content medias">                 
+              <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                        <tr>                          
+                          <th width=1% align="center" bgcolor="#ccc">
+                            <span class="uni">
+                              <input type='checkbox' value='check1' />
+                            </span>
+                          </th>
+                          <th width=10% align="center" bgcolor="#ccc">姓名</th>
+                          <th width=5% align="center" bgcolor="#ccc">登录名</th>
+                          <th width=5% align="center" bgcolor="#ccc">手机号</th>                         
+                          <th width=5% align="center" bgcolor="#ccc">类型</th>
+                          <th width=5% align="center" bgcolor="#ccc">状态</th>
+                          <th width=10% align="center" bgcolor="#ccc">最新登录时间</th>                                                                                                                                                           
+                          <th width=10% align="center" bgcolor="#ccc">操作</th>
+                        </tr>
+                   </thead>
+                   <tbody>
+					<volist name='data' id='st'>
+                        <tr>
+                          <td><span class="uni"><input type='checkbox' value='check1' /></span></td>                         
+                          <td>
+                          	<img src="#"  style="width:30px;max-width: 30px;"/><{$st.creditid|getCreditName=###}>
+                          </td>
+                          <td><{$st.username}></td> 
+                          <td><{$st.creditid|getCreditidPhone=###}></td>                        
+                          <td><{$st.type}></td> 
+                          <td><{$st.state}></td>
+                          <td><{$st.utime}></td>                                                                       
+                          <td>                              
+                              <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
+                              <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger" onclick="return confirm('点击确定该员工就离职了？')">
+                              	<i class="icon-remove"> 离职</i>
+                              </a>
+                          </td>
+                        </tr>
+					</volist>
+					
+                 </tbody>
+                </table>
+ 					<div class="widget-foot">
+                      	
+                        <ul class="pagination pull-right"><{$page}></ul>
+                      
+                      <div class="clearfix"></div> 
+
+                    </div>
+                    
+
+                </div>
+              </div>  
+        </div>
+</div>
+<!-- Matter ends -->
