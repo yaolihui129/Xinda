@@ -30,8 +30,8 @@
                             </span>
                           </th>
                           <th width=10% align="center" bgcolor="#ccc">姓名</th>
-                          <th width=5% align="center" bgcolor="#ccc">登录名</th>
-                          <th width=5% align="center" bgcolor="#ccc">手机号</th>                         
+                          <th width=5% align="center" bgcolor="#ccc">登录名(手机号)</th>
+                                              
                           <th width=5% align="center" bgcolor="#ccc">类型</th>
                           <th width=5% align="center" bgcolor="#ccc">状态</th>
                           <th width=10% align="center" bgcolor="#ccc">最新登录时间</th>                                                                                                                                                           
@@ -43,10 +43,9 @@
                         <tr>
                           <td><span class="uni"><input type='checkbox' value='check1' /></span></td>                         
                           <td>
-                          	<img src="#"  style="width:30px;max-width: 30px;"/><{$st.creditid|getCreditName=###}>
+                          	<img src="__UPLOAD__/<{$st.img}>"  style="width:40px;max-width: 40px;"/><{$st.creditid|getCreditName=###}>
                           </td>
-                          <td><{$st.username}></td> 
-                          <td><{$st.creditid|getCreditidPhone=###}></td>                        
+                          <td><{$st.username}></td>                                                
                           <td><{$st.type}></td> 
                           <td><{$st.state}></td>
                           <td><{$st.utime}></td>                                                                       
