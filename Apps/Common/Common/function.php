@@ -68,14 +68,35 @@
         return $data['realname'];
     }
    //登录
-   function login($qz,$phone,$password){
+   function login($phone,$password){
         $where=array('phone'=>$phone,['password']=>md5($password));
         $data=M('tp_credit')->where($where)->find();
         if ($data){
-            $_SESSION['userid']  = $data['id'];
-            $_SESSION['uphone']  = $data['phone'];
+            $_SESSION['isCLogin']= C(PRODUCT);
             $_SESSION['realname']= $data['realname'];
-            $_SESSION['isCLogin']= $qz;           
+            $m=M('tp_customer');
+            $where=array('creditid'=>$data['id'],'prodid'=>C(PRODID));
+            $arr=$m->where($where)->find();
+            if($arr){
+                $_SESSION['userid']  = $arr['id'];                                
+                $_POST['id']=$arr['id'];
+                $_POST['lastLoginTime']=time();
+                $_POST['lastLoginIP']=get_client_ip();
+                $m->save($_POST);//更新最后登录信息
+            }else {
+                $_POST['prodid']=C(PRODID);
+                $_POST['creditid']=$data['id'];
+                $_POST['name']=$data['realname'];
+                $_POST['type']=0;
+                $_POST['lastLoginTime']=time();
+                $_POST['lastLoginIP']=get_client_ip();
+                $_POST['adder']='客户登录';
+                $_POST['moder']='客户登录';
+                $_POST['ctime']=time();
+                $m->create();
+                $_SESSION['userid']=$m->add();                         
+            }
+                   
             return $data;
         }else{
             return 0;
@@ -287,6 +308,21 @@
                       </xml>";
         echo sprintf($template, $toUser, $fromUser, $time, $msgType,$title,$description,$musicUrl,$HQMusicUrl,$thumbMediaId);
     }
+    
+    function wxNewsArr($size){
+        for ($x=0; $x<=$size; $x++) {        
+                $str.="array(
+                             'title'        =>  ".'$data['.$x."]['name'],
+                             'description'  =>  ".'$data['.$x."]['content'],
+                             'picUrl'       =>  C(WEBSERVER).'/Upload/'.".'$data['.$x."]['productimg'],
+                             'url'          =>  C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Service/index/id/'.".'$data['.$x."]['productid']".".'/wxOpenId/'".'.$toUser.'."'/wxAppId/'".'.$fromUser,'."
+                        ),
+                   ";
+        }
+        
+        return $str;
+    }
+    
 
     //换取微信短链接
     function getShortUrl($token,$long_url){

@@ -2,13 +2,14 @@
 	<!-- Page heading -->
 	    <div class="page-head">
 	      	<h2 >
-	      		<!-- Breadcrumb -->
 		        <div class="bread-crumb">
 		          <a href="__APP__/Admin"><i class="icon-cog"></i> 设置</a> 
 		          <span class="divider">/</span> 
 		          <a href="__URL__" class="bread-current">字典</a> 
 		          <span class="divider">/</span> 新增         
+		          <a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>
 		        </div>
+		        	    
 	      	</h2>
 	      	
 	        
@@ -47,13 +48,19 @@
                              </div>
                          </div>
                          <div class="form-group">
+                             <label class="col-lg-4 control-label">产品：</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='prodid' value="0">
+                             </div>
+                         </div>
+                         <div class="form-group">
                              <label class="col-lg-4 control-label">状态：</label>
                              <div class="col-lg-8"><{$state}></div>
                          </div>                         
                          <hr />
                          <div class="form-group">
-                             <div class="col-lg-offset-1 col-lg-9">
-                                 <button type="submit" class="btn btn-primary">提交</button>                       
+                             <div class="col-lg-offset-1 col-lg-8">
+                                 <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                       
                              </div>
                          </div>
                      </form>

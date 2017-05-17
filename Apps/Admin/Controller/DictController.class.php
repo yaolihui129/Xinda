@@ -16,7 +16,7 @@ class DictController extends CommonController{
          $_SESSION['dictType']=$type;
          $this->assign('type',$type);
 
-    	 $data=$m->field('dictid,k,v,type,state,moder,utime',false)
+    	 $data=$m->field('dictid,k,v,type,state,prodid,moder,utime',false)
     	 ->where(array('type'=>$type))->order('k')->select();
 	     $this->assign('data',$data);
 

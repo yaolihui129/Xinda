@@ -5,21 +5,32 @@ class LoginController extends Controller {
 private static $data;   
     private $app_id='101376709';
     private $app_key="17bf1ad6668548c147ae3a65a1c739ef";
-//     private $callBackUrl="http://www.xiuliguanggao.com/index.php/Xiuli/Login/qq_callback";//回调地址
-    private $callBackUrl="http://localhost/Xiuli/index.php/Xiuli/Login/qq_callback";//回调地址
+    private $callBackUrl="http://www.xiuliguanggao.com/index.php/Xiuli/Login/qq_callback";//回调地址
+    private $callBackUrlTest="http://localhost/Xiuli/index.php/Xiuli/Login/qq_callback";//回调地址
     private $code="";
     private $accessToken="";
     public function qq_login(){
         $url="https://graph.qq.com/oauth2.0/authorize";       
         $state = md5(uniqid(rand(), TRUE)); //-------生成唯一随机串防CSRF攻击
         $_SESSION['state']=$state;       
-        $param=array(
-            'response_type'=>"code",
-            'client_id'=>$this->app_id,
-            'redirect_uri'=>$this->callBackUrl,
-            'state'=>$state,
-            'scope'=>"get_user_info",
-        );
+        if(ONLINE){
+            $param=array(
+                'response_type'=>"code",
+                'client_id'=>$this->app_id,
+                'redirect_uri'=>$this->callBackUrl,
+                'state'=>$state,
+                'scope'=>"get_user_info",
+            );
+        }else {
+            $param=array(
+                'response_type'=>"code",
+                'client_id'=>$this->app_id,
+                'redirect_uri'=>$this->callBackUrlTest,
+                'state'=>$state,
+                'scope'=>"get_user_info",
+            );
+        }
+        
         $param =http_build_query($param,'','&');
         $url=$url."?".$param;
         header("Location:".$url); 
@@ -118,7 +129,7 @@ private static $data;
 
         $phone=$_POST['phone'];
         $password=$_POST['password'];
-        $data=login(C('PRODUCT'), $phone, $password);
+        $data=login($phone, $password);
       if ($data){
             $this->success("登录成功!");
       }else{

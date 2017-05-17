@@ -10,17 +10,18 @@
 		        </div>	      	
 		      	
 		      	<ul class="nav navbar-nav pull-right">
-			          <li> <a href="__URL__/add" type="button" class="btn pull-right"><i class="icon-plus"> 添加</i></a></li>
-			          <li class="dropdown pull-right">            
+			          
+			          <li class="dropdown">            
 			            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-			              <i class="icon-retweet"></i> <{$_SESSION['dictType']}> <b class="caret"></b>              
+			               <{$_SESSION['dictType']}>  <i class="icon-retweet"></i>           
 			            </a>
 			            <ul class="dropdown-menu">
 			              	<volist name='arr' id='st'>
 							  	<li ><a  href="__URL__/index/type/<{$st.type}>"><{$st.type}></a></li>			  				  
 							</volist>
 			            </ul>
-			          </li>			          	          
+			          </li>	
+			          <li> <a href="__URL__/add" class="btn"><i class="icon-plus"> 添加</i></a></li>		          	          
 		        </ul>	       
 	      	</h2>	      		        
 	        <div class="clearfix"></div>
@@ -39,7 +40,8 @@
                         <tr>                                                    
                           <th width=10% align="center" bgcolor="#ccc">键</th>
                           <th width=10% align="center" bgcolor="#ccc">值</th>
-                           <th width=10% align="center" bgcolor="#ccc">分类</th>
+                          <th width=10% align="center" bgcolor="#ccc">分类</th>
+                          <th width=10% align="center" bgcolor="#ccc">产品</th>
                           <th width=5% align="center" bgcolor="#ccc">状态</th>                                                                            
                           <th width=15% align="center" bgcolor="#ccc">更新时间</th>
                           <th width=20% align="center" bgcolor="#ccc">操作</th>
@@ -52,6 +54,7 @@
                           <td><{$st.k}></td>
                           <td><{$st.v}></td>
                           <td><{$st.type}></td>
+                          <td><{$st.prodid}></td>
                           <td><{$st.state|getState=###}></td>
                           <td><{$st.utime}></td>                         
                           <td>                              

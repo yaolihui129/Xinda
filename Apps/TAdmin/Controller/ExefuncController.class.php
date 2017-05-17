@@ -1,14 +1,9 @@
 <?php
 namespace TAdmin\Controller;
-class ExefuncController extends CommonController{
-    
+class ExefuncController extends CommonController{    
     public function index(){
-        /* 接收参数*/    
-        $id=$_GET['id'];
-        /* 实例化模型*/
-        $m=D('tp_stage');
-        $map['zt_tp_exescene.id']=$id;
-        $pro=$m->where($map)
+        $map['zt_tp_exescene.id']=$_GET['id'];
+        $pro=M('tp_stage')->where($map)
             ->join('zt_tp_stagetester ON zt_tp_stage.id =zt_tp_stagetester.stageid')
             ->join('zt_tp_exescene ON zt_tp_exescene.stagetesterid =zt_tp_stagetester.id')
             ->find();
@@ -21,10 +16,9 @@ class ExefuncController extends CommonController{
         $where=array("stagetesterid"=>$arr['stagetesterid'],"type"=>$arr['type']);
         $data=$m->where($where)->order("sn")->select();
         $this->assign('data',$data);    
-        /* 实例化模型*/
-        $m=M('tp_exefunc');
-        $where=array("exesceneid"=>$id);
-        $exe=$m->where($where)->order('sn,id')->select();
+
+        $where=array("exesceneid"=>$_GET['id']);
+        $exe=M('tp_exefunc')->where($where)->order('sn,id')->select();
         $this->assign('exe',$exe);   
     
         $this->display();
@@ -55,8 +49,7 @@ class ExefuncController extends CommonController{
 
 
 
-    public function pass(){
-    
+    public function pass(){    
         $_GET['result']="通过";
         $_GET['moder']=$_SESSION['realname'];
         $db=D('tp_exefunc');
@@ -99,11 +92,9 @@ class ExefuncController extends CommonController{
 
 
     public function order(){
-    
-        $db = D('tp_exescene');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
+            $num += D('tp_exescene')->save(array("id"=>$id, "sn"=>$sn));
         }
         if($num) {
             $this->success("重新排序成功!");
@@ -115,22 +106,13 @@ class ExefuncController extends CommonController{
 
 
     public function supdate(){
-        /* 实例化模型*/
-        $db=D('tp_exescene');
-        $_POST['moder']=$_SESSION['realname'];
-    
-        if ($db->save($_POST)){
+        $_POST['moder']=$_SESSION['realname'];    
+        if (D('tp_exescene')->save($_POST)){
             $this->success("成功！");
         }else{
             $this->error("失败！");
         }
     
-    }
-
-
-    public function _empty(){
-    
-        $this->display('index');
     }
 
 }

@@ -3,13 +3,8 @@ namespace TAdmin\Controller;
 
 class FuncController extends CommonController{
     public function index(){
-         /* 接收参数*/
-        $pathid=$_GET['pathid'];
-        $proid=$_SESSION['proid'];
-
-        /* 实例化模型*/
         $m=D('module');
-        $arr=$m->find($pathid);
+        $arr=$m->find($_GET['pathid']);
         $this->assign("arr",$arr);
          
         $where['branch']=$arr['branch'];
@@ -18,7 +13,7 @@ class FuncController extends CommonController{
         $this->assign("data",$data);
         /* 实例化模型*/
         $m= D("tp_func");
-        $map['pathid']=$pathid;
+        $map['pathid']=$_GET['pathid'];
         $funcs=$m->where($map)->order("sn")->select();
         $this->assign("funcs",$funcs);
         
@@ -26,7 +21,7 @@ class FuncController extends CommonController{
         $count=$m->where($map)->count()+1;
         $this->assign("c",$count);       
         $this -> assign("state", formselect());
-        $this -> assign("fproid", proselect($proid,"fproid"));
+        $this -> assign("fproid", proselect($_SESSION['proid'],"fproid"));
                
 	    $this->display();
     }
@@ -38,8 +33,7 @@ class FuncController extends CommonController{
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
+        if($m->add()){
            $this->success("添加成功");
         }else{
             $this->error("添加失败");
@@ -48,16 +42,12 @@ class FuncController extends CommonController{
     }
 
     public function mod(){
-        /* 接收参数*/        
-        $id=$_GET['id'];
-        /* 实例化模型*/
         $m= D("tp_func");
-        $func=$m->find($id);
+        $func=$m->find($_GET['id']);
         $this->assign("func",$func);
         $where['pathid']=$func['pathid'];
         $data=$m->where($where)->order("sn")->select();
-        $this->assign("data",$data);
-        
+        $this->assign("data",$data);      
 
         $this -> assign("state", formselect($func['state']));
         $this -> assign("fproid", proselect($func['fproid'],"fproid"));
@@ -68,10 +58,8 @@ class FuncController extends CommonController{
    
 
     public function update(){
-        /* 实例化模型*/
-        $db=D('tp_func');
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (D('tp_func')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
@@ -80,11 +68,9 @@ class FuncController extends CommonController{
 
 
     public function order(){
-        /* 实例化模型*/
-        $db = D('tp_func');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
+            $num += D('tp_func')->save(array("id"=>$id, "sn"=>$sn));
         }
         if($num) {
            $this->success("重新排序成功!");
@@ -95,21 +81,19 @@ class FuncController extends CommonController{
 
 
     public function func(){
-         /* 接收参数*/
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
+        $_SESSION['proid']=$_GET['proid'];
          /* 实例化模型*/
         $m= D("project");
         $where['testgp']=$_SESSION['testgp'];
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_GET['proid']);
         $this->assign("arr",$arr);
 
         /* 实例化模型*/
         $s = D("tp_prosys");
-        $map['zt_tp_prosys.project']=$proid;
+        $map['zt_tp_prosys.project']=$_GET['proid'];
         $map['zt_module.state']='正常';
         $map['zt_tp_func.state']='正常';
         $data=$s->where($map)
@@ -126,9 +110,7 @@ class FuncController extends CommonController{
 
 
     public function range(){
-        /* 接收参数*/
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
+        $_SESSION['proid']=$_GET['proid'];
     	$gp=$_SESSION['testgp'];
          /* 实例化模型*/
         $m= D("project");
@@ -136,11 +118,11 @@ class FuncController extends CommonController{
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_GET['proid']);
         $this->assign("arr",$arr);
         /* 实例化模型*/
         $s = D('branch');
-        $where=array('zt_tp_func.fproid'=>$proid,'zt_tp_func.state'=>'正常','zt_module.state'=>'正常');
+        $where=array('zt_tp_func.fproid'=>$_GET['proid'],'zt_tp_func.state'=>'正常','zt_module.state'=>'正常');
         $data=$s->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
         ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
         ->where($where)
@@ -252,27 +234,21 @@ class FuncController extends CommonController{
     }
 
     public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        $where['funcid']=$id;
-        /* 实例化模型*/
-        $m=D('tp_case');
-        $arr=$m->where($where)->select();
+        $where['funcid']= $_GET['id'];
+        $arr=D('tp_case')->where($where)->select();
         if ($arr){
             $this->error('该功能点下有用例，不能删除');
         }else {
-            $m=D('tp_rules');
-            $arr=$m->where($where)->select();
+            $arr=D('tp_rules')->where($where)->select();
             if ($arr){
                 $this->error('该功能点下有规则，不能删除');
             }else {
-                $m=D('tp_element');
-                $arr=$m->where($where)->select();
+                $arr=D('tp_element')->where($where)->select();
                 if ($arr){
                     $this->error('该功能点下有控件，不能删除');
                 }else {
                     $m=M('tp_func');                   
-                    $count =$m->delete($id);
+                    $count =M('tp_func')->delete($_GET['id']);
                     if ($count>0) {
                         $this->success('删除成功');
                     }else{
@@ -280,16 +256,7 @@ class FuncController extends CommonController{
                     }
                 }
             }
-        }
-        
-       
-    }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-
-
+        }             
+    }    
+ 
 }

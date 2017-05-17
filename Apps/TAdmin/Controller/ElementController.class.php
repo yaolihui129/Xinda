@@ -2,27 +2,22 @@
 namespace TAdmin\Controller;
 class ElementController extends CommonController{
     public function index(){
-        /* 接收参数*/
-        $p=$_GET['p'];
-        $funcid=$_GET['funcid'];
-        /* 实例化模型*/
-        $m=D('tp_func');
-        $arr=$m->find($funcid);
+        $arr=M('tp_func')->find($_GET['funcid']);
         $this->assign('arr',$arr);
-        
-        $m=D('tp_element');
-        $where['funcid']=$funcid;
-        $data=$m->where($where)->order('sn,id')->select();
+
+        $where['funcid']=$_GET['funcid'];
+        $data=M('tp_element')->where($where)->order('sn,id')->select();
         $this->assign('data',$data);
-        
-        
+ 
         $m=D('tp_case');
         $cases=$m->where($where)->order('sn,id')->select();
         $this->assign('cases',$cases);
+        
         $count=$m->where($where)->count()+1;
         $this->assign("cc",$count);
         $this->assign("caozuo",PublicController::editor("steps"));
-	     $this->display();
+        
+	    $this->display();
     }
 
     public function add(){
@@ -54,8 +49,7 @@ class ElementController extends CommonController{
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
+        if($m->add()){
            $this->success("添加成功");
         }else{
             $this->error("添加失败");
@@ -67,10 +61,9 @@ class ElementController extends CommonController{
         /* 接收参数*/
         $p=$_GET['p'];
         $this -> assign("p", $p);
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
         /* 实例化模型*/
         $m=D('tp_element');
-        $element=$m->find($id);
+        $element=$m->find( $_GET['id']);
         $this->assign('element',$element);
         
         $where['funcid']=$element['funcid'];
@@ -78,8 +71,7 @@ class ElementController extends CommonController{
         $this->assign('data',$data);
         
         $this -> assign("state", formselect($element['state']));
-        $this -> assign("typeset", formselect($element['typeset'],"typeset","typeset"));
-        
+        $this -> assign("typeset", formselect($element['typeset'],"typeset","typeset"));       
 
         $this->display();
     }
@@ -87,9 +79,8 @@ class ElementController extends CommonController{
   
 
     public function update(){
-        $db=D('tp_element');
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (D('tp_element')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
@@ -98,11 +89,9 @@ class ElementController extends CommonController{
 
 
     public function order(){
-
-        $db = D('tp_element');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
+            $num +=  D('tp_element')->save(array("id"=>$id, "sn"=>$sn));
         }
         if($num) {
             $this->success("重新排序成功!");
@@ -165,12 +154,8 @@ class ElementController extends CommonController{
         $this->display();
     }
 
-    public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=D('tp_element');        
-        $count =$m->delete($id);
+    public function del(){    
+        $count =D('tp_element')->delete($_GET['id']);
         if ($count>0) {
             $this->success('删除成功');
         }else{
@@ -178,11 +163,4 @@ class ElementController extends CommonController{
         }
     }
     
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-
-
 }

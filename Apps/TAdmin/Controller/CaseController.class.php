@@ -2,18 +2,16 @@
 namespace TAdmin\Controller;
 class CaseController extends CommonController {
 public function index(){
-        /* 接收参数*/
-         $funcid=$_GET['funcid'];
          /* 实例化模型*/
          $m=D('tp_func');
-         $arr=$m->find($funcid);
+         $arr=$m->find($_GET['funcid']);
          $this->assign('arr',$arr);
          $where['pathid']=$arr['pathid'];
          $data=$m->where($where)->order('sn,id')->select();
          $this->assign('data',$data);
          
     	 $m=D('tp_case');
-    	 $where['funcid']=$funcid;
+    	 $where['funcid']=$_GET['funcid'];
     	 $cases=$m->where($where)->order('sn,id')->select();
 	     $this->assign('cases',$cases);
 	     
@@ -37,8 +35,7 @@ public function index(){
         if(!$m->create()){
             $this->error($m->getError());
         }
-        $lastId=$m->add();
-        if($lastId){
+        if($m->add()){
             $this->success("添加成功");
         }else{
             $this->error("添加失败");
@@ -90,11 +87,8 @@ public function index(){
     }
 
     public function update(){
-        /* 实例化模型*/
-        $db=D('tp_case');
         $_POST['moder']=$_SESSION['realname'];
-        //$_POST['updateTime']=date("Y-m-d H:i:s",time());
-        if ($db->save($_POST)){
+        if (D('tp_case')->save($_POST)){
             $this->success("修改成功！");
         }else{
             $this->error("修改失败！");
@@ -103,11 +97,9 @@ public function index(){
 
 
     public function order(){
-
-        $db = D('tp_case');
         $num = 0;
         foreach($_POST['sn'] as $id => $sn) {
-           $num += $db->save(array("id"=>$id, "sn"=>$sn));
+           $num +=  D('tp_case')->save(array("id"=>$id, "sn"=>$sn));
         }
         if($num) {
             $this->success("排序成功!");
@@ -153,11 +145,7 @@ public function index(){
     }
 
     public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('tp_case');
-        $count =$m->delete($id);
+        $count =M('tp_case')->delete($_GET['id']);
         if ($count>0) {
             $this->success('删除成功');
         }else{
@@ -165,10 +153,4 @@ public function index(){
         }
     }
     
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
 }

@@ -115,11 +115,7 @@ class LoginController extends Controller {
     }
        
     public function login(){           
-
-        $phone=$_POST['phone'];
-        $password=$_POST['password'];
-        $data=login(C('PRODUCT'), $phone, $password);
-      if ($data){
+      if (login($_POST['phone'], $_POST['password'])){
             $this->success("登录成功!");
       }else{
            $this->error('用户或密码错误，请重新登陆！');

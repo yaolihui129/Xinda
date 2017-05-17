@@ -1,21 +1,14 @@
 <?php
 namespace TAdmin\Controller;
-class BranchController extends CommonController {
-    
-
+class BranchController extends CommonController {    
     public function index(){
         /* 接收参数*/
-        $prodid=$_GET['prodid'];
         $_SESSION['proid']=null;
-        /* 实例化模型*/
-        $p=M('product');
-        $arr=$p->select();
+        $arr=M('product')->select();
         $this->assign('data',$arr);
-      
-        /* 实例化模型*/
-        $m=M('branch');
-        $where=array(prodid=>$prodid);
-        $syses=$m->where($where)->order('sysno')->select();
+     
+        $where=array(prodid=>$_GET['prodid']);
+        $syses=M('branch')->where($where)->order('sysno')->select();
         $this->assign('syses',$syses);
         $this->assign('w',$where);
     
@@ -41,10 +34,8 @@ class BranchController extends CommonController {
     }
     
     public function update(){
-        /* 实例化模型*/
-        $db=D('branch');   
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (D('branch')->save($_POST)){
             $this->success("修改成功",U("Prosys/index?proid={$_POST['proid']}"));
         }else{
             $this->error("修改失败！");
@@ -75,9 +66,5 @@ class BranchController extends CommonController {
         $this->display();
     }
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
     
 }

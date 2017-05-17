@@ -18,13 +18,7 @@ return array(
     'DB_NAME'=>'xinda123',
     'DB_USER'=>'xinda123_f',
     'DB_PWD'=>'xinda123',
-    'DB_PORT'=>'5510',
-    //数据库设置（本地）
-//     'DB_HOST'=>'127.0.0.1',
-//     'DB_NAME'=>'xiuli',
-//     'DB_USER'=>'root',
-//     'DB_PWD'=>'root',
-//     'DB_PORT'=>'3306',   
+    'DB_PORT'=>'5510', 
     'DB_PREFIX'=>'zt_',
     'DB_CHARSET'=> 'utf8', // 字符集
 

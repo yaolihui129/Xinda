@@ -33,7 +33,8 @@
 	</ul>
 	<div class="panel panel-default">
 		  <ul class="list-group">
-		   <form action="__URL__/order" method="post" >
+		   <form action="__URL__/Porder" method="post" >
+		   <input type="hidden" name="table" value="tp_stage" />
 		   <volist name='stages' id='st' empty="没有数据">
 		     <li class="list-group-item">
 		        <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/><{$st.stage}>【<{$st.end}>】
