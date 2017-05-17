@@ -54,6 +54,9 @@
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
+//         import('Org.Net.IpLocation');// 导入IpLocation类
+// //         $Ip = new IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
+//         $_SESSION['area'] = $Ip->getlocation(get_client_ip()); // 获取某个IP地址所在的位置
     }
     //获取征信电话
     function getCreditidPhone($creditId){
@@ -75,12 +78,12 @@
             $_SESSION['isCLogin']= C(PRODUCT);
             $_SESSION['realname']= $data['realname'];
             $m=M('tp_customer');
-            $where=array('creditid'=>$data['id'],'prodid'=>C(PRODID));
+            $where=array('creditid'=>$data['creditid'],'prodid'=>C(PRODID));
             $arr=$m->where($where)->find();
             if($arr){
-                $_SESSION['userid']  = $arr['id'];                                
-                $_POST['id']=$arr['id'];
-                $_POST['lastLoginTime']=time();
+                $_SESSION['userid'] =   $arr['id'];                                
+                $_POST['id']        =   $arr['id'];
+                $_POST['lastLoginTime']=date("Y-m-d H:i:s",time());
                 $_POST['lastLoginIP']=get_client_ip();
                 $m->save($_POST);//更新最后登录信息
             }else {
@@ -88,7 +91,7 @@
                 $_POST['creditid']=$data['id'];
                 $_POST['name']=$data['realname'];
                 $_POST['type']=0;
-                $_POST['lastLoginTime']=time();
+                $_POST['lastLoginTime']=date("Y-m-d H:i:s",time());
                 $_POST['lastLoginIP']=get_client_ip();
                 $_POST['adder']='客户登录';
                 $_POST['moder']='客户登录';
@@ -363,38 +366,7 @@
         $long_url='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$res['ticket']; //3.使用$ticket换去二维码图片
         return getShortUrl($token,$long_url);
     }
-    //微信公众账号免登陆
-    function wxLogin($qz,$db,$appid,$openid){
-        if($openid){//如果有$_GET['wxOpenId']就直接登录
-            $map=array('wxopenid'=>$openid);
-            $m=D('tp_customer');
-            $arr=$m->where($map)->find();
-            if($arr){//如果用户表有值，直接登录
-                $_SESSION['userid']   = $arr['tpid'];
-                $_SESSION['isCLogin'] = $qz;
-                if($arr[0]['tpid']==0){//如果绑定手机号
-                    $_SESSION['realname'] = '游客';
-                }else{//如果未绑定手机号
-                    $_SESSION['uphone']   = getCreditidPhone($arr['tpid']);
-                    $_SESSION['realname'] = getCreditName($arr['tpid']);
-                }
-            }else{//如果用户表没有值，向用户表插入数据
-                $_POST['wxopenid']=$_GET['wxOpenId'];
-                $_POST['wxappid']=$appid;
-                $_POST['adder']=$appid;
-                $_POST['moder']=$appid;
-                $_POST['ctime']=time();
-                $m->create();
-                $m->add();
-                $arr=$m->where($map)->select();
-                $_SESSION['userid']   = $arr['tpid'];
-                $_SESSION['isCLogin'] = $qz;
-                $_SESSION['realname'] = '游客';
-            }
-            return ;
-        }
     
-    }
     
     //群发接口
     function wxSendMsgAll($token,$array,$type='preview'){

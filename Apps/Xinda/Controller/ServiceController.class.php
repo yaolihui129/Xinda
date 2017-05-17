@@ -5,7 +5,7 @@ class ServiceController extends WebInfoController {
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);
         getWebInfo($JC);//获取网页信息  
-        if($_SESSION[isCLogin==C('PRODUCT')]){//未登录
+        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录
              
         }else {
             if($_GET['wxOpenId']){//微信免登陆

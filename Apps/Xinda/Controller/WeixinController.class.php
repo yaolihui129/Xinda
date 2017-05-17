@@ -1097,12 +1097,12 @@ class WeixinController extends WebInfoController {
     function getWXUsers(){
         $token= $this->getAccessToken();
         $m=D('wx_wechat');
-        $var=$m->where(array('appid'=>C(WX_APPID)))->find();
+        $data=$m->where(array('appid'=>C(WX_APPID)))->find();
         $nextOpenid = $data['next_openid'];
         $url        = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token='.$token.'&next_openid='.$nextOpenid;
         $res        = httpGet($url);
         $arr        = json_decode($res,true);
-        $data       = array('id'=>$var['id'],'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
+        $data       = array('id'=>$data['id'],'total'=>$arr['total'],'count'=>$arr['count'],'next_openid',$arr['next_openid']);
         $m->save($data);//更新数据
     }
     

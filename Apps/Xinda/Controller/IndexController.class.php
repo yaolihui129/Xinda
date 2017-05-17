@@ -5,16 +5,20 @@ class IndexController extends WebInfoController {
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);
         getWebInfo($JC);//获取网页信息
-        $appid  = $_GET['wxAppId'];
-        $openid = $_GET['wxOpenId'];
-//         wxLogin(C('PRODUCT',C('DBQZ'),$appid,$openid));//微信公众号免登陆
-        $where=array('prodid'=>C('PRODID'));
-//         $pic=D('tp_ad')->where($where)->order('utime desc')->select();
-//         $this->assign('pic',$pic); 
+//         dump($_SESSION);
+        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录             
+        }else {
+            if($_GET['wxOpenId']){//微信免登陆
+                $this->weiXinLogin($_GET['wxAppId'],$_GET['wxOpenId']);
+            } 
+        }
         
-        $m=M('tp_product');
+        $where=array('prodid'=>C('PRODID'));
+        $pic=M('tp_ad')->where($where)->order('utime desc')->select();
+        $this->assign('pic',$pic); 
+
         $where=array('prodid'=>C('PRODID'),'istj'=>1,'state'=>5);
-        $data=$m->where($where)->order('utime desc')->field("productId,name,money,smoney,num,productImg,utime")->select();
+        $data=M('tp_product')->where($where)->order('utime desc')->field("productId,name,money,smoney,num,productImg,utime")->select();
         $this->assign('data',$data);
         
         $this->display();

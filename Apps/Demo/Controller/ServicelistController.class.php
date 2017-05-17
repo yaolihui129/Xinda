@@ -1,7 +1,6 @@
 <?php
 namespace Demo\Controller;
-use Think\Controller;
-class ServicelistController extends Controller {
+class ServicelistController extends WebInfoController {
     public function index(){
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);

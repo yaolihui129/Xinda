@@ -1,6 +1,5 @@
 <?php
 namespace Tuocai\Controller;
-use Think\Controller;
 class EmptyController  extends WebInfoController {
     public function index(){
         

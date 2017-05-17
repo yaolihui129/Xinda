@@ -1,9 +1,16 @@
 <?php
 namespace Runzhu\Controller;
-use Think\Controller;
 class IndexController extends WebInfoController {
     public function index(){               
-
+        
+        
+        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录
+             
+        }else {
+            if($_GET['wxOpenId']){//微信免登陆
+                $this->weiXinLogin($_GET['wxAppId'],$_GET['wxOpenId']);
+            }
+        }
         $m=D('product');
         $data=$m->field('web,adress,desc,phone,tel,qq,qz,url,record,path,img')->find(7);
         $_SESSION['Runzhu']=$data;
@@ -30,11 +37,5 @@ class IndexController extends WebInfoController {
         $this->display();
         
     }
-    
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-        
+      
 }
