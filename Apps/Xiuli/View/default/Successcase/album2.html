@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title><{$_SESSION['Xiuli']['web']}></title>
+	    <meta name="keywords" content="<{$_SESSION['keywords']}>" />
+		<meta name="description" content="" />
+	    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body,ul, ol, li,img{margin: 0;padding: 0;font-size:13px}
+img{border: none;}
+li{list-style-type: none}
+
+#slider{width: 743px;margin: 0 auto;height: auto;border: 1px solid #888}
+.show-box{height: auto;float: left;width: 100%;position: relative;}
+.show-box li{display: none;width: 100%;float: left;height: auto;}
+.show-box .show{display: block;/*_margin: 0 auto;_width:expression(eval(this.offsetWidth>643?643:this.offsetWidth))*/}
+.show-box img{display: block;max-width: 643px;margin:  0 auto;_width: 100%;}
+.show-btn{display: block;height: 100%;width: 50px;position: absolute;_height:expression(eval(this.parentNode.offsetHeight));*top:0}
+.show-prev{left: 0;}
+.show-next{right: 0;_right:-1px}
+.show-btn span{height: 46px;display: block;position: absolute;top:50%;width: 100%;cursor: pointer;margin-top: -23px;background: url(__IMG__/page_button.gif) no-repeat;_width:49px}
+.show-prev span{background-position: -20px 0}
+.show-next span{background-position: -89px 0}
+
+/*小图列表部分*/
+.minImgs{width: 100%;height: 92px;position: relative;margin-top: 20px;float: left;overflow: hidden;}
+.clear{clear: both;}
+.min-btn{height: 100%;width: 28px;position: absolute;top:0;display: block;background: url(images/album-arrow.png) no-repeat}
+.min-prev{left:0}
+.min-prev:hover{background-position: -28px 0}
+.min-next{right: 0;background-position: 0 -94px}
+.min-next:hover{background-position: -28px -94px}
+.min-box{width: 684px;height: 100%;margin: 0 auto;position: relative;overflow: hidden;height: 76px;top:8px}
+.min-box-list{height: 100%;position: absolute;left:0;top:0;width: 776px}
+.min-box-list .cur{background:#F45E5E}
+.min-box-list li{height: 70px;width: 76px;padding: 3px 0 ;float: left;cursor: pointer}
+.min-box-list li div{width: 70px;height: 70px;overflow: hidden;margin: 0 auto}
+</style>
+<script type="text/javascript" src="http://www.js-css.cn/jscode/jquery.min.js"></script>
+</head>
+<body>
+	<h1>分享jQuery带略缩图焦点图左右切换特效</h1>
+	<div id='slider'>
+		 <div class='show-box '>
+		 	 	<ul>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/1.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/2.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/3.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/4.jpg'/></a></li>
+				 	<li class='show'><a href="#"><img src='__IMAGES__/ggp/5.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/6.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/7.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/8.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/9.jpg'/></a></li>
+				 	<li><a href="#"><img src='__IMAGES__/ggp/10.jpg'/></a></li>				 	
+			    </ul>
+				<div class='show-btn show-prev' ><span></span></div>
+				<div class='show-btn show-next'><span></span></div>
+		 </div>
+		 <div class='minImgs'>
+			 	<a href='javascript:;' class='min-prev min-btn'></a>
+			 	<a href='javascript:;' class='min-next min-btn'></a>
+			 	<div class='min-box'>
+				 	 <ul class='min-box-list'>
+						 	<li><div><img src='__IMAGES__/ggp/mini/1.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/2.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/3.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/4.jpg'/></div></li>
+						 	<li  class='cur'><div><img src='__IMAGES__/ggp/mini/5.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/6.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/7.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/8.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/9.jpg'/></div></li>
+						 	<li><div><img src='__IMAGES__/ggp/mini/10.jpg'/></div></li>
+						 	
+					 </ul>
+				</div>
+		 </div>
+		 <div class='clear'></div>
+	</div>
+</body>
+</html>
+<script>
+	$(function(){
+		/*
+		*该效果遇到的一个难点在ie6下的布局,由于图片大小全自适应,div.show-btn没办法获取到高度
+		*所以大的左右点击按钮就没办法通过css来实现上下居中了
+		*解决办法是：_height:expression;//ie所特有css属性.
+		*当然如果利用js来控制也就不存在这个问题。主要是考虑到js通常是等页面加载完才执行，
+		*所以第用户一眼可能看到的位置是没有居中的，所以想通过css来实现.
+		*仅供学习.
+		*/
+		var oSlider=$('#slider'),
+			oShowBox=oSlider.find('.show-box'),
+			oShowPrev=oSlider.find('.show-prev'),
+			oShowNext=oSlider.find('.show-next'),
+			oMinPrev=oSlider.find('.min-prev'),
+			oMinNext=oSlider.find('.min-next'),
+			oMinBoxList=oSlider.find('.min-box-list'),
+			aShowBoxLi=oShowBox.find('li'),
+			aMinBoxLi=oMinBoxList.find('li'),
+			iMinLiWidth=aMinBoxLi.first().outerWidth(),
+			iNum=aMinBoxLi.length,
+			iNow=4;//这里初始值为4的原因是 当前显示的图片下标为4
+
+			//根据小图片的多少来计算出父容器的宽度,让其显示成一行
+			oMinBoxList.css('width',iNum*iMinLiWidth+'px');
+
+			//由于ie6 不支持max-width 所以设置图片的最大显示宽度 注意ie6下的css图片设置的宽度为100%,所以这里设置li即可
+			var isIE6=!-[1,]&&!window.XMLHttpRequest;
+			if(isIE6)  
+			{
+				for(var i =0;i<iNum;i++)
+				{
+					var o=aShowBoxLi.eq(i)
+					o.css({width:o.outerWidth() > 643 ? 643 : o.outerWidth(),float:'none',margin:'0 auto'})
+				}
+			}
+
+			oShowPrev.hover(function(){
+				//采用链式操作减少dom操作.
+				$(this).css({backgroundColor:'#F5F5F5'}).find('span').css({backgroundPosition:'-20px -47px'})
+			},function(){
+				$(this).css({backgroundColor:'#fff'}).find('span').css({backgroundPosition:'-20px 0px'})
+			})
+			oShowNext.hover(function(){
+				$(this).css({backgroundColor:'#F5F5F5'}).find('span').css({backgroundPosition:'-89px -47px'})
+			},function(){
+				$(this).css({backgroundColor:'#fff'}).find('span').css({backgroundPosition:'-89px 0px'})
+			})
+
+			//键盘左右方向箭控制图片显示  (这里采用原生js)
+			document.onkeyup=function(ev)
+			{
+				var o=window.event || ev; //获取事件对象
+				if(o.keyCode==37)
+				{
+					changePrev()
+				}
+				else if(o.keyCode==39)
+				{
+					changeNext()
+				}
+			}
+
+			//小图片列表添加点击事件
+			aMinBoxLi.click(function(){
+				var index=$(this).index();
+				iNow=index;
+				setLayout();//回调样式及动画函数
+			})
+
+			//左右按钮添加点击  回调
+			oMinPrev.click(changePrev);
+			oMinNext.click(changeNext);
+			oShowPrev.click(changePrev);
+			oShowNext.click(changeNext);
+
+			function changePrev()
+			{   //iNow相当于下标索引，固下标索引不能小于0
+				if(iNow<=0)
+				{
+					return;
+				}
+				iNow--;
+				setLayout()
+			}
+			function changeNext()
+			{
+				if(iNow>=iNum-1)
+				{
+					return;
+				}
+				iNow++;
+				setLayout();
+			}
+
+			//设置显示样式及动画
+			function setLayout()
+			{
+				var oCurLi = aShowBoxLi.eq(iNow);
+				aShowBoxLi.hide().eq(iNow).fadeIn('slow');
+				aMinBoxLi.removeClass('cur').eq(iNow).addClass('cur');
+
+				//限制图片运动距离，以免出现空白.
+				if(iNow>=4 && iNow< iNum-4) 
+				{
+					oMinBoxList.animate({left:-iMinLiWidth*(iNow-4)},100)
+				}
+			}
+	})
+</script>

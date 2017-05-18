@@ -1,11 +1,9 @@
-//author ¸ßÂå·å
-//recvType ÓÐÈý¸öÖµHTML¡¢XMLºÍJSON , Ä¬ÈÏÎªHTML,´«ÖµÊ±²»Çø·Ö´óÐ¡Ð´
-//bool ÊÇÒ»¸öbooleanÀàÐÍµÄÖµ£¬true±íÊ¾Òì²½´«Êä·½Ê½£¬false±íÊ¾Í¬²½´«Êä·½Ê½£¬Ä¬ÈÏÎªtrue
+//recvType æœ‰ä¸‰ä¸ªå€¼HTMLã€XMLå’ŒJSON , é»˜è®¤ä¸ºHTML,ä¼ å€¼æ—¶ä¸åŒºåˆ†å¤§å°å†™
+//bool æ˜¯ä¸€ä¸ªbooleanç±»åž‹çš„å€¼ï¼Œtrueè¡¨ç¤ºå¼‚æ­¥ä¼ è¾“æ–¹å¼ï¼Œfalseè¡¨ç¤ºåŒæ­¥ä¼ è¾“æ–¹å¼ï¼Œé»˜è®¤ä¸ºtrue
 function Ajax(recvType, bool) {
 	var aj = new Object();
-	aj.targetUrl = '';    //ÇëÇóµÄµØÖ· ¿ÉÒÔÊÇPHPÒ²¿ÉÒÔXMLÎÄ¼þ
-	aj.sendString = '';   //ÇëÇó·þÎñÆ÷´«µÝµÄ×Ö·û´®  £¿ & ¸ñÊ½ url 
-
+	aj.targetUrl = '';    
+	aj.sendString = '';  
 	if(typeof(bool)=="undefined")
 		aj.async=true;
 	else
@@ -43,7 +41,7 @@ function Ajax(recvType, bool) {
 
 	aj.processHandle = function() {
 		if(aj.XMLHttpRequest.readyState == 4) {
-			aj.ff=false; //Èç¹ûÊÇIE7ÒÔÉÏÔò²»ÔÙÖ´ÐÐÒ»´Îµ÷ÓÃ
+			aj.ff=false; 
 			if(aj.XMLHttpRequest.status == 200) {
 				if(aj.recvType == 'HTML') {
 					aj.resultHandle(aj.XMLHttpRequest.responseText);

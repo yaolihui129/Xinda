@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>超漂亮带滚动条的3D圆形立体相册图片旋转轮播特效 - JS代码网</title>
+<meta name="keywords" content="jQuery 3D 图片轮播特效,JS 3D 图片轮播,jQuery图片3D旋转轮播,jQuery 3D 图片相册轮播" />
+<meta name="description" content="JS代码网提供高质量jQuery 3D图片轮播特效代码下载" />
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";background-color:#F1F1F1;}
+/* wide-wrapper */
+#wide-wrapper{background:url(images/bg.jpg) repeat-x;height:600px;}
+#header{width:280px;margin:0px auto;padding-top:75px;}
+#carousel{width:870px;height:450px;margin:0px auto;padding:0px;}
+#carousel{list-style:none;padding:0px;}
+#carousel li{float:left;}
+#carousel .tooltip, #carousel .bigImage, #carousel .title, #carousel .description{position:absolute;left:-9999px;}
+</style>
+<link rel="stylesheet" type="text/css" href="css/carousel.css" />
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.carousel.min.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function($){
+
+	$('#carousel').carousel({
+		width: 870, 
+		height: 350, 
+		itemWidth:120, 
+		horizontalRadius:270, 
+		verticalRadius:85, 
+		resize:false, 
+		mouseScroll:false, 
+		mouseDrag:true, 
+		scaleRatio:0.4, 
+		scrollbar:true, 
+		tooltip:true, 
+		mouseWheel:true, 
+		mouseWheelReverse:true
+	});
+	
+});
+</script>
+
+</head>
+
+<body>
+
+	<div id="wide-wrapper">
+	
+		<div id="header">
+			<a href="http://www.jq22.com/"><img src="images/name.jpg" width="280" height="50" alt="3d carousel"></a>
+		</div>
+	
+		<ul id="carousel">
+			<li>
+				<img src="images/image1.jpg" alt="">
+				<div class="tooltip">Image description</div>
+			</li>
+			<li><img src="images/image2.jpg" alt=""></li>
+			<li><img src="images/image3.jpg" alt=""></li>
+			<li>
+				<img src="images/image4.jpg" alt="">
+				<div class="tooltip"><u>Image title</u><br/><br alt="">Tooltips support <i>HTML</i> text.</div>
+			</li>
+			<li><img src="images/image5.jpg" alt=""></li>
+			<li><img src="images/image6.jpg" alt=""></li>
+			<li>
+				<img src="images/image7.jpg" alt="">
+				<div class="tooltip"><u>Image title</u><br/><br/><img src="images/image7.jpg" width="60" height="50" style="float:left; margin-right:10px; margin-bottom:10px;" alt="">Load images inside the tooltip.</div>
+			</li>
+			<li><img src="images/image8.jpg" alt=""></li>
+			<li><img src="images/image9.jpg" alt=""></li>
+			<li>
+				<img src="images/image10.jpg" alt="">
+				<div class="tooltip">Image description</div>
+			</li>
+			<li><img src="images/image11.jpg" alt=""></li>
+			<li><img src="images/image12.jpg" alt=""></li>
+			<li>
+				<img src="images/image13.jpg" alt="">
+				<div class="tooltip"><u>Image title</u><br/><br/>Tooltips support <i>HTML</i> text.</div>
+			</li>
+			<li><img src="images/image14.jpg" alt=""></li>
+			<li><img src="images/image15.jpg" alt=""></li>
+			<li>
+				<img src="images/image16.jpg" alt="">
+				<div class="tooltip"><u>Image title</u><br/><br/><img src="images/image16.jpg" width="60" height="50" style="float:left; margin-right:10px; margin-bottom:10px;" alt="">Load images inside the tooltip.</div>
+			</li>
+			<li><img src="images/image17.jpg" alt=""></li>
+			<li><img src="images/image18.jpg" alt=""></li>
+			<li><img src="images/image19.jpg" alt=""></li>
+		</ul>
+	</div>
+
+</body>
+</html>

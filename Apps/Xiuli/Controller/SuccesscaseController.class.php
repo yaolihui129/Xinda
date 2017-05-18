@@ -5,4 +5,13 @@ class SuccesscaseController extends WebInfoController {
         $this->display();
         
     }
+    
+    public function album1(){
+        
+        $this->display();
+    }
+    public function album2(){
+    
+        $this->display();
+    }
 }
