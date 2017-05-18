@@ -8,135 +8,53 @@
 		<import file="Js.jquery172_min" />
 		<import file="Js.jQuery_imgPlayer" />
 		<style type="text/css">
-			body{
-				margin:0px;
-				padding:0px;
-				text-align:center;
-				background-color:#909090;
-				font-family:Arial;
-			}
-			.imgplayer-body{
-				margin:0px auto;
-				width:1024px;
-				text-align:left;
-				border-right:4px solid #324b6a;
-				background-color:#333333;
-			}
-			.imgplayer-download{
-				font-size:20px;
-				}
-			.imgplayer-top{
-				 width:1024px;
-				 height:135px;	
-				 background-image:url(../images/imagePlayer_top_back.jpg);
-				 background-repeat: no-repeat;
-			}
-			.imgplayer-content{
-				 width:1024px;
-				 padding:25px 50px 0px;	
-			}
-			.imgplayer-title{
-				
-				font-size:22px;
-				color:#577aa6;
-				font-weight:600;
-				padding:10px 0px;
-			}
-			.imgplayer-introduce{
-				color:#d0d0d0;
-				font-size:13px;
-				text-indent:2em;
-				line-height:16px;
-			}
-			
-			.imgplayer-setting{
-				padding-left:2em;
-				color:#d0d0d0;
-				font-size:13px;
-				line-height:16px;
-			}
-			.imgplayer-setting-list{
-				width:900px;
-				color:#d0d0d0;
-				font-size:13px;
-				line-height:16px;
-			}
-			.imgPlayer1-stitle{
-				color:#d0d0d0;
-				font-size:13px;
-				line-height:16px;
-				padding:10px;
-			}
-			.imgplayer-example{
-				border:1px solid #666;
-				background-color:#3e3e3e;
-				padding:10px;
-				margin-top:10px;
-				font-size:13px;
-				line-height:16px;
-				color:#577aa6;
-				position:relative;
-			}
-			.imgplayer-example-js{
-				margin-top:10px;
-				
-				width:900px;
-				padding:10px;
-			}
-			.imgplayer-example-html{
-				width:900px;
-				padding:10px;
-				
-			}
-			.imgplayer-example-say{
-				margin-top:10px;
-				width:900px;
-				padding:10px;
-				
-			}
-			.imgplayer-bottom{
-				 width:1024px;
-				 height:80px;
-				 color:#324b6a;
-				 line-height:80px;
-				 padding-left:80px;	
-				 font-family:Arial;
-				 background-image:url(../images/imagePlayer_bottom_back.jpg);
-				 background-repeat: no-repeat;
-			}
+			body{margin:0px;padding:0px;text-align:center;background-color:#909090;font-family:Arial;}
+			.imgplayer-body{margin:0px auto;width:1024px;text-align:left;border-right:4px solid #324b6a;background-color:#333333;}
+			.imgplayer-download{font-size:20px;}
+			.imgplayer-top{width:1024px;height:135px; background-image:url(__IMG__/Jiaodt/focus8/imagePlayer_top_back.jpg);background-repeat: no-repeat;}
+			.imgplayer-content{width:1024px;padding:25px 50px 0px;}
+			.imgplayer-title{font-size:22px;color:#577aa6;font-weight:600;padding:10px 0px;}
+			.imgplayer-introduce{color:#d0d0d0;font-size:13px;text-indent:2em;line-height:16px;}			
+			.imgplayer-setting{padding-left:2em;color:#d0d0d0;font-size:13px;line-height:16px;}
+			.imgplayer-setting-list{width:900px;color:#d0d0d0;font-size:13px;line-height:16px;}
+			.imgPlayer1-stitle{color:#d0d0d0;font-size:13px;line-height:16px;padding:10px;}
+			.imgplayer-example{border:1px solid #666;background-color:#3e3e3e;padding:10px;margin-top:10px;font-size:13px;line-height:16px;color:#577aa6;position:relative;}
+			.imgplayer-example-js{margin-top:10px;width:900px;padding:10px;}
+			.imgplayer-example-html{width:900px;padding:10px;}
+			.imgplayer-example-say{margin-top:10px;width:900px;padding:10px;}
+			.imgplayer-bottom{ width:1024px;height:80px;color:#324b6a;line-height:80px; padding-left:80px;font-family:Arial;background-image:url(__IMG__/Jiaodt/focus8/imagePlayer_bottom_back.jpg);background-repeat: no-repeat;}
 			.imgPlayer1 img,.imgPlayer2 img,.imgPlayer3 img,.imgPlayer4 img{display:none;}
 		</style>
-		
-			<script type="text/javascript">
-				$(function(){
-					$(".imgPlayer1").imgPlayer({
-						fontAlign:'right',//标题右对齐
-						titleAlign:"top"  //标题在上面
-					});
-					
-					$(".imgPlayer2").imgPlayer({
-						iconOpacity:'0.4',		 //图标显示的透明度
-						activeIconOpacity:'0.8', //激活时图标显示的透明度
-						iconColor:'#fcf086',	 //图标的颜色
-						iconFontColor:'#090b42', //图标字体的颜色
-						activeIconColor:'#0e5f1b'//激活时图标的颜色
-					});
-					$(".imgPlayer3").imgPlayer({
-						height:250,					 //自定义高度
-						width:250,					 //自定义宽度
-						showTitle:false,		     //不显示标题	
-						bindEvent:'mouseover'		 //更改触发图片切换的鼠标事件为mouseover,默认为click
-					});
-					$(".imgPlayer4").imgPlayer({
-						height:115,				//自定义高度
-						width:900,				//自定义宽度
-						showTitle:false,		//不显示标题	
-						mouseEvent:false,		//取消鼠标悬浮停止播放的事件
-						isIconShow:false		//不显示序号	
-					});
-					
-				})
-			</script>
+		<script type="text/javascript">
+		$(function(){
+			$(".imgPlayer1").imgPlayer({
+				fontAlign:'right',//标题右对齐
+				titleAlign:"top"  //标题在上面
+			});
+			
+			$(".imgPlayer2").imgPlayer({
+				iconOpacity:'0.4',		 //图标显示的透明度
+				activeIconOpacity:'0.8', //激活时图标显示的透明度
+				iconColor:'#fcf086',	 //图标的颜色
+				iconFontColor:'#090b42', //图标字体的颜色
+				activeIconColor:'#0e5f1b'//激活时图标的颜色
+			});
+			$(".imgPlayer3").imgPlayer({
+				height:250,					 //自定义高度
+				width:250,					 //自定义宽度
+				showTitle:false,		     //不显示标题	
+				bindEvent:'mouseover'		 //更改触发图片切换的鼠标事件为mouseover,默认为click
+			});
+			$(".imgPlayer4").imgPlayer({
+				height:115,				//自定义高度
+				width:900,				//自定义宽度
+				showTitle:false,		//不显示标题	
+				mouseEvent:false,		//取消鼠标悬浮停止播放的事件
+				isIconShow:false		//不显示序号	
+			});
+			
+		})
+		</script>
 	</head>
 	<body style="margin:0px;padding:0px;">	
 	<div class="imgplayer-body">
@@ -151,24 +69,24 @@
 			<div class="imgplayer-title">例子&example</div>
 			<div class="imgPlayer1-stitle">例子1:</div>
 			<span class="imgPlayer1">
-				<img src="images/1.jpg" url='http://www.js-css.cn' title='风吹稻花香,小河水流荡'/>
-				<img src="images/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
-				<img src="images/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
-				<img src="images/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
-				<img src="images/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
-				<img src="images/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/>
+				<img src="__IMG__/Jiaodt/focus8/1.jpg" url='http://www.js-css.cn' title='风吹稻花香,小河水流荡'/>
+				<img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
+				<img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
+				<img src="__IMG__/Jiaodt/focus8/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
+				<img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
+				<img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/>
 			</span>
 			<br/>
 			<div class="imgplayer-example">
 				<span class="imgplayer-example-html">
 				例子1:html<br/>
 					&lt;span class="imgPlayer1"&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/1.jpg" url='http://www.baidu.com' title='风吹稻花香,小河水流荡'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/1.jpg" url='http://www.baidu.com' title='风吹稻花香,小河水流荡'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
 					&lt;/span&gt;<br/>
 				</span>
 				<span class="imgplayer-example-js">
@@ -184,24 +102,24 @@
 			</div>
 			<div class="imgPlayer1-stitle">例子2:</div>
 			<div class="imgPlayer2">
-				<img src="images/1.jpg" title='风吹稻花香,小河水流荡'/>
-				<img src="images/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
-				<img src="images/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
-				<img src="images/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
-				<img src="images/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
-				<img src="images/6.jpg" title='梦幻的世界,是儿时长想着去的地方.'/>
+				<img src="__IMG__/Jiaodt/focus8/1.jpg" title='风吹稻花香,小河水流荡'/>
+				<img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
+				<img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
+				<img src="__IMG__/Jiaodt/focus8/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
+				<img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
+				<img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时长想着去的地方.'/>
 			</div>
 			
 			<div class="imgplayer-example">
 				<span class="imgplayer-example-html">
 				例子2:html<br/>
 					&lt;div class="imgPlayer2"&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/1.jpg" title='风吹稻花香,小河水流荡'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/1.jpg" title='风吹稻花香,小河水流荡'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
 					&lt;/div&gt;<br/>
 				</span>
 				<span class="imgplayer-example-js">
@@ -220,20 +138,20 @@
 			</div>
 			<div class="imgPlayer1-stitle">例子3:</div>
 			<div class="imgPlayer3">
-				<img src="images/01.jpg" />
-				<img src="images/02.jpg" />
-				<img src="images/03.jpg" />
-				<img src="images/04.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/01.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/02.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/03.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/04.jpg" />
 			</div>
 			
 			<div class="imgplayer-example">
 				<span class="imgplayer-example-html">
 				例子3:html<br/>
 					&lt;div class="imgPlayer3"&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/01.jpg"/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/02.jpg"/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/03.jpg"/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/04.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/01.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/02.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/03.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/04.jpg"/&gt;<br/>
 					&lt;/div&gt;<br/>
 				</span>
 				<span class="imgplayer-example-js">
@@ -252,18 +170,18 @@
 			
 			<div class="imgPlayer1-stitle">例子4:</div>
 			<div class="imgPlayer4">
-				<img src="images/001.jpg" />
-				<img src="images/002.jpg" />
-				<img src="images/003.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/001.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/002.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/003.jpg" />
 			</div>
 			
 			<div class="imgplayer-example">
 				<span class="imgplayer-example-html">
 				例子4:html<br/>
 					&lt;div class="imgPlayer4"&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/001.jpg"/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/002.jpg"/&gt;<br/>
-						&nbsp;&nbsp;&lt;img src="images/003.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/001.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/002.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/003.jpg"/&gt;<br/>
 					&lt;/div&gt;<br/>
 				</span>
 				<span class="imgplayer-example-js">
