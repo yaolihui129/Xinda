@@ -42,7 +42,7 @@ function getFunces($pathid){
  //根据exesceneid获取执行场景功能信息
 function getESceneFunc($exesceneid){
     $where['exesceneid']=$exesceneid;
-    $arr=$D('tp_exefunc')->where($where)->order('sn,id')->select();
+    $arr=M('tp_exefunc')->where($where)->order('sn,id')->select();
     foreach ($arr as $ar){
         $str.='<li class="list-group-item">'
             .$ar['sn'].".".$ar['func'].":".$ar['remarks']

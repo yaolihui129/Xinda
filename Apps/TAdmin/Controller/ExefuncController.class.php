@@ -10,7 +10,7 @@ class ExefuncController extends CommonController{
         $_SESSION['proid']=$pro['proid'];
         
         $m=D('tp_exescene');
-        $arr=$m->find($id);  
+        $arr=$m->find($_GET['id']);  
         $this->assign('arr',$arr);
     
         $where=array("stagetesterid"=>$arr['stagetesterid'],"type"=>$arr['type']);

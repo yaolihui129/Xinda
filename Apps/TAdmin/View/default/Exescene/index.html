@@ -13,7 +13,13 @@
 	  			<volist name='exe' id='ex' empty="没有数据">
   					<li class="list-group-item">
   					<span>
-  						<span class="badge"><{$ex.results}></span>
+  					
+  						<switch name="ex.results">
+							<case value="通过"><span class="label label-success "></case>
+							<case value="失败"><span class="label label-danger"></case>
+							<default /><span class="label label-warning">
+						</switch><{$ex.results}></span>
+  						
   						<switch name="ex.sceneid">
 			          		<case value="0"><a href="__APP__/TAdmin/Exefunc/index/id/<{$ex.id}>"><{$ex.pathid|getSPath=###}></a></case>			          
 			         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
