@@ -1,11 +1,4 @@
-.carousel
-{
-	position:relative;
-	margin:0px;
-	padding:0px;
-	-moz-user-select:none;
-	-webkit-user-select:none;
-}
+.carousel{position:relative;margin:0px;padding:0px;-moz-user-select:none;-webkit-user-select:none;}
 
 
 .carousel .carousel-item

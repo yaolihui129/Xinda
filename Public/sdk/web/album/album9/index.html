@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>超漂亮带滚动条的3D圆形立体相册图片旋转轮播特效 - JS代码网</title>
-<meta name="keywords" content="jQuery 3D 图片轮播特效,JS 3D 图片轮播,jQuery图片3D旋转轮播,jQuery 3D 图片相册轮播" />
-<meta name="description" content="JS代码网提供高质量jQuery 3D图片轮播特效代码下载" />
+<title>超漂亮带滚动条的3D圆形立体相册图片旋转轮播特效</title>
+<meta name="keywords" content="" />
+<meta name="description" content="#" />
 <style type="text/css">
 *{margin:0;padding:0;list-style-type:none;}
 a,img{border:0;}
@@ -16,44 +16,37 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";background-color:#
 #carousel{list-style:none;padding:0px;}
 #carousel li{float:left;}
 #carousel .tooltip, #carousel .bigImage, #carousel .title, #carousel .description{position:absolute;left:-9999px;}
+.carousel{position:relative;margin:0px;padding:0px;-moz-user-select:none;-webkit-user-select:none;}
+.carousel .carousel-item{background-image:url(../images/preloader.gif);background-position:center;background-repeat:no-repeat;background-color:#FFF;position:absolute;cursor:pointer;}
+.carousel .out{border:#DDD 2px solid;}
+.carousel .over{border:2px solid #DDD;-moz-box-shadow: 0px 0px 10px #000;-webkit-box-shadow: 0px 0px 10px #000;box-shadow: 0px 0px 10px #000;-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color=#000000)";}
+.carousel .click{border:2px solid #DDD;-moz-box-shadow: 0px 0px 10px #000;-webkit-box-shadow: 0px 0px 10px #000;box-shadow: 0px 0px 10px #000;-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color=#000000)";}
+.carousel .select{border:2px solid #DDD;-moz-box-shadow: 0px 0px 10px #000;-webkit-box-shadow: 0px 0px 10px #000;box-shadow: 0px 0px 10px #000;-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color=#000000)";}
+.carousel .tooltip{position:absolute;z-index:9999;background-color:#DDD;margin-bottom:20px;border:#EEE solid 4px;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+.carousel .tooltip p{color:#999;padding:10px;margin:0px;}
+.carousel .scrollbar{width:340px;position:absolute;margin-top:100px;}
+.carousel .scrollbar .track{background-image:url(../images/track.png);width:300px;height:20px;position:absolute;left:20px;}
+.carousel .scrollbar .thumb{background-image:url(../images/thumb.png);width:70px;height:20px;position:absolute;cursor:pointer;}
+.carousel .scrollbar .left{background-image:url(../images/left.png);width:20px;height:20px;position:absolute;cursor:pointer;left:0px;}
+.carousel .scrollbar .right{background-image:url(../images/right.png);width:20px;height:20px;position:absolute;cursor:pointer;right:0px;}
 </style>
-<link rel="stylesheet" type="text/css" href="css/carousel.css" />
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.carousel.min.js"></script>
 <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function($){
-
-	$('#carousel').carousel({
-		width: 870, 
-		height: 350, 
-		itemWidth:120, 
-		horizontalRadius:270, 
-		verticalRadius:85, 
-		resize:false, 
-		mouseScroll:false, 
-		mouseDrag:true, 
-		scaleRatio:0.4, 
-		scrollbar:true, 
-		tooltip:true, 
-		mouseWheel:true, 
-		mouseWheelReverse:true
-	});
-	
+	$('#carousel').carousel({width: 870,height: 350,itemWidth:120,horizontalRadius:270, 
+		verticalRadius:85,resize:false,mouseScroll:false,mouseDrag:true,scaleRatio:0.4, 
+		scrollbar:true,tooltip:true,mouseWheel:true,mouseWheelReverse:true});	
 });
 </script>
-
 </head>
 
 <body>
 
-	<div id="wide-wrapper">
-	
-		<div id="header">
-			<a href="http://www.jq22.com/"><img src="images/name.jpg" width="280" height="50" alt="3d carousel"></a>
-		</div>
-	
+	<div id="wide-wrapper">	
+		<div id="header"><a href="http://www.jq22.com/"><img src="images/name.jpg" width="280" height="50" alt="3d carousel"></a></div>	
 		<ul id="carousel">
 			<li>
 				<img src="images/image1.jpg" alt="">
