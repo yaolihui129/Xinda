@@ -39,10 +39,11 @@ class DingdController extends WebInfoController {
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/department/list?access_token='.$token;
         $arr     =  json_decode(httpGet($url), true);
-        dump($arr);
+//         dump($arr['department']);
+        return $arr;
     }
     
-    function getDepartment($id){//获取部门详情
+    function getDepartment($id='29417014'){//获取部门详情
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/department/get?access_token='.$token.'&id='.$id;
         $arr     =  json_decode(httpGet($url), true);
@@ -108,7 +109,7 @@ class DingdController extends WebInfoController {
         dump($arr);
     }
     
-    function getUser($userid){//获取成员详情
+    function getUser($userid='manager1881'){//获取成员详情
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/user/get?access_token='.$token.'&userid='.$userid;
         $arr     =  json_decode(httpGet($url), true);
@@ -152,7 +153,7 @@ class DingdController extends WebInfoController {
         return $res;
     }
     
-    function getSimpleList($department_id){//获取部门用户列表
+    function getSimpleList($department_id=29417014){//获取部门用户列表
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/user/simplelist?access_token='.$token.'&department_id='.$department_id;
         $arr     =  json_decode(httpGet($url), true);
@@ -170,7 +171,7 @@ class DingdController extends WebInfoController {
         $token   =  $this->getToken();
         $url     =  'https://oapi.dingtalk.com/user/get_admin?access_token='.$token;
         $arr     =  json_decode(httpGet($url), true);
-        dump($arr);
+        dump($arr['adminList']);
     }
     
     function getUserCount($onlyActive){//获取企业员工人数,0:非激活人员数量，1:已经激活人员数量
@@ -202,6 +203,7 @@ class DingdController extends WebInfoController {
     }
     
     function sendRobotMeg(){//发送机器人消息
+        $Meg='111';
         $token    =  $this->getToken();
         $url      = 'https://oapi.dingtalk.com/robot/send?access_token=6203882eef6a7057fd8c68dfdf97e484df252f6c55a9532380337ce0ca989cce';
         $Meg      = array("content"=>"张珊的请假申请");
@@ -217,7 +219,13 @@ class DingdController extends WebInfoController {
         return $res;
     }
     
-    
+    public function bumen(){
+        getWebInfo(C('PRODUCT'));//获取网页信息       
+        $data=$this->getDepartmentList(); //获取部门信息
+        $this->assign('data',$data['department']);
+dump($data);
+        $this->display();
+    }
 
 }
 
