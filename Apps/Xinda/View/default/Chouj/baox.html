@@ -74,30 +74,29 @@
   </div>
   <import file="Js.zepto_min" />
   
-<script type="text/javascript">
-
-  $(".chest-close").click(function(){
-    $(this).addClass("shake");
-    var that=this;   
-    this.addEventListener("webkitAnimationEnd", function(){      
-      $(that).closest(".open-has").addClass("opened");
-      setTimeout(function(){
-        $(that).removeClass("show");
-        $(that).closest(".mod-chest").find(".chest-open").addClass("show");
-        setTimeout(function(){
-          $(".chest-open").addClass("blur");
-        },500)
-      },200)
-    }, false);
-  })
-</script>
+	<script type="text/javascript">
+	  $(".chest-close").click(function(){
+	    $(this).addClass("shake");
+	    var that=this;   
+	    this.addEventListener("webkitAnimationEnd", function(){      
+	      $(that).closest(".open-has").addClass("opened");
+	      setTimeout(function(){
+	        $(that).removeClass("show");
+	        $(that).closest(".mod-chest").find(".chest-open").addClass("show");
+	        setTimeout(function(){
+	          $(".chest-open").addClass("blur");
+	        },500)
+	      },200)
+	    }, false);
+	  })
+	</script>
 </body>
 </html>
-<div style="display:none">
-	<script type="text/javascript">
-	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6f798e51a1cd93937ee8293eece39b1a' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5718743'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/stat.php%3Fid%3D5718743%26show%3Dpic2' type='text/javascript'%3E%3C/script%3E"));</script>
+	<div style="display:none">
+		<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6f798e51a1cd93937ee8293eece39b1a' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5718743'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/stat.php%3Fid%3D5718743%26show%3Dpic2' type='text/javascript'%3E%3C/script%3E"));</script>
 	</div>
   

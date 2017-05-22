@@ -5,12 +5,24 @@ class AlbumController extends WebInfoController {
         getWebInfo(C('PRODUCT'));//获取网页信息
         $this->display();
     }
-    
-    public function album4(){
+
+    public function album6(){
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        $this->display();
+    }
+    public function album8(){
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        $this->display();
+    }
+    public function album9(){
         getWebInfo(C('PRODUCT'));//获取网页信息
         $this->display();
     }
     
+    public function album12(){
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        $this->display();
+    }
     
     public function album13(){
         getWebInfo(C('PRODUCT'));//获取网页信息
