@@ -16,6 +16,11 @@ class ToolController extends WebInfoController {
         $this->display();
     }
     
+    public function jsq3(){
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        $this->display();
+    }
+    
     public function shizhong(){
         getWebInfo(C('PRODUCT'));//获取网页信息
         $this->display();
