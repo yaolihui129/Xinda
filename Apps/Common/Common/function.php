@@ -188,7 +188,7 @@
         }
         return $res;
     }
-    // CURL_GET操作
+
     function httpPost($url,$postJson){    
         $ch=curl_init();//1.获取初始化URL
         //2.设置curl的参数
@@ -538,10 +538,21 @@
     
 
     // 根据id获取项目信息
-    function getPro($projectid){
-        $data=M('project')->find($projectid); 
+    function getPro($proid){
+        $data=M('project')->find($proid); 
         return $data['name']."(".$data['end']."上线)";  
     } 
+    // 根据id获取项目信息
+    function getProname($proid){
+        $data=M('project')->find($proid);
+        return $data['name'];
+    }
+    
+    //根据id获取项目编号
+    function getProNo($proid){
+        $data=M('project')->find($proid);
+        return $data['code'];
+    }
     
     //根据prodid 获取机构名称
     function getProduct($prodid){
@@ -549,17 +560,7 @@
         return $data['name'];
     }
     
-    // 根据id获取项目信息
-    function getProname($proid){
-        $data=M('project')->find($proid);
-        return $data['name'];        
-    }   
     
-    //根据id获取项目编号
-    function getProNo($proid){
-        $data=M('project')->find($proid);   
-        return $data['code'];        
-    }
     
     //根据branchid获取路径数   
     function countPath($branchid){
@@ -651,14 +652,14 @@
     //根据$pathid获取功能信息
     function getSPath($pathid){
         $where=array("zt_module.id"=>$pathid);
-        $data=M("branch")->where($where)->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')->select();   
+        $data=M("branch")->where($where)->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')->find();   
         $str.= '<span class="label label-default">'
-                    .getBranchName($data[0]['branch'])
+                    .getBranchName($data['branch'])
                 .'</span>&nbsp;';
         $str.= '<span class="label label-info">'
-                    .getModuleName($data[0]['parent'])
+                    .getModuleName($data['parent'])
                 ."</span>" ;          
-        $str.=  "<b>".$data[0]['name']."(".$data[0]['id'].")</b>";
+        $str.=  "<b>".$data['name']."(".$data['id'].")</b>";
         return $str;      
     }
     
