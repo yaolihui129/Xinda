@@ -117,7 +117,7 @@ public function index(){
         $_SESSION['proid']=$proid;
         /* 实例化模型*/
         $m= D("project");
-        $where=array("testgp"=>$testgp);
+        $where=array("testgp"=>$testgp,"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
@@ -125,7 +125,7 @@ public function index(){
         $this->assign("arr",$arr);
 
         /* 实例化模型*/
-        $where=array("testgp"=>$testgp);
+        $where=array("testgp"=>$testgp,"deleted"=>'0');
         $data=$m->where($where)->select();
         $this->assign('data',$data);
         $m=M('branch');

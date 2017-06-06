@@ -8,7 +8,7 @@ class StageController extends CommonController {
         $_SESSION['proid']=$proid;
          /* 实例化模型*/
         $m= D("project");
-        $where=array("testgp"=>$_SESSION['testgp']);
+        $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         

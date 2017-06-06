@@ -11,7 +11,7 @@ class SceneController extends CommonController {
     	$copy=$_GET['copy'];
          /* 实例化模型*/
         $m= D("project");
-        $where=array("testgp"=>"$gp");
+        $where=array("testgp"=>"$gp","deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         

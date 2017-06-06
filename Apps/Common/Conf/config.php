@@ -4,9 +4,11 @@ return array(
 	'SHOW_PAGE_TRACE'=>true,//显示页面Trace信息false
     'SESSION_AUTO_START' => true,//开启SESSION
     'URL_MODEL' => '1',//URL模式
-    'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Demo','Tpyjd'),//设置允许模块
+    'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Demo','Tpyjd','TestAdmin'),//设置允许模块
     'DEFAULT_MODULE' => 'Xinda',//设置默认模块设置
     'MODULE_DENY_LIST' => array('Common','Runtime'), // 禁止访问的模块列表
+    'LAYOUT_ON'=>true,//开启模板布局
+    'LAYOUT_NAME'=>'layout',//布局模板文件为：layout
     'URL_CASE_INSENSITIVE' =>true, //不区分大小写
     'ONLINE'=>0,                   //是否为线上环境，0：测试环境；1：生产环境
     //修改定界符

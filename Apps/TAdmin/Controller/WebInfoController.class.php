@@ -1,7 +1,7 @@
 <?php
 namespace TAdmin\Controller;
 use Think\Controller;
-class WebInfoController extends Controller {        
+class WebInfoController extends CommonController {        
     public function _empty(){//错误网页重新定向到首页
         $this->redirect(C(PRODUCT).'/Index');
     }  

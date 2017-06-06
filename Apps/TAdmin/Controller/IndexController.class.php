@@ -29,10 +29,7 @@ class IndexController  extends WebInfoController{
         $end=date("Y-m-d",time()+1*24*3600);
         $this->assign('end',$end);
         
-        
-        
-        
-        $this->display();
+        $this->theme($_SESSION['theme'])->display();
     }
     
     public  function test(){
@@ -40,6 +37,6 @@ class IndexController  extends WebInfoController{
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
              
-        $this->display();
+        $this->theme($_SESSION['theme'])->display();
     }
 }

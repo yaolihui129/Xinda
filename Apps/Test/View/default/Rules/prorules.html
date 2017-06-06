@@ -38,7 +38,7 @@
 							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
 									        <span class='pull-right'>
 									        <span class="label label-info"><{$st.status}></span> 
-									        <span class="label label-warning"><{$st.openedby}></span>  
+									        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
 								         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
 							           		</span>															      
 									 </h5>

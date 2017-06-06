@@ -877,6 +877,12 @@
       $count=M("tp_stage")->where($where)->count();
       return $count;
   }
+  //获取禅道用户名
+  function getZTUserName($account){
+      $where=array('account'=>$account);
+      $arr=M('user')->where($where)->find();
+      return $arr['realname'];
+  }
   
  
    
