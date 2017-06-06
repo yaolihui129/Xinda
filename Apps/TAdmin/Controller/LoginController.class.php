@@ -9,6 +9,7 @@ class LoginController extends Controller {
 
     public function login(){
         $user = D('user')->where(array('account'=>$_POST['username'],'password'=>md5($_POST['password']))) 
+        ->field("id,dept,realname,usergp")
         ->find();
         
         if ($user){
