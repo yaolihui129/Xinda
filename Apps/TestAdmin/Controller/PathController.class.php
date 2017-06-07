@@ -3,7 +3,12 @@ namespace TestAdmin\Controller;
 
 class PathController extends CommonController {
     public function index(){
-        $map['project']=I('proid');
+        $m= M("project");
+        $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
+        $pros=$m->where($where)->order("end desc")->select();
+        $this->assign("pros",$pros);
+        
+        $map['project']=$_SESSION['proid'];
         $data=M('tp_prosys')->where($map)->join('zt_branch ON zt_branch.id = zt_tp_prosys.branch')->order("zt_branch.sysno")->select();
         $this->assign("data",$data);            
 
@@ -24,25 +29,7 @@ class PathController extends CommonController {
 	    $this->display();
     }
 
-
-
-    public function insert(){
-        $m=D('module');
-        $_POST['moder']=$_SESSION['realname'];
-        $_POST['type']='story';
-        $_POST['grade']=1;
-        $_POST['order']=10;
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        if($m->add()){
-           $this->success("成功");
-        }else{
-            $this->error("失败");
-        }
-
-    }
-
+   
     public function mod(){
         $m=M('module');        
         $path=$m->find(I('id'));
@@ -55,31 +42,6 @@ class PathController extends CommonController {
         $this->assign("proid",I('proid'));
         
         $this->display();
-    }
-
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('module')->save($_POST)){
-            $this->success("成功！");
-        }else{
-            $this->error("失败！");
-        }
-
-    }
-
-    public function order(){
-        /* 实例化模型*/
-        $db = D('module');
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-           $num += $db->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("排序成功!");
-            
-        }else{
-            $this->error("排序失败...");
-        }
     }
 
     public function library(){

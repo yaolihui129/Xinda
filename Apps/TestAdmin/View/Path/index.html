@@ -1,0 +1,44 @@
+<layout name="layout" /> 
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf">
+      		<strong class="am-text-primary am-text-lg"> <a href="__APP__/<{$Think.config.PRODUCT}>/Index/index/proid/<{$_SESSION['proid']}>"><{$_SESSION['proid']|getPro=###}></a></strong> / 
+      		<small>项目模块 <a href="__APP__/<{$Think.config.PRODUCT}>/Index/index/proid/<{$_SESSION['proid']}>">返回</a></small>
+      		
+      </div>
+    </div>
+    <div class="am-g">  
+	  <div class="am-u-md-9">		   		   
+			    	<!-- 模块 -->
+			    	<div class="am-tab-panel am-fade am-in am-active" id="tab1">			    		
+			    		<form action="__URL__/order" method="post" >
+					   	<input type="hidden" name="table" value="module" />
+						<table class="am-table am-table-striped am-table-hover table-main">
+				           <thead><tr><th class="table-sn">序号</th><th class="table-stage">模块</th><th class="table-sn">操作</th></tr></thead>					      
+					      <tbody>					      		
+					      <volist name='pathes' id='st' empty=""> 	
+					          <tr>
+					            <td width=10% align="center"><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
+					            <td width=80%><a href="__APP__/<{$Think.config.PRODUCT}>/Func/index/pathid/<{$st.id}>" ><{$st.id|getSPath=###}></a></td>					            
+					            <td width=10%><a href="__APP__/<{$Think.config.PRODUCT}>/Func/index/pathid/<{$st.id}>" >功能点 <span class="am-badge"><{$st.id|countFunc=###}></span></a></td>					            		
+					          </tr>
+					       </volist>					            
+					     </tbody>					     
+				      </table>
+					  <div class='am-btn-group'>
+		            	<input type="submit" name="do_submit" value="批量排序" class="am-btn am-btn-primary">
+		              </div>		            
+		            </form> 
+			    	</div>
+			    	<!-- 模块END-->
+	  </div>
+	  <div class="am-u-md-3">
+	  		<ul class="am-list  ">
+	          <volist name='data' id='vo' empty=""> 
+	          	<li><a href="__URL__/index/sysid/<{$vo.id}>"><{$vo.sysno}>:<{$vo.name}> <span class="am-badge"><{$vo.id|countPath=###}></span></a></li> 
+	          </volist>         
+	        </ul>
+	  </div>
+	</div>  
+</div>

@@ -1,31 +1,41 @@
+ <layout name="layout" /> 
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
       <div class="am-fl am-cf">
-      		<strong class="am-text-primary am-text-lg">项目里程碑</strong> / <small><{$arr.id|getPro=###}></small>
-      		<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}>
+      		<strong class="am-text-primary am-text-lg"><{$_SESSION['proid']|getPro=###}></strong> / 
+      		<small>
+	      		<b> 产品：</b><{$arr.po|getRealname=###}>
+	      		<b> 项目：</b><{$arr.pm|getRealname=###}>
+	      		<b> 研发：</b><{$arr.rd|getRealname=###}>
+	      		<b> 测试：</b><{$arr.qd|getRealname=###}>
+      		</small>
       </div>
     </div>  
     <div class="am-g">  
-	  <div class="am-u-md-9">
-	  		<div class="well well-sm"><{$arr.desc}></div>	
-	  		<div class="am-btn-group am-btn-group-xs">
-              <a href="__APP__/TAdmin/Index/add"  class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
-              <a href="__APP__/TAdmin/Index"  class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 返回</a>
-            </div>
+	  <div class="am-u-md-9">	  			  		
 	  		<div class="am-tabs am-margin" data-am-tabs>
 			    <ul class="am-tabs-nav am-nav am-nav-tabs">
-			      <li class="am-active"><a href="#tab1">里程碑<span class="am-badge"><{$arr.id|countStage=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Risk/index/proid/<{$arr.id}>">风险<span class="am-badge"><{$arr.id|countRisk=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统<span class="am-badge"><{$arr.id|countProsys=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Func/func/proid/<{$arr.id}>">功能点<span class="am-badge"><{$arr.id|countProFunc=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Func/range/proid/<{$arr.id}>">范围<span class="am-badge"><{$arr.id|countRange=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景<span class="am-badge"><{$arr.id|countScene=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Case/library/proid/<{$arr.id}>">用例<span class="am-badge"><{$arr.id|countCase=###}></span></a></li>
-			      <li><a href="__APP__/TestAdmin/Rules/index/proid/<{$arr.id}>">项目需求<span class="am-badge"></span></a></li>
+			      <li class="am-active"><a href="#tab1">里程碑 <span class="am-badge"><{$_SESSION['proid']|countStage=###}></span></a></li>
+			      <li><a href="#tab2">风险 <span class="am-badge"><{$_SESSION['proid']|countRisk=###}></span></a></li>
+			      <li><a href="#tab3">涉及系统 <span class="am-badge"><{$_SESSION['proid']|countProsys=###}></span></a></li>
+			      <li><a href="#tab4">功能点 <span class="am-badge"><{$_SESSION['proid']|countProFunc=###}></span></a></li>
+			      <li><a href="#tab5">范围 <span class="am-badge"><{$_SESSION['proid']|countRange=###}></span></a></li>
+			      <li><a href="#tab6">场景 <span class="am-badge"><{$_SESSION['proid']|countScene=###}></span></a></li>
+			      <li><a href="#tab7">用例 <span class="am-badge"><{$_SESSION['proid']|countCase=###}></span></a></li>
+			      <li><a href="#tab8">需求 <span class="am-badge"></span></a></li>
 			    </ul>
 			    <div class="am-tabs-bd">
+			    	<!-- 里程碑 -->
 			    	<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+			    		<div class="am-g">			    		
+			    			<div class="am-u-md-10"></div>
+			    			<div class="am-u-md-2">	
+				    			<div class="am-btn-group">
+				    				<a href="__APP__/<{$Think.config.PRODUCT}>/Stage/add"  class="am-btn am-btn-success"><span class="am-icon-plus"></span> 新增</a>	
+				    			</div>			    				
+			    			</div>	              
+			            </div>
 			    		<form action="__URL__/order" method="post" >
 					   	<input type="hidden" name="table" value="tp_stage" />
 						<table class="am-table am-table-striped am-table-hover table-main">
@@ -36,45 +46,116 @@
 					            <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
 					            <td><{$st.stage}></td>
 					            <td><{$st.end}></td>
-					            <td><{$st.state}></td>
+					            <td><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/modstate/id/<{$st.id}>/state/<{$st.state}>" class="am-badge"><{$st.state}></a></td>
 					            <td>	
-					            	<a target="_blank" href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success btn-xs">用例<{$st.id|countCTester=###}></a>
-						            <a target="_blank" href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info btn-xs">测试<{$st.id|countMTester=###}></a>	
-						            <a target="_blank" href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/A">自动化<{$st.id|countATester=###}></a>
-						            <a href="__URL__/mod/id/<{$st.id}>/proid/<{$st.proid}>">修改</a>
-						            <a href="__URL__/del/id/<{$st.id}>">删除</a>					            		
+					            	<a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/C" class="am-btn am-btn-primary am-btn-xs">编写用例 <{$st.id|countCTester=###}></a>
+						            <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/M" class="am-btn am-btn-warning am-btn-xs">手工测试 <{$st.id|countMTester=###}></a>	
+						            <!--  <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/A" class="am-btn am-btn-primary am-btn-xs">自动化<{$st.id|countATester=###}></a>-->
+						            <a href="__APP__/<{$Think.config.PRODUCT}>/Stage/mod/id/<{$st.id}>" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"> 修改</span></a>
+						            <a href="__URL__/realdel/id/<{$st.id}>/table/tp_stage" class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o" onclick="return confirm('你确定要移除：<{$st.stage}>吗？')"> 删除</span> </a>					            		
 					            </td>					            		
 					          </tr>
 					       </volist>					            
 					     </tbody>					     
 				      </table>
-					  <div class='am-margin'>
-		            	<input type="submit" name="do_submit" value="批量排序" class="am-btn am-btn-primary am-btn-xs">
+					  <div class='am-btn-group'>
+		            	<input type="submit" name="do_submit" value="批量排序" class="am-btn am-btn-primary">
 		              </div>		            
 		            </form> 
 			    	</div>
-			    
-			    </div>
-			    
-    		</div>	   	
+			    	<!-- 里程碑 END-->
+			    	
+			    	<!-- 项目风险 -->
+			    	<div class="am-tab-panel am-fade am-in am-active" id="tab2">
+			    		<div class="am-btn-group am-pull-right">
+			              <a href="__APP__/<{$Think.config.PRODUCT}>/Stage/add"  class="am-btn am-btn-success"><span class="am-icon-plus"></span> 新增</a>			              
+			            </div>
+			    		<form action="__URL__/order" method="post" >
+					   	<input type="hidden" name="table" value="tp_risk" />
+						<table class="am-table am-table-striped am-table-hover table-main">
+				           <thead><tr><th class="table-sn">序号</th><th class="table-stage">项目风险</th><th class="table-sn">日期</th><th class="table-sn">状态</th><th class="table-do">操作</th></tr></thead>					      
+					      <tbody>					      		
+					      <volist name='risks' id='st' empty="没有数据"> 	
+					          <tr>
+					            <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
+					            <td><{$st.stage}></td>
+					            <td><{$st.end}></td>
+					            <td><{$st.state}></td>
+					            <td>						            	
+						            <a href="__APP__/<{$Think.config.PRODUCT}>/Risk/mod/id/<{$st.id}>" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"> 修改</span></a>
+						            <a href="__APP__/<{$Think.config.PRODUCT}>/Risk/del/id/<{$st.id}>" class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"> 删除</span> </a>					            		
+					            </td>					            		
+					          </tr>
+					       </volist>					            
+					     </tbody>					     
+				      </table>
+					  <div class='am-btn-group'>
+		            	<input type="submit" name="do_submit" value="批量排序" class="am-btn am-btn-primary">
+		              </div>		            
+		            </form> 
+			    	</div>
+			    	<!-- 项目风险 END-->
+			    	
+			    	<!-- 系统平台 -->
+			    	<div class="am-tab-panel am-fade am-in am-active" id="tab3">
+			    		<div class="am-g">  
+	  						<div class="am-u-md-6">
+	  							<table class="am-table am-table-striped am-table-hover table-main">
+						           <thead><tr><th class="table-sn">项目关联平台</th></tr></thead>					      
+							      <tbody>					      		
+							      <volist name='prosys' id='st' empty="没有数据"> 	
+							          <tr>					            
+							            <td><{$st.name}></td>					            
+							            <td>	
+								            <a href="__APP__/<{$Think.config.PRODUCT}>/Path/index/sysid/<{$st.branch}>" class="am-btn am-btn-primary am-btn-xs">
+								            <span class="am-icon-file"> 模块 <{$st.branch|countPath=###}></span>
+								            </a>
+								            <a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/mod/id/<{$st.id}>" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+								            	<span class="am-icon-pencil-square-o"> 修改</span>
+								            </a>
+								            <a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/realdel/id/<{$st.id}>/table/tp_prosys" 
+								            class="am-btn am-btn-default am-btn-xs am-text-danger" onclick="return confirm('你确定要从项目中移除：<{$st.name}>系统吗？')">
+								            	<span class="am-icon-trash-o"> 删除</span> 
+								            </a>				            		
+							            </td>					            		
+							          </tr>
+							       </volist>					            
+							     </tbody>					     
+						      </table>	
+	  						</div>
+	  						<div class="am-u-md-6">
+	  							<table class="am-table am-table-striped am-table-hover table-main">
+						           <thead><tr><th class="table-sn">备选平台</th></tr></thead>					      
+							      <tbody>					      		
+							      <volist name='syses' id='st' empty="没有数据"> 	
+							          <tr>					            
+							            <td><{$st.name}></td>					            
+							            <td>	
+								            <a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/insert/branch/<{$st.id}>/project/<{$_SESSION['proid']}>/url/tab3"
+								             class="am-btn am-btn-primary am-btn-xs">关联</a>								            			            		
+							            </td>					            		
+							          </tr>
+							       </volist>					            
+							     </tbody>					     
+						      </table>	
+	  						</div>
+	  					</div>
+										 
+			    	</div>
+			    	<!-- 系统平台 END-->
+			    	
+			    	
+			    				    
+			    </div>			    
+    		</div>    			   	
 	  </div>
 	  <div class="am-u-md-3">
-	      <table class="am-table am-table-striped am-table-hover table-main">
-	           <thead><tr><th class="table-title">项目列表</th></tr></thead>
-		      <tbody>
-		            <volist name='pros' id='pro' empty="没有数据"> 	
-		            	<tr>
-		            		<td>
-		            			<a href="__URL__/index/proid/<{$pro.id}>">
-			            			【<{$pro.status|getProst=###}>】
-			            			<span class="am-badge am-badge-warning"><{$pro.id|countStage=###}></span>
-			            			<{$pro.name}>
-		            			</a>
-		            		</td>
-		            	</tr>
-		            </volist>
-		     </tbody>
-	      </table>	
+	      <div class="am-panel am-panel-default admin-sidebar-panel">
+		      <div class="am-panel-bd">
+		        <p><span class="am-icon-tag"></span> 项目详情</p>
+		        <p><{$arr.desc}></p>
+		      </div>
+		    </div>
 	  </div>  
 	</div>   
   </div>

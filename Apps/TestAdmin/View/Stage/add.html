@@ -1,0 +1,63 @@
+<layout name="layout" /> 
+<!-- content start -->
+<div class="admin-content">
+  	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg"><a href="__APP__/TestAdmin/Index/index/proid/<{$_SESSION['proid']}>">里程碑</a></strong> / 
+  			<small>添加</small>
+  		</div>	
+  	</div>  
+	<div class="am-g">  
+	  <div class="am-u-md-9">
+	  	 <div class="am-tab-panel am-in">
+	  	 	<form action="__URL__/insert" method="post" class="am-form am-form-inline" role="form" >
+	      	<input type="hidden" name="proid" value="<{$_SESSION['proid']}>" />
+	      	<input type="hidden" name="table" value="tp_stage" />
+	      	<input type="hidden" name="state" value="未开始" />
+		     <div class="am-g am-margin-top">
+		          <div class="am-u-sm-2 am-text-right">顺序: </div>
+		          <div class="am-u-sm-10"><input type="text" class="form-control" name="sn" value="<{$c}>"></div>
+		     </div>		     
+		     <div class="am-g am-margin-top">
+		          <div class="am-u-sm-2 am-text-right">里程碑: </div>
+		          <div class="am-u-sm-10">
+		            <select name="stage" class="form-control" >
+		              	 <option value="编写测试计划">编写测试计划</option>
+                         <option value="编写测试用例">编写测试用例</option>                         
+                         <option value="测试冒烟测试">测试冒烟测试</option>
+                         <option value="第一轮测试">第一轮测试</option>
+                         <option value="第二轮测试">第二轮测试</option>
+                         <option value="第三轮测试">第三轮测试</option>
+                         <option value="第四轮测试">第四轮测试</option>
+                         <option value="仿真环境测试">仿真环境测试</option>
+                         <option value="线上验证测试">线上验证测试</option>
+		            </select>
+		          </div>
+		      </div>
+		      <div class="am-g am-margin-top">
+		          <div class="am-u-sm-2 am-text-right">结束时间: </div>
+		          <div class="am-u-sm-10">		           		              
+		              <input type="date" name="end" class="am-form-field am-input-sm" value="<{$end}>">		             		            
+		          </div>
+		     </div>
+		     
+		     <div class="am-g am-margin-top">
+		     	<div class="am-u-sm-2"></div>
+		          	<div class="am-u-sm-10">
+			    		<button type="submit" class="am-btn am-btn-primary am-btn-block">提交</button>	
+			    	</div>		    
+			  </div>	
+		     </form>
+		 </div>
+	  </div>
+	  <div class="am-u-md-3">
+	  		<ul class="am-list  ">
+	          <volist name='stages' id='stage' empty="暂时还没有里程碑，赶快添加吧"> 
+	          	<li><a href="__URL__/mod/id/<{$stage.id}>"><span class="am-badge"><{$stage.state}></span> <{$stage.stage}>【<{$stage.end}>】</a></li> 
+	          </volist>         
+	        </ul>
+	  </div>
+	</div>
+	
+	
+</div>

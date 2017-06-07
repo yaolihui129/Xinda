@@ -560,6 +560,11 @@
         return $data['name'];
     }
     
+    function getProProdunct($pro){
+        $where=array('project'=>$pro);
+        $data=M('projectproduct')->where($where)->find();
+        return $data['product'];
+    }
     
     
     //根据branchid获取路径数   
