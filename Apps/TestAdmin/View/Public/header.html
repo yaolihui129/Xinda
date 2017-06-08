@@ -8,6 +8,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="__CSS__/amazeui.min.css"/>
   <link rel="stylesheet" href="__CSS__/amazeui.admin.css">
   <style>
@@ -74,8 +75,8 @@
         </a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
           <volist name='pros' id='pro' empty=""> 
-          	<li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/index/proid/<{$pro.id}>"> 
-          			<span class="am-badge"><{$pro.status|getProst=###}></span><{$pro.name}>
+          	<li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/index/proid/<{$pro.id}>"> <{$pro.code}>
+          		<span class="am-badge"><{$pro.status|getProst=###}></span>
           	</a></li> 
           </volist>         
         </ul>

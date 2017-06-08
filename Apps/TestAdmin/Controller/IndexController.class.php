@@ -27,8 +27,9 @@ class IndexController  extends CommonController{
         $this->assign("prosys",$prosys);
        
         /* 备选平台*/
-        $map['product']=getProProdunct($_SESSION['proid']);                
-        $syses=$m->order('sysno')->select();
+        $map['product']=getProProdunct($_SESSION['proid']);
+        $map['state']=0;
+        $syses=$m->where($map)->order('sn')->select();
         $this->assign('syses',$syses); 
         
         /* 功能点*/
@@ -46,6 +47,40 @@ class IndexController  extends CommonController{
             ->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id")->select();
         $this->assign("ranges",$range);
         
+        
+        /* 测试场景*/
+//         if (!empty(I('copy'))) {
+//             $_SESSION['copy']=I('copy');
+//         }             
+        $where=array("proid"=>$_SESSION['proid']);
+        $scene=M("tp_scene")->where($where)->order('sn')->select();
+        $this->assign("scene",$scene);
+        /* 项目用例*/
+        $where=array("zt_tp_case.fproid"=>$_SESSION['proid']);
+        $cases=M('branch')->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
+        ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
+        ->join(' inner JOIN zt_tp_case ON zt_tp_func.id = zt_tp_case.funcid')
+        ->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id,zt_tp_case.sn,zt_tp_case.id")
+        ->where($where)->select();
+        $this->assign('cases',$cases);
+        
+        
+        /* 项目需求*/
+        $where=array("zt_projectstory.project"=>$_SESSION['proid'], 'zt_story.deleted'=>'0');
+        $rules=M('module')->where($where)->join('zt_story ON zt_story.module =zt_module.id')
+                ->join('zt_projectstory ON zt_projectstory.story =zt_story.id')
+                ->order('zt_story.branch,zt_module.order,zt_module.id')
+                ->field('zt_story.id as id,
+                         zt_story.branch as branch,
+                         zt_story.module as moduleid,
+                         zt_story.title as title,
+                         zt_story.status as status,
+                         zt_story.stage as stage,
+                         zt_story.openedBy as openedBy,
+                         zt_story.lastEditedDate as lastEditedDate,
+                         zt_story.version as version')->select();
+        $this->assign("rules",$rules);
+     
         $this->display();
     }
     
