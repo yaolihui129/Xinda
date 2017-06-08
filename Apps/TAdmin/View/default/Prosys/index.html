@@ -1,12 +1,11 @@
 <layout name="layout" />
-<div class="container">
 <div class="row"> 
   <div class="col-md-9">
   		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}>
 		    	<div class="btn-group pull-right">
-		    	<a href="__APP__/TAdmin/Program"  class="btn btn-warning btn-xs">返 回</a>
+		    		<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返 回</a>
 		    	</div>
 		    </h3>
 		  </div>
@@ -14,21 +13,21 @@
 	 <b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
 	 <div class="well well-sm"><{$arr.desc}></div>    
     <ul class="nav nav-pills" role="tablist">
-		  <li role="presentation" ><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
+		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-		  <li role="presentation" class="active"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
+		  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
 		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
 		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" ><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
+		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
 		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
 		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Rules/index/proid/<{$arr.id}>">项目需求</a></li>  
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>  
 	</ul>
 	<div class="row">
 	  <div class="col-md-6">
@@ -38,7 +37,7 @@
 			        <volist name='data' id='st' empty="没有数据">
 			            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
 			              <div class="btn-group pull-right">
-			                <a href="__APP__/TAdmin/Path/index/sysid/<{$st.branch}>/proid/<{$arr.id}>" 
+			                <a href="__APP__/<{$Think.config.PRODUCT}>/Path/index/sysid/<{$st.branch}>/proid/<{$arr.id}>" 
 			                class="btn btn-info btn-xs">路径<{$st.branch|countPath=###}></a>
 			                <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
 			                  <span class="caret"></span>
@@ -93,8 +92,7 @@
 				<default /><li class="list-group-item ">
 			</switch>   
 	            <a href="__URL__/index/proid/<{$pro.id}>">
-	            	<span class="badge"><{$pro.status|getProst=###}></span>
-	            	<{$pro.name}>
+	            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
 	            	<span class="badge"><{$pro.id|countProsys=###}></span>
 	            </a>           
             </li>
@@ -103,7 +101,6 @@
 	</div>  	 
   </div> 
 </div> 
-</div>
 
 
 

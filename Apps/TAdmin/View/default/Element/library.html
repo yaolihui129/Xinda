@@ -1,12 +1,11 @@
 <layout name="layout" />
-<div class="container">
 <div class="row"> 
   <div class="col-md-9">
   		<div class="panel panel-info">
 		  <div class="panel-heading">
 		    <h3 class="panel-title"><{$arr.id|getPro=###}>
 		    	<div class="btn-group pull-right">
-			    	<a href="__APP__/TAdmin/Program"  class="btn btn-warning btn-xs">
+			    	<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">
 			    	<span class="glyphicon glyphicon-arrow-left">返回</span></a>
 			    </div>
 		    </h3>
@@ -15,21 +14,21 @@
 		 	<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
 			<div class="well well-sm"><{$arr.desc}></div>	  
 		    <ul class="nav nav-pills" role="tablist">
-				  <li role="presentation" ><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
 				  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-				  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
 				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
 				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
 				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"  class="active"><a href="__APP__/TAdmin/Element/library/proid/<{$arr.id}>">控件库</a></li>
+				  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Element/library/proid/<{$arr.id}>">控件库</a></li>
 			</ul>
 			<table class="table table-striped table-bordered table-hover table-condensed ">
 		         <tr >
@@ -90,4 +89,3 @@
   </div>
   
 </div> 
-</div>

@@ -5,8 +5,8 @@
   <div class="panel-heading">
     <h3 class="panel-title"><{$arr.sn}>【<{$arr.swho}>】<{$arr.swhen}>:<{$arr.scene}>
     	<div class="btn-group pull-right">
-    		<a href="__APP__/TAdmin/Func/library/sceneid/<{$arr.id}>" class="btn btn-info btn-xs">功能库</a>
-    		<a href="__APP__/TAdmin/Scene/index/proid/<{$arr.proid}>" class="btn btn-warning btn-xs">
+    		<a href="__APP__/<{$Think.config.PRODUCT}>/Func/library/sceneid/<{$arr.id}>" class="btn btn-info btn-xs">功能库</a>
+    		<a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.proid}>" class="btn btn-warning btn-xs">
     		<span class="glyphicon glyphicon-arrow-left">返回</span></a>
     	</div>
     </h3>
@@ -24,15 +24,12 @@
 			        <button class="btn btn-default" type="submit" name="do_submit">提 交</button></form>
 			        
 			      
-			      <a target="_blank" href="__APP__/TAdmin/Element/index/funcid/<{$st.id}>" class="btn btn-info ">模板</a>
-	              <a target="_blank" href="__APP__/TAdmin/Rules/index/funcid/<{$st.id}>" class="btn btn-warning ">规则</a>
-	               <a href="__APP__/TAdmin/Scenecase/index/sfuncid/<{$st.id}>" class="btn btn-info ">用例库</a>	               
+			      <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$st.id}>" class="btn btn-info ">模板</a>
+	              <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/funcid/<{$st.id}>" class="btn btn-warning ">规则</a>
+	               <a href="__APP__/<{$Think.config.PRODUCT}>/Scenecase/index/sfuncid/<{$st.id}>" class="btn btn-info ">用例库</a>	               
 	               <a href="__URL__/del/id/<{$st.id}>" class="btn btn-danger " onclick="return confirm('你确定要场景中移除这个功能点吗？')">移除</a>
 	            </span>
-		     </div> 
-               
-	  
-	  
+		     </div>   
 	  </li>
 	 </volist>  
   </ul>
@@ -50,9 +47,9 @@
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
 			</switch> 
-            <a href="__URL__/index/sceneid/<{$vo.id}>">
-            	<{$vo.sn}>【<{$vo.swho}>】<{$vo.swhen}><br>
-            	<{$vo.scene}></a><span class="badge"><{$vo.id|countSFunc=###}></span></li>
+            <a href="__URL__/index/sceneid/<{$vo.id}>"><{$vo.sn}>【<{$vo.swho}>】<{$vo.swhen}><br><{$vo.scene}></a>
+            	<span class="badge"><{$vo.id|countSFunc=###}></span>
+            </li>
         </volist>
       </ul>	  
 	</div>

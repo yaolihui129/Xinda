@@ -9,7 +9,7 @@ return array(
     ),    
     'DEFAULT_THEME' =>  'default',//开启模板
     'PRODID'        =>   10,    //定义产品编号
-    'PRODUCT'       =>  'Test',//定义产品编号
+    'PRODUCT'       =>  'TAdmin',//定义产品编号
     'WEIXIN_APPID'  =>  '',//定义微信APPID
     //连接数据库
     'DB_HOST'       =>  '192.168.21.10',

@@ -2,47 +2,28 @@
 namespace TAdmin\Controller;
 class UserController extends CommonController {
    public function index(){
-         $testgp=$_SESSION['testgp'];
-    	 $m=M('user');
-    	 //$where['usergp']="PJD";
-    	 $arr=$m->where($where)->select();
+    	 $arr=M('user')->where(array('testgp'=>$_SESSION['testgp']))->select();
 	     $this->assign('data',$arr);	    
 	     
 	     $this->display();
     }
    
     public function mod(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
         $m=M('user');
         $arr=$m->select();
         $this->assign('data',$arr);
 
-        $user=$m->find($id);
+        $user=$m->find(I('id'));
         $this->assign('user',$user);
         $this -> assign("usergp", formselect($user['usergp'],"usergp","testgp"));
                        
         $this->display();
     }
 
-    public function update(){
-        /* 实例化模型*/
-        $db=D('user');
-        $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
-            $this->success("修改成功",U('User/index'));
-        }else{
-            $this->error("修改失败！");
-        }
-    }
+    
 
-    public function photo(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=M('user');      
-        $user=$m->find($id);
+    public function photo(){    
+        $user=M('user')->find(I('id'));
         $this->assign('user',$user);
 
         $this->display();
@@ -75,30 +56,22 @@ class UserController extends CommonController {
     }
 
     public function setpw(){
-        /* 实例化模型*/
-        $m=D('user');
-        $arr=$m->find($_GET['id']);
+        $arr=D('user')->find($_GET['id']);
         $this->assign('user',$arr);
         $this->display();
     }
 
     public function set(){
-        /* 实例化模型*/
-        $db=M('user');
         $_POST['password']=md5(123456);
         $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
+        if (M('user')->save($_POST)){
             $this->success("密码已重置为：123456！");
         }else{
             $this->error("重置失败！");
         }
     }
     public function setpass(){
-        /* 接收参数*/
-        $id =  $_SESSION['id'];
-        /* 实例化模型*/
-        $m=M('user');  
-        $user=$m->find($id);
+        $user=M('user')->find($_SESSION['id']);
         $this->assign('user',$user);
     
         $this->display();
@@ -131,23 +104,5 @@ class UserController extends CommonController {
         }        
     }
      
-    public function del(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-   	    $m=M('user');
-   	    $count =$m->delete($id);
-   	    if ($count>0) {
-   		    $this->success('删除成功');
-   	    }else{
-   		    $this->error('删除失败');
-     	}
-   }
-   
-   public function _empty(){
-   
-       $this->display('index');
-   }
-   
-   
+    
 }

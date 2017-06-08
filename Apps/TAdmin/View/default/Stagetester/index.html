@@ -1,5 +1,4 @@
- <layout name="layout" />
- <div class="container">    
+ <layout name="layout" />  
  <div class="row">
   <div class="col-md-3 hidden-xs hidden-sm">
     <div class="panel panel-info">
@@ -7,9 +6,8 @@
     	<ul class="list-group">
       	<volist name='data' id='vo' empty="没有数据">      
            <switch name="w.stageid">
-        	<case value="$vo.id"> <li class="list-group-item list-group-item-warning"></case>                          
-           <default />
-           	<li class="list-group-item ">
+	        	<case value="$vo.id"> <li class="list-group-item list-group-item-warning"></case>                          
+	           	<default /><li class="list-group-item ">
      	   </switch> 
            		<a href="__URL__/index/stageid/<{$vo.id}>/type/<{$type.type}>"><{$vo.sn}>.<{$vo.stage}></a>
            		<span class="badge"><{$vo.state}></span>
@@ -22,14 +20,14 @@
   	<div class="panel panel-info">
 	  <div class="panel-heading">人员安排(<{$_SESSION["proid"]|getProNo=###}><{$type.type}>) -
 	  	<{$type.stageid|getStage=###}>
-	  	<a href="__APP__/TAdmin/Stage/index/proid/<{$_SESSION['proid']}>"  class="btn btn-warning btn-xs pull-right">返回</a>
+	  	<a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$_SESSION['proid']}>"  class="btn btn-warning btn-xs pull-right">返回</a>
 	  </div>
 	   <form action="__URL__/order" method="post" >
 	     <volist name='testers' id='tester'>
 	       <li class="list-group-item">
 		       	<input type="text" name="sn[<{$tester.id}>]" value="<{$tester.sn}>"  class="input40"/>
 		       	&nbsp;<{$tester.id}>.<{$tester.tester}>			        
-				<a href="__APP__/TAdmin/Exescene/queue/stagetesterid/<{$tester.id}>" class="btn btn-info btn-xs pull-right">列队
+				<a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/queue/stagetesterid/<{$tester.id}>" class="btn btn-info btn-xs pull-right">列队
 				<span class="badge"><{$tester.id|countExescene=###}></span></a>					  					  							       
 	        </li>
 	    </volist>
@@ -43,10 +41,7 @@
 	  <ul class="list-group">
 	      <volist name='users' id='user' empty="没有数据">
 	        <li class="list-group-item">
-	        	<span >
-	            	<span class="badge"><{$user.usergp}></span>
-	            	<{$user.realname}>
-	        	</span>
+	        	<span class="badge"><{$user.usergp}></span><{$user.realname}>	        	
 	        	<a href="__URL__/insert/tester/<{$user.realname}>/stageid/<{$type.stageid}>/type/<{$type.type}>"  
 	        	type="button" class="btn btn-info btn-xs pull-right">安排</a>	        
 	        </li>
@@ -55,5 +50,4 @@
 	</div> 
   </div>
   
-</div>
 </div>

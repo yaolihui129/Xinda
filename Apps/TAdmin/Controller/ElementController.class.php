@@ -41,21 +41,7 @@ class ElementController extends CommonController{
     }
    
 
-    public function insert(){
-        $m=D('tp_element');
-        $_POST['adder']=$_SESSION['realname'];
-        $_POST['moder']=$_SESSION['realname'];
-        $_POST['createTime']=date("Y-m-d H:i:s",time());
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        if($m->add()){
-           $this->success("添加成功");
-        }else{
-            $this->error("添加失败");
-        }
-
-    }
+   
 
     public function mod(){
         /* 接收参数*/
@@ -78,27 +64,8 @@ class ElementController extends CommonController{
 
   
 
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('tp_element')->save($_POST)){
-            $this->success("修改成功！");
-        }else{
-            $this->error("修改失败！");
-        }
-    }
 
 
-    public function order(){
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num +=  D('tp_element')->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("重新排序成功!");
-        }else{
-            $this->error("没有修改，无需排序");
-        }
-    }
 
 
     public function setdstate(){
@@ -154,13 +121,5 @@ class ElementController extends CommonController{
         $this->display();
     }
 
-    public function del(){    
-        $count =D('tp_element')->delete($_GET['id']);
-        if ($count>0) {
-            $this->success('删除成功');
-        }else{
-            $this->error('删除失败');
-        }
-    }
     
 }

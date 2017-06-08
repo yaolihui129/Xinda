@@ -1,102 +1,90 @@
 <layout name="layout" />
-<div class="container">
 <div class="row">
   <div class="col-md-9">
   		<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><{$arr.id|getPro=###}>
-    	<div class="btn-group pull-right">
-    	    <a href="__URL__/resetAll/proid/<{$arr.id}>" class="btn btn-info btn-xs">重置</a>
-	    	<a href="__APP__/TAdmin/Program"  class="btn btn-warning btn-xs">返回</a>
-	    </div>
-    </h3>
-  </div>
-  <div class="panel-body table-responsive">
-   	 <b> 产品：</b><{$arr.po|getRealname=###}>
-   	 <b> 项目：</b><{$arr.pm|getRealname=###}>
-   	 <b> 研发：</b><{$arr.rd|getRealname=###}>
-   	 <b> 测试：</b><{$arr.qd|getRealname=###}><br>
-	 <div class="well well-sm"><{$arr.desc}></div>  	  
-    <ul class="nav nav-pills" role="tablist">
-		  <li role="presentation" ><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
-		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
-		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
-		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
-		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" class="active"><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
-		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
-		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
-	</ul>
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		    <volist name='data' id='st' empty="没有数据">
-		      <switch name="st.result">
-		          <case value="通过"><div class="panel panel-success"></case>
-		          <case value="失败"><div class="panel panel-danger"></case>
-		          <default /><div class="panel panel-default">
-		      </switch>      
-		        <div class="panel-heading" role="tab" id="heading<{$st.id}>">
-		          <h4 class="panel-title">
-		              <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
-		                  <span class="badge"><{$st.result}></span>
-		                  <span class="label label-default"><{$st.branch|getBranchName=###}></span>
-		                  <span class="label label-info"><{$st.parent|getModuleName=###}></span>
-		                  <span class="label label-info"><{$st.name}></span><b><{$st.func}></b>
-		                  <!-- <span class="label label-default"><{$st.state}></span> -->
-		                  <span class="badge">历史:<{$st.id|countFResult=###}>/<{$st.id|countFQResult=###}></span>
-		              </a>
-		              <div class="btn-group pull-right">
-			             <a target="_blank" href="__APP__/TAdmin/Case/index/funcid/<{$st.id}>" class="btn btn-success btn-xs">用例
-			               <{$st.id|countFCase=###}></a>        			           
-			            <a target="_blank" href="__APP__/TAdmin/Element/index/funcid/<{$st.id}>" class="btn btn-warning btn-xs">模板</a>			            
-			          </div>
-		            </h4>
-		        </div>
-		        <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">		          		          			            
-		             	<div class="btn-group pull-left">
-				          	<a href="__URL__/reset/funcid/<{$st.id}>" type="button" 
-				          	class="btn btn-warning btn-xs" onclick="return confirm('测试结果将被置为“未测试”')">重置</a>
-		                  	<a href="__URL__/pass/funcid/<{$st.id}>" type="button" class="btn btn-success btn-xs">通过</a>
-                  		</div><br>
-		              <ul class="list-group"><{$st.id|getTest=###}></ul>	           
-		        </div>
-		      </div>
-		    </volist>
-		</div>
-       
-       
-    </div>
-  </div>
-  
-  
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    	<div class="btn-group pull-right">
+		    	    <a href="__URL__/resetAll/proid/<{$arr.id}>" class="btn btn-info btn-xs">重置</a>
+			    	<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返回</a>
+			    </div>
+		    </h3>
+		  </div>
+		  <div class="panel-body table-responsive">
+		   	 <b> 产品：</b><{$arr.po|getRealname=###}>
+		   	 <b> 项目：</b><{$arr.pm|getRealname=###}>
+		   	 <b> 研发：</b><{$arr.rd|getRealname=###}>
+		   	 <b> 测试：</b><{$arr.qd|getRealname=###}><br>
+			 <div class="well well-sm"><{$arr.desc}></div>  	  
+		    <ul class="nav nav-pills" role="tablist">
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
+				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
+				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
+				  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
+				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
+				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
+				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
+			</ul>
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				    <volist name='data' id='st' empty="没有数据">
+				      <switch name="st.result">
+				          <case value="通过"><div class="panel panel-success"></case>
+				          <case value="失败"><div class="panel panel-danger"></case>
+				          <default /><div class="panel panel-default">
+				      </switch>      
+				        <div class="panel-heading" role="tab" id="heading<{$st.id}>">
+				          <h4 class="panel-title">
+				              <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
+				                  <span class="badge"><{$st.result}></span>
+				                  <span class="label label-default"><{$st.branch|getBranchName=###}></span>
+				                  <span class="label label-info"><{$st.parent|getModuleName=###}></span>
+				                  <span class="label label-info"><{$st.name}></span><b><{$st.func}></b>
+				                  <!-- <span class="label label-default"><{$st.state}></span> -->
+				                  <span class="badge">历史:<{$st.id|countFResult=###}>/<{$st.id|countFQResult=###}></span>
+				              </a>
+				              <div class="btn-group pull-right">
+					             <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Case/index/funcid/<{$st.id}>" class="btn btn-success btn-xs">用例
+					               <{$st.id|countFCase=###}></a>        			           
+					            <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$st.id}>" class="btn btn-warning btn-xs">模板</a>			            
+					          </div>
+				            </h4>
+				        </div>
+				        <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">		          		          			            
+				             	<div class="btn-group pull-left">
+						          	<a href="__URL__/reset/funcid/<{$st.id}>" type="button" 
+						          	class="btn btn-warning btn-xs" onclick="return confirm('测试结果将被置为“未测试”')">重置</a>
+				                  	<a href="__URL__/pass/funcid/<{$st.id}>" type="button" class="btn btn-success btn-xs">通过</a>
+		                  		</div><br>
+				              <ul class="list-group"><{$st.id|getTest=###}></ul>	           
+				        </div>
+				      </div>
+				    </volist>
+				</div>            
+    		</div>
+  		</div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm">
   	<div class="panel panel-info">
-	  <div class="panel-heading">
-	    <h3 class="panel-title"><{$_SESSION['testgp']}>测试项目</h3>
-	  </div>
+	  <div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>测试项目</h3></div>
 	  <ul class="list-group">
 	    <volist name='pros' id='pro' empty="没有数据"> 			
             <switch name="pro.id">
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
 			</switch>            
-	            <a href="__URL__/range/proid/<{$pro.id}>">
-	            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>	            	
-	            </a> 
+	            <a href="__URL__/range/proid/<{$pro.id}>"><span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}></a> 
 	            <span class="badge"><{$pro.id|countRange=###}></span>             	
             </li>
         </volist>
       </ul>	  
-	</div>
-  	 
-  </div>
-  
-</div> 
+	</div> 	 
+  </div> 
 </div> 

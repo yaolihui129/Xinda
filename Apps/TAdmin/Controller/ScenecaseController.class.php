@@ -66,9 +66,6 @@ public function index(){
         }
     }
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
+   
     
 }

@@ -1,10 +1,9 @@
 <layout name="layout" />
-<div class="container">
 <div class="row">
   	<div class="col-md-7">	
   	<h3>控件-编辑</h3>	
   		<div class="panel-body">
-  		<form action="__APP__/TAdmin/Element/update" method="post" class="form-horizontal" role="form" > 
+  		<form action="__APP__/<{$Think.config.PRODUCT}>/Element/update" method="post" class="form-horizontal" role="form" > 
   		 	<input type="hidden" name="id" value="<{$element.id}>" />
   		 	<div class="form-group">
   		     	<div class="col-sm-2"></div>
@@ -40,7 +39,7 @@
 				<button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
                 </form>
             <div class="btn-group pull-right">                       
-                 <a href="__APP__/TAdmin/<{$p}>/index/funcid/<{$element.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
+                 <a href="__APP__/<{$Think.config.PRODUCT}>/<{$p}>/index/funcid/<{$element.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
             </div>
   		 </div>	            
 	</div>
@@ -60,4 +59,4 @@
         </div>                            	
   	</div>
 </div>           
-</div><!-- container -->   
+

@@ -26,17 +26,6 @@ class ExesceneController extends CommonController{
 	    }	    	    
     }
 
-    public function order(){
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += D('tp_exescene')->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("重新排序成功!");
-        }else{
-            $this->error("重新排序失败...");
-        }
-    }
 
     public function test(){
 

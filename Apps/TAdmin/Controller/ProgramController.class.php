@@ -12,9 +12,7 @@ class ProgramController extends CommonController {
         $map['acl']='private';
         $map['deleted']='0';        
         $arr=M('project')->where($map)->order("end desc")->field("id,name,code,status")->select();
-        $this->assign('arr',$arr);
-
-        
+        $this->assign('arr',$arr);       
 
 	    $this->display();
     }

@@ -109,20 +109,6 @@ class HcController extends CommonController {
 
     }
 
-    public function order(){
-
-        $db = D('tp_hcfunc');
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("重新排序成功!");
-        }else{
-            $this->error("重新排序失败...");
-        }
-    }
-
 
 /*
  * 移除单个缓存
@@ -140,10 +126,6 @@ class HcController extends CommonController {
         }
     }
     
-    public function _empty(){
-    
-        $this->display('index');
-    }
-
+   
 
 }

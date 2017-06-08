@@ -27,12 +27,12 @@
             <th width=3%   bgcolor="#ccc"><{$data[9]['control']?$data[9]['control']:'Num10'}></th>
             <th width=3%   bgcolor="#ccc">操作 </th> 
          </tr>
-         <form action="__APP__/TAdmin/Case/order" method="post" >
+         <form action="__APP__/<{$Think.config.PRODUCT}>/Case/order" method="post" >
          <volist name='cases' id='case' empty="没有用例">
             <tr>             	
                 <td align="center" ><input type="text" name="sn[<{$case.id}>]" value="<{$case.sn}>"  class="input40"/></td>
                 <td ><{$case.id}>:【<{$case.state}>】<{$case.main}>-<{$case.level}>(<{$case.fproid|getProNo=###}>)
-                	<a  href="__APP__/TAdmin/Case/mod/id/<{$case.id}>/p/Element" type="button" class="btn btn-info btn-xs pull-right">修改</a>
+                	<a  href="__APP__/<{$Think.config.PRODUCT}>/Case/mod/id/<{$case.id}>/p/Element" type="button" class="btn btn-info btn-xs pull-right">修改</a>
                 </td>
                 <td><{$case.expected}></td>
                 <td align="center" >
@@ -48,7 +48,7 @@
                 <td align="center" ><{$case.num8}></td>
                 <td align="center" ><{$case.num9}></td>
                 <td align="center" ><{$case.num10}></td>
-                <td align="center" ><a href="__APP__/TAdmin/Case/data/id/<{$case.id}>/p/Element" >更多</a></td>                             
+                <td align="center" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/data/id/<{$case.id}>/p/Element" >更多</a></td>                             
             </tr>
             </volist>
             	<tr><td  colspan="10"><input type="submit" name="do_submit" value="批量排序" class="btn"></td></tr>
@@ -97,7 +97,7 @@
 	        <h4 class="modal-title" id="myModalLabel">用例-添加</h4>
 	    </div>
 	    <div class="modal-body">
-	      	<form action="__APP__/TAdmin/Case/insert" method="post" class="form-horizontal" role="form" >
+	      	<form action="__APP__/<{$Think.config.PRODUCT}>/Case/insert" method="post" class="form-horizontal" role="form" >
 	      	<input type="hidden" name="funcid" value="<{$arr.id}>" />
 	      	<input type="hidden" name="fproid" value="<{$_SESSION['proid']}>" />
 				<div class="form-group">

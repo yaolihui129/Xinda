@@ -45,24 +45,5 @@ class StagetesterController extends CommonController {
             $this->error("添加失败");
         }
     }
-  
-    public function order(){
-        /* 实例化模型*/
-        $db = D('tp_stagetester');
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("重新排序成功!");
-        }else{
-            $this->error("重新排序失败...");
-        }
-    }
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
 
 }

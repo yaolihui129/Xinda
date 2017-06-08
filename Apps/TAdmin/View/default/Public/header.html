@@ -22,7 +22,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="__APP__/TAdmin/Program">测试管理平台</a>
+          <a class="navbar-brand" href="__APP__/<{$Think.config.PRODUCT}>/Program">测试管理平台</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -32,15 +32,15 @@
                <span class="glyphicon glyphicon-book"> 测试任务</span>
                <span class="caret"></span></a>
 		       <ul class="dropdown-menu" role="menu">                
-		           <li><a href="__APP__/TAdmin/Exescene/index/type/C"> 用例
+		           <li><a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/index/type/C"> 用例
 		           <span class="badge"><{$_SESSION.realname|countCExescene=###}></span></a>
 		           </li>
 		           <li class="divider"></li>
-		           <li><a href="__APP__/TAdmin/Exescene/index/type/M">手工
+		           <li><a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/index/type/M">手工
 		           <span class="badge"><{$_SESSION.realname|countMExescene=###}></span></a>
 		           </li>
 		           <!-- <li class="divider"></li>
-		           <li><a href="__APP__/TAdmin/Exescene/test/type/A">自动
+		           <li><a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/test/type/A">自动
 		           <span class="badge"><{$_SESSION.realname}></span></a>
 		           </li> -->		                 
 		       </ul>
@@ -51,24 +51,24 @@
 	               <span class="caret"></span>
                </a>
                <ul class="dropdown-menu" role="menu">
-                 <li><a href="__APP__/TAdmin/User">用户</a></li>
+                 <li><a href="__APP__/<{$Think.config.PRODUCT}>/User">用户</a></li>
                  <li class="divider"></li>                 
-                 <li><a href="__APP__/TAdmin/Index/test">环境</a></li>
+                 <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/test">环境</a></li>
                  <li class="divider"></li>
-                 <li><a href="__APP__/TAdmin/Dict">字典</a></li>
+                 <li><a href="__APP__/<{$Think.config.PRODUCT}>/Dict">字典</a></li>
                  <li class="divider"></li>
-                 <li><a href="__APP__/TAdmin/Wxreturn">微信返回码</a></li>                               
+                 <li><a href="__APP__/<{$Think.config.PRODUCT}>/Wxreturn">微信返回码</a></li>                               
                </ul>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 			 <li>
-				 <a href="__APP__/TAdmin/User/setpass">
+				 <a href="__APP__/<{$Think.config.PRODUCT}>/User/setpass">
 				 	<span class="glyphicon glyphicon-user"> <{$_SESSION.realname}></span>
 				 </a>
 			 </li>			 
 			 <li>
-				 <a href="__APP__/TAdmin/Login/logout" onclick="return confirm('你确定要退出系统吗？')" >
+				 <a href="__APP__/<{$Think.config.PRODUCT}>/Login/logout" onclick="return confirm('你确定要退出系统吗？')" >
 				 	<span class="glyphicon glyphicon-log-out"> 退出</span>
 				 </a>		 
 			 </li>

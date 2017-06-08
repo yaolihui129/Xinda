@@ -20,14 +20,6 @@ class DatacaseController extends CommonController{
 
     }
 
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('case')->save($_POST)){
-            $this->success("修改成功！");
-        }else{
-            $this->error("修改失败！");
-        }
-
-    }
+   
     
 }

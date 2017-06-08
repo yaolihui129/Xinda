@@ -19,7 +19,7 @@
 <div class="col-md-5">	
  <h3>用例-编辑</h3>	
   	<div class="panel-body">
-  		<form action="__APP__/TAdmin/Case/update" method="post" class="form-horizontal" role="form" >
+  		<form action="__APP__/<{$Think.config.PRODUCT}>/Case/update" method="post" class="form-horizontal" role="form" >
   		<input type="hidden" name="id" value="<{$case.id}>" />  		     	  		
 		<div class="form-group">					   
 			<label for="short" class="col-sm-2 control-label">级别:</label>
@@ -50,7 +50,7 @@
 		<button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
         </form>
          <div class="btn-group pull-right">                       
-              <a href="__APP__/TAdmin/<{$p}>/index/funcid/<{$case.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
+              <a href="__APP__/<{$Think.config.PRODUCT}>/<{$p}>/index/funcid/<{$case.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
          </div>
   	</div>	
 </div>

@@ -1,7 +1,7 @@
 <?php
 namespace TAdmin\Controller;
 use Think\Controller;
-class IndexController  extends WebInfoController{
+class IndexController  extends CommonController{
 
     
     public function index(){

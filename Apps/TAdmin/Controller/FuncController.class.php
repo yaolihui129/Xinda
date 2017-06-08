@@ -27,19 +27,6 @@ class FuncController extends CommonController{
     }
   
 
-    public function insert(){
-        $m=D('tp_func');
-        $_POST['moder']=$_SESSION['realname'];      
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        if($m->add()){
-           $this->success("添加成功");
-        }else{
-            $this->error("添加失败");
-        }
-
-    }
 
     public function mod(){
         $m= D("tp_func");
@@ -57,27 +44,6 @@ class FuncController extends CommonController{
 
    
 
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('tp_func')->save($_POST)){
-            $this->success("修改成功！");
-        }else{
-            $this->error("修改失败！");
-        }
-    }
-
-
-    public function order(){
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += D('tp_func')->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-           $this->success("重新排序成功!");
-        }else{
-            $this->error("重新排序失败...");
-        }
-    }
 
 
     public function func(){

@@ -1,5 +1,4 @@
 <layout name="layout" />
-<div class="container">
 <div class="row">  
   <div class="col-md-9">
   		<div class="panel panel-info">
@@ -7,7 +6,7 @@
 		    <h3 class="panel-title"><{$arr.id|getPro=###}>
 		    	<div class="btn-group pull-right">
 		    		<a data-toggle="modal" href="#tianjstage" class=" btn btn-info btn-xs" >添加</a>
-		    		<a href="__APP__/TAdmin/Program"  class="btn btn-warning btn-xs">返回</a>
+		    		<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返回</a>
 		    	</div>    	    	
 		    </h3>
 		  </div>
@@ -15,21 +14,21 @@
    	<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
 	<div class="well well-sm"><{$arr.desc}></div>	  
     <ul class="nav nav-pills" role="tablist">
-		  <li role="presentation" class="active"><a href="__APP__/TAdmin/Stage/index/proid/<{$arr.id}>">里程碑
+		  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Risk/index/proid/<{$arr.id}>">风险
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Prosys/index/proid/<{$arr.id}>">涉及系统
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
 		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Func/func/proid/<{$arr.id}>">功能点
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
 		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" ><a href="__APP__/TAdmin/Func/range/proid/<{$arr.id}>">范围
+		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
 		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
 		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/TAdmin/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
+		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
 	</ul>
 	<div class="panel panel-default">
 		  <ul class="list-group">
@@ -40,14 +39,14 @@
 		        <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/><{$st.stage}>【<{$st.end}>】
 		        <a href="__URL__/modstate/id/<{$st.id}>/state/<{$st.state}>" class="badge"><{$st.state}></a>		                
 		        <div class="btn-group">		            
-		            <a href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success btn-xs">用例<{$st.id|countCTester=###}></a>
-		            <a href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info btn-xs">测试<{$st.id|countMTester=###}></a>		                    
+		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success btn-xs">用例<{$st.id|countCTester=###}></a>
+		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info btn-xs">测试<{$st.id|countMTester=###}></a>		                    
 		            <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
 		                <span class="caret"></span>
 		                <span class="sr-only">Toggle Dropdown</span>
 		            </button>
 		            <ul class="dropdown-menu" role="menu">
-			            <li><a target="_blank" href="__APP__/TAdmin/Stagetester/index/stageid/<{$st.id}>/type/A">自动化
+			            <li><a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/A">自动化
 			            <span class="badge pull-right"><{$st.id|countATester=###}></span></a></li>		                    
 			            <li><a href="__URL__/mod/id/<{$st.id}>/proid/<{$st.proid}>">修改</a></li>
 			            <li class="divider"></li>
@@ -66,28 +65,24 @@
   </div>
   <div class="col-md-3 hidden-xs hidden-sm">
   	<div class="panel panel-info">
-	  	<div class="panel-heading">
-	  		<h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3>
-	  	</div>
+	  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
 	  <ul class="list-group">
 	    <volist name='pros' id='pro' empty="没有数据"> 			
            <switch name="pro.id">
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
-		 </switch> 
-            <a href="__URL__/index/proid/<{$pro.id}>">           	
-            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
-            	<span class="badge pull-right"><{$pro.id|countStage=###}></span></li>
-            </a>
-            
+		 	</switch> 
+	            <a href="__URL__/index/proid/<{$pro.id}>">           	
+	            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
+	            	<span class="badge pull-right"><{$pro.id|countStage=###}></span>
+	            </a>
+          </li>  
         </volist>
       </ul>	  
-	</div>
-  	 
-  </div>
-  
+	</div> 	 
+  </div>  
 </div> 
-</div>
+
 
 <!-- 添加-模态框 -->
 <div class="modal fade " id="tianjstage" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -128,11 +123,8 @@
 				</div>				
 				<div class="form-group">
 					<label for="state" class="col-sm-4 control-label">结束:</label>
-					<div class="col-sm-8">
-						<input type="date" class="form-control" name="end" value="<{$end}>" >
-					</div>
-				</div>
-				
+					<div class="col-sm-8"><input type="date" class="form-control" name="end" value="<{$end}>" ></div>
+				</div>				
 		</div>
 		<div class="modal-footer">
 		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

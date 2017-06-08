@@ -1,12 +1,11 @@
 <layout name="layout" />
-<div class="container">
 <div class="row">
   <div class="col-md-8">
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}>
 	          <div class="btn-group pull-right">
-	          	<a href="__APP__/TAdmin/Exescene/index/type/<{$arr.type}>" class="btn btn-warning btn-xs">返 回 </a>
+	          	<a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/index/type/<{$arr.type}>" class="btn btn-warning btn-xs">返 回 </a>
 	          </div>            
           </h3>
         </div>
@@ -23,9 +22,9 @@
 				<default /><{$arr.swho}>【<{$arr.swhen}>】<{$arr.scene}>
 			</switch>			
 			<div class="btn-group">
-				<a  href="__APP__/TAdmin/Exescene/pass/id/<{$arr.id}>" title="标记测试通过"  class="btn btn-success btn-xs">
+				<a  href="__APP__/<{$Think.config.PRODUCT}>/Exescene/pass/id/<{$arr.id}>" title="标记测试通过"  class="btn btn-success btn-xs">
 					<span class="glyphicon glyphicon-ok">通过</span></a>
-				<a href="__APP__/TAdmin/Exescene/fail/id/<{$arr.id}>"  title="标记测试失败" class="btn btn-danger btn-xs">
+				<a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/fail/id/<{$arr.id}>"  title="标记测试失败" class="btn btn-danger btn-xs">
 					<span class="glyphicon glyphicon-remove">失败</span></a>					  
 			</div>
 	    </h4>
@@ -63,11 +62,11 @@
 						</button>
 						<a href="__URL__/pass/id/<{$ex.id}>"  class="btn btn-success ">
 						<span class="glyphicon glyphicon-ok">标记通过</span></a>
-						<a target="_blank" href="__APP__/TAdmin/Case/index/funcid/<{$ex.funcid}>"  
+						<a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Case/index/funcid/<{$ex.funcid}>"  
 						class="btn btn-info ">用例<{$ex.funcid|countFCase=###}></a>
-						<a target="_blank" href="__APP__/TAdmin/Rules/index/funcid/<{$ex.funcid}>"  
+						<a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/funcid/<{$ex.funcid}>"  
 						class="btn btn-warning ">规则<{$ex.funcid|countFRules=###}></a>
-						<a target="_blank" href="__APP__/TAdmin/Element/index/funcid/<{$ex.funcid}>"  
+						<a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$ex.funcid}>"  
 						class="btn btn-info">模板</a>
 					</span>
 				</div>
@@ -102,5 +101,5 @@
     </div>
   </div>
 </div>
-</div>
+
 

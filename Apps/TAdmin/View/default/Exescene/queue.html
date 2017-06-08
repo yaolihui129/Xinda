@@ -1,5 +1,4 @@
 <layout name="layout" />
-<div class="container">
 <div class="row"> 
   <div class="col-md-9">
   	<div class="panel panel-info">
@@ -7,8 +6,8 @@
 	  	<h3 class="panel-title">【<{$arr.type}>】规划列队(<{$_SESSION['proid']|getProNo=###}>)
 	  		<div class="btn-group pull-right">
 			  <a href="__URL__/library/stagetesterid/<{$arr.id}>"  class="btn btn-info btn-xs">场景库<{$_SESSION['proid']|countScene=###}></a>
-			  <a href="__APP__/TAdmin/Path/library/stagetesterid/<{$arr.id}>" class="btn btn-success btn-xs">待测模块</a>
-			  <a href="__APP__/TAdmin/Stagetester/index/stageid/<{$arr.stageid}>/type/<{$arr.type}>"  class="btn btn-warning btn-xs"> 返 回 </a>
+			  <a href="__APP__/<{$Think.config.PRODUCT}>/Path/library/stagetesterid/<{$arr.id}>" class="btn btn-success btn-xs">待测模块</a>
+			  <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$arr.stageid}>/type/<{$arr.type}>"  class="btn btn-warning btn-xs"> 返 回 </a>
 			</div>
 	  	</h3>
 	  </div>
@@ -40,31 +39,26 @@
 		        </form>
 		     </div>
 		  </div>		
-  </div>
-  
-  
+  		</div>
   </div>
   <div class="col-md-3 hidden-xs">
   	<div class="panel panel-info">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">人员轮次</h3>
-	  </div>
+	  <div class="panel-heading"><h3 class="panel-title">人员轮次</h3></div>
 	  <ol class="list-group">
 	    <volist name='data' id='vo' empty="没有数据"> 			
            <switch name="vo.id">
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
-		 </switch> 
-           <a href="__URL__/queue/stagetesterid/<{$vo.id}>"><{$vo.stage}>:<{$vo.tester}>【<{$vo.id|countExescene=###}>】
-                       <span class="badge pull-right"><{$vo.state}></span></a></li>
+		 	</switch> 
+           				<a href="__URL__/queue/stagetesterid/<{$vo.id}>"><{$vo.stage}>:<{$vo.tester}>【<{$vo.id|countExescene=###}>】
+                       <span class="badge pull-right"><{$vo.state}></span></a>
+                </li>
         </volist>
       </ol>	  
-	</div>
-  	 
-  </div>
-  
+	</div>  	 
+  </div> 
 </div> 
-</div>
+
 
 
               

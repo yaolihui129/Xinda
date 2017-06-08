@@ -26,23 +26,6 @@ public function index(){
 
 
 
-    public function insert(){
-        /* 实例化模型*/
-        $m=D('tp_case');
-        $_POST['adder']=$_SESSION['realname'];
-        $_POST['moder']=$_SESSION['realname'];
-        $_POST['createTime']=date("Y-m-d H:i:s",time());
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        if($m->add()){
-            $this->success("添加成功");
-        }else{
-            $this->error("添加失败");
-        }
-
-    }
-
     public function mod(){
         /* 接收参数*/
         $p=$_GET['p'];
@@ -78,37 +61,6 @@ public function index(){
         $date=$m->find($funcid);
         return $date['pathid'];
     }
-    
-    
-    public function data(){
-        
-        $this->display();
-    
-    }
-
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('tp_case')->save($_POST)){
-            $this->success("修改成功！");
-        }else{
-            $this->error("修改失败！");
-        }
-    }
-
-
-    public function order(){
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-           $num +=  D('tp_case')->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("排序成功!");
-            
-        }else{
-            $this->error("排序失败...");
-        }
-    }
-   
 
     public function library(){
         /* 接收参数*/
@@ -144,13 +96,5 @@ public function index(){
         $this->display();
     }
 
-    public function del(){
-        $count =M('tp_case')->delete($_GET['id']);
-        if ($count>0) {
-            $this->success('删除成功');
-        }else{
-            $this->error('删除失败');
-        }
-    }
     
 }

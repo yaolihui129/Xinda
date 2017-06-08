@@ -1,5 +1,4 @@
 <layout name="layout" />
-<div class="container">
 <div class="row"> 
   <div class="col-md-9">
   	<div class="panel panel-info">
@@ -18,7 +17,7 @@
 	                <td width=3% align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
 	                <td width=80%><{$st.id|getSPath=###}>
 	                    <div class="btn-group pull-right">
-			                <a href="__APP__/TAdmin/Func/index/pathid/<{$st.id}>" type="button" class="btn btn-info btn-xs">功能点<{$st.id|countFunc=###}></a>
+			                <a href="__APP__/<{$Think.config.PRODUCT}>/Func/index/pathid/<{$st.id}>" type="button" class="btn btn-info btn-xs">功能点<{$st.id|countFunc=###}></a>
 			                <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
 			                  <span class="caret"></span>
 			                  <span class="sr-only">Toggle Dropdown</span>
@@ -46,13 +45,14 @@
            <switch name="vo.id">
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
-		 </switch> 
-            <a href="__URL__/index/sysid/<{$vo.id}>/proid/<{$proid}>">
-            	<{$vo.sysno}>:<{$vo.name}></a><span class="badge"><{$vo.id|countPath=###}></span></li>
+		 	</switch> 
+            	<a href="__URL__/index/sysid/<{$vo.id}>/proid/<{$proid}>"><{$vo.sysno}>:<{$vo.name}></a>
+            	<span class="badge"><{$vo.id|countPath=###}></span>
+            </li>
         </volist>
       </ul>	  
 	</div>  	 
   </div> 
 </div> 
-</div>
+
 

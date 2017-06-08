@@ -69,32 +69,8 @@ class PathController extends CommonController {
         $this->display();
     }
 
-    public function update(){
-        /* 实例化模型*/
-        $db=M('module');
-        $_POST['moder']=$_SESSION['realname'];
-        if ($db->save($_POST)){
-            $this->success("成功！");
-        }else{
-            $this->error("失败！");
-        }
+   
 
-    }
-
-    public function order(){
-        /* 实例化模型*/
-        $db = D('module');
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-           $num += $db->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("排序成功!");
-            
-        }else{
-            $this->error("排序失败...");
-        }
-    }
 
     public function library(){
         /* 接收参数*/
@@ -171,10 +147,6 @@ class PathController extends CommonController {
             $this->error("失败");
         }
     }
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
+ 
     
 }
