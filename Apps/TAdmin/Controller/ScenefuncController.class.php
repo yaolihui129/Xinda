@@ -2,21 +2,16 @@
 namespace TAdmin\Controller;
 class ScenefuncController extends CommonController {
     public function index(){
-         /* 接收参数*/
-        $sceneid=$_GET['sceneid'];
-       /* 实例化模型*/
         $m = D('tp_scene');
         $where['proid']=$_SESSION['proid'];       
         $data=$m->where($where)->order('sn,id')->select();
         $this->assign("data",$data);
         
-        $arr=$m->find($sceneid);
+        $arr=$m->find(I('sceneid'));
         $this->assign("arr",$arr);
 
-        $m=D('branch');
-        $where=array("zt_tp_scenefunc.sceneid"=>$sceneid);
-        $sfunc=$m
-        ->join("inner JOIN zt_path ON zt_branch.id = zt_path.sysid")
+        $where=array("zt_tp_scenefunc.sceneid"=>I('sceneid'));
+        $sfunc=M('branch')->join("inner JOIN zt_path ON zt_branch.id = zt_path.sysid")
         ->join("inner JOIN zt_tp_func ON zt_path.id = zt_tp_func.pathid")
         ->join("inner JOIN zt_tp_scenefunc ON zt_tp_func.id = zt_tp_scenefunc.funcid")
         ->where($where)->order('zt_tp_scenefunc.sn')->select();
@@ -30,28 +25,22 @@ class ScenefuncController extends CommonController {
  * 功能库加入场景
  */
     public function addscene(){
-        /* 接收参数*/
-        $sceneid=$_GET['sceneid'];
-        $funcid=$_GET['funcid'];
-        /* 实例化模型*/
-        $m=D('branch');
-        $where=array("zt_tp_func.id"=>$funcid);
-        $arr=$m->join("zt_path ON zt_branch.id = zt_path.sysid ")
+        $where=array("zt_tp_func.id"=>I('funcid'));
+        $arr=M('branch')->join("zt_path ON zt_branch.id = zt_path.sysid ")
         ->join('zt_tp_func ON zt_path.id =zt_tp_func.pathid')
-        ->field("sysno,system,path,func")
-        ->where($where)->find();
+        ->field("sysno,system,path,func")->where($where)->find();
         $arr['path']=$arr['system']."-".$arr['path'];
-        $arr['funcid']=$funcid;
+        $arr['funcid']=I('funcid');
         $arr['adder']=$_SESSION['realname'];
-        $arr['sceneid']=$sceneid;
+        $arr['sceneid']=I('sceneid');
+        
         $m=D('scenefunc');
-        $where=array("sceneid"=>$sceneid);
+        $where=array("sceneid"=>I('sceneid'));
         $arr['sn']=$m->where($where)->count()+1;
         if(!$m->create($arr)){
             $this->error($m->getError());
         }
-        $lastId=$m->add($arr);
-        if($lastId){
+        if($m->add($arr)){
             $this->success("添加成功");
         }else{
             $this->error("添加失败");
@@ -59,11 +48,8 @@ class ScenefuncController extends CommonController {
     }
 
     public function addAllhc(){
-        /* 接收参数*/
-        $sceneid=$_GET['sceneid'];
-        $m=D('tp_scenefunc');
-        $where=array("sceneid"=>$sceneid);
-        $arr=$m->where($where)->field("funcid,sn,sysno,path,func,remarks,casestate,casemain,caseexpected,
+        $where=array("sceneid"=>I('sceneid'));
+        $arr=M('tp_scenefunc')->where($where)->field("funcid,sn,sysno,path,func,remarks,casestate,casemain,caseexpected,
             num1,num2,num3,num4,num5,num6,num7,num8,num9,num10,num11,num12,num13,num14,num15,num16,num17,num18,num19,num20")->select();
         $m=D('tp_hcfunc');
         foreach ($arr as $a){
@@ -81,24 +67,15 @@ class ScenefuncController extends CommonController {
 
 
     public function addhc(){
-        /* 接收参数*/
-        $id=$_GET['id'];
-        /* 实例化模型*/
-        $m=D('tp_scenefunc');
-        $arr=$m
-        ->field("funcid,sysno,path,func,remarks,casestate,casemain,caseexpected,
-            num1,num2,num3,num4,num5,num6,num7,num8,num9,num10,num11,num12,num13,num14,num15,num16,num17,num18,num19,num20")
-        ->find($id);
+        $arr=M('tp_scenefunc')->find(I('id'));
         $arr['moder']=$_SESSION['realname'];
         $m=D('tp_hcfunc');
         $where=array("moder"=>$_SESSION['realname']);
         $arr['sn']=$m->where($where)->count()+1;
-
         if(!$m->create($arr)){
             $this->error($m->getError());
         }
-        $lastId=$m->add($arr);
-        if($lastId){
+        if($m->add($arr)){
             $this->success("添加成功");
         }else{
             $this->error("添加失败");

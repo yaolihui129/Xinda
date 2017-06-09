@@ -1,89 +1,70 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"><br>
 <div class="row"> 
   <div class="col-md-9">
   		<div class="panel panel-info">
 		  <div class="panel-heading">
 		    <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}>
-		    	<div class="btn-group pull-right">
-		    		<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返 回</a>
-		    	</div>
+		    	<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返 回</a></div>
 		    </h3>
 		  </div>
-  <div class="panel-body table-responsive">	    	
-	 <b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
-	 <div class="well well-sm"><{$arr.desc}></div>    
-    <ul class="nav nav-pills" role="tablist">
-		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
-		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
-		  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-		  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
-		  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
-		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
-		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-		  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
-		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>  
-	</ul>
-	<div class="row">
-	  <div class="col-md-6">
-	  		<div class="panel panel-success">
-			  <div class="panel-heading">关联系统</div>
-			      <ul class="list-group">
-			        <volist name='data' id='st' empty="没有数据">
-			            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
-			              <div class="btn-group pull-right">
-			                <a href="__APP__/<{$Think.config.PRODUCT}>/Path/index/sysid/<{$st.branch}>/proid/<{$arr.id}>" 
-			                class="btn btn-info btn-xs">路径<{$st.branch|countPath=###}></a>
-			                <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-			                  <span class="caret"></span>
-			                  <span class="sr-only">Toggle Dropdown</span>
-			                </button>
-			                <ul class="dropdown-menu" role="menu">			                  
-			                  <li>
-				                  <a href="__URL__/mod/id/<{$st.branch}>/proid/<{$arr.id}>">
-				                  <span class="glyphicon glyphicon-cloud"> 修改</span></a>
-				              </li>                 
-			                  <li class="divider"></li>
-			                  <li>
-			                  	  <a href="__URL__/del/id/<{$st.id}>"  onclick="return confirm('你确定要从项目中移除：<{$st.name}>系统吗？')">
-			                  	  <span class="glyphicon glyphicon-remove"> 移除</span></a>
-			                  </li>
-			                </ul>
-			              </div>
-			            </li>
-			        </volist> 
-			      </ul>
-			</div>
-	  </div>
-	  <div class="col-md-6">
-	  		<div class="panel panel-danger">
-			  <div class="panel-heading">备选系统</div>
-			      <ul class="list-group">
-			        <volist name='syses' id='st' empty="没有数据">
-			            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
-			              <a href="__URL__/insert/project/<{$arr.id}>/branch/<{$st.id}>"  
-			              class="btn btn-danger btn-xs pull-right">
-			                <span class="glyphicon glyphicon-link"> 关联 </span></a>
-			            </li>
-			        </volist> 
-			      </ul>
-			</div>	 
-	  </div>
-	</div>     
-    </div>
-  </div>
-  
-  
+		  <div class="panel-body table-responsive">	    	   
+		    <ul class="nav nav-pills" role="tablist">
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$_SESSION['proid']}>">里程碑
+				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$_SESSION['proid']}>">风险
+				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$_SESSION['proid']}>">涉及系统
+				  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$_SESSION['proid']}>">功能点
+				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$_SESSION['proid']}>">范围
+				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$_SESSION['proid']}>/copy/<{$_SESSION['proid']}>">场景
+				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$_SESSION['proid']}>">用例
+				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$_SESSION['proid']}>">项目需求</a></li>  
+			</ul>
+			<div class="row">
+			  <div class="col-md-6">
+			  		<div class="panel panel-success">
+					  <div class="panel-heading">项目关联平台</div>
+					      <ul class="list-group">
+					        <volist name='data' id='st' empty="没有数据">
+					            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+					              <div class="btn-group pull-right">
+					                <a href="__APP__/<{$Think.config.PRODUCT}>/Path/index/sysid/<{$st.branch}>" class="btn btn-info">路径<{$st.branch|countPath=###}></a>
+					                <a href="__URL__/mod/id/<{$st.branch}>" class="btn btn-info"><span class="glyphicon glyphicon-cloud"> 修改</span></a>
+					                <a href="__URL__/realdel/id/<{$st.id}>/table/tp_prosys" class="btn btn-info"  onclick="return confirm('你确定要从项目中移除：<{$st.name}>系统吗？')">
+					                  	  <span class="glyphicon glyphicon-remove"> 移除</span></a>					                
+					              </div>
+					            </li>
+					        </volist> 
+					      </ul>
+					</div>
+			  </div>
+			  <div class="col-md-6">
+			  		<div class="panel panel-danger">
+					  <div class="panel-heading">备选平台</div>
+					      <ul class="list-group">
+					        <volist name='syses' id='st' empty="没有数据">
+					            <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+					              <a href="__URL__/insert/branch/<{$st.id}>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-link"> 关联 </span></a>
+					            </li>
+					        </volist> 
+					      </ul>
+					</div>	 
+			  </div>
+			</div>     
+		  </div>
+  	</div>   
   </div>
   <div class="col-md-3 hidden-xs hidden-sm">
   	<div class="panel panel-info">
 	  <div class="panel-heading">
-	    <h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3>
+	    <h3 class="panel-title">项目列表</h3>
 	  </div>
 	  <ul class="list-group">
 	    <volist name='pros' id='pro' empty="没有数据"> 			
@@ -102,5 +83,5 @@
   </div> 
 </div> 
 
-
+</div>
 

@@ -1,35 +1,21 @@
 <?php
 namespace TAdmin\Controller;
-use Think\Controller;
-class IndexController  extends CommonController{
-
-    
+class IndexController  extends CommonController{    
+   
     public function index(){
-        /* 接收参数*/
-        $_SESSION['proid']=$_GET['proid'];
-        /* 实例化模型*/
-        $m= D("project");
-        $where=array("testgp"=>$_SESSION['testgp']);
-        $pros=$m->where($where)->order("end desc")->select();
-        $this->assign("pros",$pros);
-        
-        $arr=$m->find($_SESSION['proid']);
-        $this->assign("arr",$arr);
-        
-        /* 实例化模型*/
-        $m = D("tp_stage");
-        $where=array("proid"=>$_SESSION['proid']);
-        $stages=$m->where($where)->order("sn,id")->select();
-        $this->assign("stages",$stages);
-        
-        /* 阶段添加*/
-        $count=$m->where($where)->count()+1;
-        $this->assign('c',$count);
-        $this -> assign("state", formselect("未开始","state","prost"));
-        $end=date("Y-m-d",time()+1*24*3600);
-        $this->assign('end',$end);
-        
-        $this->theme($_SESSION['theme'])->display();
+        $_SESSION['testgp']=I('testgp',$_SESSION['testgp']);
+        $data=M('dict')->where(array("type"=>"testgp","state"=>"正常"))->field("id,k,v,state")->select();
+        $this->assign('data',$data);
+        $this->assign('search',I('search'));
+
+        $map['testgp']=$_SESSION['testgp'];
+        $map['name|code']=array('like','%'.I('search').'%');
+        $map['acl']='private';
+        $map['deleted']='0';        
+        $arr=M('project')->where($map)->order("end desc")->field("id,name,code,status")->select();
+        $this->assign('arr',$arr);       
+
+	    $this->display();
     }
     
     public  function test(){

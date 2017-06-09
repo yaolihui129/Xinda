@@ -1,4 +1,6 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content">
 	<div class="row">
 		<div class="col-md-3 hidden-xs hidden-sm">
  		 	<div class="panel panel-primary">
@@ -16,7 +18,8 @@
   		<h3>功能点-编辑</h3>	
   			<div class="panel-body">
   		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
-  		     	  <input type="hidden" name="id" value="<{$func.id}>" />  		     	  
+  		     	  <input type="hidden" name="id" value="<{$func.id}>" /> 
+  		     	  <input type="hidden" name="table" value="tp_func" />  		     	  
   		     	    <div class="form-group">
   		     	      <div class="col-sm-2"></div>
   		     	      <div class="col-sm-10"><{$func.moder}>更新于:<{$func.updatetime}></div>
@@ -45,4 +48,4 @@
   		     	</div>	           
   		</div>		 
 	</div>           
-
+</div>

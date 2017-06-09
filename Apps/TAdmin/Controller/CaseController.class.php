@@ -1,17 +1,17 @@
 <?php
 namespace TAdmin\Controller;
 class CaseController extends CommonController {
-public function index(){
-         /* 实例化模型*/
+    public function index(){
          $m=D('tp_func');
-         $arr=$m->find($_GET['funcid']);
+         $arr=$m->find(I('funcid'));
          $this->assign('arr',$arr);
+         
          $where['pathid']=$arr['pathid'];
          $data=$m->where($where)->order('sn,id')->select();
          $this->assign('data',$data);
          
     	 $m=D('tp_case');
-    	 $where['funcid']=$_GET['funcid'];
+    	 $where['funcid']=I('funcid');
     	 $cases=$m->where($where)->order('sn,id')->select();
 	     $this->assign('cases',$cases);
 	     
@@ -27,25 +27,18 @@ public function index(){
 
 
     public function mod(){
-        /* 接收参数*/
-        $p=$_GET['p'];
-        $this -> assign("p", $p);
-        
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
+
         $m=M('tp_case');
-        $case=$m->find($id);
+        $case=$m->find(I('id'));
         $this->assign("case",$case);
+        $this -> assign("p", I('p'));
         
         $where['funcid']=$case['funcid'];
         $data=$m->where($where)->order('sn,id')->select();
-        $this->assign('data',$data); 
-        
-         
+        $this->assign('data',$data);                  
         //获取模块
-        $m=D('story');
         $where=array("module"=>$this->getModuleid($case['funcid']), 'deleted'=>'0');
-        $rules=$m->where($where)->field('id,branch,module,title,status,stage,openedBy,lastEditedDate,version')->select();
+        $rules=D('story')->where($where)->field('id,branch,module,title,status,stage,openedBy,lastEditedDate,version')->select();
         $this->assign('rules',$rules);
         
         
@@ -63,35 +56,22 @@ public function index(){
     }
 
     public function library(){
-        /* 接收参数*/
-        $testgp=!empty($_GET['testgp']) ? $_GET['testgp'] :$_SESSION['testgp'];
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
-        /* 实例化模型*/
+        $_SESSION['proid']=I('proid');
         $m= D("project");
-        $where=array("testgp"=>$testgp,"deleted"=>'0');
+        $where=array("testgp"=>I('testgp',$_SESSION['testgp']),"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
-        /* 实例化模型*/
-        $where=array("testgp"=>$testgp,"deleted"=>'0');
-        $data=$m->where($where)->select();
-        $this->assign('data',$data);
-        $m=M('branch');
-        $where=array("zt_tp_case.fproid"=>$proid);
-        $cases=$m
-        ->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
-        ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
-        ->join(' inner JOIN zt_tp_case ON zt_tp_func.id = zt_tp_case.funcid')
-        ->where($where)
-        ->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id,zt_tp_case.sn,zt_tp_case.id")
-        ->select();
+        $where=array("zt_tp_case.fproid"=>$_SESSION['proid']);
+        $cases=M('branch')->where($where)->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id,zt_tp_case.sn,zt_tp_case.id")
+            ->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
+            ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
+            ->join(' inner JOIN zt_tp_case ON zt_tp_func.id = zt_tp_case.funcid')->select();
         $this->assign('cases',$cases);
-        $where=array("proid"=>$proid);
-        $this->assign('w',$where);
+
 
         $this->display();
     }

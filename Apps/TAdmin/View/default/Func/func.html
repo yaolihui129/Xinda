@@ -1,13 +1,13 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"><br>
 <div class="row"> 
   <div class="col-md-9">
   		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title"><{$arr.id|getPro=###}><div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返回</a></div></h3>
+		    <h3 class="panel-title"><{$arr.id|getPro=###}><div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div></h3>
 		 </div>
-		  <div class="panel-body table-responsive">
-		   	 <b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
-			 <div class="well well-sm"><{$arr.desc}></div>  
+		  <div class="panel-body table-responsive">		   	   
 		    <ul class="nav nav-pills" role="tablist">
 				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
@@ -77,3 +77,4 @@
 	</div>  	 
   </div>  
 </div> 
+</div>

@@ -1,39 +1,28 @@
 <?php
 namespace TAdmin\Controller;
 class ScenecaseController extends CommonController {
-public function index(){
-        /* 接收参数*/        
-        $sfuncid=$_GET['sfuncid'];               
-        /* 实例化模型*/
-        $m=D('tp_scenefunc');
-        $sf=$m->find($sfuncid);
+public function index(){             
+        $sf=M('tp_scenefunc')->find(I('sfuncid'));
         $this->assign("sf",$sf);        
         
-        $m=D('branch');
         $where=array("zt_tp_scenefunc.sceneid"=>$sf['sceneid']);
-        $data=$m->join("inner JOIN zt_path ON zt_branch.id = zt_path.sysid")
+        $data=M('branch')->join("inner JOIN zt_path ON zt_branch.id = zt_path.sysid")
         ->join("inner JOIN zt_tp_func ON zt_path.id = zt_tp_func.pathid")
         ->join("inner JOIN zt_tp_scenefunc ON zt_tp_func.id = zt_tp_scenefunc.funcid")
         ->where($where)->order('zt_tp_scenefunc.sn')->select();
         $this->assign("data",$data);
         
-        $m=D('tp_case');
         $where=array("funcid"=>$sf['funcid']);
-        $arr=$m->where($where)->select();
+        $arr=M('tp_case')->where($where)->select();
         $this->assign("arr",$arr);       
 
         $this->display();
     }
 
     public function bind(){
-        /* 接收参数*/
-        $sfuncid=$_GET['sfuncid'];
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
-        $m=D('tp_case');
-        $data=$m->find($id);
-        $arr['id']=$sfuncid;
-        $arr['caseid']=$id;
+        $data=M('tp_case')->find(I('id'));
+        $arr['id']=I('sfuncid');
+        $arr['caseid']=I('id');
         $arr['casestate']='已绑定';
         $arr['casemain']=$data['main'];
         $arr['caseexpected']=$data['expected'];
@@ -58,8 +47,7 @@ public function index(){
         $arr['num19']=$data['num19'];
         $arr['num20']=$data['num20'];
         $arr['moder']=$_SESSION['realname'];
-        $m=D('tp_scenefunc');
-        if ($m->save($arr)){
+        if (D('tp_scenefunc')->save($arr)){
             $this->success("绑定成功！");
         }else{
             $this->error("绑定失败！");

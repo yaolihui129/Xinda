@@ -1,18 +1,18 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"><br>
 <div class="row"> 
   <div class="col-md-9">
   	<div class="panel panel-info">
 	  <div class="panel-heading">
-	    <h3 class="panel-title"><{$arr.id|getPro=###}>
+	    <h3 class="panel-title"><{$arr.id|getPro=###}>	    		
 	    	<div class="btn-group pull-right">
 	    		<a data-toggle="modal" href="#tianjrisk" class=" btn btn-info btn-xs" >添加</a>
-		    	<a href="__APP__/<{$Think.config.PRODUCT}>/Program" class="btn btn-warning btn-xs">返回</a>
+		    	<a href="__APP__/<{$Think.config.PRODUCT}>" class="btn btn-warning btn-xs">返回</a>
 		    </div>
 	    </h3>
 	  </div>
-  <div class="panel-body table-responsive">	    	
-	<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
-	<div class="well well-sm"><{$arr.desc}></div>	  
+  <div class="panel-body table-responsive">	    		  
     <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
@@ -30,9 +30,9 @@
 		  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
 		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
 	</ul>
-	<table class="table table-striped table-bordered table-hover table-condensed ">
-         
+	<table class="table table-striped table-bordered table-hover table-condensed ">         
          <form action="__URL__/order" method="post" >
+         <input type="hidden" name="table" value="tp_risk" />
          <volist name='risks' id='st' empty="没有数据">
             <tr> 
             	<td align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
@@ -74,7 +74,7 @@
   </div>
   
 </div> 
-
+</div>
 
 <!-- 添加-模态框 -->
 <div class="modal fade " id="tianjrisk" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

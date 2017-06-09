@@ -3,22 +3,17 @@ namespace TAdmin\Controller;
 
 class RiskController extends CommonController {
     public function index(){
-         /* 接收参数*/
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
-    	$gp=$_SESSION['testgp'];
-         /* 实例化模型*/
+        $_SESSION['proid']=I('proid');
         $m= D("project");
-        $where=array("testgp"=>"$gp","deleted"=>'0');
+        $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
-        /* 实例化模型*/
         $m = D("tp_risk");
-        $where=array("proid"=>"$proid");
+        $where=array("proid"=>$_SESSION['proid']);
         $risks=$m->where($where)->select();
         $this->assign("risks",$risks);
         
@@ -34,18 +29,13 @@ class RiskController extends CommonController {
 
 
     public function mod(){
-        /* 接收参数*/
-        $proid=$_GET['proid'];
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
-        /* 实例化模型*/
         $m= D("tp_risk");
-        $where=array("proid"=>$proid);
+        $where=array("proid"=> $_SESSION['proid']);
         $data=$m->where($where)->select();
 
         $this->assign("data",$data);
-        $this->assign('w',$where);
 
-        $risk=$m->find($id);
+        $risk=$m->find(I('id'));
         $this->assign("risk",$risk);
         $this -> assign("level", formselect($risk['level'],"level","risklevel"));
         $this -> assign("state", formselect($risk['state'],"state","rstate"));
@@ -54,11 +44,5 @@ class RiskController extends CommonController {
 
         $this->display();
     }
-
-  
-
-
-
-
-    
+   
 }

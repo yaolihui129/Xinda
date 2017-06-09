@@ -1,11 +1,14 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content">
+ <br>
 <div class="row"> 
   <div class="col-md-9">
   	<div class="panel panel-info">
 	  <div class="panel-heading">
 	  	<h3 class="panel-title"><{$arr.name}>
 	  		<div class="btn-group pull-right">	  		
-	  			<a href="__APP__/TAdmin/Prosys/index/proid/<{$proid}>" class=" btn btn-warning btn-xs ">返回</a>
+	  			<a href="__APP__/TAdmin/Prosys/index/proid/<{$_SESSION['proid']}>" class=" btn btn-warning btn-xs ">返回</a>
 	  		</div>
 	  	</h3>
 	  </div>
@@ -23,7 +26,7 @@
 			                  <span class="sr-only">Toggle Dropdown</span>
 			                </button>
 			                <ul class="dropdown-menu" role="menu">			                  
-			                  <li><a href="__URL__/mod/id/<{$st.id}>/proid/<{$proid}>">修改</a></li>                 			                 
+			                  <li><a href="__URL__/mod/id/<{$st.id}>">修改</a></li>                 			                 
 			                </ul>
 			            </div>
 	                </td>                            
@@ -46,7 +49,7 @@
 				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 				<default /><li class="list-group-item ">
 		 	</switch> 
-            	<a href="__URL__/index/sysid/<{$vo.id}>/proid/<{$proid}>"><{$vo.sysno}>:<{$vo.name}></a>
+            	<a href="__URL__/index/sysid/<{$vo.id}>"><{$vo.sysno}>:<{$vo.name}></a>
             	<span class="badge"><{$vo.id|countPath=###}></span>
             </li>
         </volist>
@@ -55,4 +58,4 @@
   </div> 
 </div> 
 
-
+</div>

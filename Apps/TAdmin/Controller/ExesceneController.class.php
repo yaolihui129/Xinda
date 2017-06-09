@@ -1,24 +1,19 @@
 <?php
 namespace TAdmin\Controller;
 class ExesceneController extends CommonController{
-    public function index(){
-        //接收参数       
-        $type=$_GET['type'];
-        $this->assign('type',$type);
-        //初始化模型               
+    public function index(){             
     	$m=M('project');
-    	$where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>$type);
-    	$data=$m->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")
-    	 ->join("zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")
-    	 ->order("zt_project.end desc")->where($where)->select();
+    	$where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>I('type'));
+    	$data=$m->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")->order("zt_project.end desc")
+    	 ->join("zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")->where($where)->select();
 	    $this->assign('data',$data);
-	    
-	    $stagetesterid=!empty($_GET['stagetesterid'])?$_GET['stagetesterid']:$data[0]['id'];	     
+	    $this->assign('type',I('type'));
+	         
 	    $m=D('tp_exescene');
-	    $where=array("stagetesterid"=>$stagetesterid);
+	    $where=array("stagetesterid"=>I('stagetesterid',$data[0]['id']));
 	    $exe=$m->where($where)->order("sn")->select();
 	    $this->assign('exe',$exe);
-	    $this->assign('stagetesterid',$stagetesterid);
+	    $this->assign('stagetesterid',I('stagetesterid',$data[0]['id']));
 	    if($exe) {
 	        $this->display();
 	    }else {
@@ -28,25 +23,18 @@ class ExesceneController extends CommonController{
 
 
     public function test(){
-
-        $type=$_GET['type'];
-
         $m=M('project');
-        $where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>$type);
+        $where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>I('type'));
         $data=$m->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")
         ->join("zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")
-    	->order("zt_project.end desc")
-        ->where($where)
-        ->select();
+    	->order("zt_project.end desc")->where($where)->select();
         $this->assign('data',$data);       
 
-        $stagetesterid=!empty($_GET['stagetesterid'])?$_GET['stagetesterid']:$data[0]['id'];
         $m=D('tp_exescene');
-        $where=array("stagetesterid"=>$stagetesterid);
+        $where=array("stagetesterid"=>I('stagetesterid',$data[0]['id']));
         $exe=$m->where($where)->order("sn")->select();
         $this->assign('exe',$exe);
-        $proid=!empty($_GET['proid'])?$_GET['proid']:$data[0]['proid'];
-        $where=array("proid"=>$proid,"stagetesterid"=>$stagetesterid,"type"=>$type);
+        $where=array("proid"=>I('proid',$data[0]['proid']),"stagetesterid"=>I('stagetesterid',$data[0]['id']),"type"=>I('type'));
         $this->assign('w',$where);
 
         $this->display();
@@ -77,22 +65,16 @@ class ExesceneController extends CommonController{
    }
 
     public function queue(){
-        /* 接收参数*/
-        $stagetesterid=$_GET['stagetesterid'];
-        /* 实例化模型*/
-        $m=D('tp_stagetester');
-        $arr=$m->find($stagetesterid);
+        $arr=D('tp_stagetester')->find(I('stagetesterid'));
         $this->assign('arr',$arr);
     
-        $m=D('tp_stage');
         $where=array("zt_tp_stage.proid"=>$_SESSION['proid'],"zt_tp_stagetester.type"=>$arr['type']);
-        $data=$m->join(" zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")
+        $data=D('tp_stage')->join(" zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")
         ->where($where)->order("zt_tp_stage.sn,zt_tp_stage.id,zt_tp_stagetester.sn,zt_tp_stagetester.id")->select();
         $this->assign('data',$data);
-        
-        $m=D('tp_exescene');
-        $where=array("stagetesterid"=>$stagetesterid);
-        $exe=$m->where($where)->order("sn,id")->select();
+
+        $where=array("stagetesterid"=>I('stagetesterid'));
+        $exe=D('tp_exescene')->where($where)->order("sn,id")->select();
         $this->assign('exe',$exe);
     
         $this->display();
@@ -100,10 +82,7 @@ class ExesceneController extends CommonController{
     }
 
     public function insert(){
-        $sceneid=$_GET['sceneid'];
-        $m=D('tp_scene');
-        $data=$m->field("type,level,swho,swhen,testip,scene,flow")->find($sceneid);
-    
+        $data=D('tp_scene')->field("type,level,swho,swhen,testip,scene,flow")->find(I('sceneid'));    
         $m=D('tp_exescene');
         $where=array("stagetesterid"=>$_GET['stagetesterid'],"type"=>$_GET['type']);
         $data['sn']=$m->where($where)->count()+1;
@@ -111,7 +90,7 @@ class ExesceneController extends CommonController{
         $data['moder']=$_SESSION['realname'];
         $data['createTime']=date("Y-m-d H:i:s",time());
         $data['stagetesterid']=$_GET['stagetesterid'];
-        $data['sceneid']=$sceneid;
+        $data['sceneid']=I('sceneid');
     
         /*插入执行场景数据 */
         if(!$m->create($data)){
@@ -119,7 +98,7 @@ class ExesceneController extends CommonController{
         }
         $lastId=$m->add($data);
          $m=D("tp_scenefunc");
-         $where=array("sceneid"=>$sceneid);
+         $where=array("sceneid"=>I('sceneid'));
          $arr=$m->field("sn,funcid,func,path,remarks as funcremarks,casestate,casemain,caseexpected,
                 num1,num2,num3,num4,num5,num6,num7,num8,num9,num10,num11,num12,num13,num14,num15,num16,num17,num18,num19,num20")
          ->where($where)->select();
@@ -145,21 +124,15 @@ class ExesceneController extends CommonController{
 
 
     public function library(){
-        /* 接收参数*/
-        $stagetesterid=$_GET['stagetesterid'];
-        /* 实例化模型*/
-        $m=D('tp_stagetester');
-        $arr=$m->find($stagetesterid);
+        $arr=M('tp_stagetester')->find(I('stagetesterid'));
         $this->assign('arr',$arr);
-    
-        $m=D('tp_exescene');
-        $where=array("stagetesterid"=>$stagetesterid);
-        $exe=$m->where($where)->order("sn")->select();
+
+        $where=array("stagetesterid"=>I('stagetesterid'));
+        $exe=M('tp_exescene')->where($where)->order("sn")->select();
         $this->assign('exe',$exe);
     
-        $m=D('tp_scene');
         $where=array("proid"=>$_SESSION['proid'],"type"=>$arr['type']);
-        $scene=$m->where($where)->order("sn")->select(); 
+        $scene=M('tp_scene')->where($where)->order("sn")->select(); 
         $this->assign('scene',$scene);   
     
         $this->display();

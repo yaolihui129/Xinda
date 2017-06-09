@@ -8,21 +8,16 @@ class LoginController extends Controller {
     }
 
     public function login(){
-        $user = D('user')->where(array('account'=>$_POST['username'],'password'=>md5($_POST['password']))) 
-        ->field("id,dept,realname,usergp")
-        ->find();
-        
+        $where=array('account'=>$_POST['username'],'password'=>md5($_POST['password']));
+        $user = D('user')->where($where)->field("id,dept,realname,usergp")->find();
         if ($user){
             session('[start]');
             $_SESSION=$user;
-            $_SESSION['isLogin']=1;
+            $_SESSION['isLogin']=C(PRODUCT);
             $_SESSION['testgp']=$user['usergp'];
-            $where['userid']=$user['id'];
-            $arr = D('tp_userprod')->where($where)->select();
 
-            $this->redirect('TAdmin/Program/index');
+            $this->redirect('TAdmin/Index/index');
         }else{
-
             $this->error('用户或密码错误，请重新登陆！', "index");
         }
 
@@ -40,13 +35,6 @@ class LoginController extends Controller {
         $this->success($username.",再见!", "index");
 
     }
-
-    
-    public function _empty(){
-    
-        $this->display('index');
-    }
-
 
 
 }

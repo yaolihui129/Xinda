@@ -3,18 +3,13 @@ namespace TAdmin\Controller;
 
 class SceneController extends CommonController {
     public function index(){
-        /* 接收参数*/
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
-    	$gp=$_SESSION['testgp'];
-    	$copy=$_GET['copy'];
-         /* 实例化模型*/
+        $_SESSION['proid']=I('proid');
         $m= D("project");
-        $where=array("testgp"=>"$gp","deleted"=>'0');
+        $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
         if (!empty($_GET['copy'])) {
@@ -23,10 +18,10 @@ class SceneController extends CommonController {
 
         /* 实例化模型*/
         $m = D("tp_scene");
-        $where=array("proid"=>"$proid");
+        $where=array("proid"=>$_SESSION['proid']);
         $scene=$m->where($where)->order('sn')->select();
         $this->assign("scene",$scene);
-        $where=array("proid"=>"$proid","copy"=>$_SESSION['copy']);
+        $where=array("proid"=>$_SESSION['proid'],"copy"=>$_SESSION['copy']);
         
         $count=$m->where($where)->count()+1;
         $this->assign('c',$count);
@@ -39,15 +34,13 @@ class SceneController extends CommonController {
 
 
     public function mod(){
-        /* 接收参数*/
-        $id = !empty($_POST['id']) ? $_POST['id'] : $_GET['id'];
         /* 实例化模型*/
         $m= D("tp_scene");
         $where['proid']=$_SESSION['proid'];
         $pros=$m->where($where)->order('sn,id')->select();
         $this->assign("data",$pros);
         
-        $scene=$m->find($id);
+        $scene=$m->find(I('id'));
         $this->assign("scene",$scene);
 
         $this -> assign("state", formselect($scene['state']));
@@ -61,16 +54,12 @@ class SceneController extends CommonController {
     
 
     public function copy(){
-        /* 接收参数*/
-        $sceneid=$_GET['sceneid'];
-        $proid=$_GET['proid'];
-        /* 实例化模型*/
         $m=M('tp_scene');
-        $data=$m->field("type,level,swho,swhen,testip,scene,state,flow")->find($sceneid);
-        $where=array("proid"=>$proid);
-        $data['sourceid']=$sceneid;
+        $data=$m->field("type,level,swho,swhen,testip,scene,state,flow")->find(I('sceneid'));
+        $where=array("proid"=>I('proid'));
+        $data['sourceid']=I('sceneid');
         $data['sn']=$m->where($where)->count()+1;
-        $data['proid']=$proid;
+        $data['proid']=I('proid');
         $data['state']='待确认';
         $data['moder']=$_SESSION['realname'];
         if(!$m->create($data)){
@@ -79,7 +68,7 @@ class SceneController extends CommonController {
         $lastId=$m->add($data);
 
         $m=D('tp_scenefunc');
-        $where=array("sceneid"=>$sceneid);
+        $where=array("sceneid"=>I('sceneid'));
         $arr=$m->where($where)
              ->field("sn,funcid,sysno,path,func,remarks,caseid,casestate,casemain,caseexpected,num1,num2,num3,
                  num4,num5,num6,num7,num8,num9,num10,num11,num12,num13,num14,num15,num16,num17,num18,num19,num20")

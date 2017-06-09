@@ -1,13 +1,13 @@
  <layout name="layout" />
+  <!-- content start -->
+ <div class="admin-content"><br>
  <div class="row">  
   <div class="col-md-9">
   	<div class="panel panel-info">
 	  <div class="panel-heading">项目规则（<{$_SESSION['proid']|getProNo=###}> ）
-	  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返回</a></div>	  		
+	  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div>	  		
 	  </div>
-	  <div class="panel-body">
-	   	<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
-		<div class="well well-sm"><{$arr.desc}></div>	  
+	  <div class="panel-body">	  
 	    <ul class="nav nav-pills" role="tablist">
 			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 			  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
@@ -60,16 +60,16 @@
 	           <switch name="pro.id">
 					<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 					<default /><li class="list-group-item ">
-			 	</switch> 
+			   </switch> 
 		            <a href="__URL__/index/proid/<{$pro.id}>">           	
 		            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
 		            	<span class="badge pull-right"><{$pro.id|countStage=###}></span>
 		            </a>
-	            </li>
+	           </li>
 	        </volist>
 	      </ul>	  
 		</div>	  	 
 	  </div>
 	</div>
 
-    
+ </div>   

@@ -2,26 +2,17 @@
 namespace TAdmin\Controller;
 class StagetesterController extends CommonController {
    public function index(){
-        /* 接收参数*/
-        $stageid=$_GET['stageid'];
-        $proid=$_SESSION["proid"];
-        $type=$_GET['type'];
-        /* 实例化模型*/
-        $m=D('tp_stage');
-        $where=array("proid"=>$proid);
-        $data=$m->where($where)->order("sn")->select();
+        $where=array("proid"=>$_SESSION["proid"]);
+        $data=M('tp_stage')->where($where)->order("sn")->select();
         $this->assign('data',$data);
         
-        /* 实例化模型*/
-        $m=D('tp_stagetester');
-        $where=array("stageid"=>$stageid,"type"=>$type);
-        $testers=$m->where($where)->select();
+        $where=array("stageid"=>I('stageid'),"type"=>I('type'));
+        $testers=M('tp_stagetester')->where($where)->select();
         $this->assign('testers',$testers);
         $this->assign('type',$where);
-        /* 实例化模型*/
-        $m=D('user');
-        $where['usergp']="PJD";
-        $users=$m->where($where)->order("usergp")->select();
+
+        $where=array('usergp'=>"PJD",'deleted'=>'0');
+        $users=M('user')->where($where)->order("usergp")->select();
         $this->assign('users',$users);
                        
         $this->display();
@@ -29,7 +20,6 @@ class StagetesterController extends CommonController {
 
 
     public function insert(){
-        /* 实例化模型*/
         $m=D('tp_stagetester');
         $where=array("stageid"=>$_GET['stageid'],"type"=>$_GET['type']);
         $_GET['sn']=$m->where($where)->count()+1;

@@ -2,10 +2,10 @@
 namespace TAdmin\Controller;
 class ElementController extends CommonController{
     public function index(){
-        $arr=M('tp_func')->find($_GET['funcid']);
+        $arr=M('tp_func')->find(I('funcid'));
         $this->assign('arr',$arr);
 
-        $where['funcid']=$_GET['funcid'];
+        $where['funcid']=I('funcid');
         $data=M('tp_element')->where($where)->order('sn,id')->select();
         $this->assign('data',$data);
  
@@ -21,36 +21,26 @@ class ElementController extends CommonController{
     }
 
     public function add(){
-        /* 接收参数*/
-        $funcid=$_GET['funcid'];
-        $this->assign('funcid',$funcid);
-        $p=$_GET['p'];
-        $this -> assign("p", $p);
-        /* 实例化模型*/
         $m=M('tp_element');
-        $where['funcid']=$funcid;
+        $where['funcid']=I('funcid');
+        $this->assign('funcid',I('funcid'));
+        $this -> assign("p", I('p'));
         $data=$m->where($where)->order('sn')->select();
         $this->assign('data',$data);
         
         $count=$m->where($where)->count()+1;
         $this->assign("c",$count);
-        $this -> assign("state", formselect());              
-        $this -> assign("typeset", formselect($element['typeset'],"typeset","typeset"));
+        $this->assign("state", formselect());              
+        $this->assign("typeset", formselect($element['typeset'],"typeset","typeset"));
         
         $this->display();
     }
    
-
-   
-
     public function mod(){
-        /* 接收参数*/
-        $p=$_GET['p'];
-        $this -> assign("p", $p);
-        /* 实例化模型*/
         $m=D('tp_element');
-        $element=$m->find( $_GET['id']);
+        $element=$m->find(I('id'));
         $this->assign('element',$element);
+        $this -> assign("p", I('p'));
         
         $where['funcid']=$element['funcid'];
         $data=$m->where($where)->order('sn')->select();
@@ -61,12 +51,6 @@ class ElementController extends CommonController{
 
         $this->display();
     }
-
-  
-
-
-
-
 
     public function setdstate(){
         $db=D('tp_case');
@@ -91,32 +75,22 @@ class ElementController extends CommonController{
     }
 
     public function library(){
-        /* 接收参数*/
-        $testgp=!empty($_GET['testgp']) ? $_GET['testgp'] :$_SESSION['testgp'];
-        $proid=$_GET['proid'];
-        $_SESSION['proid']=$proid;
-        /* 实例化模型*/
+        $_SESSION['proid']=I('proid');
         $m=D('project');
-        $where=array("testgp"=>$testgp);
+        $where=array("testgp"=>I('testgp',$_SESSION['testgp']));
         $pros=$m->where($where)->select();
-       //$this->assign('data',$data);
         $this->assign("pros",$pros);
         
-        $arr=$m->find($proid);
+        $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
         
-
-        $m=D("tp_prosys");
-        $where=array("zt_tp_prosys.project"=>$proid);
-        $elements=$m->join('inner JOIN zt_branch ON zt_branch.id = zt_tp_prosys.branch')
-        ->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
-        ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
-        ->join(' inner JOIN zt_tp_element ON zt_tp_func.id = zt_tp_element.funcid')
-        ->where($where)
-        ->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id,zt_tp_element.sn,zt_tp_element.id")
-        ->select();
+        $where=array("zt_tp_prosys.project"=>$_SESSION['proid']);
+        $elements=M("tp_prosys")->where($where)->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id,zt_tp_element.sn,zt_tp_element.id")
+            ->join('inner JOIN zt_branch ON zt_branch.id = zt_tp_prosys.branch')
+            ->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')
+            ->join(' inner JOIN zt_tp_func ON zt_module.id = zt_tp_func.pathid')
+            ->join(' inner JOIN zt_tp_element ON zt_tp_func.id = zt_tp_element.funcid')->select();
         $this->assign('elements',$elements);
-        $this->assign('w',$where);
 
         $this->display();
     }

@@ -2,7 +2,7 @@
 namespace TAdmin\Controller;
 class ExefuncController extends CommonController{    
     public function index(){
-        $map['zt_tp_exescene.id']=$_GET['id'];
+        $map['zt_tp_exescene.id']=I('id');
         $pro=M('tp_stage')->where($map)
             ->join('zt_tp_stagetester ON zt_tp_stage.id =zt_tp_stagetester.stageid')
             ->join('zt_tp_exescene ON zt_tp_exescene.stagetesterid =zt_tp_stagetester.id')
@@ -10,14 +10,14 @@ class ExefuncController extends CommonController{
         $_SESSION['proid']=$pro['proid'];
         
         $m=D('tp_exescene');
-        $arr=$m->find($_GET['id']);  
+        $arr=$m->find(I('id'));  
         $this->assign('arr',$arr);
     
         $where=array("stagetesterid"=>$arr['stagetesterid'],"type"=>$arr['type']);
         $data=$m->where($where)->order("sn")->select();
         $this->assign('data',$data);    
 
-        $where=array("exesceneid"=>$_GET['id']);
+        $where=array("exesceneid"=>I('id'));
         $exe=M('tp_exefunc')->where($where)->order('sn,id')->select();
         $this->assign('exe',$exe);   
     
@@ -26,22 +26,17 @@ class ExefuncController extends CommonController{
 
 
     public function test(){
-        /* 接收参数*/
-        $stagetesterid=$_GET['stagetesterid'];
-        $proid=$_GET['proid'];
-        $type=$_GET['type'];
-        $id=$_GET['id'];
-        /* 实例化模型*/
+
         $m=D('tp_exescene');
-        $where=array("stagetesterid"=>$stagetesterid,"type"=>$type);
+        $where=array("stagetesterid"=>I('stagetesterid'),"type"=>I('type'));
         $data=$m->where($where)->order("sn")->select();
         $this->assign('data',$data);
         /* 实例化模型*/
         $m=M('tp_exefunc');
-        $where=array("exesceneid"=>$id);
+        $where=array("exesceneid"=>I('id'));
         $exe=$m->where($where)->select();
         $this->assign('exe',$exe);
-        $where=array("stagetesterid"=>$stagetesterid,"exesceneid"=>$id,"proid"=>$proid,"type"=>$type);
+        $where=array("stagetesterid"=>I('stagetesterid'),"exesceneid"=>I('id'),"proid"=>I('proid'),"type"=>I('type'));
         $this->assign('w',$where);
     
         $this->display();
@@ -80,8 +75,7 @@ class ExefuncController extends CommonController{
                 }
             }else{
                 $this->error("失败！");
-            }
-            
+            }            
         }else {
             $this->error("必须填写失败描述！");
         }
@@ -89,21 +83,6 @@ class ExefuncController extends CommonController{
         
             
     }
-
-
-    public function order(){
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += D('tp_exescene')->save(array("id"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("重新排序成功!");
-        }else{
-            $this->error("重新排序失败...");
-        }
-    }
-
-
 
     public function supdate(){
         $_POST['moder']=$_SESSION['realname'];    

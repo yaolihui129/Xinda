@@ -1,18 +1,18 @@
 <layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"><br>
 <div class="row">  
   <div class="col-md-9">
   		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>		    	
 		    	<div class="btn-group pull-right">
 		    		<a data-toggle="modal" href="#tianjstage" class=" btn btn-info btn-xs" >添加</a>
-		    		<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">返回</a>
+		    		<a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a>
 		    	</div>    	    	
 		    </h3>
 		  </div>
   <div class="panel-body">
-   	<b> 产品：</b><{$arr.po|getRealname=###}><b> 项目：</b><{$arr.pm|getRealname=###}><b> 研发：</b><{$arr.rd|getRealname=###}><b> 测试：</b><{$arr.qd|getRealname=###}><br>
-	<div class="well well-sm"><{$arr.desc}></div>	  
     <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 		  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
@@ -37,21 +37,12 @@
 		   <volist name='stages' id='st' empty="没有数据">
 		     <li class="list-group-item">
 		        <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/><{$st.stage}>【<{$st.end}>】
-		        <a href="__URL__/modstate/id/<{$st.id}>/state/<{$st.state}>" class="badge"><{$st.state}></a>		                
-		        <div class="btn-group">		            
-		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success btn-xs">用例<{$st.id|countCTester=###}></a>
-		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info btn-xs">测试<{$st.id|countMTester=###}></a>		                    
-		            <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-		                <span class="caret"></span>
-		                <span class="sr-only">Toggle Dropdown</span>
-		            </button>
-		            <ul class="dropdown-menu" role="menu">
-			            <li><a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/A">自动化
-			            <span class="badge pull-right"><{$st.id|countATester=###}></span></a></li>		                    
-			            <li><a href="__URL__/mod/id/<{$st.id}>/proid/<{$st.proid}>">修改</a></li>
-			            <li class="divider"></li>
-			            <li><a href="__URL__/del/id/<{$st.id}>">删除</a></li>
-		            </ul>
+		        <a href="__URL__/modstate/id/<{$st.id}>/state/<{$st.state}>" class="label label-default"><{$st.state}></a>		                
+		        <div class="btn-group pull-right">		            
+		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success">用例任务<{$st.id|countCTester=###}></a>
+		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info">测试任务<{$st.id|countMTester=###}></a>		                    		            
+		            <a href="__URL__/mod/id/<{$st.id}>"  class="btn btn-info">修改</a>
+		            <a href="__URL__/realdel/id/<{$st.id}>/table/tp_stage"  class="btn btn-info">删除</a>
 		        </div>
 		      </li>
 		   </volist>
@@ -63,6 +54,7 @@
   
   </div>
   </div>
+  
   <div class="col-md-3 hidden-xs hidden-sm">
   	<div class="panel panel-info">
 	  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
@@ -80,7 +72,8 @@
         </volist>
       </ul>	  
 	</div> 	 
-  </div>  
+  </div>
+    
 </div> 
 
 
@@ -95,11 +88,10 @@
 	    <div class="modal-body">
 	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
 	      	<input type="hidden" name="proid" value="<{$arr.id}>" />
+	      	<input type="hidden" name="table" value="tp_stage" />
 				<div class="form-group">
 					<label for="short" class="col-sm-4 control-label">顺序:</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" name="sn" value="<{$c}>" placeholder="顺序">
-					</div>
+					<div class="col-sm-8"><input type="text" class="form-control" name="sn" value="<{$c}>"></div>
 				</div>
 				<div class="form-group">
 					<label  class="col-sm-4 control-label">里程碑:</label>
@@ -132,4 +124,6 @@
 		</div>
     </div>       
   </div>
+  
+</div>
 

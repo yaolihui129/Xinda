@@ -1,50 +1,51 @@
 <layout name="layout" />
-<div class="row"> 
-  <div class="col-md-9">
-  	<div class="panel panel-info">
-	  <div class="panel-heading">
-	  	<h3 class="panel-title">执行场景<{$stagetesterid}>
-	  		<a href="__APP__/<{$Think.config.PRODUCT}>/Program" class="btn btn-warning btn-xs pull-right">返回</a>
-	  	</h3>
-	  </div>	  
-	  		<ul class="list-group">
-	  			<volist name='exe' id='ex' empty="没有数据">
-  					<li class="list-group-item">
-  					<span>					
-  						<switch name="ex.results">
-							<case value="通过"><span class="label label-success "></case>
-							<case value="失败"><span class="label label-danger"></case>
-							<default /><span class="label label-warning">
-						</switch><{$ex.results}></span> 						
-  						<switch name="ex.sceneid">
-			          		<case value="0"><a href="__APP__/<{$Think.config.PRODUCT}>/Exefunc/index/id/<{$ex.id}>"><{$ex.pathid|getSPath=###}></a></case>			          
-			         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
-			      		</switch> 						
-  						<a href="__APP__/<{$Think.config.PRODUCT}>/Exefunc/index/id/<{$ex.id}>" class="btn btn-info btn-xs pull-right">执行
-  						<span class="badge"><{$ex.id|countExeFunc=###}></span></a>  						
-  					</span>
-  					</li>
-  				</volist>
-  			</ul>			 
-  	</div>
-  </div>
-  <div class="col-md-3 hidden-xs">
-  	<div class="panel panel-info">
-	  <div class="panel-heading"><h3 class="panel-title">里程碑</h3></div>
-	  <ul class="list-group">
-	    <volist name='data' id='vo' empty="没有数据"> 			
-           <switch name="vo.id">
-				<case value="$stagetesterid"> <li class="list-group-item list-group-item-warning"></case>					   					    
-				<default /><li class="list-group-item ">
-		 	</switch> 
-		            <a href="__URL__/index/stagetesterid/<{$vo.id}>/type/<{$type}>">
-		             <{$vo.id}>:<span class="badge pull-right"><{$vo.id|countExescene=###}></span>
-		             <{$vo.stage}>(<{$vo.code}>)</a></span>
-             	</li>
-        </volist>
-      </ol>	  
-	</div> 	 
-  </div>  
-</div> 
+<!-- content start -->
+<div class="admin-content"><br>
+	<div class="row"> 
+	  <div class="col-md-9">
+	  	<div class="panel panel-info">
+		  <div class="panel-heading">
+		  	<h3 class="panel-title">执行场景<{$stagetesterid}>
+		  		<div class="btn-group pull-right">
+		  			<a href="__APP__/<{$Think.config.PRODUCT}>" class="btn btn-warning btn-xs">返回</a>
+		  		</div>
+		  	</h3>
+		  </div>	  
+		  		<ul class="list-group">
+		  			<volist name='exe' id='ex' empty="没有数据">
+	  					<li class="list-group-item">	  										
+	  						<switch name="ex.results">
+								<case value="通过"><span class="label label-success "></case>
+								<case value="失败"><span class="label label-danger"></case>
+								<default /><span class="label label-warning">
+							</switch><{$ex.results}></span> 						
+	  						<switch name="ex.sceneid">
+				          		<case value="0"><a href="__APP__/<{$Think.config.PRODUCT}>/Exefunc/index/id/<{$ex.id}>"><{$ex.pathid|getSPath=###}></a></case>			          
+				         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
+				      		</switch> 						
+	  						<a href="__APP__/<{$Think.config.PRODUCT}>/Exefunc/index/id/<{$ex.id}>" class="btn btn-info btn-xs pull-right">执行<span class="badge"><{$ex.id|countExeFunc=###}></span></a>  							  					
+	  					</li>
+	  				</volist>
+	  			</ul>			 
+	  	</div>
+	  </div>
+	  <div class="col-md-3 hidden-xs">
+	  	<div class="panel panel-info">
+		  <div class="panel-heading"><h3 class="panel-title">里程碑</h3></div>
+		  <ul class="list-group">
+		    <volist name='data' id='vo' empty="没有数据"> 			
+	           <switch name="vo.id">
+					<case value="$stagetesterid"> <li class="list-group-item list-group-item-warning"></case>					   					    
+					<default /><li class="list-group-item ">
+			 	</switch> 
+			            <a href="__URL__/index/stagetesterid/<{$vo.id}>/type/<{$type}>">
+			             <{$vo.id}>:<span class="badge pull-right"><{$vo.id|countExescene=###}></span>
+			             <{$vo.stage}>(<{$vo.code}>)</a></span>
+	             	</li>
+	        </volist>
+	      </ol>	  
+		</div> 	 
+	  </div>  
+	</div> 
 
-            
+</div>            

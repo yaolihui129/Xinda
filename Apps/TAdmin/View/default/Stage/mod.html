@@ -1,14 +1,24 @@
 <layout name="layout" />
-<h3>里程碑-编辑</h3>
+ <!-- content start -->
+ <div class="admin-content">
+ 	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg">
+  				<{$arr.id|getPro=###}>	
+  			</strong>
+  			 /<a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$_SESSION['proid']}>">里程碑</a>
+  			 /<small>修改</small>
+  		</div>	
+  	</div>
 	<div class="row">
   		<div class="col-md-7">		
-  			<div class="panel-body addmod">
+  			<div class="panel-body">
   		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
   		     	  <input type="hidden" name="id" value="<{$stage.id}>" />
   		     	  <input type="hidden" name="proid" value="<{$stage.proid}>" />
   		     	    <div class="form-group">
   		     	      <div class="col-sm-2"></div>
-  		     	      <div class="col-sm-10"><{$stage.moder}>更新于:<{$stage.updatetime}></div>
+  		     	      <div class="col-sm-10"><{$stage.moder}> 更新于:<{$stage.utime}></div>
   		     	    </div>
 					  <div class="form-group">					   
 					    <label for="short" class="col-sm-2 control-label">顺序:</label>
@@ -26,26 +36,22 @@
 					    <label for="state" class="col-sm-2 control-label">结束:</label>
 					    <div class="col-sm-10"><input type="date" class="form-control" name="end" value="<{$stage.end}>"></div>
 					  </div>
-					  
-					  <button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
-                </form>
-                 <div class="btn-group pull-right">                       
-                        <a href="__URL__/index/proid/<{$stage.proid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
-                  </div>
-  		     	</div>	
-            
+					  <div class="form-group">
+					  	<label  class="col-sm-2 control-label"></label>
+					  	<div class="col-sm-10"><button type="submit" class="btn btn-info btn-block ">提 交</button></div>
+					  </div>					  					  
+                </form>                 
+  		    </div>	            
   		</div>
- 		 <div class="col-md-4 hidden-xs hidden-sm">
- 		 	<div class="panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title">里程碑</h3></div>            
-	            <ul class="list-group">
-		  			 <volist name='data' id='vo' empty="没有数据">
-		  			 	<li class="list-group-item" >
-		            		<a href="__URL__/mod/id/<{$vo.id}>"><{$vo.sn}>.<{$vo.stage}>【<{$vo.end}>】</a>
-		            		<span class="badge"><{$vo.state}></span>
-						</li>
-		        	</volist>
-	        	</ul>
-        	</div>                         	
+ 		 <div class="col-md-4 hidden-xs hidden-sm"> 
+ 		 <br>  <br>  
+	        <ul class="list-group">
+		  		<volist name='data' id='vo' empty="没有数据">
+		  			<li class="list-group-item" >
+		            	<a href="__URL__/mod/id/<{$vo.id}>"><{$vo.sn}>.<{$vo.stage}>【<{$vo.end}>】</a><span class="badge"><{$vo.state}></span>
+					</li>
+		        </volist>
+	        </ul>        	                     	
   		</div>
 	</div>           
+</div>
