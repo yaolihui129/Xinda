@@ -22,7 +22,8 @@
  <h3>用例-编辑</h3>	
   	<div class="panel-body">
   		<form action="__APP__/<{$Think.config.PRODUCT}>/Case/update" method="post" class="form-horizontal" role="form" >
-  		<input type="hidden" name="id" value="<{$case.id}>" />  		     	  		
+  		<input type="hidden" name="id" value="<{$case.id}>" />
+  		<input type="hidden" name="table" value="tp_case" />  		     	  		
 		<div class="form-group">					   
 			<label for="short" class="col-sm-2 control-label">级别:</label>
 			<div class="col-sm-10"><input type="text" class="form-control" name="level" value="<{$case.level}>" placeholder="级别"></div>

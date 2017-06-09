@@ -70,13 +70,7 @@ class CommonController extends Controller {
             }else{
                 $this->error("修改失败！");
             } 
-        }
-        $_POST['moder']=$_SESSION['realname'];
-        if (D(I('table'))->save($_POST)){
-            $this->success("修改成功！");
-        }else{
-            $this->error("修改失败！");
-        }
+        }        
     }
     //逻辑删除
     public function del(){

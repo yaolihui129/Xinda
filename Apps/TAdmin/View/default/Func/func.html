@@ -23,7 +23,9 @@
 				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/index/proid/<{$arr.id}>">项目需求</a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
+			  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
 			</ul>
 			<table class="table table-striped table-bordered table-hover table-condensed ">
 		         <volist name='data' id='st' empty="没有数据">

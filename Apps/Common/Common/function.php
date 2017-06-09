@@ -764,6 +764,11 @@
             ->count();
         return $count;
     }
+    function countBug($proid){
+        $where=array("project"=>$proid,"deleted"=>'0');
+        $count=M("bug")->where($where)->count();
+        return $count;
+    }
     
     //根据$proid获取用例数
     function countCase($proid){
