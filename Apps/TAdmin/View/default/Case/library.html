@@ -1,81 +1,61 @@
 <layout name="layout" />
  <!-- content start -->
- <div class="admin-content"><br>
-<div class="row"> 
-  <div class="col-md-9">
-  		<div class="panel panel-info">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">
-		    	<{$arr.id|getPro=###}>
-		    	<div class="btn-group pull-right">
-			    	<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">
-			    	<span class="glyphicon glyphicon-arrow-left">返回</span></a>
-			    </div>
-		    </h3>
-		  </div>
-		  <div class="panel-body table-responsive">		  
-		    <ul class="nav nav-pills" role="tablist">
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
-				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
-				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
-				  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
-				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
-				  <span class="badge"><{$arr.id||countRange=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-				  <li role="presentation" class="active"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
-				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
-			  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
-			</ul>
-			<table class="table table-striped table-bordered table-hover table-condensed ">
-		          <tr >
-		          		<th width=3% align="center" bgcolor="#ccc">ID</th>
-		                <th width=27% align="left" bgcolor="#ccc">功能</th>
-		                <th width=10% align="left"  bgcolor="#ccc">意图 </th>               
-		                <th width=10% align="left"  bgcolor="#ccc">预期</th>				
-		                <th width=5% align="center" bgcolor="#ccc">操作 </th>         	
-		         </tr>
-		         <volist name='cases' id='case' empty="没有数据">
-				 <tr>
-		            <td align="center" ><{$case.id}></td>
-		            <td align="left" ><{$case.branch|getBranchName=###}>-<{$case.parent|getModuleName=###}>-<{$case.name}>-<{$case.func}></td>
-		            <form action="__URL__/update" method="post" >
-		               <input type="hidden" name="id" value="<{$case.id}>" />
-		               <input type="hidden" name="table" value="tp_case" />
-		            <td align="left" ><textarea rows="2" cols="30" name="main" ><{$case.main}></textarea><{$case.state}></td>            
-
-		            <td align="left" ><textarea rows="2" cols="30" name="expected"><{$case.expected}></textarea></td>
-					<td align="center" ><button>修改</button></form></td>                   
-		        </tr>
-		       </volist>		            	
-		     </table>
-		   </div>
-		</div>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm">
-  	<div class="panel panel-info">
-	  <div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
-	  <ul class="list-group">
-	    <volist name='pros' id='pro' empty="没有数据">
-	    	<switch name="pro.id">
-				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
-				<default /><li class="list-group-item ">
-			</switch>    			
-            <a href="__URL__/library/proid/<{$pro.id}>">
-            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>            	          	
-            </a>
-            	<span class="badge"><{$pro.id|countCase=###}></span>
-            </li>
-        </volist>
-      </ul>	  
-	</div>  	 
-  </div>
-  
-</div>
+ <div class="admin-content">
+	<div class="row"> 
+	  <div class="col-md-12">
+	  		<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><{$arr.id|getPro=###}>
+			    	<div class="btn-group pull-right">
+				    	<a href="__APP__/<{$Think.config.PRODUCT}>/Program"  class="btn btn-warning btn-xs">
+				    	<span class="glyphicon glyphicon-arrow-left">返回</span></a>
+				    </div>
+			    </h3>
+			  </div>
+			  <div class="panel-body table-responsive">		  
+			    <ul class="nav nav-pills" role="tablist">
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
+					  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
+					  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
+					  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
+					  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
+					  <span class="badge"><{$arr.id||countRange=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+					  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+					  <li role="presentation" class="active"><a href="__APP__/TAdmin/Case/library/proid/<{$arr.id}>">用例
+					  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
+				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
+				</ul>
+				<table class="table table-striped table-bordered table-hover table-condensed ">
+			          <tr >
+			          		<th width=3% align="center" bgcolor="#ccc">ID</th>
+			                <th width=27% align="left" bgcolor="#ccc">功能</th>
+			                <th width=10% align="left"  bgcolor="#ccc">意图 </th>               
+			                <th width=10% align="left"  bgcolor="#ccc">预期</th>				
+			                <th width=5% align="center" bgcolor="#ccc">操作 </th>         	
+			         </tr>
+			         <volist name='cases' id='case' empty="没有数据">
+					 <tr>
+			            <td align="center" ><{$case.id}></td>
+			            <td align="left" ><{$case.branch|getBranchName=###}>-<{$case.parent|getModuleName=###}>-<{$case.name}>-<{$case.func}></td>
+			            <form action="__URL__/update" method="post" >
+			               <input type="hidden" name="id" value="<{$case.id}>" />
+			               <input type="hidden" name="table" value="tp_case" />
+			            <td align="left" ><textarea rows="2" cols="30" name="main" ><{$case.main}></textarea><{$case.state}></td>            
+	
+			            <td align="left" ><textarea rows="2" cols="30" name="expected"><{$case.expected}></textarea></td>
+						<td align="center" ><button>修改</button></form></td>                   
+			        </tr>
+			       </volist>		            	
+			     </table>
+			   </div>
+			</div>
+	  </div>	   
+	</div>
 </div> 

@@ -1,6 +1,6 @@
  <layout name="layout" />
   <!-- content start -->
- <div class="admin-content"><br> 
+ <div class="admin-content">
  <div class="row">
   <div class="col-md-3 hidden-xs hidden-sm">
     <div class="panel panel-info">
@@ -18,7 +18,7 @@
      </ul>   
   	</div>     
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
   	<div class="panel panel-info">
 	  <div class="panel-heading">人员安排(<{$_SESSION["proid"]|getProNo=###}><{$type.type}>) -
 	  	<{$type.stageid|getStage=###}>
@@ -42,10 +42,8 @@
    	<div class="panel panel-default">	  
 	  <ul class="list-group">
 	      <volist name='users' id='user' empty="没有数据">
-	        <li class="list-group-item">
-	        	<span class="badge"><{$user.usergp}></span><{$user.realname}>	        	
-	        	<a href="__URL__/insert/tester/<{$user.realname}>/stageid/<{$type.stageid}>/type/<{$type.type}>"  
-	        	type="button" class="btn btn-info btn-xs pull-right">安排</a>	        
+	        <li class="list-group-item">	        	
+	        	<a href="__URL__/insert/tester/<{$user.realname}>/stageid/<{$type.stageid}>/type/<{$type.type}>"><{$user.realname}></a>	        
 	        </li>
 	      </volist>
 	  </ul>

@@ -1,10 +1,52 @@
 <layout name="layout" />
  <!-- content start -->
  <div class="admin-content">
-	<div class="row">
-		<div class="col-md-3 hidden-xs hidden-sm">
- 		 	<div class="panel panel-primary">
-	            <div class="panel-heading"><h3 class="panel-title">路径</h3></div>            
+ 	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg"><a href="__URL__/index/pathid/<{$func.pathid}>">功能点</a></strong> / 
+  			<small>编辑</small>
+  		</div>	
+  	</div> 
+	<div class="row">		
+  		<div class="col-md-7">	
+  			<div class="panel-body">
+  		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
+  		     	  <input type="hidden" name="id" value="<{$func.id}>" /> 
+  		     	  <input type="hidden" name="table" value="tp_func" />  		     	  
+  		     	    <div class="form-group">
+  		     	      <div class="col-sm-2 control-label"></div>
+  		     	      <div class="col-sm-10"><{$func.moder}>更新于:<{$func.utime}></div>
+  		     	    </div>
+					  <div class="form-group">					   
+					    <label class="col-sm-2 control-label">顺序:</label>
+					    <div class="col-sm-10"><input type="text" class="form-control" name="sn" value="<{$func.sn}>" placeholder="顺序"></div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label">功能:</label>
+					    <div class="col-sm-10"><input type="text" class="form-control" name="func" value="<{$func.func}>" placeholder="功能点"></div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label">状态:</label>
+					    <div class="col-sm-10"><{$state}></div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label">项目:</label>
+					    <div class="col-sm-10"><{$fproid}></div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label"></label>
+					    <div class="col-sm-10"></div>
+					  </div>
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label"></label>
+					    <div class="col-sm-10"><button type="submit" class="btn btn-info btn-block ">提 交</button></div>
+					  </div>					  
+					  
+                </form>
+                
+  		     	</div>	           
+  		</div>	
+  		<div class="col-md-4 hidden-xs hidden-sm">               
 	            <ul class="list-group">
 		  			 <volist name='data' id='vo' empty="没有数据">
 			  			 <li class="list-group-item" >
@@ -13,39 +55,5 @@
 		        	</volist>
 	        	</ul>
         	</div>                            	
-  		</div>
-  		<div class="col-md-7">	
-  		<h3>功能点-编辑</h3>	
-  			<div class="panel-body">
-  		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
-  		     	  <input type="hidden" name="id" value="<{$func.id}>" /> 
-  		     	  <input type="hidden" name="table" value="tp_func" />  		     	  
-  		     	    <div class="form-group">
-  		     	      <div class="col-sm-2"></div>
-  		     	      <div class="col-sm-10"><{$func.moder}>更新于:<{$func.updatetime}></div>
-  		     	    </div>
-					  <div class="form-group">					   
-					    <label for="short" class="col-sm-2 control-label">顺序:</label>
-					    <div class="col-sm-10"><input type="text" class="form-control" name="sn" value="<{$func.sn}>" placeholder="顺序"></div>
-					  </div>
-					  <div class="form-group">
-					    <label for="product" class="col-sm-2 control-label">功能:</label>
-					    <div class="col-sm-10"><input type="text" class="form-control" name="func" value="<{$func.func}>" placeholder="功能点"></div>
-					  </div>
-					  <div class="form-group">
-					    <label for="state" class="col-sm-2 control-label">状态:</label>
-					    <div class="col-sm-10"><{$state}></div>
-					  </div>
-					  <div class="form-group">
-					    <label for="state" class="col-sm-2 control-label">项目:</label>
-					    <div class="col-sm-10"><{$fproid}></div>
-					  </div>					  
-					  <button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
-                </form>
-                 <div class="btn-group pull-right">                       
-                        <a href="__URL__/index/pathid/<{$func.pathid}>"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
-                  </div>
-  		     	</div>	           
-  		</div>		 
+  		</div>	 
 	</div>           
-</div>

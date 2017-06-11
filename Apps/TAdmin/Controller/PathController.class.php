@@ -24,7 +24,7 @@ class PathController extends CommonController {
         $this->assign("path",$path);
         $this -> assign("state", formselect($path['state'],"state"));      
               
-        $where=array("branch"=>$path['branch']);
+        $where=array("branch"=>$path['branch'],'state'=>'正常');
         $data= $m->where($where)->order("sn,id")->select();
         $this->assign("data",$data);
       

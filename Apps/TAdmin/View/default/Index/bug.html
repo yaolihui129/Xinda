@@ -1,10 +1,10 @@
 <layout name="layout" />
   <!-- content start -->
- <div class="admin-content"><br>
+ <div class="admin-content">
  <div class="row">  
-  <div class="col-md-9">
+  <div class="col-md-12">
   	<div class="panel panel-info">
-	  <div class="panel-heading">项目规则（<{$_SESSION['proid']|getProNo=###}> ）
+	  <div class="panel-heading">禅道BUG（<{$_SESSION['proid']|getProNo=###}> ）
 	  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div>	  		
 	  </div>
 	  <div class="panel-body">	  
@@ -54,24 +54,7 @@
 		</div>  	    
 	</div>
 	</div>
-	<div class="col-md-3 hidden-xs hidden-sm">
-	  	<div class="panel panel-info">
-		  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
-		  <ul class="list-group">
-		    <volist name='pros' id='pro' empty="没有数据"> 			
-	           <switch name="pro.id">
-					<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
-					<default /><li class="list-group-item ">
-			   </switch> 
-		            <a href="__URL__/bug/proid/<{$pro.id}>">           	
-		            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
-		            	<span class="badge pull-right"><{$pro.id|countStage=###}></span>
-		            </a>
-	           </li>
-	        </volist>
-	      </ul>	  
-		</div>	  	 
-	  </div>
+	
 	</div>
 
  </div>  

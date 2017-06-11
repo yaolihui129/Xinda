@@ -133,7 +133,8 @@ class ExesceneController extends CommonController{
     
         $where=array("proid"=>$_SESSION['proid'],"type"=>$arr['type']);
         $scene=M('tp_scene')->where($where)->order("sn")->select(); 
-        $this->assign('scene',$scene);   
+        $this->assign('scene',$scene);  
+//         dump($scene);
     
         $this->display();
     

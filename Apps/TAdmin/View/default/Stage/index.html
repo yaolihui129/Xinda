@@ -1,6 +1,6 @@
 <layout name="layout" />
  <!-- content start -->
- <div class="admin-content"><br>
+ <div class="admin-content">
 <div class="row">  
   <div class="col-md-9">
   		<div class="panel panel-info">
@@ -57,9 +57,7 @@
   </div>
   </div>
   
-  <div class="col-md-3 hidden-xs hidden-sm">
-  	<div class="panel panel-info">
-	  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
+  <div class="col-md-3 hidden-xs hidden-sm">	  	
 	  <ul class="list-group">
 	    <volist name='pros' id='pro' empty="没有数据"> 			
            <switch name="pro.id">
@@ -72,10 +70,8 @@
 	            </a>
           </li>  
         </volist>
-      </ul>	  
-	</div> 	 
-  </div>
-    
+      </ul>	  	
+  </div>    
 </div> 
 
 

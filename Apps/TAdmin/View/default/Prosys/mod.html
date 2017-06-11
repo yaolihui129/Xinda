@@ -1,44 +1,55 @@
 <layout name="layout" />
  <!-- content start -->
  <div class="admin-content">
-<div class="row">
-  	<div class="col-md-7"><h3>系统-编辑</h3>	
-  		<div class="panel-body">
-  		<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
-  		<input type="hidden" name="id" value="<{$sys.id}>" />
-  		<input type="hidden" name="table" value="branch" />
-			<div class="form-group">					   
-				<label for="short" class="col-sm-2 control-label">代码:</label>
-				<div class="col-sm-10"><input type="text" class="form-control" name="sysno" value="<{$sys.sysno}>" placeholder="代码"></div>
-			</div>
-			<div class="form-group">
-				<label for="product" class="col-sm-2 control-label">系统:</label>
-				<div class="col-sm-10"><input type="text" class="form-control" name="name" value="<{$sys.name}>" placeholder="系统" readonly></div>
-			</div>
-			<div class="form-group">					   
-				<label for="short" class="col-sm-2 control-label">测试环境:</label>
-				<div class="col-sm-10"><input type="text" class="form-control" name="testip" value="<{$sys.testip}>" placeholder="测试环境地址"></div>
-			</div>
-			<div class="form-group">					   
-				<label for="short" class="col-sm-2 control-label">仿真环境:</label>
-				<div class="col-sm-10"><input type="text" class="form-control" name="sedan" value="<{$sys.sedan}>" placeholder="仿真环境地址"></div>
-			</div>					  
-			<button type="submit" class="btn btn-info btn-lg pull-left" >提 交</button>
-         </form>
-            <a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$_SESSION['proid']}>" class="btn btn-warning btn-lg pull-right " >返 回</a>                                        
-  		</div>	           
-  	</div>
- 	<div class="col-md-5 hidden-xs hidden-sm">
- 		<div class="panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title">系统</h3></div>            
-            <ul class="list-group">
-	  			<volist name='data' id='vo' empty="没有数据">
-	  			 	<li class="list-group-item" >
-	            		<a href="__URL__/mod/id/<{$vo.id}>/proid/<{$w.proid}>"><{$vo.sysno}>.<{$vo.name}></a>
-					</li>
-	        	</volist>
-          	</ul>
-        </div>                          	
-  	</div>
-</div> 
+ 	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$_SESSION['proid']}>">系统</a></strong> / 
+  			<small>编辑</small>
+  		</div>	
+  	</div> 
+	<div class="row">
+	  	<div class="col-md-7">
+	  		<div class="panel-body">
+	  		<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
+	  		<input type="hidden" name="id" value="<{$sys.id}>" />
+	  		<input type="hidden" name="table" value="branch" />
+				<div class="form-group">					   
+					<label  class="col-sm-2 control-label">代码:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="sysno" value="<{$sys.sysno}>" placeholder="代码"></div>
+				</div>
+				<div class="form-group">
+					<label  class="col-sm-2 control-label">系统:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="name" value="<{$sys.name}>" placeholder="系统" readonly></div>
+				</div>
+				<div class="form-group">					   
+					<label  class="col-sm-2 control-label">测试环境:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="testip" value="<{$sys.testip}>" placeholder="测试环境地址"></div>
+				</div>
+				<div class="form-group">					   
+					<label  class="col-sm-2 control-label">仿真环境:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="sedan" value="<{$sys.sedan}>" placeholder="仿真环境地址"></div>
+				</div>	
+				<div class="form-group">					   
+					<label  class="col-sm-2 control-label">生产环境:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="real" value="<{$sys.real}>" placeholder="生产环境地址"></div>
+				</div>
+				<div class="form-group">					   
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10"></div>
+				</div>	
+				<div class="form-group">					   
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10"><button type="submit" class="btn btn-info btn-block" >提 交</button></div>
+				</div>				  				
+	         </form>                                                   
+	  		</div>	           
+	  	</div>
+	 	<div class="col-md-5 hidden-xs hidden-sm">		               
+	        <ul class="list-group">
+		  		<volist name='data' id='vo' empty="没有数据">
+		  			<li class="list-group-item" ><a href="__URL__/mod/id/<{$vo.id}>/proid/<{$w.proid}>"><{$vo.sysno}>.<{$vo.name}></a></li>
+		        </volist>
+	        </ul>                           	
+	  	</div>
+	</div> 
 </div>           

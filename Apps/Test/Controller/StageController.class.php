@@ -2,16 +2,11 @@
 namespace Test\Controller;
 class StageController extends WebInfoController {
     public function index(){
-        /* 接收参数*/
-        $proid=$_GET['proid'];
-        /* 实例化模型*/
-        $m=D('project');
-        $arr=$m->field("id,name,code,begin,end,testgp,status,pri,deleted,desc,po,pm,qd,rd,order")->find($proid);
+        $arr=D('project')->find(I('proid'));
         $this->assign('arr',$arr);        
-        
-        $m = D("tp_stage");
-        $where=array("proid"=>"$proid");
-        $data=$m->where($where)->order("sn,id")->select();
+
+        $where=array("proid"=>I('proid'));
+        $data=D("tp_stage")->where($where)->order("sn,id")->select();
         $this->assign('data',$data);
 
         $this->display();

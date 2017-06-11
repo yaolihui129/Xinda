@@ -1,39 +1,18 @@
 <?php
 namespace Test\Controller;
 class RulesController extends WebInfoController {
-
-  public function index(){
-     /* 接收参数*/
-     $funcid=$_GET['funcid'];
-     /* 实例化模型*/
-     $m=D('tp_func');
-     $arr=$m->find($funcid);
-     $this->assign('arr',$arr);
-
-     $where['pathid']=$arr['pathid'];
-     $data=$m->where($where)->order('sn,id')->select();
-     $this->assign('data',$data);
-        
-     $m=D('tp_rules');
-     $where['funcid']=$funcid;
-     $rules=$m->where($where)->select();
-     $this->assign('rules',$rules);
-
-    $this->display();
-  }
   public function prorules(){
       /* 接收参数*/
       $proid=$_GET['proid'];
-      $_SESSION['proid']=$proid;
+      $_SESSION['proid']=I('proid');
       /* 实例化模型*/
       $m=D('project');
-      $arr=$m->field("id,name,code,begin,end,testgp,status,pri,deleted,desc,po,pm,qd,rd,order")->find($proid);
+      $arr=$m->find($_SESSION['proid']);
       $this->assign('arr',$arr);
       
        //获取模块
-        $m=D('module');
-        $where=array("zt_projectstory.project"=>$_GET['proid'], 'zt_story.deleted'=>'0');
-        $data=$m->where($where)->join('zt_story ON zt_story.module =zt_module.id')
+        $where=array("zt_projectstory.project"=>$_SESSION['proid'], 'zt_story.deleted'=>'0');
+        $data=D('module')->where($where)->join('zt_story ON zt_story.module =zt_module.id')
                 ->join('zt_projectstory ON zt_projectstory.story =zt_story.id')
                 ->field('
                         zt_story.id as id,

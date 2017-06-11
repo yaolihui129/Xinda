@@ -2,14 +2,10 @@
 namespace Test\Controller;
 class TaskController extends WebInfoController {
     public function index(){
-
-        $m=D('task');
         $where['deleted']='0';
         $where['assignedTo'] = array('neq','closed');
         $where['status']=array('neq','cancel');
-        $data=$m->where($where)
-        ->order("assignedTo,finishedBy,project,type,story")
-        ->select();
+        $data=M('task')->where($where)->order("assignedTo,finishedBy,project,type,story")->select();
         $this->assign('data',$data);
         
         $this->display();

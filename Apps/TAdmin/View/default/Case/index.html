@@ -1,77 +1,74 @@
 <layout name="layout" />
  <!-- content start -->
- <div class="admin-content"><br>
-<div class="row"> 
-  <div class="col-md-8">   
-  	<div class="panel panel-info">
-	  <div class="panel-heading">
-	  	<b>用例（<{$_SESSION['proid']|getProNo=###}>）:</b><{$arr.id|getSPFunc=###}>(<{$arr.sn}>)
-	  	<div class="btn-group pull-right">
-				<a  data-toggle="modal" href="#tianjcase" type="button" class="btn btn-info btn-xs ">
-				<span class="glyphicon glyphicon-plus"></span>添加</a>
-				<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-					<span class="caret"></span>
-					<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li><a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$arr.id}>" >模板</a></li>						    
-				</ul>
+ <div class="admin-content">
+	<div class="row"> 
+	  <div class="col-md-8">   
+	  	<div class="panel panel-info">
+		  <div class="panel-heading">
+		  	<b>用例（<{$_SESSION['proid']|getProNo=###}>）</b><{$arr.id|getSPFunc=###}>(<{$arr.sn}>)
+		  	<div class="btn-group pull-right">
+					<a  data-toggle="modal" href="#tianjcase" type="button" class="btn btn-info btn-xs ">
+					<span class="glyphicon glyphicon-plus">添加</span></a>
+					<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+						<span class="sr-only">Toggle Dropdown</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$arr.id}>" >模板</a></li>						    
+					</ul>
 			</div>
+		  </div>
+		  <ul class="list-group">
+			    <form action="__URL__/order" method="post" >
+			    <input type="hidden" name="table" value="tp_case" />
+			        <volist name='cases' id='case' empty="没有用例">
+			            <li class="list-group-item">
+			            <span>
+			                <input type="text" name="sn[<{$case.id}>]" value="<{$case.sn}>"  class="input40"/>
+			                <b>意图：</b><{$case.main}><span class="badge"><{$case.fproid|getProNo=###}></span><br>
+			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <b>预期：</b><{$case.expected}>	               
+			                <span class="badge"><{$case.state}>-<{$case.level}></span>
+			                <div class="btn-group pull-right">
+				               <a href="__URL__/mod/id/<{$case.id}>/p/Case" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"> 修改</span></a>
+				               <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+					               <span class="caret"></span>
+					               <span class="sr-only">Toggle Dropdown</span>
+				               </button>
+				               <ul class="dropdown-menu" role="menu">		                  		                  
+				                  <li><a href="__URL__/realdel/id/<{$case.id}>/table/tp_case"  onclick="return confirm('你确定要删除用例：<{$case.main}>？')"><span class="glyphicon glyphicon-remove"> 删除</span></a></li>
+				               </ul>
+				            </div>
+			            </span>
+			            </li>
+			        </volist>
+			        <input type="submit" name="do_submit" value="批量排序" class="btn">
+			    </form>
+			 </ul>			  		 
+		 </div>
 	  </div>
-
-	  	<ul class="list-group">
-		    <form action="__URL__/order" method="post" >
-		    <input type="hidden" name="table" value="tp_case" />
-		        <volist name='cases' id='case' empty="没有用例">
-		            <li class="list-group-item">
-		            <span>
-		                <input type="text" name="sn[<{$case.id}>]" value="<{$case.sn}>"  class="input40"/>
-		                <b>意图：</b><{$case.main}><span class="badge"><{$case.fproid|getProNo=###}></span><br>
-		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                <b>预期：</b><{$case.expected}>	               
-		                <span class="badge"><{$case.state}>-<{$case.level}></span>
-		                <div class="btn-group pull-right">
-			               <a href="__URL__/mod/id/<{$case.id}>/p/Case" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"> 修改</span></a>
-			               <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-				               <span class="caret"></span>
-				               <span class="sr-only">Toggle Dropdown</span>
-			               </button>
-			               <ul class="dropdown-menu" role="menu">		                  		                  
-			                  <li><a href="__URL__/realdel/id/<{$case.id}>/table/tp_case"  onclick="return confirm('你确定要删除用例：<{$case.main}>？')"><span class="glyphicon glyphicon-remove"> 删除</span></a></li>
-			               </ul>
-			            </div>
-		            </span>
-		            </li>
-		        </volist>
-		        <input type="submit" name="do_submit" value="批量排序" class="btn">
-		    </form>
-		  </ul>
-		  
+	  
 	 
-	 </div>
-  </div>
-  
- 
-  <div class="col-md-4 hidden-xs">
-  	<div class="panel panel-default">
-	  <div class="panel-heading">
-	    <h3 class="panel-title"><{$arr.pathid|getSPath=###}></h3>
+	  <div class="col-md-4 hidden-xs">
+	  	<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.pathid|getSPath=###}></h3>
+		  </div>
+		  <ul class="list-group">
+		    <volist name='data' id='vo' empty="没有数据"> 			
+	           <switch name="vo.id">
+					<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+					<default /><li class="list-group-item ">
+			 </switch> 
+	            <a href="__URL__/index/funcid/<{$vo.id}>">
+	            	<{$vo.sn}>.<{$vo.func}><{$vo.fproid|getProNo=###}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
+	        </volist>
+	      </ul>	  
+		</div>
+	  	 
 	  </div>
-	  <ul class="list-group">
-	    <volist name='data' id='vo' empty="没有数据"> 			
-           <switch name="vo.id">
-				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
-				<default /><li class="list-group-item ">
-		 </switch> 
-            <a href="__URL__/index/funcid/<{$vo.id}>">
-            	<{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】<{$vo.fproid|getProNo=###}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
-        </volist>
-      </ul>	  
-	</div>
-  	 
-  </div>
-  
-</div> 
+	  
+	</div> 
 </div>
 
 <!-- 添加-模态框 -->

@@ -27,7 +27,7 @@ class IndexController extends WebInfoController {
         $m = D("tp_stage");
         $where=array("proid"=>$_GET['proid']);
         $stage=$m->where($where)->order("sn,id")->select();
-        $this->assign('stages',$stages);
+        $this->assign('stages',$stage);
         dump($where);
         
         $this->display();

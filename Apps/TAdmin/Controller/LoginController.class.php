@@ -9,7 +9,7 @@ class LoginController extends Controller {
 
     public function login(){
         $where=array('account'=>$_POST['username'],'password'=>md5($_POST['password']));
-        $user = D('user')->where($where)->field("id,dept,realname,usergp")->find();
+        $user = D('user')->where($where)->field("id,dept,account,realname,usergp")->find();
         if ($user){
             session('[start]');
             $_SESSION=$user;

@@ -10,7 +10,15 @@ class CommonController extends WebInfoController{
         
     }
 
-
+    public function del(){
+        $count =M(I('table'))->delete(I('id'));
+        if ($count>0) {
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
+    }
+    
 
 
 

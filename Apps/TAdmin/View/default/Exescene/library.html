@@ -1,35 +1,63 @@
  <layout name="layout" />
-  <!-- content start -->
+ <!-- content start -->
  <div class="admin-content">
- <h2>待测<{$arr.type}>场景库 
-	 <span class="pull-right"> 当前项目：<{$_SESSION['proid']|getProNo=###}>
-	 	<a href="__URL__/queue/stagetesterid/<{$arr.id}>"> 返回</a>
-	 </span>
- </h2>
- <div class="row">
+ 	<div class="row">
 	  <div class="col-md-6">
-	  		<table border="1" width="95%" align="left">
-               <tr><th bgcolor="#ccc">列队场景</th></tr>
-               <volist name='exe' id='ex'>
-               <tr>                            
-                  <td ><a href="#" ><{$ex.id}>：<{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}></a></td>                                                                                        
-                </tr>
-               </volist>
-             </table>	  
+	  	<div class="panel panel-success">
+	  		<div class="panel-heading"> 列队场景
+		  		<div class="btn-group pull-right"><a href="__URL__/queue/stagetesterid/<{$arr.id}>" class="btn btn-warning btn-xs"> 返回</a></div>
+	  		</div>
+	  		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">           
+	           <volist name='exe' id='ex'  empty="没有数据">
+	              <div class="panel panel-default">
+	        		<div class="panel-heading" role="tab" id="heading<{$ex.id}>">
+	          			<h4 class="panel-title">
+	             		 	<a data-toggle="collapse" data-parent="#accordion" href="#<{$ex.id}>" aria-expanded="true" aria-controls="<{$ex.id}>"><{$ex.id}>
+		                  		<switch name="ex.sceneid">
+					          		<case value="0"><{$ex.pathid|getSPath=###}> <span class="badge"><{$ex.pathid}></span></case>			          
+					         		 <default /><{$ex.swho}>【<{$ex.swhen}>】<{$ex.scene}>
+					      		</switch>               		                 		                  		
+	                  		</a>                  		               
+	           			 </h4>
+	        		</div>
+			        <div id="<{$ex.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ex.id}>">
+			          <ul class="list-group"><{$ex.id|getFunces=###}></ul>		           
+			        </div>
+	         	 </div>
+	           </volist>
+	      	</div>
+	  	</div>
 	  </div>
 	  <div class="col-md-6">
-	  	<table border="1" width="100%" align="left">
-             <tr><th bgcolor="#ccc">待测场景</th></tr>
-             <volist name='scene' id='se'>
-             <tr>                           
-                 <td ><a href="#" ><{$se.id}>:<{$se.swho}>【<{$se.swhen}>】  <{$se.scene}></a>
-                      <a href="__APP__/TAdmin/Exescene/insert/sceneid/<{$se.id}>/stagetesterid/<{$arr.id}>/type/<{$arr.type}>" 
-                      type="button" class="btn btn-info btn-xs pull-right" >加入<span class="badge"><{$se.id|countSFunc=###}></span></a>
-                 </td>                                          
-             </tr>
-             </volist>
-        </table>  
+	  	<div class="panel panel-info">
+	  		<div class="panel-heading">待测<{$arr.type}>场景库（<{$_SESSION['proid']|getProNo=###}>）</div>
+	  		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		        <volist name='scene' id='st' empty="没有数据">		        	
+		        			<div class="panel panel-default">
+					        	<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+					          		<h4 class="panel-title">
+					             		<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">                  		
+						                  	<span class="label label-default"><{$st.swho}></span>
+							                <span class="label label-info"><{$st.swhen}></span>
+							                <span class="label label-info"><{$st.scene}></span>(<{$st.id}>)                  		
+					                  	</a>
+					                  	<div class="btn-group pull-right">
+					                  		<a href="__APP__/TAdmin/Exescene/insert/sceneid/<{$se.id}>/stagetesterid/<{$arr.id}>/type/<{$arr.type}>" class="btn btn-info btn-xs pull-right">加入
+					                    		<span class="badge"><{$st.id|countSFunc=###}></span>
+					                    	</a>
+					                  	</div>			                  		               
+					           		</h4>
+					        	 </div>
+							     <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">
+							       <ul class="list-group"><{$st.id}></ul>  
+							     </div>
+					      	</div>		        		
+		      	</volist>
+	      </div>
+	    </div> 
 	  </div>
-  </div>
-        
- </div>                                                                
+	</div>
+</div>	<!-- content end -->
+	  	
+
+ 

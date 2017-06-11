@@ -1,0 +1,43 @@
+<layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"> 
+<div class="row"> 
+  <div class="col-md-8">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	  <{$arr.id|getSPFunc=###}>（<{$arr.sn}>）<b>测试用例</b>
+	  <span class="badge pull-right"><{$_SESSION['proid']|getProNo=###}></span>
+	  </div>  
+	  <ul class="list-group">	   
+	      <volist name='cases' id='case' empty="没有用例">
+	          <li class="list-group-item">	                
+	             <b>意图：</b><{$case.main}>(<{$case.fproid|getProNo=###}>)（<{$case.sn}>）<br>
+	             <b>预期：</b><{$case.expected}>	               
+	             <span class="badge"><{$case.state}>-<{$case.level}></span>
+	          </li>
+	      </volist>	       
+	  </ul>
+	</div>
+  </div>
+  <div class="col-md-4 hidden-xs">
+  	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><{$arr.pathid||getSPath=###}></h3>
+	  </div>
+	  <ul class="list-group">
+	    <volist name='data' id='vo' empty="没有数据"> 			
+           <switch name="vo.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+		 </switch> 
+            <a href="__URL__/index/funcid/<{$vo.id}>">
+            	<{$vo.sn}>.<{$vo.func}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
+        </volist>
+      </ul>	  
+	</div>
+  	 
+  </div>
+  
+</div>
+
+</div>

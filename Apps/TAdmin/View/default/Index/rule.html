@@ -1,77 +1,59 @@
  <layout name="layout" />
   <!-- content start -->
- <div class="admin-content"><br>
- <div class="row">  
-  <div class="col-md-9">
-  	<div class="panel panel-info">
-	  <div class="panel-heading">项目规则（<{$_SESSION['proid']|getProNo=###}> ）
-	  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div>	  		
-	  </div>
-	  <div class="panel-body">	  
-	    <ul class="nav nav-pills" role="tablist">
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
-			  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
-			  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
-			  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
-			  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-			  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
-			  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-			  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-			  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
-			  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-			  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
-			   <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
-			  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
-		</ul>	
-		<div class="panel panel-default">
-			<div class="starter-template">             
-		        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
-		         	<volist name='data' id='st' empty="没有规则">
-			            <div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="heading<{$st.id}>">
-								<h5 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
-						                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
-								        <span class='pull-right'>
-									        <span class="label label-info"><{$st.status}></span> 
-									        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
-								         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
-						           		</span>															      
-								 </h5>
-							 </div>
-							 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
-								 <div class="panel-body"><ul class="list-group"><{$st.id|getStorySpec=###}></ul></div>
-							</div>
-			  			</div>                     
-		            </volist>
-		        </div>
-		     </div> 		
-			</div>		
-		</div>  	    
-	</div>
-	</div>
-	<div class="col-md-3 hidden-xs hidden-sm">
+ <div class="admin-content">
+	 <div class="row">  
+	  <div class="col-md-12">
 	  	<div class="panel panel-info">
-		  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
-		  <ul class="list-group">
-		    <volist name='pros' id='pro' empty="没有数据"> 			
-	           <switch name="pro.id">
-					<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
-					<default /><li class="list-group-item ">
-			   </switch> 
-		            <a href="__URL__/rule/proid/<{$pro.id}>">           	
-		            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
-		            	<span class="badge pull-right"><{$pro.id|countStage=###}></span>
-		            </a>
-	           </li>
-	        </volist>
-	      </ul>	  
-		</div>	  	 
-	  </div>
+		  <div class="panel-heading">项目需求（<{$_SESSION['proid']|getProNo=###}> ）
+		  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div>	  		
+		  </div>
+		  <div class="panel-body">	  
+		    <ul class="nav nav-pills" role="tablist">
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
+				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
+				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
+				  <span class="badge"><{$arr.id|countProsys=###}></span> </a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
+				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
+				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
+				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
+				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+				  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
+				   <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
+				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
+			</ul>	
+			<div class="panel panel-default">
+				<div class="starter-template">             
+			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+			         	<volist name='data' id='st' empty="没有规则">
+				            <div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+									<h5 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
+							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+									        <span class='pull-right'>
+										        <span class="label label-info"><{$st.status}></span> 
+										        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
+									         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+							           		</span>															      
+									 </h5>
+								 </div>
+								 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
+									 <div class="panel-body"><ul class="list-group"><{$st.id|getStorySpec=###}></ul></div>
+								</div>
+				  			</div>                     
+			            </volist>
+			        </div>
+			     </div> 		
+				</div>		
+			</div>  	    
+		</div>
+		</div>
+		
 	</div>
-
  </div>   

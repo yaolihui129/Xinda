@@ -17,8 +17,8 @@
 			<table class="table table-striped table-bordered table-hover table-condensed ">
 		          <tr >
 		          	<th width=5% align="center" bgcolor="#ccc">顺序</th>
-		            <th width=70% align="left"  bgcolor="#ccc">功能点</th> 
-		            <th width=25% align="left"  bgcolor="#ccc">操作</th> 
+		            <th width=60% align="left"  bgcolor="#ccc">功能点</th> 
+		            <th width=35% align="left"  bgcolor="#ccc">操作</th> 
 		         </tr>
 		         <form action="__URL__/order" method="post" > 
 		         <input type="hidden" name="table" value="tp_func" />   
@@ -32,7 +32,7 @@
 		                 <td>
 		                 	<div class="btn-group">
 				               <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Case/index/funcid/<{$st.id}>" class="btn btn-info ">用例  <{$st.id|countFCase=###}></a>
-				               <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$st.id}>" class="btn btn-info ">数据模板</a>
+				               <!--  <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$st.id}>" class="btn btn-info ">数据模板</a>-->
 				               <a href="__URL__/mod/id/<{$st.id}>" class="btn btn-info ">修改</a>
 				               <a href="__URL__/realdel/id/<{$st.id}>/table/tp_func" class="btn btn-info " onclick="return confirm('你确定要删除功能点：<{$st.func}>？')">删除</a>				               
 				            </div>
@@ -100,3 +100,4 @@
 		</div>
     </div>       
   </div>
+</div>  
