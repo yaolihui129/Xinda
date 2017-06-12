@@ -7,50 +7,36 @@
   			<small>加班调休</small>
   		</div>	
   	</div>
-  	<div class="row"> 
-	  <div class="col-md-12">
-		  	<div class="panel panel-info">
-			  <div class="panel-heading">
-			  	<h3 class="panel-title">&nbsp;
-			  		<div class="btn-group pull-right">				  			
-		    			<button data-toggle="modal" href="#tianjjiab" class=" btn btn-info btn-xs" ><span class="glyphicon glyphicon-plus"> 加班</span></button>				  					  	    					  			
-			  		</div>
-			  	</h3>
-			  </div>
-			  <div class="panel-body table-responsive">
-				<table class="table table-striped table-bordered table-hover table-condensed ">
-			         <form action="__URL__/order" method="post" >
-			         <volist name='pathes' id='st' empty="没有数据">
-			            <tr> 	            	
-			                <td width=3% align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
-			                <td width=80%><{$st.id|getSPath=###}>
-			                    <div class="btn-group pull-right">
-					                <a href="__APP__/<{$Think.config.PRODUCT}>/Func/index/pathid/<{$st.id}>" type="button" class="btn btn-info btn-xs">功能点<{$st.id|countFunc=###}></a>
-					                <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-					                  <span class="caret"></span>
-					                  <span class="sr-only">Toggle Dropdown</span>
-					                </button>
-					                <ul class="dropdown-menu" role="menu">			                  
-					                  <li><a href="__URL__/mod/id/<{$st.id}>">修改</a></li>                 			                 
-					                </ul>
-					            </div>
-			                </td>                            
-			            </tr>
-			         </volist>
-			            <tr><td  colspan="10"><input type="submit" name="do_submit" value="批量排序" class="btn"></td></tr>
-			         </form>
-			     </table>
-			  </div>
-		  </div>	  	  
-	  </div>	   
-	</div>  	  	
+  	<div class="row">
+				  <div class="col-md-7">
+				  		<div class="panel panel-success">
+						  <div class="panel-heading">加班</div>
+						      <ul class="list-group">
+						        <volist name='arr' id='st' empty="没有数据">
+						            <li class="list-group-item"><{$st.riqi}>:<{$st.remark}>:<{$st.hourlong}>小时
+						              
+						            </li>
+						        </volist> 
+						      </ul>
+						</div>
+				  </div>
+				  <div class="col-md-5">
+				  	<ul class="list-group">
+						<volist name='syses' id='st' empty="没有数据">
+						   <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+						      <a href="__URL__/insert/branch/<{$st.id}>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-link"> 关联</span></a>
+						   </li>
+						</volist> 
+					</ul>						
+				  </div>
+				</div>    	  	
  </div>
  
  
  
  <!-- 添加-模态框 -->
 <div class="modal fade " id="tianjjiab" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
     	<div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -59,20 +45,29 @@
 	    <div class="modal-body">
 	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
 	      	<input type="hidden" name="userid" value="<{$_SESSION.id}>" />
-	      	<input type="hidden" name="type" value="加班" />
+	      	<input type="hidden" name="type" value="0" />
+	      	<input type="hidden" name="state" value="0" />
 	      	<input type="hidden" name="table" value="tp_overtime" />
 				<div class="form-group">
 					<label for="short" class="col-sm-2 control-label">日期:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="riqi" value="<{$c}>" placeholder="日期"></div>
+					<div class="col-sm-10"><input type="date" class="form-control" name="riqi" value="<{$riqi}>" placeholder="日期"></div>
 				</div>
 				<div class="form-group">
 					<label for="short" class="col-sm-2 control-label">开始:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="begin" value="" placeholder="开始"></div>
+					<div class="col-sm-10"><input type="time" class="form-control" name="begin" value="<{$begin}>" placeholder="开始"></div>
 				</div>
 				
 				<div class="form-group">
 					<label for="short" class="col-sm-2 control-label">结束:</label>
-					<div class="col-sm-10"><input type="text" class="form-control" name="end" value="" placeholder="结束"></div>
+					<div class="col-sm-10"><input type="time" class="form-control" name="end" value="<{$end}>" placeholder="结束"></div>
+				</div>
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">时长:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="hourlong" value="" placeholder="时长"></div>
+				</div>
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">备注:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="remark" value="" placeholder="原因"></div>
 				</div>
 											
 		</div>

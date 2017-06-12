@@ -12,9 +12,9 @@ return array(
     'PRODUCT'       =>  'TAdmin',//定义产品编号
     'WEIXIN_APPID'  =>  '',//定义微信APPID
     //连接数据库
-//     'DB_HOST'       =>  '192.168.21.10',
-    'DB_HOST'       =>  '127.0.0.1',   
-    'DB_NAME'       =>  'zentao1',
+    'DB_HOST'       =>  '192.168.21.10',
+//     'DB_HOST'       =>  '127.0.0.1',   
+    'DB_NAME'       =>  'zentao',
     'DB_USER'       =>  'root',
     'DB_PWD'        =>  'root',
     'DB_PORT'       =>  '3306',

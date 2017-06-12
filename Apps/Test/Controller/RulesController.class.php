@@ -32,6 +32,11 @@ class RulesController extends WebInfoController {
       
   }
   
-
+public function test(){
+    $arr=array('1','4','6');
+    $this->assign('id',6);
+    $this->assign("arr",$arr);
+    $this->display();
+}
 
 }

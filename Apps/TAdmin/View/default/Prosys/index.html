@@ -50,9 +50,17 @@
 				  <div class="col-md-5">
 				  	<ul class="list-group">
 						<volist name='syses' id='st' empty="没有数据">
-						   <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
-						      <a href="__URL__/insert/branch/<{$st.id}>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-link"> 关联</span></a>
-						   </li>
+							 <in name="st.id" value="$a">
+							
+							 <else/>
+								<li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+								    <a href="__URL__/insert/branch/<{$st.id}>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-link"> 关联</span></a>
+								</li>
+							 </in>
+								 
+								
+						   
+						   
 						</volist> 
 					</ul>						
 				  </div>

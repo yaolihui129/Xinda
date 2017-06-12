@@ -25,34 +25,7 @@
   	<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
   </button>
 
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-      <li>
-      	<a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/index/type/C">
-      		<span class="am-icon-file"> 编写用例</span>  
-      		<span class="am-badge am-badge-warning"><{$_SESSION.realname|countCExescene=###}></span>
-      	</a>
-      </li>
-      <li>
-      	<a href="__APP__/<{$Think.config.PRODUCT}>/Exescene/index/type/M">
-      		<span class="am-icon-pencil-square-o"> 手工测试</span>  
-      		<span class="am-badge am-badge-warning"><{$_SESSION.realname|countMExescene=###}></span>
-      	</a>
-      </li>
-            
-      <li class="am-dropdown" data-am-dropdown>
-        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          <span class="am-icon-user"></span> <{$_SESSION['realname']}> <span class="am-icon-caret-down"></span>
-        </a>
-        <ul class="am-dropdown-content">
-          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
-          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-          
-        </ul>
-      </li>
-     <li><a href="__APP__/<{$Think.config.PRODUCT}>/Login/logout"><span class="am-icon-power-off"></span> 退出</a></li>
-    </ul>
-  </div>
+  
 </header>
 <div class="am-cf admin-main">
   <!-- sidebar start -->
