@@ -42,9 +42,17 @@
    	<div class="panel panel-default">	  
 	  <ul class="list-group">
 	      <volist name='users' id='user' empty="没有数据">
-	        <li class="list-group-item">	        	
-	        	<a href="__URL__/insert/tester/<{$user.realname}>/stageid/<{$type.stageid}>/type/<{$type.type}>"><{$user.realname}></a>	        
-	        </li>
+	        
+	        <in name="user.realname" value="$a">
+							
+			<else/>
+				<li class="list-group-item">	        	
+		        	<a href="__URL__/insert/tester/<{$user.realname}>/stageid/<{$type.stageid}>/type/<{$type.type}>"><{$user.realname}></a>	        
+		        </li>				
+			</in>
+	        
+	        
+	        
 	      </volist>
 	  </ul>
 	</div> 

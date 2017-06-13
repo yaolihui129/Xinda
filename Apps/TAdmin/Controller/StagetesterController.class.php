@@ -14,7 +14,12 @@ class StagetesterController extends CommonController {
         $where=array('usergp'=>"PJD",'deleted'=>'0');
         $users=M('user')->where($where)->order("usergp")->select();
         $this->assign('users',$users);
-                       
+        
+        foreach ($testers as $var){
+            $a[]=$var['tester'];
+        }
+        $this->assign('a',$a);
+
         $this->display();
     }
 

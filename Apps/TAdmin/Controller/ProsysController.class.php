@@ -23,6 +23,7 @@ class ProsysController extends CommonController {
         $map['state']=0;
         $syses=$m->where($map)->order('sn')->select();
         $this->assign('syses',$syses);
+
         foreach ($data as $sys){
             $a[]=$sys['branch'];
         }

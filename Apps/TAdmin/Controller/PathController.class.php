@@ -36,6 +36,10 @@ class PathController extends CommonController {
         $where=array("stagetesterid"=>I('stagetesterid'));
         $exe=$m->where($where)->order("sn")->select();
         $this->assign('exe',$exe);
+        foreach ($exe as $var){
+            $a[]=$var['pathid'];
+        }
+        $this->assign('a',$a);
         $this->assign('stagetesterid',I('stagetesterid'));
 
         $where=array("zt_tp_prosys.project"=>$_SESSION['proid'],"zt_module.state"=>"正常");
