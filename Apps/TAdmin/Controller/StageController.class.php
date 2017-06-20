@@ -2,16 +2,17 @@
 namespace TAdmin\Controller;
 class StageController extends CommonController {
     public function index(){
-        $_SESSION['proid']=I('proid');
+        
         $m= D("project");
         $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
+        $_SESSION['proid']=I('proid',$pros[0]['id']);
+//         dump($pros[0]['id']);
         $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
-        /* 实例化模型*/
         $m = D("tp_stage");
         $where=array("proid"=>$_SESSION['proid']);
         $stages=$m->where($where)->order("sn,id")->select();

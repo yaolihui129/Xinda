@@ -18,16 +18,16 @@ class ProsysController extends CommonController {
         $where=array("zt_tp_prosys.project"=>$_SESSION['proid']);
         $data=$m->where($where)->join('zt_tp_prosys ON zt_tp_prosys.branch =zt_branch.id')->order('zt_branch.sysno')->select();
         $this->assign("data",$data);
-        
-        $map['product']=$pp['product'];
-        $map['state']=0;
-        $syses=$m->where($map)->order('sn')->select();
-        $this->assign('syses',$syses);
-
         foreach ($data as $sys){
             $a[]=$sys['branch'];
         }
         $this->assign('a',$a);
+        
+        $map['product']=$pp['product'];
+        $map['state']=0;
+        $map['id']=array('not in',$a);
+        $syses=$m->where($map)->order('sn')->select();
+        $this->assign('syses',$syses);       
         
 	    $this->display();
     }
@@ -55,7 +55,7 @@ class ProsysController extends CommonController {
     
     public function mod(){
         $m=M('branch');
-        $sys=$m->find($_GET['id']);
+        $sys=$m->find(I('id'));
         $this->assign('sys',$sys);
     
         $where['product']=$sys['product'];

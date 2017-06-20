@@ -1,26 +1,5 @@
 <?php
 /**
- * 根据proid获取需求规则数
- */
-function countRules($proid){
-    $m=M("tp_rules");
-    $where=array("proid"=>$proid);
-    $count=$m->where($where)->count();
-    return $count;
-}
-
-/**
- * 获取规则数
- */
-function countPRules($proid){
-    $m=D('module');
-    $where=array("zt_projectstory.project"=>$_GET['proid'], 'zt_story.deleted'=>'0');
-    $count=$m->where($where)->join('zt_story ON zt_story.module =zt_module.id')
-      ->join('zt_projectstory ON zt_projectstory.story =zt_story.id')->count();
-    return $count;
-}
-
-/**
  * 根据stgeid获取列队数据
  */
 function getQueue($stageid){
@@ -33,26 +12,6 @@ function getQueue($stageid){
             .'<span class="badge">场景'.countExescene($ar['id']).'</span></li>';
     };       
     return $str;       
-}
-
-/**
- * 根据funcid获取规则数据
- */
-function getRules($funcid){
-    $m=D("tp_rules");
-    $where['funcid']=$funcid;
-    $arr=$m->where($where)->order("sn,id")->select();
-    foreach ($arr as $ar){
-        $str.='<li class="list-group-item">'
-                . $ar['sn'].".".$ar['rules']."【".$ar['source']."】"
-                .'<span class="badge">'.$ar['state'].'</span>
-               </li>';
-    };
-    if($arr){
-        return $str;
-    }else{
-        return '无';
-    }
 }
 
 /**

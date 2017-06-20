@@ -40,29 +40,32 @@ class FuncController extends CommonController{
     }
 
    
-    public function func(){
-        $_SESSION['proid']=$_GET['proid'];
-         /* 实例化模型*/
+    public function func(){        
         $m= D("project");
         $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
         $pros=$m->where($where)->order("end desc")->select();
         $this->assign("pros",$pros);
         
-        $arr=$m->find($_GET['proid']);
+        $_SESSION['proid']=$_GET['proid'];
+        $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
-        /* 实例化模型*/
-        $s = D("tp_prosys");
-        $map['zt_tp_prosys.project']=$_GET['proid'];
-        $map['zt_module.state']='正常';
-        $map['zt_tp_func.state']='正常';
-        $data=$s->where($map)
-        ->join('zt_branch ON zt_tp_prosys.branch =zt_branch.id')
-        ->join('zt_module ON zt_branch.id = zt_module.branch')
-        ->join('zt_tp_func ON zt_module.id = zt_tp_func.pathid')
-        ->order("zt_branch.sysno,zt_module.sn,zt_module.id,zt_tp_func.sn,zt_tp_func.id")
-        ->select();
-        $this->assign("data",$data);
+        $where=array('project'=>$_SESSION['proid']);
+        $arr=M("tp_prosys")->where($where)->select();
+        foreach ($arr as $ar){
+            $sys[]=$ar['branch'];
+        }
+        
+        $where=array('state'=>"正常");
+        $arr=M('module')->where($where)->select();
+        foreach ($arr as $ar){
+            $path[]=$ar['id'];
+        }
+        $map['state']="正常";
+        $map['sysid']=array('in',$sys);
+        $map['pathid']=array('in',$path);
+        $funcs=M('tp_func')->where($map)->order('sysid,pathid,sn,id')->select();
+        $this->assign("data",$funcs);
 
         $this->display();
 
@@ -99,7 +102,7 @@ class FuncController extends CommonController{
         $sceneid=$_GET['sceneid'];
         /* 实例化模型*/
         $m= D("prosys");
-        $where=array("zt_tp_prosys.proid"=>"$proid");
+        $where=array("zt_tp_prosys.proid"=>$proid);
         $data=$m->join('inner JOIN zt_system ON zt_system.id = zt_tp_prosys.sysid')
         ->join('inner JOIN zt_path ON zt_system.id = zt_path.sysid')
         ->where($where)
@@ -122,7 +125,7 @@ class FuncController extends CommonController{
         $hfunc=$m->where($where)->order('sn')->select();
         $this->assign("hfunc",$hfunc);
 
-        $where=array("proid"=>"$proid","sceneid"=>$sceneid,"pathid"=>$pathid);
+        $where=array("proid"=>$proid,"sceneid"=>$sceneid,"pathid"=>$pathid);
         $this->assign('w',$where);
 
 
@@ -194,24 +197,20 @@ class FuncController extends CommonController{
         $arr=D('tp_case')->where($where)->select();
         if ($arr){
             $this->error('该功能点下有用例，不能删除');
-        }else {
-            $arr=D('tp_rules')->where($where)->select();
-            if ($arr){
-                $this->error('该功能点下有规则，不能删除');
-            }else {
-                $arr=D('tp_element')->where($where)->select();
-                if ($arr){
-                    $this->error('该功能点下有控件，不能删除');
-                }else {
-                    $m=M('tp_func');                   
-                    $count =M('tp_func')->delete($_GET['id']);
-                    if ($count>0) {
-                        $this->success('删除成功');
-                    }else{
-                        $this->error('删除失败');
-                    }
+        }else {           
+           $arr=D('tp_element')->where($where)->select();
+           if ($arr){
+                $this->error('该功能点下有控件，不能删除');
+           }else {
+                $m=M('tp_func');                   
+                $count =M('tp_func')->delete($_GET['id']);
+                if ($count>0) {
+                    $this->success('删除成功');
+                }else{
+                    $this->error('删除失败');
                 }
-            }
+           }
+           
         }             
     }    
  

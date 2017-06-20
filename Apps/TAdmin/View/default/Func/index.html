@@ -76,6 +76,7 @@
 	    <div class="modal-body">
 	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
 	      	<input type="hidden" name="pathid" value="<{$arr.id}>" />
+	      	<input type="hidden" name="sysid" value="<{$arr.id|getSysid=###}>" />
 	      	<input type="hidden" name="table" value="tp_func" />
 				<div class="form-group">
 					<label for="short" class="col-sm-2 control-label">顺序:</label>

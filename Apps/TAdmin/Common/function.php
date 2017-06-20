@@ -12,6 +12,11 @@
         return $html;
     }
     
+    function getSysid($Pathid){
+        $data=M('module')->find($Pathid);
+        return $data['branch'];
+    }
+    
      //根据stagetesterid获取列队信息
     function getSTester($stagetesterid){
         if ($stagetesterid){

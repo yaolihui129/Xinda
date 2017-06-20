@@ -16,7 +16,7 @@ class LoginController extends Controller {
             $_SESSION['isLogin']=C(PRODUCT);
             $_SESSION['testgp']=$user['usergp'];
 
-            $this->redirect('TAdmin/Index/index');
+            $this->redirect('TAdmin/Stage/index');
         }else{
             $this->error('用户或密码错误，请重新登陆！', "index");
         }

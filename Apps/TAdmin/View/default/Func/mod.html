@@ -11,7 +11,8 @@
   		<div class="col-md-7">	
   			<div class="panel-body">
   		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
-  		     	  <input type="hidden" name="id" value="<{$func.id}>" /> 
+  		     	  <input type="hidden" name="id" value="<{$func.id}>" />
+  		     	  <input type="hidden" name="sysid" value="<{$func.pathid|getSysid=###}>" />
   		     	  <input type="hidden" name="table" value="tp_func" />  		     	  
   		     	    <div class="form-group">
   		     	      <div class="col-sm-2 control-label"></div>

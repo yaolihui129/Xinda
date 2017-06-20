@@ -20,6 +20,7 @@
 			  <div class="panel-body table-responsive">
 				<table class="table table-striped table-bordered table-hover table-condensed ">
 			         <form action="__URL__/order" method="post" >
+			         <input type="hidden" name="table" value="module" />  
 			         <volist name='pathes' id='st' empty="没有数据">
 			            <tr> 	            	
 			                <td width=3% align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
