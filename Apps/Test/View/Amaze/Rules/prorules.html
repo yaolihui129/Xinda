@@ -27,8 +27,9 @@
 				  <li role="presentation" ><a href="__APP__/Test/Case/procase/proid/<{$arr.id}>">用例
 				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
 				  <li role="presentation" class="active"><a href="__APP__/Test/Rules/prorules/proid/<{$arr.id}>">本期需求
-				  <span class="badge">
-				  <{$arr.id|countPRules=###}></span></a></li>		  
+				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">禅道BUG
+				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
 				</ul>
 				<div class="starter-template">             
 			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               

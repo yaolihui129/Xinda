@@ -2,16 +2,15 @@
 namespace TAdmin\Controller;
 class ExesceneController extends CommonController{
     public function index(){             
-    	$m=M('project');
+        $_SESSION['casetype']=I('type');
     	$where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>I('type'));
-    	$data=$m->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")->order("zt_project.end desc")
+    	$data=M('project')->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")->order("zt_project.end desc")
     	 ->join("zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")->where($where)->select();
 	    $this->assign('data',$data);
 	    $this->assign('type',I('type'));
-	         
-	    $m=D('tp_exescene');
+	    
 	    $where=array("stagetesterid"=>I('stagetesterid',$data[0]['id']));
-	    $exe=$m->where($where)->order("sn")->select();
+	    $exe=M('tp_exescene')->where($where)->order("sn")->select();
 	    $this->assign('exe',$exe);
 	    $this->assign('stagetesterid',I('stagetesterid',$data[0]['id']));
 	    if($exe) {
@@ -23,16 +22,14 @@ class ExesceneController extends CommonController{
 
 
     public function test(){
-        $m=M('project');
         $where=array("zt_tp_stage.state"=>"进行中","zt_tp_stagetester.tester"=>$_SESSION['realname'],"zt_tp_stagetester.type"=>I('type'));
-        $data=$m->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")
+        $data=M('project')->join("zt_tp_stage ON zt_project.id = zt_tp_stage.proid")
         ->join("zt_tp_stagetester ON zt_tp_stage.id = zt_tp_stagetester.stageid")
     	->order("zt_project.end desc")->where($where)->select();
         $this->assign('data',$data);       
 
-        $m=D('tp_exescene');
         $where=array("stagetesterid"=>I('stagetesterid',$data[0]['id']));
-        $exe=$m->where($where)->order("sn")->select();
+        $exe=M('tp_exescene')->where($where)->order("sn")->select();
         $this->assign('exe',$exe);
         $where=array("proid"=>I('proid',$data[0]['proid']),"stagetesterid"=>I('stagetesterid',$data[0]['id']),"type"=>I('type'));
         $this->assign('w',$where);

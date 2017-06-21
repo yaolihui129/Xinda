@@ -2,12 +2,10 @@
  <!-- content start -->
  <div class="admin-content">
 	<div class="row"> 
-	  <div class="col-md-9">
+	  <div class="col-md-8">
 	  		<div class="panel panel-info">
 			  <div class="panel-heading">
-			    <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}>
-			    	<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返 回</a></div>
-			    </h3>
+			    <h3 class="panel-title"><{$_SESSION['proid']|getPro=###}></h3>
 			  </div>
 			  <div class="panel-body table-responsive">	    	   
 			    <ul class="nav nav-pills" role="tablist">
@@ -51,17 +49,9 @@
 				  <div class="col-md-5">
 				  	<ul class="list-group">
 						<volist name='syses' id='st' empty="没有数据">
-							 <in name="st.id" value="$a">
-							
-							 <else/>
-								<li class="list-group-item"><{$st.sysno}>:<{$st.name}>
+							 <li class="list-group-item"><{$st.sysno}>:<{$st.name}>
 								    <a href="__URL__/insert/branch/<{$st.id}>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-link"> 关联</span></a>
-								</li>
-							 </in>
-								 
-								
-						   
-						   
+							</li>							 
 						</volist> 
 					</ul>						
 				  </div>
@@ -76,9 +66,8 @@
 					<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 					<default /><li class="list-group-item ">
 				</switch>   
-		            <a href="__URL__/index/proid/<{$pro.id}>">
-		            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}><span class="badge"><{$pro.id|countProsys=###}></span>
-		            </a>           
+		            <a href="__URL__/index/proid/<{$pro.id}>"><span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}></a> 
+		            <span class="badge"><{$pro.id|countProsys=###}></span>          
 	            </li>
 	        </volist>
 	      </ul>	  		 

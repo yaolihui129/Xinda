@@ -2,13 +2,12 @@
  <!-- content start -->
  <div class="admin-content">
 	<div class="row"> 
-		  <div class="col-md-9">
+		  <div class="col-md-8">
 		  	<div class="panel panel-info">
 			  <div class="panel-heading">
 			    <h3 class="panel-title"><{$arr.id|getPro=###}>	    		
 			    	<div class="btn-group pull-right">
-			    		<a data-toggle="modal" href="#tianjrisk" class=" btn btn-info btn-xs" >添加</a>
-				    	<a href="__APP__/<{$Think.config.PRODUCT}>" class="btn btn-warning btn-xs">返回</a>
+			    		<a data-toggle="modal" href="#tianjrisk" class=" btn btn-info btn-xs" >添加</a>				    	
 				    </div>
 			    </h3>
 			  </div>
@@ -28,7 +27,8 @@
 					  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 					  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">需求
+					  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
 					  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
 				</ul>
@@ -61,9 +61,8 @@
 						<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
 						<default /><li class="list-group-item ">
 				 	</switch> 
-		            	<a href="__URL__/index/proid/<{$pro.id}>">
-							<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}><span class="badge"><{$pro.id}></span>
-		            	</a>
+		            	<a href="__URL__/index/proid/<{$pro.id}>"><span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}></a>
+		            	<!--  <span class="badge"><{$pro.id}></span>-->
 		            </li>
 		        </volist>
 		      </ul>	    	 

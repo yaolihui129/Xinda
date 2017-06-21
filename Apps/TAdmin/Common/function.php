@@ -31,10 +31,10 @@
      //根据pathid获取功能列表
     function getFunces($pathid){
         $where['pathid']=$pathid;    
-        $arr=M('tp_func')->where($where)->select();
+        $arr=M('tp_func')->where($where)->order("sn,id")->select();
         foreach ($arr as $ar){
             $str.='<li class="list-group-item"><b>'
-                    . $ar['sn']."</b>-".$ar['func']."【".$ar['state']."】<span class='badge'>".getProNo($ar['fproid'])         
+                    . $ar['sn']."</b>.".$ar['func']."【".$ar['state']."】<span class='badge'>".getProNo($ar['fproid'])         
                     .'</span></li>';
         }
             if ($arr){

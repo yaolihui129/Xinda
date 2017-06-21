@@ -4,9 +4,7 @@
 	 <div class="row">  
 	  <div class="col-md-12">
 	  	<div class="panel panel-info">
-		  <div class="panel-heading">项目需求（<{$_SESSION['proid']|getProNo=###}> ）
-		  		<div class="btn-group pull-right"><a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a></div>	  		
-		  </div>
+		  <div class="panel-heading">项目需求（<{$_SESSION['proid']|getProNo=###}> ）</div>
 		  <div class="panel-body">	  
 		    <ul class="nav nav-pills" role="tablist">
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
@@ -23,7 +21,8 @@
 				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
 				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">项目需求</a></li>
+				  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">需求
+				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
 				   <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
 				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
 			</ul>	

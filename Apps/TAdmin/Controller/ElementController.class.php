@@ -31,7 +31,7 @@ class ElementController extends CommonController{
         $count=$m->where($where)->count()+1;
         $this->assign("c",$count);
         $this->assign("state", formselect());              
-        $this->assign("typeset", formselect($element['typeset'],"typeset","typeset"));
+        $this->assign("typeset", formselect($data['typeset'],"typeset","typeset"));
         
         $this->display();
     }

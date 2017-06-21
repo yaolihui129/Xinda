@@ -12,6 +12,8 @@ class IndexController extends WebInfoController {
         $this->theme('')->display();
     }
     
+    
+    
     public function  test(){
         $where=array('zt_projectproduct.product'=>C(PRODID),'zt_project.acl'=>'private','zt_project.deleted'=>'0');
         $pros=M('projectproduct')->where($where)

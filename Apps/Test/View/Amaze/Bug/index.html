@@ -7,27 +7,27 @@
 		  <div class="panel-heading">
 		    <h3 class="panel-title"><{$arr.id|getPro=###}>
 			    <div class="btn-group pull-right">
-			    	<a href="__APP__/Test" class="btn btn-warning btn-xs">返回</a>
+			    	<a href="__APP__/<{$Think.config.PRODUCT}>" class="btn btn-warning btn-xs">返回</a>
 			    </div>
 		    </h3>
 		  </div>
 		  <div class="panel-body ">
 		    	<ul class="nav nav-tabs" role="tablist">
-				  <li role="presentation"  class="active"><a href="__APP__/Test/Stage/index/proid/<{$arr.id}>">里程碑
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
 				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/Test/Risk/index/proid/<{$arr.id}>">风险
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/Test/Func/func/proid/<{$arr.id}>">功能点
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
 				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/Test/Func/range/proid/<{$arr.id}>">范围
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
 				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/Test/Scene/index/proid/<{$arr.id}>">场景
+				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>">场景
 				  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/Test/Case/procase/proid/<{$arr.id}>">用例
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$arr.id}>">用例
 				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/Test/Rules/prorules/proid/<{$arr.id}>">本期需求
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$arr.id}>">本期需求
 				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">禅道BUG
+				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">禅道BUG
 				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
 				</ul>
 				
@@ -37,14 +37,13 @@
 						<div class="panel-heading" role="tab" id="heading<{$st.id}>">
 							<h4 class="panel-title">
 							    <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
-							        <{$st.sn}>.<{$st.stage}>(<{$st.end}>完成)
-							        <span class="badge pull-right"><{$st.state}> </span>
+							        <{$st.id}>.<{$st.assignedto||getZTUserName=###}>：<{$st.branch}>-<{$st.module}>:<{$st.title}>
+							        <span class="badge pull-right"><{$st.status|getBugStauts=###}> </span>
 							     </a>
 							  </h4>
 						</div>
-						<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">											        
-								 <span class="pull-right"><{$st.moder}>&nbsp;更新于:<{$st.utime}></span><br>
-								 <ul class="list-group"><{$st.id|getQueue=###}></ul>						 					
+						<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">				
+								 <{$st.steps}>						 					
 						</div>
 		  			 </div>                      
 		           </volist>
@@ -67,8 +66,3 @@
 	</div>
 </div>
 </div>
-
-
-
-
-				

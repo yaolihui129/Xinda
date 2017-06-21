@@ -1,5 +1,4 @@
-<?php
-    
+<?php    
     function getState($key){// 根据id获取状态
         $where=array('type'=>'state','k'=>$key);
         $data=M('tp_dict')->where($where)->find();        
@@ -459,9 +458,9 @@
         $arr=D('tp_exefunc')->where($where)->order('updateTime desc')->limit(15)->select();
         $str.='<ul class="list-group">';
                     foreach ($arr as $ar){
-                          $str.='<li class="list-group-item"><span class=badge>'.$ar['result'].'</span>'
-                                            .getExescene($ar['exesceneid']).';'
-                                            .getFunc($ar['funcid']);
+                          $str.='<li class="list-group-item">'
+                                    .'<span class=badge>'.$ar['result'].'</span>'
+                                            .getExescene($ar['exesceneid']).';'.getFunc($ar['funcid']);
                                       $str.='('.$ar['funcremarks'].')'.'备注：'.$ar['remark'].'<br>
                                             <b>意图：</b>'.$ar['casemain'];
                                       if($ar['caseexpected']){
@@ -754,6 +753,17 @@
         }
     } 
     
+    function getBugStauts($value){
+        if($value=='active'){
+            return '激活';
+        }elseif ($value=='closed'){
+            return '已关闭';
+        }elseif ($value=='resolved'){
+            return '已解决';
+        }else{
+            return ;
+        }
+    }
 
     
     //获取真实姓名
@@ -796,13 +806,6 @@
     function countFPCase($funcid){
         $where=array("funcid"=>$funcid,"fproid"=>$_SESSION['proid'],"state"=>"正常");
         $count=M("tp_case")->where($where)->count();
-        return $count;
-    }
-    
-    //根据funcid获取规则数
-    function countFRules($funcid){
-        $where=array("funcid"=>$funcid);
-        $count=M("tp_rules")->where($where)->count();
         return $count;
     }
 

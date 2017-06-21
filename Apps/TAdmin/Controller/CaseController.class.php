@@ -14,8 +14,17 @@ class CaseController extends CommonController {
     	 $where['funcid']=I('funcid');
     	 $cases=$m->where($where)->order('sn,id')->select();
 	     $this->assign('cases',$cases);
+	    
 	     
 	     /* 添加*/
+	     if($_SESSION['casetype']=="M"){
+	         $source='测试执行阶段';
+	     }elseif ($_SESSION['casetype']=="C"){
+	         $source='用例编写阶段';
+	     }else{
+	         $source='其他阶段';
+	     }
+	     $this->assign('source',$source);
 	     $count=$m->where($where)->count()+1;
 	     $this->assign("c",$count);
 	     $this -> assign("state", formselect());	     
