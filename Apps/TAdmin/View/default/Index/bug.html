@@ -34,16 +34,14 @@
 								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
 									<h5 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
-							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+							                <{$st.id}>.<{$st.assignedto||getZTUserName=###}>：<{$st.branch|getBranchName=###}>-<{$st.module|getModuleName=###}>:<{$st.title}>
 									        <span class='pull-right'>
-										        <span class="label label-info"><{$st.status}></span> 
-										        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
-									         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+										        <span class="label label-info"><{$st.status|getBugStauts=###}></span> 										        									         		         	          	                  	         	                	                
 							           		</span>															      
 									 </h5>
 								 </div>
 								 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
-									 <div class="panel-body"><ul class="list-group"><{$st.id|getStorySpec=###}></ul></div>
+									 <div class="panel-body"><ul class="list-group"><{$st.steps}></ul></div>
 								</div>
 				  			</div>                     
 			            </volist>

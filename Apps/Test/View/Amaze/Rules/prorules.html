@@ -38,11 +38,13 @@
 								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
 									<h5 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
-							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+							                <{$st.id}>【#<{$st.version}>】
+							                <span class="label label-default"><{$st.branch|getBranchName=###}></span>
+							                <span class="label label-info"><{$st.moduleid|getModuleName=###}></span><{$st.title}>
 									        <span class='pull-right'>
-									        <span class="label label-info"><{$st.status}></span> 
-									        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
-								         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+										        <span class="label label-info"><{$st.status|getBugStauts=###}></span> 
+										        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
+									         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
 							           		</span>															      
 									 </h5>
 								 </div>

@@ -11,7 +11,7 @@
       <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/>80082</a></li>
       <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>在线用户<br/>3000</a></li>
     </ul>
-  <div class="col-md-12">  
+  <div class="col-md-6">  
      <div class="starter-template">             
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
          	<volist name='data' id='pro' empty="没有数据">
@@ -54,9 +54,18 @@
   			</div>                     
             </volist>
         </div>
-     </div>    
-		
-  </div>          
+     </div>    		
+  </div>  
+  <div class="col-md-5">  
+  		<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">正式环境配置</h3></div>						
+			<ul class="list-group">
+				<volist name='var' id='vo' empty="没有数据">
+				  	<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.real}>'><{$vo.real}></a> <span class="label label-info pull-right">1</span></li>
+				</volist>				 
+			</ul>											
+		</div>
+  </div>        
 </div>
 
 </div>

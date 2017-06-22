@@ -9,6 +9,10 @@ class IndexController extends WebInfoController {
             ->order("end desc")->limit(12)->select();        
         $this->assign('data',$data);
         //T('Test@Index/index')
+        $where=array('product'=>10,'state'=>'0');
+        $m=M('branch');
+        $var=$m->where($where)->select();
+        $this->assign('var',$var);
         $this->theme('')->display();
     }
     

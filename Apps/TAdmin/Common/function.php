@@ -1,9 +1,10 @@
 <?php
     //项目选择
     function proselect($value=1,$name=code) {
-        $html = '<select name="'.$name.'" class="form-control">';
-            $where=array("testgp"=>$_SESSION['testgp']);
-            $cats = M('project')->where($where)->order("end desc")->select();
+        
+        $where=array("testgp"=>$_SESSION['testgp']);
+        $cats = M('project')->where($where)->order("end desc")->select();
+        $html = '<select name="'.$name.'" class="form-control">';           
             foreach($cats as $v) {
                 $selected = ($v['id']==$value) ? "selected" : "";
                 $html .= '<option '.$selected.' value="'.$v['id'].'">'.$v['code'].'</option>';

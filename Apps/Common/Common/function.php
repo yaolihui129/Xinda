@@ -5,6 +5,15 @@
         return $data['v'];   
     }
     
+    function getBuild($buildId){
+        $arr=M('build')->find($buildId);
+        if($arr){
+            return $arr['name'];
+        }else {
+            return 'trunk';
+        }
+    }
+    
     function getZhouqi($key){// 根据id获取周期
         $where=array('type'=>'zhouqi','k'=>$key);
         $data=M('tp_dict')->where($where)->find();
@@ -760,6 +769,8 @@
             return '已关闭';
         }elseif ($value=='resolved'){
             return '已解决';
+        }elseif ($value=='changed'){
+            return '已变更';
         }else{
             return ;
         }
@@ -900,9 +911,14 @@
   }
   //获取禅道用户名
   function getZTUserName($account){
-      $where=array('account'=>$account);
-      $arr=M('user')->where($where)->find();
-      return $arr['realname'];
+      if($account){
+          $where=array('account'=>$account);
+          $arr=M('user')->where($where)->find();
+          return $arr['realname'];
+      }else {
+          return 'NoBody';
+      }
+      
   }
   
  

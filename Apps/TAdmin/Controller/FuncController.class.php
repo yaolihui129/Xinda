@@ -156,13 +156,27 @@ class FuncController extends CommonController{
         }
     
     }
+    function passAll(){
+        $db=D('tp_func');
+        $where['fproid']=I('proid');
+        $where['result']='未测试';
+        $arr=$db->where($where)->select();
+        if ($arr){
+            foreach ($arr as $a){
+                $a['result']='通过';
+                $a['moder']=$_SESSION['realname'];
+                $db->save($a);
+            }
+            $this->success("设置成功！");
+        }else {
+            $this->error("设置失败！");
+        }
+    }
+    
     
     public function resetAll(){
-        /* 接收参数*/
-        $proid=$_GET['proid'];
-        /* 实例化模型*/
         $db=D('tp_func');
-        $where['fproid']=$proid;
+        $where['fproid']=I('proid');
         $where['result']='失败';
         $arr=$db->where($where)->select();
         if ($arr){
@@ -179,7 +193,6 @@ class FuncController extends CommonController{
     }
     
     public function reset(){   
-        /* 接收参数*/
         $arr['id']=$_GET['funcid'];
         $arr['result']='未测试';
         $arr['moder']=$_SESSION['realname'];

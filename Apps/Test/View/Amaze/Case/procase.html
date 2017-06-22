@@ -61,21 +61,15 @@
 			</div>			
 		</div>
 		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">用例统计</h3></div>			
-			
-				<ul class="list-group">
-					<volist name='var' id='vo' empty="没有数据">
-				  		<li class="list-group-item"><{$vo.adder}>
+			<div class="panel-heading"><h3 class="panel-title">用例统计</h3></div>						
+			<ul class="list-group">
+				<volist name='var' id='vo' empty="没有数据">
+				  	<li class="list-group-item"><{$vo.adder}>
 				  			<span class="badge"><{$vo.count(id)}></span>
-				  		</li>
-				  	</volist>
-				 
-				</ul>	
-					
-					
-		</div>
-	
-	
+				  	</li>
+				  </volist>				 
+			</ul>											
+		</div>		
 	</div>
 </div>
 
