@@ -2,15 +2,28 @@
  <!-- content start -->
  <div class="admin-content">     
 <div class="row">
-	<div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>近期上线项目</small></div>
-    </div>
-    <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+   <!--  <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
       <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增页面<br/>2300</a></li>
       <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/>308</a></li>
       <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/>80082</a></li>
       <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>在线用户<br/>3000</a></li>
-    </ul>
+    </ul> -->
+    <div class="col-md-1"></div> 
+    <div class="col-md-10"> 
+    	<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">正式环境配置</h3></div>						
+			<ul class="list-group">
+				<volist name='var' id='vo' empty="没有数据">
+					<notempty  name="vo.real">				
+						<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.real}>'><{$vo.real}></a> <span class="label label-default pull-right"><{$vo.realversion}></span></li>
+					</notempty > 				  	
+				</volist>				 
+			</ul>											
+		</div>
+	</div>
+	<div class="col-md-1"></div> 
+</div>
+<div class="row">
   <div class="col-md-6">  
      <div class="starter-template">             
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
@@ -57,11 +70,22 @@
      </div>    		
   </div>  
   <div class="col-md-5">  
-  		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">正式环境配置</h3></div>						
+  		
+		
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3 class="panel-title">测试环境配置</h3></div>						
 			<ul class="list-group">
 				<volist name='var' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.real}>'><{$vo.real}></a> <span class="label label-info pull-right">1</span></li>
+					<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.testip}>'><{$vo.testip}></a> <span class="label label-default pull-right"><{$vo.id|getBuildVersion=###}></span></li>									  	
+				</volist>				 
+			</ul>											
+		</div>
+		
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3 class="panel-title">仿真环境配置</h3></div>						
+			<ul class="list-group">
+				<volist name='var' id='vo' empty="没有数据">
+					<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.sedan}>'><{$vo.testip}></a> <span class="label label-default pull-right"><{$vo.sedanversion}></span></li>									  	
 				</volist>				 
 			</ul>											
 		</div>

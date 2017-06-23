@@ -6,13 +6,14 @@ class IndexController extends WebInfoController {
         $data=M('projectproduct')->where($where)
             ->join('zt_project ON zt_projectproduct.project = zt_project.id')
             ->field("id,name,code,begin,end,testgp,status,pri,acl,deleted,desc,po,pm,qd,rd,order,deleted")
-            ->order("end desc")->limit(12)->select();        
+            ->order("end desc")->limit(20)->select();        
         $this->assign('data',$data);
         //T('Test@Index/index')
         $where=array('product'=>10,'state'=>'0');
         $m=M('branch');
         $var=$m->where($where)->select();
         $this->assign('var',$var);
+//         dump($var);
         $this->theme('')->display();
     }
     

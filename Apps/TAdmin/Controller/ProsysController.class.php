@@ -67,7 +67,30 @@ class ProsysController extends CommonController {
     }
     
     
-
+    public function deployToReplica(){
+        $_GET['sedanVersion']=getBuildVersion(I('id'));
+        $_GET['moder']=$_SESSION['realname'];
+        if (M('branch')->save($_GET)){
+            $this->success("已成功部署到仿真环境！");
+        }else{
+            $this->error("部署失败！");
+        }
+    }
+    
+    public function deployToOnline(){
+        $m=M('branch');
+        $arr=$m->find(I('id'));
+        $_GET['id']=I('id');
+        $_GET['realVersion']=$arr['sedanversion'];
+        $_GET['moder']=$_SESSION['realname'];
+//         dump($_GET);
+        if ($m->save($_GET)){
+            $this->success("已成功部署到生产环境！");
+        }else{
+            $this->error("部署失败！");
+        }
+        
+    }
    
     
 }

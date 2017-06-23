@@ -23,22 +23,25 @@
 				</div>
 				<div class="form-group">					   
 					<label  class="col-sm-2 control-label">测试环境:</label>
-					<div class="col-sm-6"><input type="text" class="form-control" name="testip" value="<{$sys.testip}>" placeholder="测试环境地址"></div>
-					
-					<div class="col-sm-4"><input type="text" class="form-control" name="" value="" placeholder="版本号"></div>
+					<div class="col-sm-4"><input type="text" class="form-control" name="testip" value="<{$sys.testip}>" placeholder="测试环境地址"></div>					
+					<div class="col-sm-4"><input type="text" class="form-control"  value="<{$sys.id|getBuildVersion=###}>" placeholder="版本号" readonly></div>
+					<div class="col-sm-2">
+						<a href="__URL__/deployToReplica/id/<{$sys.id}>" class="btn btn-info">部署到仿真</a>
+					</div>
 					
 				</div>
 				<div class="form-group">					   
 					<label  class="col-sm-2 control-label">仿真环境:</label>
-					<div class="col-sm-6"><input type="text" class="form-control" name="sedan" value="<{$sys.sedan}>" placeholder="仿真环境地址"></div>
-					
-					<div class="col-sm-4"><input type="text" class="form-control" name="" value="" placeholder="版本号"></div>
+					<div class="col-sm-4"><input type="text" class="form-control" name="sedan" value="<{$sys.sedan}>" placeholder="仿真环境地址"></div>					
+					<div class="col-sm-4"><input type="text" class="form-control" value="<{$sys.sedanversion}>" placeholder="版本号" readonly></div>
+					<div class="col-sm-1">
+						<a href="__URL__/deployToOnline/id/<{$sys.id}>" class="btn btn-info">部署到线上</a>
+					</div>
 				</div>	
 				<div class="form-group">					   
 					<label  class="col-sm-2 control-label">生产环境:</label>
-					<div class="col-sm-6"><input type="text" class="form-control" name="real" value="<{$sys.real}>" placeholder="生产环境地址"></div>
-					
-					<div class="col-sm-4"><input type="text" class="form-control" name="" value="" placeholder="版本号"></div>
+					<div class="col-sm-6"><input type="text" class="form-control" name="real" value="<{$sys.real}>" placeholder="生产环境地址"></div>					
+					<div class="col-sm-4"><input type="text" class="form-control" value="<{$sys.realversion}>" placeholder="版本号" readonly></div>
 				</div>
 				<div class="form-group">					   
 					<label class="col-sm-2 control-label"></label>

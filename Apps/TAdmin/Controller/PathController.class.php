@@ -75,7 +75,7 @@ class PathController extends CommonController {
             $this->error($m->getError());
         }
         $lastId=$m->add($arr);       
-        $where=array("pathid"=>$data['id'],"fproid"=>$_SESSION['proid']);
+        $where=array("pathid"=>$data['id'],"fproid"=>$_SESSION['proid'],'state'=>"正常");
         $funcs=M("tp_func")->where($where)->field("sn,id as funcid,func")->order("sn")->select();
         /*插入执行场景功能数据 */
         foreach ($funcs as $a){

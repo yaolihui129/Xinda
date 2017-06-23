@@ -13,7 +13,15 @@
             return 'trunk';
         }
     }
-    
+    function getBuildVersion($branchId){
+        $where=array("branch"=>$branchId);
+        $arr=M('build')->where($where)->order('id desc')->select();
+        if($arr){
+            return $arr[0]['name'];
+        }else {
+            return '暂无版本';
+        }
+    }
     function getZhouqi($key){// 根据id获取周期
         $where=array('type'=>'zhouqi','k'=>$key);
         $data=M('tp_dict')->where($where)->find();
