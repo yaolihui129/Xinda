@@ -1,7 +1,7 @@
 <?php    
     function getState($key){// 根据id获取状态
         $where=array('type'=>'state','k'=>$key);
-        $data=M('tp_dict')->where($where)->find();        
+        $data=M('tp_dict')->where($where)->find();          
         return $data['v'];   
     }
     
