@@ -1,44 +1,68 @@
 <layout name="layout" />
- <!-- content start -->
- <div class="admin-content"> 
-<div class="panel panel-default">
-	<div class="panel-heading">
-	    <h3 class="panel-title">工时统计
-	    	<a href="__APP__/Test" class="btn btn-warning btn-xs pull-right">返回</a>
-	    </h3>
-  	</div>
-  	<div class="panel-body">
-	  	<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="__URL__/index">人员工时</a></li>
-			<li role="presentation" ><a href="__URL__/doing">进行中</a></li>
-			<li role="presentation" ><a href="__URL__/finish">已关闭</a></li>			  			  
-		</ul>
-				
-		<div class="starter-template">
-	        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	         	<volist name='data' id='da' empty="没有数据">
-	            <div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading<{$da.id}>">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#<{$da.id}>" aria-expanded="true" aria-controls="<{$da.id}>">
-							<{$da.assignedto|getRealname=###}>&nbsp;<{$da.project|getProNo=###}>
-							<b>任务:</b><{$da.name}>
-				  			<span class="badge pull-right"><{$da.type}></span>
-				  			<{$da.status}>【剩余:<{$da.left}>/消耗:<{$da.consumed}>/预计:<{$da.estimate}>】
-				  			
-				  		</a>	
-					 </h4>
-					 </div>
-						<div id="<{$da.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$da.id}>">
-						    <ul class="list-group"><{$da.id|getTasktime=###}></ul>	
-						</div>
-	  			</div>
-	            </volist>
-	        </div>
-	    </div>
-  
-  	</div>
-	
-</div>
-
+<!-- content start -->
+<div class="admin-content"> 
+	 <div class="row">
+  		<div class="col-md-9">
+	  		<div class="panel panel-success">
+				<div class="panel-heading"><{$_SESSION['taskAccount']|getZTUserName=###}> 最近9天的任务</div>
+				<div class="starter-template">             
+			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+			         	<volist name='arr' id='ar' empty="没有数据">
+				            <div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading<{$ar}>">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#<{$ar}>" aria-expanded="true" aria-controls="<{$ar}>">
+										<{$ar}>.<{$ar|taskInfo=###}></a><span class="badge pull-right"><{$ar|taskWorkTime=###}></span>					      
+									 </h4>
+								 </div>
+								 <div id="<{$ar}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ar}>">
+									   	<ul class="list-group"><{$ar|taskestimate=###}></ul>								   
+								</div>
+				  			</div>                     
+			            </volist>
+			        </div>
+			     </div> 
+			</div>
+			<notempty name="data">
+				<div class="panel panel-info">
+					<div class="panel-heading"><{$_SESSION['taskAccount']|getZTUserName=###}> 最近9天 <b>解决</b> OR <b>关闭</b> 的BUG</div>
+					<div class="starter-template">             
+				        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+				         	<volist name='data' id='ar' empty="没有数据">
+					            <div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="heading<{$ar.id}>">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#<{$ar}>" aria-expanded="true" aria-controls="<{$ar.id}>">
+											<{$ar.id}>.<{$ar.project|getProNo=###}>【<{$ar.resolveddate}>】
+											<span class="label label-default"><{$ar.branch|getBranchName=###}></span>
+				                			<span class="label label-info"><{$ar.module|getModuleName=###}></span>
+											<{$ar.title}></a><span class="badge pull-right"><{$ar.status|getProst=###}></span>					      
+										 </h4>
+									 </div>
+									 <div id="<{$ar.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ar.id}>">
+										   	<ul class="list-group"><{$ar.id}></ul>								   
+									</div>
+					  			</div>                     
+				            </volist>
+				        </div>
+				     </div>
+				</div>
+			</notempty> 
+			 			 		
+  		</div>
+  		<div class="col-md-2"> 
+	  		<ul class="list-group">
+	  			 <volist name='users' id='user'>
+	  			 	 <switch name="user.account">
+						<case value="$_SESSION['taskAccount']"> <li class="list-group-item list-group-item-warning"></case>					   					    
+						<default /><li class="list-group-item ">
+					</switch>  			      			       		       	
+				       	<a href="__URL__/index/account/<{$user.account}>" ><{$user.realname}></a>			        				
+						<span class="badge">任务：<{$user.account|countTaskWorkTime=###}>;BUG:<{$user.account|countTaskBug=###}></span>					  					  							       
+			        </li>
+			    </volist>
+			</ul>
+  		</div>
+  	 </div>
+ 
 </div>

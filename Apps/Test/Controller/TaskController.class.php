@@ -2,68 +2,28 @@
 namespace Test\Controller;
 class TaskController extends WebInfoController {
     public function index(){
-        $where['deleted']='0';
-        $where['assignedTo'] = array('neq','closed');
-        $where['status']=array('neq','cancel');
-        $data=M('task')->where($where)->order("assignedTo,finishedBy,project,type,story")->select();
-        $this->assign('data',$data);
+        $users=M('user')->where(array("deleted"=>'0',"usergp"=>'PJD'))->field("account,realname")->order('account desc')->select();
+        $this->assign('users',$users);
+        
+        $_SESSION['taskAccount']=I('account',$users[0]['account']);
+        $riqi=date("Y-m-d",time()-9*24*3600);
+        $map['date']  = array('egt',$riqi);
+        $map['account']=$_SESSION['taskAccount'];
+        $data=M('taskestimate')->where($map)->order('date desc')->select();
+        foreach ($data as $task){
+            $arr[]=$task['task'];
+        }   
+        $arr=array_unique($arr);
+        $this->assign('arr',$arr);
+        
+        $m=M('bug');
+        $where['resolvedBy|closedBy']=$_SESSION['taskAccount'];
+        $where['resolvedDate']= array('egt',$riqi);
+        $data=$m->where($where)->order('resolvedDate desc')->select();
+        $this->assign('data',$data);       
         
         $this->display();
     } 
-    
-    
-    
-    public function doing(){
-//        
-        $Model = new \Think\Model() ;// 实例化一个model对象 没有对应任何数据表
-        $data=$Model
-        ->query("SELECT
-                zt_task.assignedTo AS assignedto,
-                Sum(zt_task.estimate) AS estimate,
-                Sum(zt_task.consumed) AS consumed,
-                Sum(zt_task.left) AS left1
-                FROM
-                zt_task
-                WHERE
-                zt_task.deleted = '0' AND
-                zt_task.`status` <> 'cancel' AND
-                zt_task.assignedTo <> 'closed'
-                GROUP BY
-                zt_task.assignedTo
-                ORDER BY
-                assignedto ASC");
-        
-        
-        $this->assign('data',$data);
-    
-        $this->display();
-    
-    }
-    
-    public function finish(){
-
-
-        $Model = new \Think\Model() ;// 实例化一个model对象 没有对应任何数据表
-        $data=$Model
-        ->query("SELECT
-                zt_task.finishedBy AS finishedby,
-                Sum(zt_task.estimate) AS estimate,
-                Sum(zt_task.consumed) AS consumed,
-                Sum(zt_task.left) AS left1
-                FROM
-                zt_task
-                WHERE
-                zt_task.assignedTo = 'closed' AND
-                zt_task.deleted = '0'
-                GROUP BY
-                zt_task.finishedBy
-                            ");
-        $this->assign('data',$data);
-    
-        $this->display();
-    
-    }
-    
-    
+     
 }
    

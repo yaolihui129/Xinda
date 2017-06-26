@@ -765,6 +765,12 @@
             return '未开始';
         }elseif ($value=='suspended'){
             return '已挂起';
+        }elseif ($value=='closed'){
+            return '已关闭';
+        }elseif ($value=='active'){
+            return '激活';
+        }elseif ($value=='resolved'){
+            return '已解决';
         }else{
             return ;
         }

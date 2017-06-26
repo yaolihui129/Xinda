@@ -36,7 +36,7 @@
 			<ul class="list-group">
 				<volist name='var' id='vo' empty="没有数据">
 					<notempty  name="vo.real">				
-						<li class="list-group-item"><{$vo.name}>:<a href='<{$vo.real}>'><{$vo.real}></a> <span class="label label-default pull-right"><{$vo.realversion}></span></li>
+						<li class="list-group-item"><{$vo.name}>:<a target="_blank" href='<{$vo.real}>'><{$vo.real}></a> <span class="label label-default pull-right"><{$vo.realversion}></span></li>
 					</notempty > 				  	
 				</volist>				 
 			</ul>											
@@ -94,7 +94,7 @@
 			<div class="panel-heading"><h3 class="panel-title">测试环境配置</h3></div>						
 			<ul class="list-group">
 				<volist name='var' id='vo' empty="没有数据">
-					<li class="list-group-item">:<a href='<{$vo.testip}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.id|getBuildVersion=###}></span></li>									  	
+					<li class="list-group-item"><a target="_blank" href='<{$vo.testip}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.id|getBuildVersion=###}></span></li>									  	
 				</volist>				 
 			</ul>											
 		</div>
@@ -103,7 +103,7 @@
 			<div class="panel-heading"><h3 class="panel-title">仿真环境配置</h3></div>						
 			<ul class="list-group">
 				<volist name='var' id='vo' empty="没有数据">
-					<li class="list-group-item"><a href='<{$vo.sedan}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.sedanversion}></span></li>									  	
+					<li class="list-group-item"><a target="_blank" href='<{$vo.sedan}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.sedanversion}></span></li>									  	
 				</volist>				 
 			</ul>											
 		</div>
