@@ -1,17 +1,13 @@
 <layout name="layout" />
  <!-- content start -->
  <div class="admin-content">
- 	<div class="am-cf am-padding">
-  		<div class="am-fl am-cf">
-  			<strong class="am-text-primary am-text-lg"><a href="__URL__/index/pathid/<{$func.pathid}>"><{$arr.name}></a></strong> / 
-  			<small><{$arr.name}></small>
-  		</div>	
-  	</div> 
 	<div class="row"> 
 	  <div class="col-md-8">
 		  	<div class="panel panel-info">
 			  <div class="panel-heading">
-			  	<h3 class="panel-title">&nbsp;
+			  	<h3 class="panel-title">
+			  		<strong class="am-text-primary am-text-lg"><a href="__URL__/index/pathid/<{$func.pathid}>"><{$arr.name}></a></strong> / 
+  					<small><{$arr.name}></small>
 			  		<div class="btn-group pull-right">	  		
 			  			<a href="__APP__/TAdmin/Prosys/index/proid/<{$_SESSION['proid']}>" class=" btn btn-warning btn-xs ">返回</a>
 			  		</div>

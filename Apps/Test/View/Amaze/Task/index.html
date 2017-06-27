@@ -2,7 +2,7 @@
 <!-- content start -->
 <div class="admin-content"> 
 	 <div class="row">
-  		<div class="col-md-9">
+  		<div class="col-md-8">
 	  		<div class="panel panel-success">
 				<div class="panel-heading"><{$_SESSION['taskAccount']|getZTUserName=###}> 最近9天的任务</div>
 				<div class="starter-template">             
@@ -10,10 +10,11 @@
 			         	<volist name='arr' id='ar' empty="没有数据">
 				            <div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading<{$ar}>">
-									<h4 class="panel-title">
+									<h6 class="panel-title">										
 										<a data-toggle="collapse" data-parent="#accordion" href="#<{$ar}>" aria-expanded="true" aria-controls="<{$ar}>">
-										<{$ar}>.<{$ar|taskInfo=###}></a><span class="badge pull-right"><{$ar|taskWorkTime=###}></span>					      
-									 </h4>
+										<{$ar}>.<{$ar|taskInfo=###}></a>
+										<span class="badge pull-right"><{$ar|taskWorkTime=###}></span>					      
+									 </h6>
 								 </div>
 								 <div id="<{$ar}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ar}>">
 									   	<ul class="list-group"><{$ar|taskestimate=###}></ul>								   
@@ -32,11 +33,18 @@
 					            <div class="panel panel-default">
 									<div class="panel-heading" role="tab" id="heading<{$ar.id}>">
 										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordion" href="#<{$ar}>" aria-expanded="true" aria-controls="<{$ar.id}>">
-											<{$ar.id}>.<{$ar.project|getProNo=###}>【<{$ar.resolveddate}>】
+											<{$ar.id}>.<{$ar.project|getProNo=###}>
 											<span class="label label-default"><{$ar.branch|getBranchName=###}></span>
 				                			<span class="label label-info"><{$ar.module|getModuleName=###}></span>
-											<{$ar.title}></a><span class="badge pull-right"><{$ar.status|getProst=###}></span>					      
+											<switch name="ar.resolvedby">
+											    <case value="$_SESSION['taskAccount']">解决于：【<{$ar.resolveddate}>】</case>											    
+											    <default />关闭于：【<{$ar.closeddate}>】
+											</switch>
+											<br><br>
+											<{$ar.title}>
+											<a data-toggle="collapse" data-parent="#accordion" href="#<{$ar}>" aria-expanded="true" aria-controls="<{$ar.id}>">
+											</a>
+											<span class="badge pull-right"><{$ar.status|getProst=###}></span>					      
 										 </h4>
 									 </div>
 									 <div id="<{$ar.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$ar.id}>">
@@ -50,7 +58,7 @@
 			</notempty> 
 			 			 		
   		</div>
-  		<div class="col-md-2"> 
+  		<div class="col-md-3"> 
 	  		<ul class="list-group">
 	  			 <volist name='users' id='user'>
 	  			 	 <switch name="user.account">

@@ -2,7 +2,7 @@
     function taskInfo($task){
         $where=array('deleted'=>'0');
         $arr=M('task')->where($where)->find($task);
-        return "【".getProNo($arr['project']).'】<span class="label label-default">'.getProst($arr['status'])."</span>【".taskLastUpdateDate($arr['id']).'】'.$arr['name'];
+        return "【".getProNo($arr['project']).'】<span class="label label-default">'.getProst($arr['status'])."</span>【".taskLastUpdateDate($arr['id']).'】<br><br>'.$arr['name'];
     }
     function taskWorkTime($task){
         $where=array('deleted'=>'0');
@@ -33,22 +33,21 @@
         $m=D('taskestimate');
         $where['task']=$task;
         $where['account']=$_SESSION['taskAccount'];
-        $where['consumed']=array('gt',0);;
         $arr=$m->where($where)->order('date desc')->select();
-        return $arr[0]['date'];
+        return $arr[0]['date'];               
     }
     
     function taskestimate($task){
         $m=D('taskestimate');
         $where['task']=$task;
         $where['consumed']=array('gt',0);;
-        $arr=$m->where($where)->select();
+        $arr=$m->where($where)->order('date desc')->select();
         foreach ($arr as $ar){
             $str.='<li class="list-group-item">';
             $str.=      getZTUserName($ar['account'])."&nbsp;";
             $str.=      '：'.$ar['date']."&nbsp;"; 
-            $str.=      $ar['work'];
-            $str.=      '<span class="label label-default">'.$ar['consumed'].' 小时</span>';            
+            $str.=      '<span class="label label-default">'.$ar['consumed'].' 小时</span>';
+            $str.=      $ar['work'];                     
             $str.='</li>';
         } 
         return $str;

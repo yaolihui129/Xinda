@@ -22,12 +22,13 @@ class ProsysController extends CommonController {
             $a[]=$sys['branch'];
         }
         $this->assign('a',$a);
-        
+        if($a){           
+            $map['id']=array('not in',$a);              
+        }
         $map['product']=$pp['product'];
         $map['state']=0;
-        $map['id']=array('not in',$a);
         $syses=$m->where($map)->order('sn')->select();
-        $this->assign('syses',$syses);       
+        $this->assign('syses',$syses);
         
 	    $this->display();
     }

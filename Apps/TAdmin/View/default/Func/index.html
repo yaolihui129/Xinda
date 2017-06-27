@@ -26,17 +26,16 @@
 		            <tr>             	
 		                <td align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
 		                <td ><{$st.id}>:<{$st.func}>【<{$st.state}>】
-		                	<a href="__URL__/modproid/id/<{$st.id}>/fproid/<{$_SESSION['proid']}>"><span class="badge"><{$st.fproid|getProNo=###}></span></a>
-		                   
-		                 </td> 
-		                 <td>
+		                	<a href="__URL__/modproid/id/<{$st.id}>/fproid/<{$_SESSION['proid']}>"><span class="badge pull-right"><{$st.fproid|getProNo=###}></span></a>		                   
+		                </td> 
+		                <td>
 		                 	<div class="btn-group">
 				               <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Case/index/funcid/<{$st.id}>" class="btn btn-info ">用例  <{$st.id|countFCase=###}></a>
 				               <!--  <a target="_blank" href="__APP__/<{$Think.config.PRODUCT}>/Element/index/funcid/<{$st.id}>" class="btn btn-info ">数据模板</a>-->
 				               <a href="__URL__/mod/id/<{$st.id}>" class="btn btn-info ">修改</a>
 				               <a href="__URL__/realdel/id/<{$st.id}>/table/tp_func" class="btn btn-info " onclick="return confirm('你确定要删除功能点：<{$st.func}>？')">删除</a>				               
 				            </div>
-		                 </td>                             
+		                </td>                             
 		            </tr>
 		            </volist>
 		            <input type="hidden" name="pathid" value="<{$arr.id}>" /> 
@@ -47,7 +46,7 @@
   		</div> 
   </div>
   
-  <div class="col-md-4 hidden-xs">
+  <div class="col-md-3 hidden-xs">
   	<div class="panel panel-info">
 	  <div class="panel-heading"><h3 class="panel-title">模块</h3></div>
 	  <ul class="list-group">
