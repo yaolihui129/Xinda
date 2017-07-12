@@ -1,9 +1,93 @@
 <layout name="layout" />
+
+<style>
+#divtest
+{
+    width: 282px;
+}
+#divtest .title
+{
+    padding: 8px;
+    background-color:Blue;
+    color:#fff;
+    height: 35px;
+    line-height: 23px;
+    font-size: 15px;
+    font-weight: bold;
+}
+#divtest ul
+{
+    float: left;
+    width: 280px;
+    padding: 5px 0px;
+    margin: 0px;
+    font-size: 14px;
+    list-style-type: none;
+}
+#divtest ul li
+{
+    float: left;
+    width: 280px;
+    height: 33px;
+    line-height: 33px;
+    padding: 3px 8px;
+}
+.fl
+{
+    float: left;
+}
+.fr
+{
+    float: right;
+}
+
+</style>
  <!-- content start -->
  <div class="admin-content">
 
+		<div id="divtest">
+            <div class="title">
+                <span class="fl">检测数字的奇偶性</span> 
+                <span class="fr">
+                    <input id="btnCheck" type="button" value="检测" />
+                </span>
+            </div>
+            <ul>
+               <li>请求输入一个数字 
+                   <input id="txtNumber" type="text" size="12" />
+               </li>
+            </ul>
+        </div>
+        <embed class="USA-video" src='http://player.youku.com/player.php/sid/XMTUxNTc2NzIyMA==/v.swf' allowFullScreen='true' quality='high' width='759' height='360' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
+		
+        
  
  
+ 		<script type="text/javascript">
+            $(function () {
+            	$("#btnCheck").ajaxStart(function(){
+                    $(this).html("正在请求数据...");
+                    $this.attr("disabled", "true");
+                });
+                $("#btnCheck").ajaxStop(function(){
+                    $(this).html("数据请求完成！");
+                    $this.attr("disabled", "false");
+                });            	
+            	$("#btnCheck").bind("click", function () {
+            		 var $this = $(this);
+            		$.ajax({
+                        url:"__URL__/checkjo",
+                        data: { num: $("#txtNumber").val() },
+                        type:'post',
+                        success: function (data) {                      	                       	
+                            $("#divtest ul").append("<li>你输入的<b>  "
+                            + $("#txtNumber").val() + " </b>是<b> "
+                            + data + " </b></li>");
+                        }
+                    });
+                })
+            });
+        </script>
  
  
  

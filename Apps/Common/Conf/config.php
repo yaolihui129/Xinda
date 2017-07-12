@@ -1,7 +1,7 @@
 ﻿<?php
 return array(
 	//'配置项'=>'配置值'
-	'SHOW_PAGE_TRACE'=>true,//显示页面Trace信息false
+	'SHOW_PAGE_TRACE'=>false,//显示页面Trace信息false
     'SESSION_AUTO_START' => true,//开启SESSION
     'URL_MODEL' => '1',//URL模式
     'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Demo','Tpyjd','TestAdmin'),//设置允许模块
