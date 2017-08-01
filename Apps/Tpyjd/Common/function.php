@@ -47,7 +47,12 @@ function getOldCrmDemo($id){
     }
 }
 
-
+function getCrmFullname($crmId){
+    $m=M('user');
+    $where['crmId']=$crmId;
+    $data=$m->where($where)->find();
+    return $data['fullname'];
+}
 
 function getBinding(){
     $serviceName="clogin";
