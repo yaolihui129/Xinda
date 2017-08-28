@@ -37,13 +37,42 @@ class WeixinController extends WebInfoController {
             }
             if(strtolower($postObj->Event) == 'click' ){//自定义菜单“推”事件
                 if(strtolower($postObj->EventKey) == 'item1' ){
-                    $content   = 'item01';
+                    $content   = '诚邀加盟';
                     wxReplyText($toUser,$fromUser,$content);
                 }
                 if(strtolower($postObj->EventKey) == 'item2' ){
-                    $content   = 'item2';
+                    $content   = '最新活动';
                     wxReplyText($toUser,$fromUser,$content);
                 }
+                if(strtolower($postObj->EventKey) == 'item3' ){
+                    $content   = '最新政策';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item4' ){
+                    $content   = '积分商城';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item5' ){
+                    $content   = '我的订单';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item6' ){
+                    $content   = '优惠券';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item7' ){
+                    $content   = 'item7';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item8' ){
+                    $content   = 'item8';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                if(strtolower($postObj->EventKey) == 'item9' ){
+                    $content   = 'item9';
+                    wxReplyText($toUser,$fromUser,$content);
+                }
+                
             }
             if(strtolower($postObj->Event) == 'view' ){//自定义菜单跳转
                 $content   = '跳转链接是：'.$postObj->EventKey;
