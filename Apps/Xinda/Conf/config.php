@@ -21,7 +21,8 @@ return array(
     'txy_AppId'         =>  '1252402623',  //定义腾讯云APPID
     'txy_SecretId'      =>  'AKIDAB1f6LpnzzoTzKeQBkhZIpAJF2eao4Wq',
     'txy_SecretKey'     =>  'HQOAoGSZVFmEammaFi4ExZ7UwLYggWFm',
-    'zs_key'            =>  '9oS2m7HyLS',
+    'www_key'           =>  '9oS2m7HyLS',
+    'api_key'           =>  'KyHm6jslW4',
     'wx_mume'=>'{
                   	"button": [
                         {
