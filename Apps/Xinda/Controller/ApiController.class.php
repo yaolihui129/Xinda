@@ -6,7 +6,12 @@ class ApiController extends Controller {
                
         echo '您购买的是：'.I('name').'团购价格为：'.I('jiage');
     }
-    
+    public function ad(){
+        $where=array('prodid'=>C('PRODID'));
+        $pic=M('tp_ad')->where($where)->order('utime desc')->select();
+//         $pic=json_encode($pic);
+        echo $pic;
+    }
     public function upload(){
         if(IS_POST){
             $upload = new \Think\Upload();// 实例化上传类
