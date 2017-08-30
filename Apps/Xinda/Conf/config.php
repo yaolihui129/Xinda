@@ -22,7 +22,7 @@ return array(
     'txy_SecretId'      =>  'AKIDAB1f6LpnzzoTzKeQBkhZIpAJF2eao4Wq',
     'txy_SecretKey'     =>  'HQOAoGSZVFmEammaFi4ExZ7UwLYggWFm',
     'www_key'           =>  '9oS2m7HyLS',
-    'api_key'           =>  'KyHm6jslW4',
+    'apiKey'           =>  'KyHm6jslW4',
     'wx_mume'=>'{
                   	"button": [
                         {
