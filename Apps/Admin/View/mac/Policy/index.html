@@ -1,1 +1,72 @@
-!Templates.html5.content!
+<layout name="layout" />
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">	      	
+	    <a href="__APP__/Admin"><i class="icon-gift"></i> 优惠促销</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current"> 最新政策</a>          		        	
+		<form class="form-inline pull-right" action="__URL__/index" method="post">
+			<div class="form-group">
+				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
+			</div>
+				<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
+				<a href="__URL__/add" type="button" class="btn btn-default"><i class="icon-plus"> 添加</i></a>
+		</form>    	
+	</h2>	      		        
+	<div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+
+	
+<!-- Matter -->
+<div class="matter">
+   <div class="container">         
+      <div class="widget">               
+	     <div class="widget-content referrer">                  
+	        <table class="table table-striped table-bordered table-hover">
+	               <thead>
+		              <tr>
+		                <th width=5% align="center" bgcolor="#ccc">顺序</th>
+		                <th width=10% align="center" bgcolor="#ccc">图片</th>
+		                <th width=20% align="center" bgcolor="#ccc">标题</th>	                                          
+	                    <th width=30% align="center" bgcolor="#ccc">描述</th>                                                                             
+	                    <th width=10% align="center" bgcolor="#ccc">更新时间</th>
+	                    <th width=20% align="center" bgcolor="#ccc">操作</th>
+		               </tr>
+	               </thead>
+	               <tbody>  
+	               <form action="__URL__/order" method="post" >             
+					<volist name='data' id='st'>
+		               <tr>                          
+		                 <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
+		                 <td><img src="__UPLOAD__/<{$_SESSION['qz']}><{$st.path}><{$st.img}>"  style="width:80px;max-width: 80px;"/></td>
+		                 <td><{$st.title}></td>		                 	                          
+		                 <td><{$st.desc}></td>
+		                 <td><{$st.utime}></td>                         
+		                 <td>                              
+		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
+		                    <a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-default"><i class="icon-pencil"> 发布/下线</i></a>
+		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger" onclick="return confirm('你确定要删除？')">
+		                       <i class="icon-remove"> 删除</i>
+		                    </a>
+		                  </td>
+		                </tr>
+					</volist>				
+                  </tbody>                                                                                        
+	            </table>
+	            <div class="widget-foot">
+                      	<div class="uni pull-left">
+                      		<input type="submit" name="do_submit" value="批量排序" class="btn btn-info">                      		
+                      	</div> 
+                      	</form>                
+                        <ul class="pagination pull-right"><{$page}></ul>
+                      
+                      <div class="clearfix"></div> 
+
+                    </div>
+	         </div>
+         </div>
+     </div>
+</div>
+	

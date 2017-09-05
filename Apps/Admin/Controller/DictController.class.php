@@ -16,7 +16,7 @@ class DictController extends CommonController{
          $_SESSION['dictType']=$type;
          $this->assign('type',$type);
 
-    	 $data=$m->field('dictid,k,v,type,state,prodid,moder,utime',false)
+    	 $data=$m->field('id,k,v,type,state,prodid,moder,utime',false)
     	 ->where(array('type'=>$type))->order('k')->select();
 	     $this->assign('data',$data);
 
@@ -33,51 +33,30 @@ class DictController extends CommonController{
 
         $this->display();
     }
-
-    public function insert(){       
-        $m=D('tp_dict');   
-        do {//如果该ID在库中存在，则重新获取
-            $id=getRandCode(40);
-            $arr=$m->find($id);
-        } while ($arr);
-        $_POST['dictId']=$id;                 
-        $_POST['moder']=$_SESSION['realname'];       
-        if(!$m->create()){
-            $this->error($m->getError());
-        }
-        if($m->add()){
-           $this->success("成功",U('index'));
-        }else{
-            $this->error("失败");
-        }
+    public function insert(){
+        $this->dataInsert($this->getTable(), 8, $this->getName(), $_POST);
     }
 
+    
     public function mod(){
-        
-        $data=M('tp_dict')->find($_GET['id']);
-        $this->assign('data',$data);
-        $this->assign("state", formSV($data['state'],"state"));
-
+        $arr=M($this->getTable())->find($_GET[id]);
+        $this->assign('arr',$arr);
+        $this -> assign("state", formSV($arr['state'],"state"));
         $this->display();
     }
-
-    public function update(){
-        $_POST['moder']=$_SESSION['realname'];
-        if (D('tp_dict')->save($_POST)){
-            $this->success("成功!",U('index'));
-        }else{
-            $this->error("失败!");
-        }
+    
+    public function update(){//更新
+        $this->dataUpdate($this->getTable(), $this->getName(), $_POST);
     }
 
-
-    public function del(){
-        $count =M('tp_dict')->delete($_GET['id']);
-        if ($count>0) {
-            $this->success('删除成功');
-        }else{
-            $this->error('删除失败');
-        }
+public function del(){//删除
+        $this->shanChu($this->getTable(),I('id'));
     }
 
+    function getTable(){
+        return 'tp_dict';
+    }
+    function getName(){
+        return 'dict';
+    }
 }

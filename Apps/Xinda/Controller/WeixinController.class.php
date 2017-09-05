@@ -40,13 +40,233 @@ class WeixinController extends WebInfoController {
                     $content   = '诚邀加盟';
                     wxReplyText($toUser,$fromUser,$content);
                 }
-                if(strtolower($postObj->EventKey) == 'item2' ){
-                    $content   = '最新活动';
-                    wxReplyText($toUser,$fromUser,$content);
+                if(strtolower($postObj->EventKey) == 'item2' ){//最新活动
+                    $map['prodid']=C(PRODID);
+                    $map['state']=5;
+                    $data=M('tp_activity')->field('title,desc,img,id')->where($map)->order('utime desc')->limit(5)->select();
+                    if(sizeof($data)==1){
+                        $arr = array(
+                             array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ), 
+                        );                        
+                    }elseif (sizeof($data)==2){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    }elseif (sizeof($data)==3){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    }elseif (sizeof($data)==4){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[3]['title'],
+                                'description'=>$data[3]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[3]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[3]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                        
+                    }elseif (sizeof($data)==5){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[3]['title'],
+                                'description'=>$data[3]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[3]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[3]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[4]['title'],
+                                'description'=>$data[4]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[4]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Activity/index/id/'.$data[4]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                        
+                    }
+                    wxReplyNews($toUser,$fromUser,$arr);
                 }
-                if(strtolower($postObj->EventKey) == 'item3' ){
-                    $content   = '最新政策';
-                    wxReplyText($toUser,$fromUser,$content);
+                if(strtolower($postObj->EventKey) == 'item3' ){//最新政策
+                    $map['prodid']=C(PRODID);
+                    $map['state']=5;
+                    $data=M('tp_policy')->field('title, desc ,img,id')->where($map)->order('utime desc')->limit(5)->select();
+                    if(sizeof($data)==1){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    }elseif (sizeof($data)==2){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    }elseif (sizeof($data)==3){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    }elseif (sizeof($data)==4){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[3]['title'],
+                                'description'=>$data[3]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[3]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[3]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    
+                    }elseif (sizeof($data)==5){
+                        $arr = array(
+                            array(
+                                'title'=>$data[0]['title'],
+                                'description'=>$data[0]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[0]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[0]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[1]['title'],
+                                'description'=>$data[1]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[1]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[1]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[2]['title'],
+                                'description'=>$data[2]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[2]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[2]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[3]['title'],
+                                'description'=>$data[3]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[3]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[3]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                            array(
+                                'title'=>$data[4]['title'],
+                                'description'=>$data[4]['desc'],
+                                'picUrl'=>C(WEBSERVER).'/Upload/'.$data[4]['img'],
+                                'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Policy/index/id/'.$data[4]['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            ),
+                        );
+                    
+                    }
+                    wxReplyNews($toUser,$fromUser,$arr);
                 }
                 if(strtolower($postObj->EventKey) == 'item4' ){
                     $content   = '积分商城';

@@ -16,16 +16,17 @@ class ProductController extends CommonController {
             $_SESSION['productSearch']='';
             $_SESSION['productPage']='';
         }        
-        //查询信息
-        if(IS_POST){
+        
+        if(IS_POST){//查询信息
             if($_POST['search']){//储存当前查询信息
                 $_SESSION['productSearch']=$_POST['search'];
             }else {
                 $_SESSION['productSearch']='';
             }
+            $this->assign('search',$_SESSION['productSearch']);
+            $map['name|money|smoney|productDesc|weight|zhouqi']=array('like','%'.$_SESSION['productSearch'].'%');
         }     
-        $this->assign('search',$_SESSION['productSearch']);       
-        $map['name|money|smoney|productDesc|weight|zhouqi']=array('like','%'.$_SESSION['productSearch'].'%');
+        
         $map['cateId']=$_SESSION['prodCate'];
         $m=M('tp_product');
         if ($_GET['p']){//储存当前翻页
@@ -118,9 +119,7 @@ class ProductController extends CommonController {
     }
     
     public function mod(){
-        /* 实例化模型*/
-        $m=D('tp_product');
-        $arr=$m->find($_GET[id]);
+        $arr=M('tp_product')->find($_GET[id]);
         $this->assign('arr',$arr);
         $this -> assign("state", formSV($arr['state'],"state"));
         $this -> assign("zhouqi", formSV($arr['zhouqi'],"zhouqi","zhouqi"));

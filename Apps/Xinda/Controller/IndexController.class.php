@@ -2,15 +2,13 @@
 namespace Xinda\Controller;
 class IndexController extends WebInfoController {   
     public function index(){
-        $JC=C('PRODUCT');
-        $this->assign('JC',$JC);
-        getWebInfo($JC);//获取网页信息
-//         dump($_SESSION);
-        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录             
-        }else {
-            if($_GET['wxOpenId']){//微信免登陆
-                $this->weiXinLogin($_GET['wxAppId'],$_GET['wxOpenId']);
-            } 
+        $this->assign('JC',C('PRODUCT'));
+        getWebInfo(C('PRODUCT'));//获取网页信息
+        if($_SESSION['isCLogin']==C(PRODUCT)){//已经登录跳过          
+        }else {//未登录  
+            if(I('wxAppId')){
+                $this->weiXinLogin(I('wxAppId'), I('wxOpenId'));
+            }
         }
         
         $where=array('prodid'=>C('PRODID'));

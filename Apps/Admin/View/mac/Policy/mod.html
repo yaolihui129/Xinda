@@ -1,1 +1,60 @@
-!Templates.html5.content!
+<layout name="layout" />
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">	      	
+	    <a href="__APP__/Admin"><i class="icon-gift"></i> 优惠促销</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current"> 最新政策</a>          		        	
+		<span class="divider">/</span> 编辑	
+		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	  	
+	</h2>	      		        
+	<div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+   <div class="container">
+		<div class="widget-content">
+		<div class="row">         
+	        
+	        <div class="col-md-7">	
+	            	<form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form"> 
+					<input type="hidden" name="id" value="<{$arr.id}>" />                                                                                                 
+			            <div class="form-group">
+			               <label class="col-lg-4 control-label">标题:</label>
+			               <div class="col-lg-8">
+			                   <input type="text" class="form-control" name='title' value="<{$arr.title}>" placeholder="title">
+			               </div>                                                        
+			            </div>                                                                                                                             
+				        <div class="form-group">
+				           <label class="col-lg-4 control-label">政策图片:</label>
+				           <div class="col-lg-8">
+				               <input id="input-1" type="file" class="file form-control" name="img">
+				           </div>
+				        </div>
+			            <div class="form-group">
+				            <label class="col-lg-4 control-label">政策简介:</label>
+				            <div class="col-lg-8"><textarea class="form-control" name="desc"><{$arr.desc}></textarea></div>
+				        </div>
+				        <div class="form-group">
+				            <label class="col-lg-4 control-label">政策详情:</label>
+				            <div class="col-lg-8"><textarea class="cleditor" name="content"><{$arr.content}></textarea></div>
+				        </div><hr />
+			            <div class="form-group">
+			                <div class="col-lg-offset-1 col-lg-8">
+			                  	<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                      
+			                </div>                             
+			            </div>
+			        </form>	            	              
+	        </div>
+	        <div class="col-md-4 ">
+	        	<img  src="__UPLOAD__/<{$arr.img}>" alt="<{$arr.img}>"  height="400px;">		  
+	        </div>
+	        
+	   	</div>
+		
+        </div>                
+    </div>
+</div>
+<!-- Matter ends -->

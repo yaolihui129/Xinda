@@ -6,5 +6,6 @@ return array(
         '__UPLOAD__'=>__ROOT__.'/Upload'
     ),
     'DEFAULT_THEME' =>  'mac',//开启模板
+    'maxPageNum'=>10,
 
 );

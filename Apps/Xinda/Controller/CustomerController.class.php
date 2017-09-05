@@ -86,7 +86,13 @@ class CustomerController extends WebInfoController {
     }
 
     public function personal(){       
-        getWebInfo(C('PRODUCT'));//获取网页信息            
+        getWebInfo(C('PRODUCT'));//获取网页信息  
+        if($_SESSION['isCLogin']==C(PRODUCT)){//已经登录跳过
+        }else {//未登录
+            if(I('wxAppId')){
+                $this->weiXinLogin(I('wxAppId'), I('wxOpenId'));
+            }
+        }
         $arr=M('tp_customer')->find($_SESSION['userid']);
         $arr=M('tp_credit')->find($arr['creditid']);
         $this->assign('arr',$arr);
