@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>非常帅气的一款多功能的JS幻灯片动画焦点图切换特效</title>	
+		<import type="css" file="css.Jiaodt.focus4.styles" />
+		<import type="css" file="css.Jiaodt.focus4.skitter_styles" />
+		<import type="css" file="css.Jiaodt.focus4.sexy-bookmarks-style" />	
+		<import file="js.jquery172_min" />
+		<import file="js.jquery_easing13" />
+		<import file="js.jquery_animate-colors-min" />
+		<import file="js.jquery_skitter-min" />
+		<import file="js.mobile.Jiaodt.sexy-bookmarks-public" />
+		<script>
+			$(document).ready(function() {		
+				var options = {};	
+				if (document.location.search) {
+					var array = document.location.search.split('=');
+					var param = array[0].replace('?', '');
+					var value = array[1];			
+					if (param == 'animation') {
+						options.animation = value;
+					}
+					else if (param == 'type_navigation') {
+						if (value == 'dots_preview') {
+							$('.border_box').css({'marginBottom': '40px'});
+							options['dots'] = true;
+							options['preview'] = true;
+						}
+						else {
+							options[value] = true;
+							if (value == 'dots') $('.border_box').css({'marginBottom': '40px'});
+						}
+					}
+				}		
+				$('.box_skitter_large').skitter(options);				
+			});
+		</script>
+	</head>
+	<body>
+	
+		<div style="width:810px; height:auto; overflow:hidden; margin:20px auto;">
+			<div id="content">
+				<div class="border_box">
+					<div class="box_skitter box_skitter_large">
+						<ul>
+							<li><a href="#cube"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="cube" /></a><div class="label_text"><p>cube</p></div></li>
+							<li><a href="#cubeRandom"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="cubeRandom" /></a><div class="label_text"><p>cubeRandom</p></div></li>
+							<li><a href="#block"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="block" /></a><div class="label_text"><p>block</p></div></li>
+							<li><a href="#cubeStop"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="cubeStop" /></a><div class="label_text"><p>cubeStop</p></div></li>
+							<li><a href="#cubeHide"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="cubeHide" /></a><div class="label_text"><p>cubeHide</p></div></li>
+							<li><a href="#cubeSize"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="cubeSize" /></a><div class="label_text"><p>cubeSize</p></div></li>
+							<li><a href="#horizontal"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="horizontal" /></a><div class="label_text"><p>horizontal</p></div></li>
+							<li><a href="#showBars"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="showBars" /></a><div class="label_text"><p>showBars</p></div></li>
+							<li><a href="#showBarsRandom"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="showBarsRandom" /></a><div class="label_text"><p>showBarsRandom</p></div></li>
+							<li><a href="#tube"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="tube" /></a><div class="label_text"><p>tube</p></div></li>
+							<li><a href="#fade"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="fade" /></a><div class="label_text"><p>fade</p></div></li>
+							<li><a href="#fadeFour"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="fadeFour" /></a><div class="label_text"><p>fadeFour</p></div></li>
+							<li><a href="#paralell"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="paralell" /></a><div class="label_text"><p>paralell</p></div></li>
+							<li><a href="#blind"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="blind" /></a><div class="label_text"><p>blind</p></div></li>
+							<li><a href="#blindHeight"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="blindHeight" /></a><div class="label_text"><p>blindHeight</p></div></li>
+							<li><a href="#blindWidth"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="blindWidth" /></a><div class="label_text"><p>blindWidth</p></div></li>
+							<li><a href="#directionTop"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="directionTop" /></a><div class="label_text"><p>directionTop</p></div></li>
+							<li><a href="#directionBottom"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="directionBottom" /></a><div class="label_text"><p>directionBottom</p></div></li>
+							<li><a href="#directionRight"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="directionRight" /></a><div class="label_text"><p>directionRight</p></div></li>
+							<li><a href="#directionLeft"><img src="__IMG__/Jiaodt/focus4/002.jpg" class="directionLeft" /></a><div class="label_text"><p>directionLeft</p></div></li>
+							<li><a href="#cubeStopRandom"><img src="__IMG__/Jiaodt/focus4/003.jpg" class="cubeStopRandom" /></a><div class="label_text"><p>cubeStopRandom</p></div></li>
+							<li><a href="#cubeSpread"><img src="__IMG__/Jiaodt/focus4/001.jpg" class="cubeSpread" /></a><div class="label_text"><p>cubeSpread</p></div></li>				
+						</ul>
+					</div>
+				</div>			
+			</div>		
+		</div>
+	</body>
+</html>

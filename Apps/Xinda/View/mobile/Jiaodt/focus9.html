@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>非常漂亮超酷带略缩图的仿淘宝商城图片轮播焦点图切换jQuery特效 </title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body {padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px}
+			ul {padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px}
+			li {padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px}
+			ul {list-style-type: none; list-style-image: none}
+			a {color: #666; text-decoration: none}
+			a:hover {color: #dd0000}
+			img {border-bottom: 0px; border-left: 0px; border-top: 0px; border-right: 0px}
+			.hidden {display: none}
+			.clear {float: none; height: 0px; clear: both; overflow: hidden}
+			.imgplayer{width: 789px; height: 366px; overflow:hidden; margin:50px auto;}
+			.banner {position: relative; width: 789px; height: 366px; clear: both; overflow: hidden}
+			.img_prev {z-index: 100; position: absolute; width: 30px; bottom:175px; background: url(__IMG__/Jiaodt/focus9/imgshow.png) no-repeat; height: 60px}
+			.img_next {z-index: 100; position: absolute; width: 30px; bottom: 175px; background: url(__IMG__/Jiaodt/focus9/imgshow.png) no-repeat; height: 60px}
+			.img_prev {background-position: -5px top; left: 0px}
+			.img_next {background-position: -43px top; right: 0px}
+			.focus ul#big_list {position: absolute; width: 100000px; height: 366px}
+			.focus ul#big_list li {position: relative; width: 789px; float: left; height: 366px; overflow: hidden}
+			.focus ul#big_list li div {width: 789px; height: 366px; overflow: hidden}
+			.small_show {z-index: 99; position: absolute; margin: 0px auto; width: 762px; bottom: 10px; height: 44px; overflow: hidden; left: 13px}
+			.small_show ul {width: 10000px}
+			.small_show li {width: 124px; display: inline-block; background: url(__IMG__/Jiaodt/focus9/img_bg.png) no-repeat left -49px; float: left; height: 44px; margin-left: 3px; overflow: hidden; cursor: pointer}
+			.small_show li.visited {background-position: left top}
+			.small_show li div {padding-bottom: 2px; padding-left: 2px; width: 120px; padding-right: 2px; height: 40px; overflow: hidden; padding-top: 2px}
+			.small_show .prev {z-index: 100; position: absolute; width: 30px; bottom: 5px; background: url(__IMG__/Jiaodt/focus9/imgshow.png) no-repeat; height: 60px}
+			.small_show .next {z-index: 100; position: absolute; width: 30px; bottom: 5px; background: url(__IMG__/Jiaodt/focus9/imgshow.png) no-repeat; height: 60px}
+			.small_show .prev {background-position: -5px top; left: 0px}
+			.small_show .next {background-position: -43px top; right: 0px}
+		</style>
+		<import file="js.jquery172_min" />
+		<script type="text/javascript" >
+		$(function () {
+		    function C_slider(frame, list, Lframe, Llist, forwardEle, backEle, scrollType, LscrollType, acitonType, autoInterval) {
+		        this.frame = frame;
+		        this.list = list;
+		        this.Lframe = Lframe;
+		        this.Llist = Llist;
+		        this.forwardEle = forwardEle;
+		        this.backEle = backEle;
+		        this.scrollType = scrollType;
+		        this.LscrollType = LscrollType;
+		        this.acitonType = acitonType;
+		        this.autoInterval = autoInterval;
+		        this.slideLength = $("#" + this.Llist + " > li").length; //总的slider数量
+		        this.currentSlide = 0;
+		        this.FrameHeight = $("#" + this.frame).height();
+		        this.FrameWidth = $("#" + this.frame).width();
+		        this.lFrameHeight = $("#" + this.Lframe).height();
+		        this.lFrameWidth = $("#" + this.Lframe).width();
+		        this.lListHeight = $("#" + this.Llist + " >li").eq(0).outerHeight(true);
+		        this.lListWidth = $("#" + this.Llist + " >li").eq(0).outerWidth(true);
+		        var self = this;
+		        for (var i = 0; i < this.slideLength; i++) {
+		            $("#" + this.Llist + " > li").eq(i).data("index", i);
+		            $("#" + this.Llist + " > li").eq(i).bind(this.acitonType, function () {
+		                self.go($(this).data("index"));
+		            });
+		        };
+		        //给“上一个”、“下一个”按钮添加动作
+		        $("#" + this.forwardEle).bind('click', function () {
+		            self.forward();
+		            return false;
+		        });
+		        $("#" + this.backEle).bind('click', function () {
+		            self.back();
+		            return false;
+		        });
+		        //定论鼠标划过时，自动轮换的处理
+		        $("#" + this.frame + ",#" + this.Lframe + ",#" + this.forwardEle + ",#" + this.backEle).bind('mouseover', function () {
+		            clearTimeout(self.autoExt);
+		        });
+		        $("#" + this.frame + ",#" + this.Lframe + ",#" + this.forwardEle + ",#" + this.backEle).bind('mouseout', function () {
+		            clearTimeout(self.autoExt);
+		            self.autoExt = setTimeout(function () {
+		                self.extInterval();
+		            }, self.autoInterval);
+		        });
+		        //开始自动轮换
+		        this.autoExt = setTimeout(function () {
+		            self.extInterval();
+		        }, this.autoInterval);
+		    }
+		    //执行运动
+		    C_slider.prototype.go = function (index) {
+		        this.currentSlide = index;
+		        if (this.scrollType == "left") {
+		            $("#" + this.list).animate({
+		                marginLeft: (-index * this.FrameWidth) + "px"
+		            }, { duration: 600, queue: false });
+		        } else if (this.scrollType == "top") {
+		            $("#" + this.list).animate({
+		                marginTop: (-index * this.FrameHeight) + "px"
+		            }, { duration: 600, queue: false });
+		        }
+		        $("#" + this.Llist + " > li").removeClass("visited");
+		        $("#" + this.Llist + " > li").eq(index).addClass("visited");
+		        //对于缩略图的滚动处理
+		        if (this.LscrollType == "left") {
+		            if (this.slideLength * this.lListWidth > this.lFrameWidth) {
+		                var spaceWidth = (this.lFrameWidth - this.lListWidth) / 2;
+		                var hiddenSpace = this.lListWidth * this.currentSlide - spaceWidth;
+		                if (hiddenSpace > 0) {
+		                    if (hiddenSpace + this.lFrameWidth <= this.slideLength * this.lListWidth) {
+		                        $("#" + this.Llist).animate({
+		                            marginLeft: -hiddenSpace + "px"
+		                        }, { duration: 600, queue: false });
+		                    } else {
+		                        var endHidden = this.slideLength * this.lListWidth - this.lFrameWidth;
+		                        $("#" + this.Llist).animate({
+		                            marginLeft: -endHidden + "px"
+		                        }, { duration: 600, queue: false });
+		                    }
+		                } else {
+		                    $("#" + this.Llist).animate({
+		                        marginLeft: "0px"
+		                    }, { duration: 600, queue: false });
+		                }
+		            }
+		        } else if (this.LscrollType == "top") {
+		            if (this.slideLength * this.lListHeight > this.lFrameHeight) {
+		                var spaceHeight = (this.lFrameHeight - this.lListHeight) / 2;
+		                var hiddenSpace = this.lListHeight * this.currentSlide - spaceHeight;
+		                if (hiddenSpace > 0) {
+		                    if (hiddenSpace + this.lFrameHeight <= this.slideLength * this.lListHeight) {
+		                        $("#" + this.Llist).animate({
+		                            marginTop: -hiddenSpace + "px"
+		                        }, { duration: 600, queue: false });
+		                    } else {
+		                        var endHidden = this.slideLength * this.lListHeight - this.lFrameHeight;
+		                        $("#" + this.Llist).animate({
+		                            marginTop: -endHidden + "px"
+		                        }, { duration: 600, queue: false });
+		                    }
+		                } else {
+		                    $("#" + this.Llist).animate({
+		                        marginTop: "0px"
+		                    }, { duration: 600, queue: false });
+		                }
+		            }
+		        }
+		    }
+		    //前进
+		    C_slider.prototype.forward = function () {
+		        if (this.currentSlide < this.slideLength - 1) {
+		            this.currentSlide += 1;
+		            this.go(this.currentSlide);
+		        } else {
+		            this.currentSlide = 0;
+		            this.go(0);
+		        }
+		    }
+		    //后退
+		    C_slider.prototype.back = function () {
+		        if (this.currentSlide > 0) {
+		            this.currentSlide -= 1;
+		            this.go(this.currentSlide);
+		        } else {
+		            this.currentSlide = this.slideLength - 1;
+		            this.go(this.slideLength - 1);
+		        }
+		    }
+		    //自动执行
+		    C_slider.prototype.extInterval = function () {
+		        if (this.currentSlide < this.slideLength - 1) {
+		            this.currentSlide += 1;
+		            this.go(this.currentSlide);
+		        } else {
+		            this.currentSlide = 0;
+		            this.go(0);
+		        }
+		        var self = this;
+		        this.autoExt = setTimeout(function () {
+		            self.extInterval();
+		        }, this.autoInterval);
+		    }
+		    //实例化对象
+		    var goSlide1 = new C_slider("big_frame", "big_list", "small_frame", "small_list", "forward", "back", "left", "left", "click", 5000);
+		 
+		});
+		</script>
+	</head>
+	<body>	
+		<div class="imgplayer">
+			<div class="banner">
+			  <div class="focus" id="big_frame">
+			    <ul id="big_list">
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/fe30341187e322db.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/87a7ec9f1e8bd21b.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/7bad4375d337ff09.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/3785bb308a51b5bc.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/4a63230a25a32094.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/6add2e0058e99fec.jpg" alt="#" width="789" height="366" /></a></div></li>
+			      <li><div><a href="#" target="_blank"><img src="__IMG__/Jiaodt/focus9/c5a16873cfc7e571.jpg" alt="#" width="789" height="366" /></a></div></li>
+			    </ul>
+			  </div>
+			  <a href="javascript:;" class="img_prev" id="back">&nbsp;</a> 
+			  <a href="javascript:;" class="img_next" id="forward">&nbsp;</a>
+			  <div class="small_show" id="small_frame">
+			    <ul id="small_list">
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/5726fe2bb6f4524d.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/8bf71d373a82b46b.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/f06983902b3ef2be.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/dfe2608d7b93cd17.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/eb3d0c433da6a372.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/7cad7c8c5c23d8cd.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			      <li>
+			        <div><img src="__IMG__/Jiaodt/focus9/a3ae8b22965f600d.jpg" alt="#" width="120" height="40" /></div>
+			      </li>
+			    </ul>
+			  </div>
+			</div>
+		</div>
+	</body>
+</html>

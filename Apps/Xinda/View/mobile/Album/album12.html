@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport"  content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1.0" />
+		<title>全屏自适应支持手机端jQuery相册图片展示插件</title>	
+		<import type="css" file="css.Album.album12.styles" />
+		<import type="css" file="css.Album.album12.touch" />	
+	</head> 
+	<body>	
+		<header><h1>全屏支持手机端相册图片展示效果</h1></header>	
+		<div id="thumbs">
+			<a href="__IMG__/Album/album12/1.jpg" style="background-image:url(__IMG__/Album/album12/1.jpg)" title="风景一"></a>
+			<a href="__IMG__/Album/album12/2.jpg" style="background-image:url(__IMG__/Album/album12/2.jpg)" title="风景二"></a>
+			<a href="__IMG__/Album/album12/3.jpg" style="background-image:url(__IMG__/Album/album12/3.jpg)" title="风景三"></a>
+			<a href="__IMG__/Album/album12/4.jpg" style="background-image:url(__IMG__/Album/album12/4.jpg)" title="风景四"></a>
+			<a href="__IMG__/Album/album12/5.jpg" style="background-image:url(__IMG__/Album/album12/5.jpg)" title="风景五"></a>
+			<a href="__IMG__/Album/album12/6.jpg" style="background-image:url(__IMG__/Album/album12/6.jpg)" title="风景六"></a>
+			<a href="__IMG__/Album/album12/7.jpg" style="background-image:url(__IMG__/Album/album12/7.jpg)" title="风景七"></a>
+			<a href="__IMG__/Album/album12/8.jpg" style="background-image:url(__IMG__/Album/album12/8.jpg)" title="风景八"></a>
+			<a href="__IMG__/Album/album12/9.jpg" style="background-image:url(__IMG__/Album/album12/9.jpg)" title="风景九"></a>
+		</div>	
+		<p id="credit">jquery实现的触摸相册效果,适用于手机，电脑等</p>
+		<import file="js.jquery172_min" />
+		<script>
+		(function(){	
+			var overlay = $('<div id="galleryOverlay">'),
+				slider = $('<div id="gallerySlider">'),
+				prevArrow = $('<a id="prevArrow"></a>'),
+				nextArrow = $('<a id="nextArrow"></a>'),
+				overlayVisible = false;	
+			$.fn.touchTouch = function(){		
+				var placeholders = $([]),
+					index = 0,
+					items = this;
+				overlay.hide().appendTo('body');
+				slider.appendTo(overlay);
+				items.each(function(){
+					placeholders = placeholders.add($('<div class="placeholder">'));
+				});
+				slider.append(placeholders).on('click',function(e){
+					if(!$(e.target).is('img')){
+						hideOverlay();
+					}
+				});
+				$('body').on('touchstart', '#gallerySlider img', function(e){			
+					var touch = e.originalEvent,
+						startX = touch.changedTouches[0].pageX;	
+					slider.on('touchmove',function(e){				
+						e.preventDefault();				
+						touch = e.originalEvent.touches[0] ||
+								e.originalEvent.changedTouches[0];				
+						if(touch.pageX - startX > 10){slider.off('touchmove');showPrevious();}
+						else if (touch.pageX - startX < -10){slider.off('touchmove');showNext();}
+					});
+					return false;
+					
+				}).on('touchend',function(){slider.off('touchmove');});
+				
+				items.on('click', function(e){
+					e.preventDefault();
+					index = items.index(this);
+					showOverlay(index);
+					showImage(index);
+					preload(index+1);
+					preload(index-1);			
+				});
+				
+				if ( !("ontouchstart" in window) ){
+					overlay.append(prevArrow).append(nextArrow);			
+					prevArrow.click(function(e){e.preventDefault();showPrevious();});			
+					nextArrow.click(function(e){e.preventDefault();showNext();});
+				}
+				
+				$(window).bind('keydown', function(e){		
+					if (e.keyCode == 37){showPrevious();}
+					else if (e.keyCode==39){showNext();}
+				});
+
+				function showOverlay(index){			
+					if (overlayVisible){return false;}
+					overlay.show();			
+					setTimeout(function(){overlay.addClass('visible');}, 100);
+					offsetSlider(index);
+					overlayVisible = true;
+				}
+			
+				function hideOverlay(){
+					if(!overlayVisible){return false;}
+					overlay.hide().removeClass('visible');
+					overlayVisible = false;
+				}
+			
+				function offsetSlider(index){slider.css('left',(-index*100)+'%');}
+				function preload(index){setTimeout(function(){showImage(index);}, 1000);}
+				function showImage(index){
+					if(index < 0 || index >= items.length){return false;}
+					loadImage(items.eq(index).attr('href'), function(){placeholders.eq(index).html(this);});
+				}
+				
+				function loadImage(src, callback){
+					var img = $('<img>').on('load', function(){callback.call(img);});		
+					img.attr('src',src);
+				}
+				
+				function showNext(){
+					if(index+1 < items.length){index++;offsetSlider(index);preload(index+1);}
+					else{slider.addClass('rightSpring');setTimeout(function(){slider.removeClass('rightSpring');},500);}
+				}
+				
+				function showPrevious(){
+					if(index>0){index--;offsetSlider(index);preload(index-1);}
+					else{slider.addClass('leftSpring');setTimeout(function(){slider.removeClass('leftSpring');},500);
+					}
+				}
+			};
+			
+		})(jQuery);
+		</script>
+		<script>$(function(){$('#thumbs a').touchTouch();});</script>	
+	</body>
+</html>

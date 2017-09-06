@@ -4,7 +4,7 @@ return array(
 	'SHOW_PAGE_TRACE'=>false,//显示页面Trace信息false
     'SESSION_AUTO_START' => true,//开启SESSION
     'URL_MODEL' => '1',//URL模式
-    'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Demo','Tpyjd','TestAdmin'),//设置允许模块
+    'MODULE_ALLOW_LIST' => array('Admin','Anshun','Xiuli','TAdmin','Test','Mtsh','Tuocai','Yuefan','Xinda','Runzhu','Tpyjd'),//设置允许模块
     'DEFAULT_MODULE' => 'Xinda',//设置默认模块设置
     'MODULE_DENY_LIST' => array('Common','Runtime'), // 禁止访问的模块列表
 //     'LAYOUT_ON'=>true,//开启模板布局

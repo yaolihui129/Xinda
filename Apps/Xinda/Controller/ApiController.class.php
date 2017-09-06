@@ -21,6 +21,15 @@ class ApiController extends Controller {
         }
         
     }
+    
+    public function activity(){
+        $where=array('prodid'=>C('PRODID'),'state'=>5);
+        $data=M('tp_activity')->where($where)->order('utime desc')->select();
+        $arr=self::xmlEncode(200,"ok",$data);              
+        echo $arr;
+    }
+
+    
     public function login(){
         $id='gh_3e253e0b66bb';
         $appid=trim('wxe6f24ce3395cb972');

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>非常漂亮并强大的jquery焦点图切换特效代码</title>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<link media="screen" href="css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/ScrollPic.js"></script>
+</head>
+<BODY>
+
+<!-- 焦点图 begin -->
+<div class="scroll">
+  <div id="FS_Cont_01" class="scroll_cont" data-client="focus">
+
+    <div class="box">
+      <div><a href="http://www.js-css.cn/" target=_blank> <IMG alt="JS焦点图切换代码" src="__IMG__/Jiaodt/focus5/1.png" width="715" height="330"> </a></div>
+      <div class="bg"></div>
+      <div class="txt">
+        <H3><a class="f_white" href="http://www.js-css.cn/" target="_blank">JS代码</a></H3>
+        <P>特别是特效代码</P>
+      </div>
+    </div>
+	<div class="box">
+      <div><a href="http://www.js-css.cn/" target=_blank> <IMG alt="JS焦点图特效" src="__IMG__/Jiaodt/focus5/2.png" width="715" height="330"> </a></div>
+      <div class="bg"></div>
+      <div class="txt">
+        <H3><a class="f_white" href="#" target="_blank">jQuery插件</a></H3>
+        <P>为你节省WEB开发工作效率</P>
+      </div>
+    </div>
+  </div>
+  <a id="FS_arr_left_01" class="arr_left" title="上一个" href="javascript:;"></a> <a id="FS_arr_right_01" class="arr_right" title="下一个" href="javascript:;"></a>
+  <div id=FS_numList_01 class=scroll_num></div>
+</div>
+<import file="Js.jquery172_min" />
+<script language="javascript" type="text/javascript">
+	  <!--//--><![CDaTa[//><!--
+	  var sp = new ScrollPic();
+	  sp.scrollContId   = "FS_Cont_01"; //内容容器ID
+	  sp.arrLeftId      = "FS_arr_left_01";//左箭头ID
+	  sp.arrRightId     = "FS_arr_right_01"; //右箭头ID
+	  sp.dotListId      = "FS_numList_01";//点列表ID
+	  sp.dotClassName   = "";//点className
+	  sp.dotOnClassName	= "current";//当前点className
+	  sp.listType		= "";//列表类型(number:数字，其它为空)
+	  sp.listEvent      = "onmouseover"; //切换事件
+	  sp.frameWidth     = 715;//显示框宽度
+	  sp.pageWidth      = 715; //翻页宽度
+	  sp.upright        = false; //垂直滚动
+	  sp.speed          = 10; //移动速度(单位毫秒，越小越快)
+	  sp.space          = 60; //每次移动像素(单位px，越大越快)
+	  sp.autoPlay       = true; //自动播放
+	  sp.autoPlayTime   = 5; //自动播放间隔时间(秒)
+	  sp.circularly     = true;
+	  sp.initialize(); //初始化	
+	  //--><!]]>
+</script>
+<!-- 焦点图 end -->
+
+</BODY>
+</HTML>

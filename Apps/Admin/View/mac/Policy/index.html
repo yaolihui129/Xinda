@@ -45,10 +45,22 @@
 		                 <td><{$st.desc}></td>
 		                 <td><{$st.utime}></td>                         
 		                 <td>                              
-		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default"><i class="icon-pencil"> 编辑</i></a>
-		                    <a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-default"><i class="icon-pencil"> 发布/下线</i></a>
-		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger" onclick="return confirm('你确定要删除？')">
-		                       <i class="icon-remove"> 删除</i>
+		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 编辑</i></a>		                    
+		                    <switch name="st.state">
+							    <case value="5">
+							    	<a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-warning btn-lg">
+							    		<span class="glyphicon glyphicon-save"> 下线</span>
+							    	</a>
+							    </case>							    
+							    <default />
+							    	<a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-primary btn-lg">
+							    		<span class="glyphicon glyphicon-open"> 发布</span>
+							    	</a>
+							</switch>
+		                    			                    
+		                    
+		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger btn-lg" onclick="return confirm('你确定要删除？')">
+		                       <i class="glyphicon glyphicon-trash"> 删除</i>
 		                    </a>
 		                  </td>
 		                </tr>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<title>基于Zepto+CSS3宝箱开启动画抽奖JS特效代码 - JS代码网</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<import type="css" file="css.bx_ZeptoCss3" />
+	<style>		
+		select {-webkit-appearance: none;-webkit-padding-end: 20px;-webkit-padding-start: 6px;background:url(__IMG__/bx_ZeptoCss3/select-arrow.png) no-repeat #fff right 0px ;
+		background-size: 34px auto;border:#cfba8a 1px solid;box-sizing:border-box;width:100%;height:33px;outline: none;font-size: 12px;color:#9e702f;padding:0px 8px;}
+		.mod-chest-cont{background: url(__IMG__/bx_ZeptoCss3/open-bg-top.png) center top  no-repeat, url(__IMG__/bx_ZeptoCss3/open-bg-bottom.png) center bottom  no-repeat;
+		background-size: 276px auto;width:276px;margin:27px auto 118px;position: relative;}	
+		.mod-chest .chest-close .gift{width: 320px;height:135px;background:url(__IMG__/bx_ZeptoCss3/chest.png) no-repeat 0px 0px;background-size: 320px auto;position: absolute;left:0;top:0px;}		
+		.mod-chest .chest-open{width: 320px;height:150px;background:url(__IMG__/bx_ZeptoCss3/chest.png) no-repeat 0px -137px;
+		background-size: 320px auto;opacity: 0;position: relative;z-index: 1;position: absolute;left:0px;top:0px;}		
+		.chest-icon-zuan:after{display: block;content:"";width: 75px;height:50px;position: absolute;top:-30px;left:0px;
+		background:url(__IMG__/bx_ZeptoCss3/chest-icon-zuan.png) 0px 0px no-repeat;background-size: 75px auto;left:-10px;}
+		.icon-state-doing,.icon-state-finish,.icon-state-expired{display: block;width: 112px;height:45px;
+		background:url(__IMG__/bx_ZeptoCss3/chest-state.png) 0px 0px no-repeat;background-size: 112px auto;}		
+		.icon-gift-xin:after,.icon-gift-zuan:after{display: block;content:"";width: 15px;height:13px;position: absolute;top:-8px;left:0px;
+		background:url(__IMG__/bx_ZeptoCss3/chest-icon-sprite.png) 0px 0px no-repeat;background-size: 100px auto;}
+		.open-body .bg{position: absolute;z-index: 1;background:url(__IMG__/bx_ZeptoCss3/light.png) 0px 0px no-repeat;
+		background-size:452px auto;width:452px;height:510px; max-height:100%; left:50%;margin-left:-226px;top:-25px;}
+		.ui-round{-webkit-mask:url(__IMG__/bx_ZeptoCss3/radius-mask.png) 0px 0px no-repeat;-webkit-mask-size:100% auto;}
+		.mod-chest .chest-close .tips{width: 166px;height:60px;background:url(__IMG__/bx_ZeptoCss3/txt-tips-open.png) 0px 0px no-repeat;
+		background-size: 190px auto;position: absolute;left:70px;top:145px;-webkit-transition:all .5s;}
+		.mod-chest .chest-close .tips .arrow{width: 26px;height:60px;background:url(__IMG__/bx_ZeptoCss3/txt-tips-open.png) right 0px no-repeat;
+		background-size: 190px auto;position: absolute;display: block;top:0px;right:-28px;-webkit-animation:move .7s linear infinite alternate;}		
+		.mod-chest .chest-open.blur:after{width: 320px;height: 68px;background: url(__IMG__/bx_ZeptoCss3/chest-open-blur.png) no-repeat 0px 0px;
+		background-size: 320px auto;position: relative;z-index: 1;position: absolute;left: 0px;top: -5px;content:"";display: block;}		
+	</style>
+	
+</head>
+<body ontouchstart="" class="open-body">
+  <div class="wrapper">   
+    <div class="bg rotate"></div>
+    <div class="open-has ">
+      <h3 class="title-close"><span class="user">德水</span>给你发了一个宝箱</h3>     
+      <h3 class="title-open">恭喜你，</br>成功领取<span class="user">一二三四五六</span>发的全民飞机大战宝箱</h3>
+      <div class="mod-chest">        
+        <div class="chest-close show ">
+          <div class="gift"></div>
+          <div class="tips">
+            <i class="arrow"></i>
+          </div>
+        </div>
+        <div class="chest-open ">
+          <div class="mod-chest-cont open-cont">
+            <div class="content">
+              <div class="gift">
+                <div class="icon"><img src="__IMG__/bx_ZeptoCss3/chest-icon-zuan.png"></div> x 500 
+              </div>
+              <div class="func">
+                <button class="chest-btn">查看详情并提取</button>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+    <div class="open-none" style="display:none">
+      <h3>你来晚啦，下次早点吧！</h3>
+      <div class="mod-chest">
+        <div class="chest-open show"></div>
+      </div>
+      <div class="func">
+        <button class="chest-btn">查看领取详情</button>
+      </div>
+    </div>
+    
+  </div>
+  <import file="js.zepto_min" />
+  
+	<script type="text/javascript">
+	  $(".chest-close").click(function(){
+	    $(this).addClass("shake");
+	    var that=this;   
+	    this.addEventListener("webkitAnimationEnd", function(){      
+	      $(that).closest(".open-has").addClass("opened");
+	      setTimeout(function(){
+	        $(that).removeClass("show");
+	        $(that).closest(".mod-chest").find(".chest-open").addClass("show");
+	        setTimeout(function(){
+	          $(".chest-open").addClass("blur");
+	        },500)
+	      },200)
+	    }, false);
+	  })
+	</script>
+</body>
+</html>
+	<div style="display:none">
+		<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6f798e51a1cd93937ee8293eece39b1a' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5718743'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/stat.php%3Fid%3D5718743%26show%3Dpic2' type='text/javascript'%3E%3C/script%3E"));</script>
+	</div>
+  

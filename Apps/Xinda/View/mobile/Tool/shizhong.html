@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery+CSS3在线模拟时钟日期效果</title>
+<import file="js.jquery172_min" />
+<style type="text/css">	
+	* {margin: 0;padding: 0;}body {background:url(__IMG__/Tool/shizhong/bg-texture.jpg);margin:0;padding:0;}
+	#calendar {
+		display:block;float:left;width:220px;cursor:pointer;margin:30px;border-radius:25px;
+		-webkit-border-radius:25px;-moz-border-radius:25px;-o-border-radius:25px;
+		box-shadow:5px 4px 10px #727473;-webkit-box-shadow:5px 4px 10px #727473;-moz-box-shadow:5px 4px 10px #727473;-o-box-shadow:5px 4px 10px #727473;	
+	}
+	#day, #date {text-align:center;width:210px;font-weight:bold;font-family:"黑体";padding:5px;text-shadow:2px 2px 1px rgba(255, 255, 255, 0.5);}
+	#day {
+		height:43px;
+		color: white;
+		font-size:32px;
+		line-height:43px;
+		background:#E44947;
+		background:-webkit-gradient(linear, 0 0, 0 100%, from(#F09292), to(#E44947));
+		border: 1px solid #E44947;
+		-webkit-border-top-right-radius:25px;
+		-webkit-border-top-left-radius:25px;
+		border-top-right-radius:25px;
+		border-top-left-radius:25px;
+		-webkit-border-top-right-radius:25px;
+		-webkit-border-top-left-radius:25px;
+		-webkit-border-top-right-radius:25px;
+		-webkit-border-top-left-radius:25px;
+	}
+	#date {
+		height:145px;
+		color: black;
+		font-family:Arial, Verdana, Sans-serif;
+		font-size:164px;
+		line-height:140px;
+		border: 1px solid #CCC;
+		border-top: 1px solid #E44947;
+		background:#FFF;
+		background:-webkit-gradient(linear, 0 0, 0 6%, from(#727473), to(#FFF));
+		-webkit-border-bottom-right-radius:25px;
+		-webkit-border-bottom-left-radius:25px;
+		-moz-border-bottom-right-radius:25px;
+		-moz-border-bottom-left-radius:25px;
+		border-bottom-right-radius:25px;
+		border-bottom-left-radius:25px;
+		-o-border-bottom-right-radius:25px;
+		-o-border-bottom-left-radius:25px;
+	}
+	#clock {float:left;width: 600px;height: 600px;background: url(__IMG__/Tool/shizhong/clockface.PNG);list-style: none;}
+	#sec, #min, #hour {position: absolute;width: 30px;height: 600px;top: 0px;left: 285px;}
+	#sec {background: url(__IMG__/Tool/shizhong/sechand.png);z-index: 3;}
+	#min {background: url(__IMG__/Tool/shizhong/minhand.png);z-index: 2;}
+	#hour {background: url(__IMG__/Tool/shizhong/hourhand.png);z-index: 1;}
+	p {text-align: center;padding: 10px 0 0 0;}
+	.cube {position:absolute;top:400px;left:630px;cursor:pointer;-webkit-transform:scale(0.7);-moz-transform:scale(0.7);-ms-transform:scale(0.7);-o-transform:scale(0.7);}
+	.cube p {line-height: 14px;font-size: 12px;}
+	.cube h2 {font:bold 18px "Courier New", Courier, monospace;}
+	.rightFace, .leftFace, .topFace div {
+		background: #FFF;
+		background: -webkit-gradient(radial, 145 45, 10, 52 50, 900, from(#FFF), to(#000));
+		padding: 10px;
+		width: 180px;
+		height: 180px;
+		color:#FFF;
+	}
+	.rightFace, .leftFace, .topFace {position: absolute;}
+	.leftFace {-webkit-transform: skew(0deg, 30deg);-moz-transform: skew(0deg, 30deg);-ms-transform: skew(0deg, 30deg);-o-transform: skew(0deg, 30deg);}
+	.rightFace {
+		-webkit-transform: skew(0deg, -30deg);
+		-moz-transform: skew(0deg, -30deg);
+		-ms-transform: skew(0deg, -30deg);
+		-o-transform: skew(0deg, -30deg);
+		background-color: #ddd;
+		left: 200px;
+	}
+	.topFace div {
+		-webkit-transform: skew(0deg, -30deg) scale(1, 1.16);
+		-moz-transform: skew(0deg, -30deg) scale(1, 1.16);
+		-ms-transform: skew(0deg, -30deg) scale(1, 1.16);
+		-o-transform: skew(0deg, -30deg) scale(1, 1.16);
+		background-color: #eee;
+		font-size: 0.862em;
+	}
+	.topFace {
+		-webkit-transform: rotate(60deg);
+		-moz-transform: rotate(60deg);
+		-ms-transform: rotate(60deg);
+		-o-transform: rotate(60deg);
+		top: -158px;
+		left: 100px;
+	}
+	.one {
+		position:relative;
+		left:50px;
+		top:50px;
+		width:100px;
+		height:100px;
+		background:#F00;
+		background:-webkit-gradient(linear, 0 0, 0 100%, from(#C00), to(#F00));
+		border-radius:130px;
+		-webkit-border-radius:130px;
+		-webkit-border-radius:130px;
+		behavior: url(ie-css3.htc);
+	}
+	#three {
+		position:relative;
+		width:22px;
+		height:22px;
+		margin:7px;
+		background:#00C;
+		background:-webkit-gradient(linear, 0 0, 0 100%, from(#009), to(#00C));
+		border-radius:130px;
+		-webkit-border-radius:130px;
+		border-radius:130px;
+		behavior: url(ie-css3.htc);
+	}
+	#five {
+		position:relative;
+		width:40px;
+		height:40px;
+		margin:7px;
+		background:#00C;
+		background:-webkit-gradient(linear, 0 0, 0 100%, from(#009), to(#00C));
+		border-radius:130px;
+		-moz-border-radius:130px;
+		-webkit-border-radius:130px;
+		behavior: url(ie-css3.htc);
+	}
+</style>
+</head>
+<body>
+<ul id="clock">
+  <li id="sec"></li>
+  <li id="hour"></li>
+  <li id="min"></li>
+</ul>
+<div class="cube">
+  <div class="topFace">
+    <div>
+      <div id="three"></div>
+      <div id="three" style="left:60px"></div>
+      <div id="three" style="left:120px"></div>
+    </div>
+  </div>
+  <div class="leftFace">
+    <div id="five"></div>
+    <div id="five" style="top:-50px;left:120px"></div>
+    <div id="five" style="top:-30px;left:60px"></div>
+    <div id="five" style="top:-10px;"></div>
+    <div id="five" style="top:-60px;left:120px"></div>
+  </div>
+  <div class="rightFace">
+    <div class="one"></div>
+  </div>
+</div>
+<script type="text/javascript"> 
+	var d=new Date()
+	var weekday=new Array()
+	weekday[0]="星期日"
+	weekday[1]="星期一"
+	weekday[2]="星期二"
+	weekday[3]="星期三"
+	weekday[4]="星期四"
+	weekday[5]="星期五"
+	weekday[6]="星期六"
+	
+	document.write("<div id='calendar'>")
+	document.write("<div id='day'><span>" + weekday[d.getDay()]+"</span></div>")
+	document.write("<div id='date'><span>" +d.getDate()+"</span></div>")
+	document.write("</div>")
+
+</script>
+<script type="text/javascript" >
+	$(function() {	    
+	    setInterval( function() {
+	    var seconds = new Date().getSeconds();
+	    var sdegree = seconds * 6;
+	    var srotate = "rotate(" + sdegree + "deg)";	    
+	    $("#sec").css({"-ms-transform" : srotate, "-webkit-transform" : srotate,"-moz-transform" : srotate, "-o-transform" : srotate});}, 1000 );	     	
+	    setInterval( function() {
+	    var hours = new Date().getHours();
+	    var mins = new Date().getMinutes();
+	    var hdegree = hours * 30 + (mins / 2);
+	    var hrotate = "rotate(" + hdegree + "deg)";	    
+	    $("#hour").css({"-ms-transform" : hrotate, "-webkit-transform" : hrotate,"-msmoztransform" : hrotate, "-o-transform" : hrotate});}, 1000 );		
+	    setInterval( function() {
+	    var mins = new Date().getMinutes();
+	    var mdegree = mins * 6;
+	    var mrotate = "rotate(" + mdegree + "deg)";	    
+	    $("#min").css({"-ms-transform" : mrotate, "-webkit-transform" : mrotate,"-moz-transform" : mrotate, "-o-transform" : mrotate});}, 1000 );	
+	}); 
+</script>
+</body>
+
+</html>

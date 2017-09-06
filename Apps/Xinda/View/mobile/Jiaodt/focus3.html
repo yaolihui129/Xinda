@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>层叠图片播放jcImgScroll插件,JS焦点图左右切换特效 </title>
+		<style type="text/css">
+			* { font-size:13px; font-family:Georgia, "Times New Roman","宋体"; color:#333; margin:0; padding:0; list-style:none;  }
+			html { background:url(bg.png) repeat; }
+			a img { border:0;}
+			.demoTitle { text-align:center; font-size:30px; font-weight:bold; color:#c00; text-shadow:1px 1px 0 #fff; margin:60px 0 40px; border-bottom:1px dashed #999;border-top:1px dashed #999; padding:20px 0; background:#EEE; }
+			#demo1,#demo2,#demo3,#demo4,#demo5,#demo6,#demo7,#demo8 { margin:0 auto; }
+			#psWraper { background:#eee; padding:10px 0; margin-top:80px; border-top:1px dashed #999; }
+			#psText { padding-bottom:10px; margin-bottom:20px; border-bottom:1px dashed #bebebe; }
+			#psText samp { font-weight:bold; font-size:14px; letter-spacing:0.1em; }
+			#psText samp a { color:#06F;letter-spacing:0.1em; }
+			#psText h2 { font-size:20px; margin:10px auto; }
+			#psText p { padding:10px 0; line-height:25px; letter-spacing:0.1em; }
+			#psText ul { margin:10px auto; }
+			#psText ul li { line-height:25px; line-height:25px; letter-spacing:0.1em; }
+			#ps { width:600px; margin:0 auto; padding:30px 0; }
+			#ps h1 { padding-bottom:20px; text-shadow:1px 1px 0 #fff; color:#c00; font-size:23px; font-weight:bold; }
+			#ps h2 { line-height:20px; text-shadow:1px 1px 0 #fff; padding:10px 0; }
+			#ps h1 p { display:inline; font-size:16px; font-weight:bold; color:#666; margin-left:20px; }
+			#ps dl { padding-left:0; padding-bottom:40px; }
+			#ps dl dt,#ps dl dd { height:30px; line-height:30px; font-size:13px; text-shadow:1px 1px 0 #fff;  }
+			#ps dl dt { padding-left:10px; }
+			#ps dl dd { color:#ff6600; text-shadow:1px 1px 0 #fff; }
+			#ps dl dd span {color:#900; margin-right:50px; letter-spacing:0.01em; padding-left:10px;}
+			.TmpStyle { margin:50px auto; }
+			.jcImgScroll { position:relative; height:342px; }
+			.jcImgScroll li { border:1px solid #ccc; }
+			.jcImgScroll li a { background:#fff; display:block; height:340px;  }
+			.jcImgScroll li.loading a { background:#fff url(img/loading.gif) no-repeat center center;} 
+			.jcImgScroll li img,.jcImgScroll li,.jcImgScroll em,.jcImgScroll dl { display:none;}
+			.jcImgScroll em.sPrev { background:url(__IMG__/Jiaodt/focus3/arrow-left.png) no-repeat right center; }
+			.jcImgScroll em.sNext { background:url(__IMG__/Jiaodt/focus3/arrow-right.png) no-repeat left center;}
+			.jcImgScroll dl dd { background:url(__IMG__/Jiaodt/focus3/NumBtn.png) no-repeat 0 bottom; text-indent:-9em; }
+			.jcImgScroll dl dd:hover,.jcImgScroll dl dd.curr { background-position:0 0; }
+			body,ul,ol,h2,h3,h4,h5,p,dl,dt,dd,form{padding:0;margin:0;}img{border:none;}li{list-style:none;}a{text-decoration:none;outline:none;color:#666666;}
+			a:hover{text-decoration:none}img{border:0}ul{list-style:none;margin:0;}
+			label{color:#6CBD45;font-size:14px;font-weight:bold;padding-bottom:0.5em;margin:0;}
+			.h3{font-size:13px;font-weight:bold;}
+			#show{background:url(images/photo.jpg)}
+			#meun{color:#fff;padding-left:10px;}
+			#meun img{float:left;}
+			#submeun{margin-left:70px;float:left;}#submeun span{text-align:center;margin-right:10px;float:left;display:inline;}
+			#submeun span a{color:#fff;height:50px;line-height:50px;font-size:14px;font-weight:bold;text-align:center;padding-left:15px;padding-right:15px;display:block;}
+			#submeun span.cur{text-align:center;background:#82ce18;margin-right:10px;float:left;display:inline;}
+			#top{background-color:#000;margin:0em 0 10px 0em;border-style:solid;border-width:1px;border-color:#E5E5E5;height:50px;line-height:50px;}
+			label.subtitle{font-size:13px;float:right;color:#6CBD45;margin:0 10px;text-align:right;}
+			h1.title{height:50px;font-size:12px;background:url(logo.png) no-repeat;}
+			h1.title a:link,h1.title a:visited,h1.title a:hover{color:#000;text-decoration:none;}
+		</style>
+		<import file="Js.jquery172_min" />
+		<import file="Js.jQuery-easing" />
+		<import file="Js.jQuery-jcImgScroll" />
+		<script language="javascript" type="text/javascript">
+		$(function(){
+			$("#demo1").jcImgScroll({});
+			$("#demo2").jcImgScroll({count : 7});
+			$("#demo3").jcImgScroll({arrow : {width:110,	height:342,x:220,y:0},count : 3,offsetX : 140,NumBtn : true,title:false});
+		});
+		
+		</script>
+	</head>	
+	<body>	
+		<div class="demoTitle">Adam ’ jQuery - jcImgScroll图片展示（ 默认效果 ）</div>		
+		<div id="demo1" class="jcImgScroll">
+			<ul>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/33858e84935f6f9919cdf11d8b704749.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/d1374e5456c6e6c07b1271ae433dac4a.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/eee0913803e41b5fd2a874a4c5d88ae4.png" title="#"></a></li>
+		    	<li><a href="#" path="__IMG__/Jiaodt/focus3/26aa942152f3d14414a1dbaa4f671d6b.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/0facc08381d574a39b0f5877f962b237.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/74c2f73f6284445a9ee8781a5bb21057.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/4c767bbeb2459d9b97eef7ec3d05eb0d.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/e5d18ee7efa2fb1e4246695ecd52bf8f.png" title="#"></a></li>
+		    </ul>
+		</div>		
+		<div class="demoTitle">Adam ’ jQuery - jcImgScroll图片展示（ 7图,无按钮,带信息 ）</div>		
+		<div id="demo2" class="jcImgScroll">
+			<ul>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/33858e84935f6f9919cdf11d8b704749.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/d1374e5456c6e6c07b1271ae433dac4a.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/eee0913803e41b5fd2a874a4c5d88ae4.png" title="#"></a></li>
+		    	<li><a href="#" path="__IMG__/Jiaodt/focus3/26aa942152f3d14414a1dbaa4f671d6b.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/0facc08381d574a39b0f5877f962b237.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/74c2f73f6284445a9ee8781a5bb21057.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/4c767bbeb2459d9b97eef7ec3d05eb0d.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/e5d18ee7efa2fb1e4246695ecd52bf8f.png" title="#"></a></li>
+		    </ul>
+		</div>		
+		<div class="demoTitle">Adam ’ jQuery - jcImgScroll图片展示（ 3图,按钮,无信息,设置间距，设置箭头偏移 ）</div>		
+		<div id="demo3" class="jcImgScroll">
+			<ul>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/33858e84935f6f9919cdf11d8b704749.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/d1374e5456c6e6c07b1271ae433dac4a.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/eee0913803e41b5fd2a874a4c5d88ae4.png" title="#"></a></li>
+		    	<li><a href="#" path="__IMG__/Jiaodt/focus3/26aa942152f3d14414a1dbaa4f671d6b.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/0facc08381d574a39b0f5877f962b237.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/74c2f73f6284445a9ee8781a5bb21057.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/4c767bbeb2459d9b97eef7ec3d05eb0d.png" title="#"></a></li>
+		        <li><a href="#" path="__IMG__/Jiaodt/focus3/e5d18ee7efa2fb1e4246695ecd52bf8f.png" title="#"></a></li>
+		    </ul>
+		</div>	
+	</body>
+</html>

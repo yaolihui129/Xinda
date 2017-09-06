@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>非常漂亮实用焦点图片轮播切换代码，兼容IE,FireFox,Chrome</title>
+		<style type="text/css">	
+			*{margin:0;padding:0;}
+			#banner{width: 838px;margin: 0px auto;height: 321px;overflow: hidden;margin-top: 0px;}
+			#btn_num{display: inline;width: 200px;height: 30px;position: relative;}
+			#btn_num a{background-image:url(__IMG__/Jiaodt/focus1/pagination.png); float: left;width: 19px;height: 19px;line-height: 18px;margin-left: 5px;}
+			#btn_num a.activeSlide{background-image:url(__IMG__/Jiaodt/focus1/pagination.png);background-position:0 -44px;}
+			#btn_num a:hover{cursor:pointer;background-image:url(__IMG__/Jiaodt/focus1/pagination.png);background-position:0 -21px;}
+			.btn_do{width:19px;height:19px;}
+		</style>
+		<import file="js.jquery172_min" />
+		<import file="js.mobile.Jiaodt.jquery_cycle" />
+		<script type="text/javascript">
+			jQuery(function(){
+				var offset = $("#banner").offset();
+				$("#btn_num").css({ "top":offset.top-95  ,  "left":offset.left+340  });
+				jQuery('#banner').cycle({ 
+						fx:'scrollLeft',
+						pager:'#btn_num'
+				});
+			})	
+		</script>
+	</head>
+	<body >
+		<div id="banner">
+		    <a href="http://www.js-css.cn"><img src="__IMG__/Jiaodt/focus1/slide-1.jpg" alt="#" border="0"/></a>
+		    <a href="http://www.js-css.cn"><img src="__IMG__/Jiaodt/focus1/slide-2.jpg" alt="#" border="0"/></a>
+		    <a href="http://www.js-css.cn"><img src="__IMG__/Jiaodt/focus1/slide-3.jpg" alt="#" border="0"/></a>
+		    <a href="http://www.js-css.cn"><img src="__IMG__/Jiaodt/focus1/slide-4.jpg" alt="#" border="0"/></a>
+		    <a href="http://www.js-css.cn"><img src="__IMG__/Jiaodt/focus1/slide-5.jpg" alt="#" border="0"/></a>
+		</div>
+		<div id="btn_num" style="display: block; margin-top: -21px; z-index: 20">
+		</div>
+	</body>
+</html>

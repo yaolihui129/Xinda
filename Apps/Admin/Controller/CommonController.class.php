@@ -26,14 +26,14 @@ class CommonController extends WebInfoController{
     }
     
     //数据写入
-    public function dataInsert($table,$idLength,$savePath,$data,$img='img'){
+    public function dataInsert($table,$idLength,$savePath,$data,$img='img',$idName='id'){
         $_POST=$data;
         $m=D($table);
         do {//如果该ID在库中存在，则重新获取
             $id=getRandCode($idLength);
             $arr=$m->find($id);
         } while ($arr);
-        $_POST['id']=$id;
+        $_POST[$idName]=$id;
         $_POST['moder']=$_SESSION['realname'];
         $_POST['prodid']=$_SESSION['prodid'];
         //处理上传图片
@@ -119,7 +119,7 @@ class CommonController extends WebInfoController{
     
 
     //物理删除
-    public function shanChu($table,$id){
+    public function shanChu($table,$id,$idName='id'){
         $count =M($table)->delete($id);
         if ($count>0) {
             $this->success('删除成功');
@@ -129,7 +129,7 @@ class CommonController extends WebInfoController{
     }
     
     //逻辑删除
-    function ljShanchu($table,$id){
+    function ljShanchu($table,$id,$idName='id'){
         $_GET['id']=$id;
         $_GET['isDelete']=1;
         if (D('tp_cate')->save($_GET)){
@@ -144,7 +144,7 @@ class CommonController extends WebInfoController{
         $db = D($table);
         $num = 0;
         foreach($arr['sn'] as $id => $sn) {
-            $num += $db->save(array("id"=>$id, "sn"=>$sn));
+            $num += $db->save(array('id'=>$id, "sn"=>$sn));
         }
         if($num) {
             $this->success("排序成功!"); 
@@ -154,8 +154,8 @@ class CommonController extends WebInfoController{
     }
     
     //发布
-    public function Release($table,$id,$state){
-        $arr['id']=$id;
+    public function Release($table,$id,$state,$idName='id'){
+        $arr[$idName]=$id;
         $arr['moder']=$_SESSION['realname'];
         if ($state=='5'){
             $arr['state']="1";

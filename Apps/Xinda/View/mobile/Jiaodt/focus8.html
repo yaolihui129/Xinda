@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>JS焦点图片轮播渐变切换特效插件 </title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<import file="js.jquery172_min" />
+		<import file="js.jQuery_imgPlayer" />
+		<style type="text/css">
+			body{margin:0px;padding:0px;text-align:center;background-color:#909090;font-family:Arial;}
+			.imgplayer-body{margin:0px auto;width:1024px;text-align:left;border-right:4px solid #324b6a;background-color:#333333;}
+			.imgplayer-download{font-size:20px;}
+			.imgplayer-top{width:1024px;height:135px; background-image:url(__IMG__/Jiaodt/focus8/imagePlayer_top_back.jpg);background-repeat: no-repeat;}
+			.imgplayer-content{width:1024px;padding:25px 50px 0px;}
+			.imgplayer-title{font-size:22px;color:#577aa6;font-weight:600;padding:10px 0px;}
+			.imgplayer-introduce{color:#d0d0d0;font-size:13px;text-indent:2em;line-height:16px;}			
+			.imgplayer-setting{padding-left:2em;color:#d0d0d0;font-size:13px;line-height:16px;}
+			.imgplayer-setting-list{width:900px;color:#d0d0d0;font-size:13px;line-height:16px;}
+			.imgPlayer1-stitle{color:#d0d0d0;font-size:13px;line-height:16px;padding:10px;}
+			.imgplayer-example{border:1px solid #666;background-color:#3e3e3e;padding:10px;margin-top:10px;font-size:13px;line-height:16px;color:#577aa6;position:relative;}
+			.imgplayer-example-js{margin-top:10px;width:900px;padding:10px;}
+			.imgplayer-example-html{width:900px;padding:10px;}
+			.imgplayer-example-say{margin-top:10px;width:900px;padding:10px;}
+			.imgplayer-bottom{ width:1024px;height:80px;color:#324b6a;line-height:80px; padding-left:80px;font-family:Arial;background-image:url(__IMG__/Jiaodt/focus8/imagePlayer_bottom_back.jpg);background-repeat: no-repeat;}
+			.imgPlayer1 img,.imgPlayer2 img,.imgPlayer3 img,.imgPlayer4 img{display:none;}
+		</style>
+		<script type="text/javascript">
+		$(function(){
+			$(".imgPlayer1").imgPlayer({
+				fontAlign:'right',//标题右对齐
+				titleAlign:"top"  //标题在上面
+			});
+			
+			$(".imgPlayer2").imgPlayer({
+				iconOpacity:'0.4',		 //图标显示的透明度
+				activeIconOpacity:'0.8', //激活时图标显示的透明度
+				iconColor:'#fcf086',	 //图标的颜色
+				iconFontColor:'#090b42', //图标字体的颜色
+				activeIconColor:'#0e5f1b'//激活时图标的颜色
+			});
+			$(".imgPlayer3").imgPlayer({
+				height:250,					 //自定义高度
+				width:250,					 //自定义宽度
+				showTitle:false,		     //不显示标题	
+				bindEvent:'mouseover'		 //更改触发图片切换的鼠标事件为mouseover,默认为click
+			});
+			$(".imgPlayer4").imgPlayer({
+				height:115,				//自定义高度
+				width:900,				//自定义宽度
+				showTitle:false,		//不显示标题	
+				mouseEvent:false,		//取消鼠标悬浮停止播放的事件
+				isIconShow:false		//不显示序号	
+			});
+			
+		})
+		</script>
+	</head>
+	<body style="margin:0px;padding:0px;">	
+	<div class="imgplayer-body">
+		<div class="imgplayer-top"></div>
+		<div class="imgplayer-content">
+			<div class="imgplayer-title">介绍&introduce</div>
+			<div class="imgplayer-introduce">
+				此插件实现了简易的图片展示效果,可以做为广告图片浏览,新闻图片浏览等使用,此插件配置非常灵活,提供了多个样式的设计接口,并且满足不同场合的设计要求。<br/><br/>注意:避免页面上有class名为'jquery-imagePlayer-'开头的样式声明,以免冲突.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在css声明中把要播放的图片设置为不可见&nbsp;.imgPlayer img{display:none;}<br/><br/>声明:例子中用到的图片来源与互联网,版权归原作者所有.
+				<br/>
+				<br/>
+			</div>
+			<div class="imgplayer-title">例子&example</div>
+			<div class="imgPlayer1-stitle">例子1:</div>
+			<span class="imgPlayer1">
+				<img src="__IMG__/Jiaodt/focus8/1.jpg" url='http://www.js-css.cn' title='风吹稻花香,小河水流荡'/>
+				<img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
+				<img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
+				<img src="__IMG__/Jiaodt/focus8/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
+				<img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
+				<img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/>
+			</span>
+			<br/>
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-html">
+				例子1:html<br/>
+					&lt;span class="imgPlayer1"&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/1.jpg" url='http://www.baidu.com' title='风吹稻花香,小河水流荡'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/4.jpg" title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
+					&lt;/span&gt;<br/>
+				</span>
+				<span class="imgplayer-example-js">
+				例子1:js<br/>
+					$(".imgPlayer1").imgPlayer({<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontAlign:'right',//标题右对齐<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;titleAlign:"top" //标题在上面<br/>
+					});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:第一个图片设置了url为超链接地址,默认的宽*高是600px*200px
+				</span>
+			</div>
+			<div class="imgPlayer1-stitle">例子2:</div>
+			<div class="imgPlayer2">
+				<img src="__IMG__/Jiaodt/focus8/1.jpg" title='风吹稻花香,小河水流荡'/>
+				<img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/>
+				<img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/>
+				<img src="__IMG__/Jiaodt/focus8/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/>
+				<img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/>
+				<img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时长想着去的地方.'/>
+			</div>
+			
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-html">
+				例子2:html<br/>
+					&lt;div class="imgPlayer2"&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/1.jpg" title='风吹稻花香,小河水流荡'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/2.jpg" title='大海呀,全是水,野马呀,四条腿'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/3.jpg" title='绿油油一片生命,一滴滴的灌注着我们这个大地'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/4.jpg" url='http://www.google.com' title='广阔的草原上,是谁在20年前种了一棵那么大的树？'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/5.jpg" title='向日葵,向日葵,太阳不出来的时候你向着谁呢?'/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/6.jpg" title='梦幻的世界,是儿时常想着去的地方,现在呢?'/&gt;<br/>
+					&lt;/div&gt;<br/>
+				</span>
+				<span class="imgplayer-example-js">
+				例子2:js<br/>
+					$(".imgPlayer2").imgPlayer({<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iconOpacity:'0.4',	//左下方小图标显示的透明度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;activeIconOpacity:'0.8' //激活时图标显示的透明度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iconColor:'#fcf086',	 //图标的颜色<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iconFontColor:'#090b42', //图标字体的颜色<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;activeIconColor:'#0e5f1b'//激活时图标的颜色<br/>
+					});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:第四个图片设置了url为超链接地址,自定义宽*高是600px*200px
+				</span>
+			</div>
+			<div class="imgPlayer1-stitle">例子3:</div>
+			<div class="imgPlayer3">
+				<img src="__IMG__/Jiaodt/focus8/01.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/02.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/03.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/04.jpg" />
+			</div>
+			
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-html">
+				例子3:html<br/>
+					&lt;div class="imgPlayer3"&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/01.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/02.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/03.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/04.jpg"/&gt;<br/>
+					&lt;/div&gt;<br/>
+				</span>
+				<span class="imgplayer-example-js">
+				例子3:js<br/>
+					$(".imgPlayer3").imgPlayer({<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:250,	//自定义高度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:250,	//自定义宽度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showTitle:false,//不显示标题<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindEvent:'mouseover'//更改触发图片切换的鼠标事件为mouseover,默认为click<br/>
+					});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:
+				</span>
+			</div>
+			
+			<div class="imgPlayer1-stitle">例子4:</div>
+			<div class="imgPlayer4">
+				<img src="__IMG__/Jiaodt/focus8/001.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/002.jpg" />
+				<img src="__IMG__/Jiaodt/focus8/003.jpg" />
+			</div>
+			
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-html">
+				例子4:html<br/>
+					&lt;div class="imgPlayer4"&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/001.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/002.jpg"/&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="__IMG__/Jiaodt/focus8/003.jpg"/&gt;<br/>
+					&lt;/div&gt;<br/>
+				</span>
+				<span class="imgplayer-example-js">
+				例子4:js<br/>
+					$(".imgPlayer4").imgPlayer({<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:115,	//自定义高度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:900,	//自定义宽度<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showTitle:false,//不显示标题<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mouseEvent:false,////取消鼠标悬浮停止播放的事件<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isIconShow:false//不显示序号<br/>
+					});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:
+				</span>
+			</div>
+			<br/>			
+			<div class="imgplayer-title">配置&configure</div>
+			<div class="imgplayer-setting">
+				<table class="imgplayer-setting-list">
+					<tr style="color:#577aa6"><td>全部配置</td><td>默认值</td><td>说明</td></tr>
+					<tr><td width="150px">delay:</td><td width="150px">3000</td><td width="600px">图片停留时间</td></tr>
+					<tr><td>fadeOutTime:</td><td>800</td><td>图片淡出时间(ms)</td></tr>
+					<tr><td>fadeInTime:</td><td>800</td><td>淡入时间(ms)</td></tr>
+					<tr><td>height:</td><td>200</td><td>默认高(px)</td></tr>
+					<tr><td>width:</td><td>600</td><td>默认宽(px)</td></tr>
+					<tr><td>showTitle</td><td>true</td><td>是否显示标题</td></tr>
+					<tr><td>titleSlideUpTime:</td><td>500</td><td>标题上升过程时间(ms)</td></tr>
+					<tr><td>titleAnimate:</td><td>true</td><td>是否启动标题显示时的动画(showTitle为true的前提下生效)</td></tr>
+					<tr><td>tBackgroundColor:</td><td>#333333</td><td>标题背景颜色</td></tr>
+					<tr><td>tBackgroundOpacity:</td><td>'0.6'</td><td>标题背景透明度</td></tr>
+					<tr><td>titleColor:</td><td>'#ffffff'</td><td>标题文字颜色</td></tr>
+					<tr><td>titleHeight:</td><td>30</td><td>标题显示高度(px)</td></tr>
+					<tr><td>titleAlign:</td><td>'bottom'</td><td>标题对齐方式(top,bottom)</td></tr>
+					<tr><td>fontSize:</td><td>13</td><td>标题文字大小(px)</td></tr>
+					<tr><td>fontAlign:</td><td>'left'</td><td>标题文字对齐方式(left,center,right)</td></tr>
+					<tr><td>fontWidth:</td><td>''</td><td>标题文字显示宽度(px)</td></tr>
+					<tr><td>isNewLine:</td><td>false</td><td>标题文字是否可以换行显示</td></tr>
+					<tr><td>isIconShow:</td><td>true</td><td>是否显示序号图标(就是左下角的1,2,3,4...)</td></tr>
+					<tr><td>iconSize:</td><td>18</td><td>图标显示的大小(px)</td></tr>
+					<tr><td>iconBorder:</td><td>'1px solid #333333'</td><td>图标显示的边框</td></tr>
+					<tr><td>iconColor:</td><td>'#f0f0f0'</td><td>图标显示的颜色</td></tr>
+					<tr><td>iconFontSize:</td><td>12</td><td>图标文字的大小(px)</td></tr>
+					<tr><td>iconFontColor:</td><td>'#1d103b'</td><td>图标的文字颜色</td></tr>
+					<tr><td>iconBgUrl:</td><td>'none'</td><td>图标的自定义图标,iconBgUrl:"url('image/hello.jpg')"</td></tr>
+					<tr><td>activeIconSize:</td><td>20</td><td>激活时图标显示的大小(px)</td></tr>
+					<tr><td>activeIconBorder:</td><td>'1px solid #333333'</td><td>激活时图标显示的边框</td></tr>
+					<tr><td>activeIconColor:</td><td>'#f89903'</td><td>激活时图标显示的颜色</td></tr>
+					<tr><td>activeIconFontSize:</td><td>16</td><td>激活时文字的大小(px)</td></tr>
+					<tr><td>activeIconFontColor:</td><td>#ffffff</td><td>激活时图标的文字颜色</td></tr>
+					<tr><td>activeIconBgUrl:</td><td>'none'</td><td>激活时图标的自定义图标,activeIconBgUrl:"url('image/hello.jpg')"</td></tr>
+					<tr><td>iconOpacity:</td><td>'0.6'</td><td>图标显示的透明度</td></tr>
+					<tr><td>activeIconOpacity:</td><td>'0.9'</td><td>激活时图标显示的透明度</td></tr>
+					<tr><td>iconRigh:t</td><td>10</td><td>图标离右边的距离(px)</td></tr>
+					<tr><td>iconBottom:</td><td>5</td><td>图标离下边的距离(px)</td></tr>
+					<tr><td>iconMargin:</td><td>5</td><td>图标的间距(px)</td></tr>
+					<tr><td>startIndex:</td><td>0</td><td>初始播放序号(若大于图片总数,则从0开始)</td></tr>
+					<tr><td>autoPlay:</td><td>true</td><td>/自动播放</td></tr>
+					<tr><td>mouseEvent</td><td>true</td><td>鼠标悬浮停止播放</td></tr>
+					<tr><td>bindEvent</td><td>'click'</td><td>鼠标手动切换触发的事件</td></tr>
+				</table>
+				<br/>
+			</div>
+		</div>
+		
+		
+	</div>
+	</body>
+</html>

@@ -2,15 +2,13 @@
 namespace TAdmin\Controller;
 use Think\Controller;
 class CommonController extends Controller {
-    Public function _initialize(){
-        // 初始化的时候检查用户权限
+    Public function _initialize(){// 初始化的时候检查用户权限        
         if(!isset($_SESSION['isLogin']) || $_SESSION['realname']==''){
             $this->redirect('TAdmin/Login/index');
         }
     }
     
-    public function _empty(){
-        //错误网页重新定向到首页
+    public function _empty(){ //错误网页重新定向到首页       
         $this->redirect('public/404');
     }
     

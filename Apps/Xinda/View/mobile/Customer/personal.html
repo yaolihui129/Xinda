@@ -1,0 +1,37 @@
+<layout name="layout" />
+<div class="container">
+     <p class="text-center">
+		<empty name="arr['figureurl_qq_2']">
+			<img src="__IMG__/toux.jpg" alt="__IMG__/toux.jpg" width="100%">
+		<else /> 
+			<img src="<{$arr['figureurl_qq_2']}>" alt="<{$arr['figureurl_qq_2']}>" class="img-circle">
+		</empty> 
+		
+	 </p>
+     <p class="text-center">
+		<{$arr['realname']}>&nbsp;-&nbsp;
+		<{$arr['gender']}>&nbsp;-&nbsp;	<{$arr['phone']}>
+	</p>
+	<p class="text-center">
+		<{$arr['province']}>&nbsp;-&nbsp;
+		<{$arr['city']}>
+	</p>
+     
+	<ul class="list-group">  
+	  <li class="list-group-item"><a href="__URL__/mod">我的资料 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>	  
+	  </li>	 
+	  <li class="list-group-item"><a href="#">我的推荐 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"> </span></a>
+	  </li>
+ 
+	  <li class="list-group-item"><a href="#">我的预约 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>
+	  <li class="list-group-item"><a href="__APP__/Xinda/Customer/setpass">修改密码 
+	  		<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+	  </li>	  
+	</ul>	
+	<a href="__APP__/Xinda/Login/logout" class="btn btn-primary btn-lg btn-block">退出</a>
+	<br><br>
+</div>

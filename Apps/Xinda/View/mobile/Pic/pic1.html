@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+	<HEAD>
+		<TITLE>juqery手风琴实现图片切换</TITLE>
+		<META http-equiv=Content-Type content="text/html; charset=utf-8">
+		<style type="text/css">
+			body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0;padding:0;border:0;}
+			ul,ol,li{list-style:none;}
+			input,button{margin:0;font-size:12px;vertical-align:middle;}
+			body{font-size:12px;font-family:Arial, Helvetica, sans-serif; color:#333; margin:0 auto; }
+			table{border-collapse:collapse;border-spacing:0;}			
+			a{color:#333;text-decoration:none;}
+			a:hover{color:#c00; text-decoration:underline;}
+			em,i{ font-style:normal;}
+			b{ font-weight:normal;}
+			h1,h2,h3,h4{ font-size:14px;}
+			h5{ font-size:12px;}
+			h6{ font-size:12px; font-weight:normal;}		
+			.box-lanrenzhijia{BACKGROUND: url(__IMG__/Pic/pic1/bg01.png) no-repeat 6px 0px; MARGIN: 0px auto; OVERFLOW: hidden; WIDTH: 917px; HEIGHT: 248px}
+			.box-lanrenzhijia UL {MARGIN: 7px 0px 0px 60px; OVERFLOW: hidden; WIDTH: 867px; HEIGHT: 225px}
+			.box-lanrenzhijia UL LI {DISPLAY: inline; FLOAT: left; font-size:14px;}
+			.box-lanrenzhijia UL LI IMG {DISPLAY: none}
+			.box-lanrenzhijia SPAN{PADDING-RIGHT: 14px; DISPLAY: inline; PADDING-LEFT: 12px; FONT-WEIGHT: bold; FLOAT: left; PADDING-BOTTOM: 0px; WIDTH: 20px; CURSOR: pointer; WORD-BREAK: normal; LINE-HEIGHT: 140%; PADDING-TOP: 5px; HEIGHT: 223px; TEXT-ALIGN: right; WORD-WRAP: break-word}
+			.box-lanrenzhijia SPAN .djt {PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 8px; PADDING-BOTTOM: 0px; MARGIN: 0px 3px 0px 0px; PADDING-TOP: 0px; TEXT-ALIGN: center}
+			.box-lanrenzhijia .last SPAN {PADDING-RIGHT: 14px; PADDING-LEFT: 14px; PADDING-BOTTOM: 0px; PADDING-TOP: 5px}
+			.box-lanrenzhijia .current {COLOR: #fff}
+			.box-lanrenzhijia .last img{ width:526px;}
+				
+		</style>
+	</HEAD>
+	<BODY>
+		<div class="box-lanrenzhijia">
+			<UL>
+			   <LI><SPAN class=current><CODE class=djt>▼</CODE>迷宫寻宝　挑战神秘</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/1.jpg"></A> </LI>
+			  <LI><SPAN><CODE class=djt>▼</CODE>幻想副本　天马行空</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/2.jpg"></A> </LI>
+			  <LI><SPAN><CODE class=djt>▼</CODE>个性装饰　炫酷造型</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/3.jpg"></A> </LI>
+			  <LI><SPAN><CODE class=djt>▼</CODE>武侠奇幻　双剑合壁</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/4.jpg"></A> </LI>
+			  <LI><SPAN><CODE class=djt>▼</CODE>家园庭院　第二人生</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/5.jpg"></A> </LI>
+			  <LI><SPAN><CODE class=djt>▼</CODE>现代元素　梦想首创</SPAN><A href="#" target=_blank><IMG src="__IMG__/Pic/pic1/6.jpg"></A> </LI>
+			  <LI class=last><SPAN><CODE class=djt>▼</CODE>史诗剧情　阵营纷争</SPAN><A href="#"target=_blank><IMG src="__IMG__/Pic/pic1/7.jpg"></A> 
+			</LI>
+			</UL>
+		</div>
+		<import file="js.jquery172_min" />
+		<import file="js.jquery_easing13" />
+		<SCRIPT type=text/javascript>
+			$(function(){
+			    var j = 0,k = 0,id = 0;
+			    init();
+			    $.each( [0,1,2,3,4,5,6], function(m){
+			        $("div.box-lanrenzhijia>ul>li").eq(m).find("span").click(function () {
+			            $.each( [0,1,2,3,4,5,6], function(i){
+			                $("div.box-lanrenzhijia>ul>li").eq(i).find("span").removeClass("current");
+			                $("div.box-lanrenzhijia>ul>li").eq(i).find("img").hide();
+			            });
+			            $("div.box-lanrenzhijia>ul>li").eq(m).find("span").addClass("current");
+			            $("div.box-lanrenzhijia>ul>li").eq(m).find("img").fadeIn({queue:false, duration:100, easing:"easeInSine"});
+			            j = m + 1;
+			            clearTimeout(id);
+			            id = setTimeout(function(){init()},6000);
+			        });       
+			    });
+			    function init()
+			    {        
+			        $.each( [0,1,2,3,4,5,6], function(n){
+			            $("div.box-lanrenzhijia>ul>li").eq(n).find("span").removeClass("current");
+			            $("div.box-lanrenzhijia>ul>li").eq(n).find("img").hide();
+			        });
+			        k = j%7;
+			        $("div.box-lanrenzhijia>ul>li").eq(k).find("span").addClass("current");
+			        $("div.box-lanrenzhijia>ul>li").eq(k).find("img").fadeIn({queue:false, duration:100, easing:"easeInSine"});
+			        j = j+1;
+			        id = setTimeout(function(){init()},4000);
+			    }
+			});
+			$(".t1 a").click(function(){
+			 dialog("邀请朋友一起玩吧","id:tc","300px","auto","id");
+			});
+			var miso_a = mx_ver;
+			var miso_c = mx_verNum;
+			$('div.down').find('a').attr('href', miso_a);
+			$('div.down>a').find('span').html(miso_c);
+		</SCRIPT>
+	</BODY>
+</HTML>

@@ -1,0 +1,31 @@
+<layout name="layout" />
+<div class="panel panel-default">
+	<div class="panel-heading"><b>我的资料</b>
+		<a href="__URL__/personal"class="btn btn-warning btn-xs pull-right" >返 回</a>
+	</div>  
+     <div class="panel-body">
+     <form action="__URL__/update" method="post" enctype='multipart/form-data'  role="form">
+         <input type="hidden" name="creditid" value="<{$arr.creditid}>" />
+         <div class="form-group input-group-lg">            
+             <input type="text" class="form-control" name="realname" value="<{$arr['realname']}>" placeholder="姓名"> 
+         </div>
+         <div class="form-group input-group-lg">             
+              <input type="text" class="form-control" name="phone" value="<{$arr['phone']}>" placeholder="手机号" > 
+         </div> 
+         <div class="form-group input-group-lg">              
+              <input type="text" class="form-control" name="gender" value="<{$arr['gender']}>" placeholder="性别" readonly> 
+         </div>
+         <div class="form-group input-group-lg">              
+              <input type="text" class="form-control" name="province" value="<{$arr['province']}>" placeholder="省" > 
+         </div> 
+         <div class="form-group input-group-lg">              
+              <input type="text" class="form-control" name="city" value="<{$arr['city']}>" placeholder="市" > 
+         </div>  
+                                   
+          <div class="form-group input-group-lg">             
+              <input type="text" class="form-control" name="qq" value="<{$arr['qq']}>" placeholder="QQ" > 
+          </div>                      
+          <button type="submit" class="btn btn-info btn-lg btn-block">提 交</button>
+       </form>                 
+     </div>
+</div>

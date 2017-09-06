@@ -42,7 +42,7 @@ class ActivityController extends CommonController {
     
 
     public function fabu(){//发布、下线     
-        $this->Release($this->getTable(), $_GET['id'], $_GET['state']);
+        $this->Release($this->getTable(), I('id'), I('state'));
     }
 
     public function del(){//删除

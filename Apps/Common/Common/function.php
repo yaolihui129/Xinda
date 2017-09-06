@@ -435,9 +435,8 @@
     }
     
     //创建自定义菜单
-    function wxMenuCreat($token,$postArr) {
+    function wxMenuCreat($token,$postJson) {
         $url      = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
-        $postJson = urldecode(json_encode($postArr));
         $res      = httpPost($url,$postJson);
         return $res;
     }

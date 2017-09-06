@@ -6,7 +6,12 @@ class WebInfoController extends Controller {
         $this->redirect(C(PRODUCT).'/Index');
     } 
     
- public function insert(){
+    public function changeMuban($muban){
+        if($muban){
+            $_SESSION[C(PRODUCT)]['muban']=$muban;
+        }        
+    }
+    public function insert(){
         $m=D(I('table'));
         if (IS_GET){
             $_GET['adder']=$_SESSION['realname'];
