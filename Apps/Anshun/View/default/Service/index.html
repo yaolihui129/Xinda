@@ -10,7 +10,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="col-md-4 ">
-				<img src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.img}>"  height="180px">		
+				<img src="__UPLOAD__/<{$arr.img}>" alt="<{$arr.img}>"  height="180px">		
 			</div>
 			<div class="col-md-7 ">
 				<h5><{$arr.mark}></h5>
@@ -22,11 +22,11 @@
 								
 				</switch>
 				<span class="hidden-md hidden-lg">
-					<a href="tel:<{$_SESSION['Anshun']['phone']}>" class="btn btn-info btn-xs">电话咨询</a><br>
+					<a href="tel:<{$_SESSION[$JC]['phone']}>" class="btn btn-info btn-xs">电话咨询</a><br>
 				</span>
 				<span class="hidden-xs hidden-sm">
-					<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['Anshun']['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
-						<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['Anshun']['qq']}>:41">
+					<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION[$JC]['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
+						<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION[$JC]['qq']}>:41">
 					</a>
 				</span>
 				<hr>

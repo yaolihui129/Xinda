@@ -20,7 +20,7 @@ class IndexController extends WebInfoController {
 
         $map=array('prodid'=>$_SESSION[$JC]['id'],'istj'=>1,'state'=>5);
         $data=D('tp_product')->where($map)
-        ->field("productId,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+        ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
         ->order('utime desc')
         ->select();
         $this->assign('data',$data);

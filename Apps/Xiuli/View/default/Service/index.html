@@ -9,7 +9,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="col-md-3 ">
-				<img src="__UPLOAD__/<{$arr.productimg}>" alt="<{$arr.img}>"  height="180px">		
+				<img src="__UPLOAD__/<{$arr.img}>" alt="<{$arr.img}>"  height="180px">		
 			</div>
 			<div class="col-md-7 ">
 				<h5><{$arr.mark}></h5>
@@ -25,11 +25,11 @@
 				    <default /><h5><{$arr.weight}></h5>			
 				</switch>
 				<span class="hidden-md hidden-lg">
-					<a href="tel:<{$_SESSION['Xiuli']['tel']}>" class="btn btn-info btn-xs">咨询预约</a>
+					<a href="tel:<{$_SESSION[$JC]['tel']}>" class="btn btn-info btn-xs">咨询预约</a>
 				</span>
 				<span class="hidden-xs hidden-sm">
-					<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['Xiuli']['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
-						<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['Xiuli']['qq']}>:41">
+					<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION[$JC]['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
+						<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION[$JC]['qq']}>:41">
 					</a>
 				</span>
 				 <hr>
@@ -58,13 +58,13 @@
 <notempty name="date1">
 <div class="row">
     <div class="panel panel-success">
-		<div class="panel-heading"><h3 class="panel-title">成功案例<span class="pull-right"><a href="__APP__/Xiuli">更多</a></span></h3></div>
+		<div class="panel-heading"><h3 class="panel-title">成功案例<span class="pull-right"><a href="__APP__/<{$JC}>">更多</a></span></h3></div>
 		<div class="panel-body">
 		<volist name='date1' id='ar' empty="没有数据">
 	      	<div class="col-xs-12 col-md-3">
 				<div class="thumbnail" >
 					<a href="#" >
-					     <img data-src="holder.js/100%x180" src="__UPLOAD__/<{$arr.productimg}>" alt="<{$ar.img}>"  height="180px">
+					     <img data-src="holder.js/100%x180" src="__UPLOAD__/<{$arr.img}>" alt="<{$ar.img}>"  height="180px">
 					</a>
 					<div class="caption"><{$ar.name}></div>
 				</div>

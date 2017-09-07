@@ -15,10 +15,10 @@ class ServicelistController extends WebInfoController {
            $map['cateId|pidCateId']=$_GET['cate'];
            $this->assign('cate',getCatname($_GET['cate']));
            $data=$m->where($map)->order('sn,utime desc')
-                ->field("productId,name,money,smoney,num,productImg,utime")
+                ->field("id,name,money,smoney,num,img,utime")
                 ->select();
         }else {
-           $data=$m->where($map)->field("productId,name,money,smoney,num,productImg,utime")
+           $data=$m->where($map)->field("id,name,money,smoney,num,img,utime")
            ->order('utime desc')->limit(12)->select();
            $this->assign('cate','钣金喷漆');
         }                   

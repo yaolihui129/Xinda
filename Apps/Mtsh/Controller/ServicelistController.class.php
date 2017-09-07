@@ -18,10 +18,10 @@ class ServicelistController extends WebInfoController {
         if($_GET['cate']){
            $map['cate']=$_GET['cate'];
            $data=$m->where($map)
-                ->field("productId,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+                ->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
                 ->order('utime desc')->select();
         }else {
-           $data=$m->where($map)->field("productId,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
+           $data=$m->where($map)->field("id,mark,name,state,money,smoney,num,istj,cate,path,img,utime")
                 ->order('utime desc')->limit(12)->select();
         }
                    

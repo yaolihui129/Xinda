@@ -4,7 +4,7 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<{$arr.cate|getCatname=###}>-<b><{$arr.name}></b>
-				<a href="__APP__/Mtsh/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
+				<a href="__APP__/<{$JC}>/Servicelist/index/cate/<{$arr.cate}>" class="pull-right">返回分类</a>
 			</h3>
 		</div>
 		<div class="panel-body">
@@ -18,22 +18,15 @@
 				<!--<h4>运费：￥<{$arr.wlmoney}></h4>-->
 				<h5>规格：<{$arr.weight}></h5>
 				<a href="#" class="btn btn-info btn-xs">咨询预约</a>
-				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
-					<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION['qq']}>:41">
-				</a>
-	
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<{$_SESSION[$JC]['qq']}>&amp;site=qq&amp;menu=yes" class="btn-xs" target="_blank">
+					<img border="0" title="在线客服" alt="在线客服" style="margin-top:0px;" src="http://wpa.qq.com/pa?p=2:<{$_SESSION[$JC]['qq']}>:41">
+				</a>	
 			</div>
-			
-			
-			
-			
 		</div>
 	</div>
 	<div class="panel panel-info">
 		<div class="panel-heading"><h3 class="panel-title">详情介绍：</h3></div>
-		<div class="panel-body"><p><{$arr.content}></p></div>
-			
-			
+		<div class="panel-body"><p><{$arr.content}></p></div>		
 	</div>
 </div>
 

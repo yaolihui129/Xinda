@@ -4,8 +4,8 @@
         <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><{$_SESSION['Anshun']['web']}></title>
-        <meta name="keywords" content="<{$_SESSION['Anshun']['keywords']}>">
-        <meta name="description" content="<p><{$_SESSION['Anshun']['desc']}></p>">
+        <meta name="keywords" content="<{$_SESSION[$JC]['keywords']}>">
+        <meta name="description" content="<p><{$_SESSION[$JC]['desc']}></p>">
         <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
         <import type="css" file="css.as_home" />
 	</head>
@@ -20,12 +20,12 @@
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		          </button>
-		          <a class="navbar-brand" href="__APP__/Anshun"><{$_SESSION['Anshun']['web']}></a>
+		          <a class="navbar-brand" href="__APP__/<{$JC}>"><{$_SESSION[$JC]['web']}></a>
 		        </div>
 		        <div id="navbar" class="collapse navbar-collapse ">	        
 			          <ul class="nav navbar-nav pull-right">                       
-			            <li><a href="__APP__/Anshun/Servicelist/index/cate/8Roxs2"><span class="glyphicon glyphicon-th-list"> 钣金喷漆</span></a></li>
-			            <li><a href="__APP__/Anshun/Servicelist/index/cate/dH3Pph"><span class="glyphicon glyphicon-gift"> 汽车用品</span></a></li>			            					                     
+			            <li><a href="__APP__/<{$JC}>/Servicelist/index/cate/8Roxs2"><span class="glyphicon glyphicon-th-list"> 钣金喷漆</span></a></li>
+			            <li><a href="__APP__/<{$JC}>/Servicelist/index/cate/dH3Pph"><span class="glyphicon glyphicon-gift"> 汽车用品</span></a></li>			            					                     
 			            <if condition="$_SESSION['isCLogin'] lt 'Anshun' ">
 			            	<li><a data-toggle="modal" href="#Login" >登录</a></li>
 			           		<li><a  href="__APP__/Anshun/Customer" >注册</a></li>	
@@ -46,12 +46,12 @@
 
 	 	<div class="container text-center">         
 		   <h1 >安顺汽车服务中心</h1><br>
-		   <p><h4><{$_SESSION['Anshun']['desc']}></h4></p>      	
-           <dd>地址：<{$_SESSION['Anshun']['adress']}><br>联系电话：
-           		<a bref="tel:<{$_SESSION['Anshun']['phone']}>"><{$_SESSION['Anshun']['phone']}></a>
+		   <p><h4><{$_SESSION[$JC]['desc']}></h4></p>      	
+           <dd>地址：<{$_SESSION[$JC]['adress']}><br>联系电话：
+           		<a bref="tel:<{$_SESSION[$JC]['phone']}>"><{$_SESSION[$JC]['phone']}></a>
            </dd><br>  
 		  
-		 <a href="__APP__/Anshun/Dingdan/yuyue" class="btn btn-lg btn-outline">马上预约</a>
+		 <a href="__APP__/<{$JC}>/Dingdan/yuyue" class="btn btn-lg btn-outline">马上预约</a>
 		</div>
 		<hr>
 		
@@ -64,7 +64,7 @@
 		                            钣金喷漆是一种汽车修复技术，就是把将汽车金属外壳变形部分进行修复，比如车体外壳被撞了个坑，就可以通过钣金使之恢复原样，然后再通过喷涂专用油漆，
 						使变形的汽车金属表面恢复到与其他完好的地方一样，光亮如初
 		            </div>
-		            <a href="__APP__/Anshun/Servicelist/index/cate/8Roxs2" class="btn btn-lg btn-outline pull-right"> 
+		            <a href="__APP__/<{$JC}>/Servicelist/index/cate/8Roxs2" class="btn btn-lg btn-outline pull-right"> 
 		                <span>查看更多  </span><span class="glyphicon glyphicon-circle-arrow-right"></span>
 		            </a>                        
 		         </div>
@@ -85,7 +85,7 @@
 		                           	恢复汽车的完好技术状况和完全（或接近完全）恢复汽车寿命的恢复性修理。
 		                           	而汽车小修是指：用更换或修理个别零件的方法，保证或恢复汽车工作能力的运行性修理。
 		                 </div>
-		                 <a href="__APP__/Anshun/Servicelist/index/cate/PyUiCY" class="btn btn-lg btn-outline pull-left"> 
+		                 <a href="__APP__/<{$JC}>/Servicelist/index/cate/PyUiCY" class="btn btn-lg btn-outline pull-left"> 
 		                      <span>查看更多  </span><span class="glyphicon glyphicon-circle-arrow-right"></span>
 		                 </a>                       
 		             </div>                
@@ -99,7 +99,7 @@
 							 现代的汽车保养主要包含了对发动机系统（引擎）、变速箱系统、空调系统、冷却系统、燃油系统、动力转向系统等的保养范围。
 							汽车保养的目的是保持车容整洁，技术状况正常，消除隐患，预防故障发生，减缓劣化过程，延长使用周期。
 		             </div>
-		             <a href="__APP__/Anshun/Servicelist/index/cate/a2HmYD" class="btn btn-lg btn-outline pull-right"> 
+		             <a href="__APP__/<{$JC}>/Servicelist/index/cate/a2HmYD" class="btn btn-lg btn-outline pull-right"> 
 		                <span>查看更多  </span><span class="glyphicon glyphicon-circle-arrow-right"></span>
 		             </a>                       
 		         </div>
@@ -119,7 +119,7 @@
 		                                    汽车是现代生活的必需品。越来越多的人拥有了自己的私家车，汽车用品或者说汽车保养用品也就成了车辆保养所必不可少的一部分。
 		                                    汽车用品按功能分类，可分为保养类、装饰类、清洁类等。
 		              </div>
-		              <a href="__APP__/Anshun/Servicelist/index/cate/dH3Pph" class="btn btn-lg btn-outline pull-left"> 
+		              <a href="__APP__/<{$JC}>/Servicelist/index/cate/dH3Pph" class="btn btn-lg btn-outline pull-left"> 
 		                 <span>查看更多  </span><span class="glyphicon glyphicon-circle-arrow-right"></span>
 		              </a>
 		           </div>
@@ -139,7 +139,7 @@
                         <ul class="footer-links">                                                                            
                             <li>Copyright <span class="num">&copy;</span> 2016-2017</li>
                         	<li><a target="_blank" href="http://www.xiuliguanggao.com"><b>临城-秀丽广告</b></a>版权所有</li>
-                            <li> 热线：<a href="tel:<{$_SESSION['Anshun']['phone']}>"><{$_SESSION['Anshun']['phone']}></a></li>
+                            <li> 热线：<a href="tel:<{$_SESSION[$JC]['phone']}>"><{$_SESSION['Anshun']['phone']}></a></li>
                             <li>浏览器：<{$_SESSION['os']}>-<{$_SESSION['browser']}></li>
                             <li>IP:<{$_SESSION['ip']}></li>
                         </ul>
@@ -176,7 +176,7 @@
 			        <h4 class="modal-title" id="myModalLabel">登录</h4>
 			    </div>
 			    <div class="modal-body">
-			      	<form action="__APP__/Anshun/Login/login" method="post" class="form-horizontal" role="form" >	      	
+			      	<form action="__APP__/<{$JC}>/Login/login" method="post" class="form-horizontal" role="form" >	      	
 						<div class="form-group">
 							<label for="short" class="col-sm-2 control-label">手机:</label>
 							<div class="col-sm-10">

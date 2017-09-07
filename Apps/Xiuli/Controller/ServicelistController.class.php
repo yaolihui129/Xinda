@@ -5,8 +5,7 @@ class ServicelistController extends WebInfoController {
         $JC=C('PRODUCT');
         $this->assign('JC',$JC);
         getWebInfo($JC);//获取网页信息    
-        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录
-             
+        if($_SESSION[isCLogin]==C('PRODUCT')){//未登录            
         }else {
             if($_GET['wxOpenId']){//微信免登陆
                 $this->weiXinLogin($_GET['wxAppId'],$_GET['wxOpenId']);
@@ -21,16 +20,14 @@ class ServicelistController extends WebInfoController {
         if($_GET['cate']){
            $map['cateId|pidCateId']=$_GET['cate'];
            $this->assign('cate',getCatname($_GET['cate']));
-           $data=M('tp_product')->where($map)
-                ->field("productId,name,money,smoney,num,productImg,utime")
-                ->order('utime desc')->select();
+           
         }else {
-           $data=M('tp_product')->where($map)->field("productId,name,money,smoney,num,productImg,utime")
-           ->order('utime desc')->limit(12)->select();
+           
            $this->assign('cate','推荐服务');
-        }                   
+        } 
+        $data=M('tp_product')->where($map)->order('utime desc')->limit(12)->select();       
         $this->assign('data',$data);  
-        
+       
         $this->display();
     }   
     

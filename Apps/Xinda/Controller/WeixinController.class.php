@@ -161,14 +161,14 @@ class WeixinController extends WebInfoController {
                 $map['name']=array('like','%'.$text.'%');
                 $map['prodid']=C(PRODID);
                 $map['state']=5;
-                $data=M('tp_product')->field('name, content , productImg,productId')->where($map)->order('sn')->limit(10)->select();
+                $data=M('tp_product')->field('name, content , img,id')->where($map)->order('sn')->limit(10)->select();
                 if($data){
                     foreach ($data as $a){
                         $arr[]=[
                             'title'=>$a['name'],
                             'description'=>$a['content'],
-                            'picUrl'=>C(WEBSERVER).'/Upload/'.$a['productimg'],
-                            'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Service/index/id/'.$a['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            'picUrl'=>C(WEBSERVER).'/Upload/'.$a['img'],
+                            'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Service/index/id/'.$a['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                         ];
                     }                   
                 }else{//没找到你要的商品或服务
@@ -210,14 +210,14 @@ class WeixinController extends WebInfoController {
                 $map['name']=array('like','%'.$text.'%');
                 $map['prodid']=C(PRODID);
                 $map['state']=5;
-                $data=M('tp_product')->field('name, content , productImg,productId')->where($map)->order('sn')->limit(10)->select();
+                $data=M('tp_product')->field('name, content , img,id')->where($map)->order('sn')->limit(10)->select();
                 if($data){
                     foreach ($data as $a){
                         $arr[]=[
                             'title'=>$a['name'],
                             'description'=>$a['content'],
-                            'picUrl'=>C(WEBSERVER).'/Upload/'.$a['productimg'],
-                            'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Service/index/id/'.$a['productid'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
+                            'picUrl'=>C(WEBSERVER).'/Upload/'.$a['img'],
+                            'url'=>C(WEBSERVER).'/index.php/'.C(PRODUCT).'/Service/index/id/'.$a['id'].'/wxOpenId/'.$toUser.'/wxAppId/'.$fromUser,
                         ];
                     }   
                 }else{//没找到你要的商品或服务
