@@ -21,6 +21,28 @@
         return $a;
     }
     
+    function countTask($storyid){
+        $where['story']=$storyid;
+        $where['deleted']='0';
+        $data=M('task')->where($where)->count();
+        return $data;
+        
+    }
+    function sumTaskEstimate($storyid){
+        $where['story']=$storyid;
+        $where['deleted']='0';
+        $data=M('task')->where($where)->sum('estimate');
+        return $data;
+    
+    }
+    function countTaskConsumed($storyid){
+        $where['story']=$storyid;
+        $where['deleted']='0';
+        $data=M('task')->where($where)->sum('consumed');
+        return $data;
+    
+    }
+    
     function countTaskBug($account){
         $where['resolvedBy|closedBy']=$account;
         $riqi=date("Y-m-d",time()-9*24*3600);

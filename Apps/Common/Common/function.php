@@ -583,7 +583,7 @@
     
     function countPRules($proid){
         $m=D('module');
-        $where=array("zt_projectstory.project"=>$_GET['proid'], 'zt_story.deleted'=>'0');
+        $where=array("zt_projectstory.project"=>$proid, 'zt_story.deleted'=>'0');
         $count=$m->where($where)->join('zt_story ON zt_story.module =zt_module.id')
         ->join('zt_projectstory ON zt_projectstory.story =zt_story.id')->count();
         return $count;

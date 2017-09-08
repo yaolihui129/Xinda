@@ -1,0 +1,79 @@
+<layout name="layout" />
+ <div class="admin-content"> 
+ 	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+				    <h3 class="panel-title"><{$arr.id|getPro=###}>
+				    	<div class="btn-group pull-right">
+				    	<a href="__APP__/Test"  class="btn btn-warning btn-xs">返回</a>
+				    	</div>
+				    </h3>
+				  </div>
+				  <div class="panel-body">
+			    	<ul class="nav nav-tabs" role="tablist">
+					  <li role="presentation" ><a href="__APP__/Test/Stage/index/proid/<{$arr.id}>">里程碑
+					  	<span class="badge"><{$arr.id|countStage=###}></span></a>
+					  </li>
+					  <li role="presentation"><a href="__APP__/Test/Risk/index/proid/<{$arr.id}>">风险
+					  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/Test/Func/func/proid/<{$arr.id}>">功能点
+					  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/Test/Func/range/proid/<{$arr.id}>">范围
+					  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/Test/Scene/index/proid/<{$arr.id}>">场景
+					  <span class="badge"><{$arr.id|countScene=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/Test/Case/procase/proid/<{$arr.id}>">用例
+					  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+					  <li role="presentation" class="active"><a href="__APP__/Test/Rules/prorules/proid/<{$arr.id}>">本期需求
+					  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">禅道BUG
+					  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
+					</ul>
+					
+					<div class="starter-template"> 
+						<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+				            <thead>
+				              <tr>               
+				                <th class="table-id" bgcolor="#ccc" >ID</th>
+				                <th class="table-type" bgcolor="#ccc" >平台</th> 
+				                <th class="table-type" bgcolor="#ccc" >模块</th>
+				                <th class="table-title" bgcolor="#ccc" >需求<span class="badge pull-right">任务</span></th>
+				                <th class="table-type" bgcolor="#ccc" >预计工时</th>
+				                <th class="table-type" bgcolor="#ccc" >实际工时</th> 				                 				                
+				              </tr>
+				          </thead>
+				          <tbody >
+				          	<volist name='data' id='st' empty="没有数据">
+				            <tr>              
+				              <td><a href="#"><{$st.id}></a></td>
+				              <td><a href="#"><{$st.branch|getBranchName=###}></a></td>             
+				              <td><a href="#"><{$st.module|getModuleName=###}></a></td>
+				              <td><a href="#"><{$st.title}><span class="badge pull-right"><{$st.id|countTask=###}></span></a></td>
+				              <td><a href="#"><{$st.id|sumTaskEstimate=###}></a></td>
+				              <td><a href="#"><{$st.id|countTaskConsumed=###}></a></td>
+				              
+				            </tr>
+				            </volist>
+				          </tbody>
+				        </table> 
+					</div>
+				 </div>	
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">项目简介</h3></div>			
+				<div class="panel-body">	
+					<b> 产品：</b><{$arr.po|getRealname=###}>
+					<b> 项目：</b><{$arr.pm|getRealname=###}><br>
+					<b> 研发：</b><{$arr.rd|getRealname=###}>
+					<b> 测试：</b><{$arr.qd|getRealname=###}><br><br>
+					<{$arr.desc}>
+				</div>			
+			</div>
+		</div>
+	</div>
+ 
+ 
+ </div>
