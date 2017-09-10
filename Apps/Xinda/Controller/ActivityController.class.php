@@ -10,10 +10,26 @@ class ActivityController extends WebInfoController {
                 $this->weiXinLogin(I('wxAppId'), I('wxOpenId'));
             }
         }
-        $arr=M('tp_activity')->find(I('id'));
-        $this->assign('arr',$arr);
-        
+        $id=I('id');
+        $table=$this->getTable();
+        $this->details($table, $id);               
         $this->display();
     }
+    
+    public function activityList(){  
+        $map['type']=$this->getName();
+        $savePath=$this->getName();
+        $table=$this->getTable();
+        $this->dataChaxun($table, $savePath, $map,C('maxPageNum'),I('p'));
+        $this->display();      
+    }
+    
+    function getTable(){
+        return 'tp_activity';
+    }
+    function getName(){
+        return 'activity';
+    }
+    
 
 }

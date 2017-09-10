@@ -11,6 +11,7 @@ return array(
     'DEFAULT_THEME'     =>  'default',//开启模板
     'PRODID'            =>  6,                                       //定义产品编号
     'PRODUCT'           =>  'Xinda',                                 //定义产品编号  
+    'maxPageNum'        =>  10,
     'WEBSERVER'         =>  'http://www.zhihuixinda.com',            //定义服务器域名
     'WX_APPID'          =>  'wx0a29084c1bf1b6dc',                    //定义微信APPID
     'WX_APPSECRET'      =>  '3972363f69f4a52d4dc18f919eba499b',

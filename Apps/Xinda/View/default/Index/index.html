@@ -58,6 +58,9 @@
 		    <ul class="navbar-nav ml-auto">
 		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist/index/cate/0CxikF"><span class="glyphicon glyphicon-th-list"> 软件业务</span></a></li>
 		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Servicelist/index/cate/fKAKiC"><span class="glyphicon glyphicon-th-list"> 硬件业务</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Policy/policyList"><span class="glyphicon glyphicon-th-list"> 最新政策</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Activity/activityList"><span class="glyphicon glyphicon-th-list"> 最新活动</span></a></li>
+		      <li class="nav-item active"><a class="nav-link" href="__APP__/<{$JC}>/Article/articleList"><span class="glyphicon glyphicon-th-list"> 信达资讯</span></a></li>
 		      
 		      
 		      <empty name="_SESSION['isCLogin']">
@@ -119,7 +122,7 @@
       		<div style="margin-top: -7rem">
        			 <h1>主营业务</h1>
         			<h5>业务描述<a href="#" title="Amazon SES" target="_blank">软硬件服务</a></h5>
-        			<h5>为中小型企业提供教育最优，服务最好的解决方案</h5>
+        			<h5><{$_SESSION[$JC]['desc']}></h5>
       		</div>
       		<div class="divider_line"></div>
     	</div>

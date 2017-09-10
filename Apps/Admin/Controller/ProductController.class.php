@@ -35,7 +35,7 @@ class ProductController extends CommonController {
     public function add(){
         $cateId=$_GET[cateId];
         $this->assign('cateId',$cateId);
-        $where['prodid']=$_SESSION['prodid'];      
+        $map['prodid']=$_SESSION['prodid'];      
         $map['cateId']=$cateId;        
         $count=D($this->getTable())->where($map)->count()+1;
         $this->assign("count",$count);
@@ -73,7 +73,7 @@ class ProductController extends CommonController {
                 $this->error('失败');
             }
         }else{// 上传成功 获取上传文件信息
-            $_POST['productImg']=getQz($_SESSION['prodid']).$info['img']['savepath'].$info['img']['savename'];
+            $_POST['img']=getQz($_SESSION['prodid']).$info['img']['savepath'].$info['img']['savename'];
             if(!$m->create()){
                 $this->error($m->getError());
             }
@@ -88,26 +88,26 @@ class ProductController extends CommonController {
         }  
     }
     public function update(){//更新
-        $this->dataUpdate($this->getTable(), $this->getName(), $_POST,'productId');
+        $this->dataUpdate($this->getTable(), $this->getName(), $_POST);
     }
     
-//     public function order(){ //排序
-//         $this->paiXu($this->getTable(), $_POST);
+    public function order(){ //排序
+        $this->paiXu($this->getTable(), $_POST);
+    }
+//     public function order(){
+//         /* 实例化模型*/
+//         $db = D('tp_product');
+//         $num = 0;
+//         foreach($_POST['sn'] as $id => $sn) {
+//             $num += $db->save(array("id"=>$id, "sn"=>$sn));
+//         }
+//         if($num) {
+//             $this->success("排序成功!");
+    
+//         }else{
+//             $this->error("排序失败...");
+//         }
 //     }
-    public function order(){
-        /* 实例化模型*/
-        $db = D('tp_product');
-        $num = 0;
-        foreach($_POST['sn'] as $id => $sn) {
-            $num += $db->save(array("productId"=>$id, "sn"=>$sn));
-        }
-        if($num) {
-            $this->success("排序成功!");
-    
-        }else{
-            $this->error("排序失败...");
-        }
-    }
     
     public function mod(){
         $arr=M($this->getTable())->find($_GET[id]);

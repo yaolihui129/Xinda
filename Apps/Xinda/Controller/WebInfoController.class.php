@@ -11,6 +11,38 @@ class WebInfoController extends Controller {
             $_SESSION[C(PRODUCT)]['muban']=$muban;
         }        
     }
+    
+    //数据查询
+    function dataChaxun($table,$savePath,$map,$maxPageNum=10,$p=1){
+        $m=M($table);
+        $map['prodid']=$_SESSION['prodid'];
+        $map['state']=5;
+        $map['isDelete']=0;
+        $_SESSION[$savePath.'Page']=$p;
+        $data=$m->where($map)->order('sn desc,utime desc')->page($_SESSION[$savePath.'Page'],$maxPageNum)->select();
+        $this->assign('data',$data);
+        $count      = $m->where($map)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,$maxPageNum);// 实例化分页类 传入总记录数和每页显示的记录数
+        $show       = $Page->show();// 分页显示输出
+        $this->assign('page',$show);// 赋值分页输出
+    
+    
+    }
+    function details($table,$id){
+        $this->assign('arr',M($table)->find($id));
+        self::clicknum($table, $id);
+    }
+    
+    function clicknum($table,$id){
+        if(!$_SESSION[$table][$id]){
+            $_SESSION[$table][$id]=1;
+            $db=D($table);
+            $arr=$db->field('id,clicknum')->find($id);
+            $data['clicknum']=$arr['clicknum']+1;
+            $data[id]=$id;
+            $db->save($data);
+        }
+    }
     public function insert(){
         $m=D(I('table'));
         if (IS_GET){
