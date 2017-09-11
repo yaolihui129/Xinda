@@ -25,22 +25,64 @@
         $where['story']=$storyid;
         $where['deleted']='0';
         $data=M('task')->where($where)->count();
-        return $data;
-        
+        return $data;       
     }
     function sumTaskEstimate($storyid){
         $where['story']=$storyid;
         $where['deleted']='0';
         $data=M('task')->where($where)->sum('estimate');
-        return $data;
-    
+        return $data;   
     }
-    function countTaskConsumed($storyid){
+    function sumTaskConsumed($storyid){
         $where['story']=$storyid;
         $where['deleted']='0';
         $data=M('task')->where($where)->sum('consumed');
-        return $data;
+        return $data;   
+    }
     
+    function sumUserEstimate($user){
+        if($user){
+            $where['assignedTo']=$user;
+        }else {
+            $where['assignedTo']="";
+        }
+        
+        $where['status']=array('neq','closed');
+        $where['status']=array('neq','cancel');
+        $where['status']=array('neq','done');
+        $where['deleted']='0';
+        $data=M('task')->where($where)->sum('estimate');
+        return $data;   
+    }
+    
+    function sumUserConsumed($user){
+        if($user){
+            $where['assignedTo']=$user;
+        }else {
+            $where['assignedTo']="";
+        }
+        $where['status']=array('neq','closed');
+        $where['status']=array('neq','cancel');
+        $where['status']=array('neq','done');
+        $where['deleted']='0';
+        $data=M('task')->where($where)->sum('consumed');
+        return $data;  
+    }
+    
+    function sumUserLeft($user){
+        if($user){
+            $where['assignedTo']=$user;
+        }else {
+            $where['assignedTo']=array('eq','');
+        }
+        $where['status']=array('neq','closed');
+        $where['status']=array('neq','cancel');
+        $where['status']=array('neq','done');
+        $where['deleted']='0';
+        $data1=M('task')->where($where)->sum('estimate');
+        $data2=M('task')->where($where)->sum('consumed');
+        $data=$data1-$data2;
+        return $data;
     }
     
     function countTaskBug($account){

@@ -1,0 +1,80 @@
+<layout name="layout" />
+<!-- content start -->
+<div class="admin-content"> 
+<h1>人员负荷表 <span class="pull-right"><a target="_blank" href="http://192.168.21.211:8075/WebReport/ReportServer?reportlet=zentao%2FDailyTaskAssignment.cpt">人员每日任务投入分布表</a></span></h1>
+	<div class="row">
+  		<div class="col-md-6">
+  			<div class="starter-template">
+		  		<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+		            <thead>
+		              <tr>               
+		                <th class="table-title" bgcolor="#ccc" >人员<span class="badge pull-right">任务</span></th> 
+		                <th class="table-type" bgcolor="#ccc" >预计总工时</th>             
+		                <th class="table-type" bgcolor="#ccc" >实际总消耗</th>
+		                <th class="table-type" bgcolor="#ccc" >剩余总工时</th>                
+		              </tr>
+		          </thead>
+		          <tbody >
+		          	<volist name='data' id='pro' empty="没有数据">
+		            <tr>              
+		              <td>
+		              	<a href="__URL__/personLoad/name/<{$pro.name}>">
+		              		<empty name="pro.name">
+								未分派
+							<else /> 
+								<{$pro.name|getZTUserName=###}>
+							</empty> 		              		
+		              		<span class="badge pull-right"><{$pro.renwu}></span>
+		              	</a>		              
+		              </td>             
+		              <td><{$pro.name|sumUserEstimate=###}></td>
+		              <td><{$pro.name|sumUserConsumed=###}></td>
+		              <td><{$pro.name|sumUserLeft=###}></td>
+		            </tr>
+		            </volist>
+		          </tbody>
+		        </table> 	
+		  	</div>
+  		</div>
+  		<div class="col-md-6">
+  			<div class="starter-template">
+  				<h2>
+  					<empty name="name">
+						未分派
+					<else /> 
+						<{$name|getZTUserName=###}>
+					</empty> 	
+  				
+  				的任务详情
+  				
+  				</h2>
+		  		<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+		            <thead>
+		              <tr>               
+		                <th class="table-id" bgcolor="#ccc" >ID</th> 
+		                <th class="table-type" bgcolor="#ccc" >项目</th> 
+		                <th class="table-title" bgcolor="#ccc" >任务名称</th> 
+		                <th class="table-type" bgcolor="#ccc" >预计总工时</th>             
+		                <th class="table-type" bgcolor="#ccc" >实际总消耗</th>
+		                <th class="table-type" bgcolor="#ccc" >剩余总工时</th>                
+		              </tr>
+		          </thead>
+		          <tbody >
+		          	<volist name='arr' id='pro' empty="没有数据">
+		            <tr>              
+		              <td><{$pro.id}></td>
+		              <td><{$pro.project|getProname=###}></td>   
+		              <td><{$pro.name}></td>             
+		              <td><{$pro.estimate}></td>
+		              <td><{$pro.consumed}></td>
+		              <td><{$pro.left}></td>
+		            </tr>
+		            </volist>
+		          </tbody>
+		        </table> 	
+		  	</div>
+  		</div>
+  	</div>
+	
+
+</div>

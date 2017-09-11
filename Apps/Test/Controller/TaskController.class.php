@@ -24,6 +24,24 @@ class TaskController extends WebInfoController {
         
         $this->display();
     } 
+    
+    public function personLoad(){
+        $where['assignedTo']=array('neq','closed');
+        $where['status']=array('neq','closed');
+        $where['status']=array('neq','cancel');
+        $where['status']=array('neq','done');
+        $where['deleted']='0';
+        $m=M('task');
+        $data=$m->field("assignedTo as name,count('id') as renwu")->group('assignedTo')->where($where)->select();
+        $this->assign('data',$data);   
+        $name=I('name');
+        $where['assignedTo']=$name;
+        $arr=$m->where($where)->field('id,project,name,estimate,consumed,left')->select();
+        $this->assign('arr',$arr);
+        $this->assign("name",$name);
+        
+        $this->display();
+    }
      
 }
    
