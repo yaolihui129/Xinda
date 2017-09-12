@@ -47,7 +47,7 @@
         </ul>
       </li> -->
       <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task/personLoad"><span class="glyphicon glyphicon-time"> 人员负荷表</span></a></li>
-      <li><a target="_blank" href="http://192.168.21.211:8075/WebReport/ReportServer?reportlet=zentao%2FPersonInput.cpt"><span class="glyphicon glyphicon-time"> 项目人员投入表</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Taskestimate"><span class="glyphicon glyphicon-time"> 项目人员投入表</span></a></li>
       <li><a target="_blank" href="http://192.168.21.211:8075/WebReport/ReportServer?reportlet=zentao%2FPersonnelStageInput+.cpt"><span class="glyphicon glyphicon-time"> 人员投入分布表</span></a></li>
       <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task"><span class="glyphicon glyphicon-time"> 任务工时</span></a></li> 
       <!-- <li><a href="__APP__/<{$Think.config.PRODUCT}>/Testcase"><span class="am-icon-pencil-square-o"> 测试用例</span></a></li>
@@ -59,15 +59,19 @@
 	        <p>时光静好，与君语；细水流年，与君同。—— Amaze</p>
 	      </div>
      </div>
-     <div class="am-panel am-panel-default admin-sidebar-panel">
-		 <div class="am-panel-bd">
-		    <p><span class="am-icon-tag"></span> 项目详情</p>
-		    <b> 产品：</b><{$arr.po|getRealname=###}>
-		    <b> 项目：</b><{$arr.pm|getRealname=###}><br>
-		    <b> 研发：</b><{$arr.rd|getRealname=###}>
-		   	<b> 测试：</b><{$arr.qd|getRealname=###}><br>
-		    <p><{$arr.desc}></p>
-		 </div>
-	</div>	
+     
+     <notempty name="arr.desc">
+     	<div class="am-panel am-panel-default admin-sidebar-panel">
+			 <div class="am-panel-bd">
+			    <p><span class="am-icon-tag"></span> 项目详情</p>
+			    <b> 产品：</b><{$arr.po|getRealname=###}>
+			    <b> 项目：</b><{$arr.pm|getRealname=###}><br>
+			    <b> 研发：</b><{$arr.rd|getRealname=###}>
+			   	<b> 测试：</b><{$arr.qd|getRealname=###}><br>
+			    <p><{$arr.desc}></p>
+			 </div>
+		</div>
+     </notempty>
+     	
   </div> 
   <!-- sidebar end -->

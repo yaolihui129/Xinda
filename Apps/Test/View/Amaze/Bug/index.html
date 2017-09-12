@@ -66,64 +66,86 @@
 				<{$arr.desc}>
 			</div>			
 		</div>
+		<notempty name="var">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">提交BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
+		<notempty name="var">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">提交BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		<notempty name="var1">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h3 class="panel-title">解决BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var1' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.resolvedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		<notempty name="var2">
+			<div class="panel panel-warning">
+				<div class="panel-heading"><h3 class="panel-title">关闭BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var2' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.closedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
+		<notempty name="var4">
+			<div class="panel panel-danger">
+				<div class="panel-heading"><h3 class="panel-title">BUG当前指派</h3></div>						
+				<ul class="list-group">
+					<volist name='var4' id='vo' empty="没有数据">
+						<switch name="vo.assignedto">
+						    <case value="closed">
+						    	<li class="list-group-item"><{$vo.assignedto}><span class="badge"><{$vo.count(id)}></span></li>
+						    </case>					    
+						    <default />
+						    	<li class="list-group-item"><{$vo.assignedto|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+						</switch>
+					  	
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
 		
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">提交BUG统计</h3></div>						
-			<ul class="list-group">
-				<volist name='var' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.openedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
-				</volist>				 
-			</ul>											
-		</div>
-		<div class="panel panel-primary">
-			<div class="panel-heading"><h3 class="panel-title">解决BUG统计</h3></div>						
-			<ul class="list-group">
-				<volist name='var1' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.resolvedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
-				</volist>				 
-			</ul>											
-		</div>
-		<div class="panel panel-warning">
-			<div class="panel-heading"><h3 class="panel-title">关闭BUG统计</h3></div>						
-			<ul class="list-group">
-				<volist name='var2' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.closedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
-				</volist>				 
-			</ul>											
-		</div>
+		<notempty name="var4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">BUG模块分布</h3></div>						
+				<ul class="list-group">
+					<volist name='var3' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.module|getModuleName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
 		
-		<div class="panel panel-danger">
-			<div class="panel-heading"><h3 class="panel-title">BUG当前指派</h3></div>						
-			<ul class="list-group">
-				<volist name='var4' id='vo' empty="没有数据">
-					<switch name="vo.assignedto">
-					    <case value="closed">
-					    	<li class="list-group-item"><{$vo.assignedto}><span class="badge"><{$vo.count(id)}></span></li>
-					    </case>					    
-					    <default />
-					    	<li class="list-group-item"><{$vo.assignedto|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
-					</switch>
-				  	
-				</volist>				 
-			</ul>											
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">BUG模块分布</h3></div>						
-			<ul class="list-group">
-				<volist name='var3' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.module|getModuleName=###}><span class="badge"><{$vo.count(id)}></span></li>
-				</volist>				 
-			</ul>											
-		</div>
+		<notempty name="var4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">BUG版本分布</h3></div>						
+				<ul class="list-group">
+					<volist name='var5' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedbuild|getBuild=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
 		
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">BUG版本分布</h3></div>						
-			<ul class="list-group">
-				<volist name='var5' id='vo' empty="没有数据">
-				  	<li class="list-group-item"><{$vo.openedbuild|getBuild=###}><span class="badge"><{$vo.count(id)}></span></li>
-				</volist>				 
-			</ul>											
-		</div>
 				
 	</div>
 </div>

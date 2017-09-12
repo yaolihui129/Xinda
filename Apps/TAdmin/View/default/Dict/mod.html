@@ -1,0 +1,70 @@
+<layout name="layout" />
+	<!-- Page heading -->
+	    <div class="page-head">
+	      	<h2 class="pull-left">
+	      		<!-- Breadcrumb -->
+		        <div class="bread-crumb pull-right">
+		          <a href="__APP__/Admin"><i class="icon-cog"></i> 设置</a> 
+		          <span class="divider">/</span> 
+		          <a href="__URL__" class="bread-current">字典</a> 
+		          <span class="divider">/</span> 修改    
+		          <a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>    
+		        </div>
+	      	</h2>	      		        
+	        <div class="clearfix"></div>
+	    </div>
+	<!-- Page heading ends -->
+
+	<!-- Matter -->
+	 <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="widget-content">
+                  <div class="padd">
+                    <!-- Form starts.  -->
+                     <form action="__URL__/update" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                     
+                         <input type="hidden" name="id" value="<{$arr.id}>" />
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">键：</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='k' value="<{$arr.k}>" placeholder="k">
+                             </div>
+                         </div>                       
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">值：</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='v' value="<{$arr.v}>"  placeholder="v">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">类型：</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='type' value="<{$arr.type}>"  placeholder="type">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">产品：</label>
+                             <div class="col-lg-8">
+                                 <input type="text" class="form-control" name='prodid' value="<{$arr.prodid}>">
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="col-lg-4 control-label">状态：</label>
+                             <div class="col-lg-8"><{$state}></div>
+                         </div>                         
+                         <hr />
+                         <div class="form-group">
+                             <div class="col-lg-offset-1 col-lg-8">
+                                 <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                       
+                             </div>
+                         </div>
+                     </form>
+                     <!-- Form end.  -->
+                  </div>
+                </div>                
+            </div>  
+          </div>
+        </div>
+    </div>
+<!-- Matter ends -->

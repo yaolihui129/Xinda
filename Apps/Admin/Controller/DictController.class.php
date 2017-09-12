@@ -49,7 +49,7 @@ class DictController extends CommonController{
         $this->dataUpdate($this->getTable(), $this->getName(), $_POST);
     }
 
-public function del(){//删除
+    public function del(){//删除
         $this->shanChu($this->getTable(),I('id'));
     }
 

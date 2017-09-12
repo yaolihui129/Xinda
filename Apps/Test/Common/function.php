@@ -117,6 +117,50 @@
         return $str;
     }
     
+    function getStoryStage($stage){
+       if($stage=='developed'){
+           return '研发完成';
+       }elseif($stage=='released'){
+           return '已发布';
+       }elseif($stage=='projected'){
+           return '已立项';
+       }elseif($stage=='developing'){
+           return '开发中';
+       }elseif($stage=='testing'){
+           return '测试中';
+       }
+    }
+    
+    function sunUserProject($projet,$user){
+//         $riqi=date("Y-m-d",time()-9*24*3600);
+//         $where['zt_taskestimate.date']=array('egt',$riqi);
+        $where['zt_taskestimate.account']=$user;
+        $where['zt_task.project']=$projet;
+        $join='zt_taskestimate ON zt_taskestimate.task=zt_task.id';
+        $var=M('task')->join($join)->where($where)->Sum('zt_taskestimate.consumed');
+        $var=round($var, 2);
+        if($var){
+            return $var;
+        }else{
+           return 0; 
+        }
+        
+    }
+    
+    function sunDateSorty($story,$date){
+        $where['zt_task.id']=$story;
+        $where['zt_taskestimate.date']=$date;
+        $join='zt_taskestimate ON zt_taskestimate.task=zt_task.id';
+        $data=M('task')->join($join)->where($where)->Sum('zt_taskestimate.consumed');
+//         dump($where);
+        $var=round($data, 2);
+        if($var){
+            return $var;
+        }else{
+            return '';
+        }
+    }
+    
     /**
      * 根据stgeid获取列队数据
      */

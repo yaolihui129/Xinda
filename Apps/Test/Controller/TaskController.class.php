@@ -36,7 +36,7 @@ class TaskController extends WebInfoController {
         $this->assign('data',$data);   
         $name=I('name');
         $where['assignedTo']=$name;
-        $arr=$m->where($where)->field('id,project,name,estimate,consumed,left')->select();
+        $arr=$m->where($where)->field('id,project,name,deadline,estimate,consumed,left')->select();
         $this->assign('arr',$arr);
         $this->assign("name",$name);
         
