@@ -5,7 +5,7 @@ class StageController extends CommonController {
         
         $m= D("project");
         $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
-        $pros=$m->where($where)->order("end desc")->select();
+        $pros=$m->where($where)->order("code desc")->select();
         $this->assign("pros",$pros);
         
         $_SESSION['proid']=I('proid',$pros[0]['id']);

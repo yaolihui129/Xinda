@@ -2,7 +2,7 @@
  <!-- content start -->
  <div class="admin-content">
 <div class="row">
-	<div class="col-md-3 hidden-xs hidden-sm">
+	<div class="col-md-4 hidden-xs hidden-sm">
  		 	<div class="panel panel-primary">
             <div class="panel-heading"><h3 class="panel-title"><{$case.funcid|getSPFunc=###}></h3></div>            
 	            <ul class="list-group">
@@ -18,75 +18,66 @@
 	        	</ul>
         	</div>                            	
 	</div>
-<div class="col-md-5">	
- <h3>用例-编辑</h3>	
-  	<div class="panel-body">
-  		<form action="__APP__/<{$Think.config.PRODUCT}>/Case/update" method="post" class="form-horizontal" role="form" >
-  		<input type="hidden" name="id" value="<{$case.id}>" />
-  		<input type="hidden" name="table" value="tp_case" />  		     	  		
-		<div class="form-group">					   
-			<label for="short" class="col-sm-2 control-label">级别:</label>
-			<div class="col-sm-10"><input type="text" class="form-control" name="level" value="<{$case.level}>" placeholder="级别"></div>
-		</div>
-		<div class="form-group">
-			<label for="product" class="col-sm-2 control-label">*意图:</label>
-			<div class="col-sm-10"><input type="text" class="form-control" name="main" value="<{$case.main}>" placeholder="意图"></div>
-		</div>
-		
-		<div class="form-group">
-			<label for="product" class="col-sm-2 control-label">预期:</label>
-			<div class="col-sm-10"><input type="text" class="form-control" name="expected" value="<{$case.expected}>" placeholder="预期"></div>
-		</div>
-		<div class="form-group">
-			<label for="state" class="col-sm-2 control-label">状态:</label>
-			<div class="col-sm-10"><{$state}></div>
-		</div>
-		<div class="form-group">
-			<label for="state" class="col-sm-2 control-label">项目:</label>
-			<div class="col-sm-10"><{$fproid}></div>
-		</div>
-		<!--<div class="form-group">
-			<label for="state" class="col-sm-2 control-label">操作:</label>
-			<div class="col-sm-10"><{$caozuo}></div>
-		</div>  -->
-					  
-		<button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
-        </form>
-         <div class="btn-group pull-right">                       
-              <a href="__APP__/<{$Think.config.PRODUCT}>/<{$p}>/index/funcid/<{$case.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
-         </div>
-  	</div>	
-</div>
-<div class="col-md-4">
-	  <div class="panel panel-success">
-		  <div class="panel-heading">需求规则</div>
-		  <div class="starter-template">             
-		        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
-		         	<volist name='rules' id='st' empty="没有规则">
-			            <div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="heading<{$st.id}>">
-								<h5 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
-						                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
-								        <span class='pull-right'>
-								        <span class="label label-info"><{$st.status}></span> 
-								        <span class="label label-warning"><{$st.openedby}></span>  
-							         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
-						           		</span>															      
-								 </h5>
-							 </div>
-							 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
-								    <div class="panel-body">
-									    <ul class="list-group"><{$st.id|getStorySpec=###}></ul>
-								    </div>
-							</div>
-			  			</div>                     
-		            </volist>
-		        </div>
-		     </div>   		  
-	  </div>
-</div>
- 		 
+	<div class="col-md-8">	
+	 <h3>用例-编辑</h3>	
+	  	<div class="panel-body">
+	  		<form action="__APP__/<{$Think.config.PRODUCT}>/Case/update" method="post" class="form-horizontal" role="form" >
+	  		<input type="hidden" name="id" value="<{$case.id}>" />
+	  		<input type="hidden" name="table" value="tp_case" />  		     	  		
+			<div class="form-group">					   
+				<label for="short" class="col-sm-2 control-label">级别:</label>
+				<div class="col-sm-10"><input type="text" class="form-control" name="level" value="<{$case.level}>" placeholder="级别"></div>
+			</div>
+			<div class="form-group">
+				<label for="product" class="col-sm-2 control-label">*意图:</label>
+				<div class="col-sm-10"><input type="text" class="form-control" name="main" value="<{$case.main}>" placeholder="意图"></div>
+			</div>
+			
+			<div class="form-group">
+				<label for="product" class="col-sm-2 control-label">预期:</label>
+				<div class="col-sm-10"><input type="text" class="form-control" name="expected" value="<{$case.expected}>" placeholder="预期"></div>
+			</div>
+			<div class="form-group">
+				<label for="state" class="col-sm-2 control-label">状态:</label>
+				<div class="col-sm-10"><{$state}></div>
+			</div>
+			<div class="form-group">
+				<label for="state" class="col-sm-2 control-label">项目:</label>
+				<div class="col-sm-10"><{$fproid}></div>
+			</div>					  
+			<button type="submit" class="btn btn-info btn-lg pull-left" style="margin-left:20%;">提 交</button>
+	        </form>
+	         <div class="btn-group pull-right">                       
+	              <a href="__APP__/<{$Think.config.PRODUCT}>/<{$p}>/index/funcid/<{$case.funcid}>" type="button"  class="btn btn-warning btn-lg pull-right " >返 回</a>                        
+	         </div>
+	  	</div>
+	  	<div class="panel panel-success">
+			  <div class="panel-heading">需求规则</div>
+			  <div class="starter-template">             
+			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
+			         	<volist name='rules' id='st' empty="没有规则">
+				            <div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+									<h6 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
+							                <{$st.id}>:<b><{$st.branch|getBranchName=###}>-<{$st.moduleid|getModuleName=###}></b>【#<{$st.version}>】<{$st.title}>
+									        <span class='pull-right'>
+									        <span class="label label-info"><{$st.status}></span> 
+									        <span class="label label-warning"><{$st.openedby}></span>  
+								         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
+							           		</span>															      
+									 </h6>
+								 </div>
+								 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
+									    <div class="panel-body">
+										    <ul class="list-group"><{$st.id|getStorySpec=###}></ul>
+									    </div>
+								</div>
+				  			</div>                     
+			            </volist>
+			        </div>
+			     </div>   		  
+		  </div>	
+	</div>		 
 </div>           
- 
 </div>

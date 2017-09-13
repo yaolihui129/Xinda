@@ -43,7 +43,7 @@ class FuncController extends CommonController{
     public function func(){        
         $m= D("project");
         $where=array("testgp"=>$_SESSION['testgp'],"deleted"=>'0');
-        $pros=$m->where($where)->order("end desc")->select();
+        $pros=$m->where($where)->order("code desc")->select();
         $this->assign("pros",$pros);
         
         $_SESSION['proid']=$_GET['proid'];
@@ -78,7 +78,7 @@ class FuncController extends CommonController{
          /* 实例化模型*/
         $m= D("project");
         $where=array("testgp"=>"$gp","deleted"=>'0');
-        $pros=$m->where($where)->order("end desc")->select();
+        $pros=$m->where($where)->order("code desc")->select();
         $this->assign("pros",$pros);
         
         $arr=$m->find($_GET['proid']);
