@@ -1,15 +1,17 @@
 <?php
 namespace Admin\Controller;
-class PolicyController extends CommonController {
+class ResourcesController extends CommonController {
     function info(){
         $info=array(
-            'table'=>'tp_policy',
-            'name'=>'Policy',
-            'idLenth'=>'4',
-            'idType'=>'char'
+            'table'=>'tp_resource',
+            'name'=>'Resource',
+            'idLenth'=>'6',
+            'idType'=>'int'
         );
         return $info;
     }
+    
+
     public function index(){
         $info=$this->info();
         if(IS_POST){//查询信息
@@ -21,18 +23,18 @@ class PolicyController extends CommonController {
             $this->assign('search',$_SESSION[$info['name'].'Search']);
             $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
-        
-        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p')); 
+    
+        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
     }
     
     public function add(){
         $info=$this->info();
         $count=M($info['table'])->count()+1;
-        $this->assign("count",$count);      
+        $this->assign("count",$count);
         $this->display();
     }
-
+    
     public function insert(){
         $info=$this->info();
         if($info['idType'=='int']){
@@ -41,11 +43,11 @@ class PolicyController extends CommonController {
             $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
         }
     }
-
+    
     public function mod(){
         $info=$this->info();
         $arr=M($info['table'])->find($_GET[id]);
-        $this->assign('arr',$arr);       
+        $this->assign('arr',$arr);
         $this->display();
     }
     
@@ -54,21 +56,23 @@ class PolicyController extends CommonController {
         $this->dataUpdate($info['table'], $info['name'], $_POST);
     }
     
-    public function order(){ //排序  
+    public function order(){ //排序
         $info=$this->info();
         $this->paiXu($info['table'], $_POST);
     }
     
-
-    public function fabu(){//发布、下线  
+    
+    public function fabu(){//发布、下线
         $info=$this->info();
         $this->Release($info['table'], I('id'), I('state'));
     }
-
+    
     public function del(){//删除
         $info=$this->info();
         $this->ljshanChu($info['table'],I('id'));
     }
     
-    
 }
+    
+
+

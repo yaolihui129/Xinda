@@ -1,59 +1,76 @@
 <?php
 namespace Admin\Controller;
-class ActivityController extends CommonController {    
-    public function index(){        
+class ActivityController extends CommonController {   
+    function info(){
+        $info=array(
+            'table'=>'tp_activity',
+            'name'=>'Activity',
+            'idLenth'=>'7',
+            'idType'=>'char'
+        );
+        return $info;
+    }      
+    
+    public function index(){ 
+        $info=$this->info();
         if(IS_POST){//查询信息
             if($_POST['search']){//储存当前查询信息
-                $_SESSION[$this->getName().'Search']=$_POST['search'];
+                $_SESSION[$info['name'].'Search']=$_POST['search'];
             }else {
-                $_SESSION[$this->getName().'Search']='';
+                $_SESSION[$info['name'].'Search']='';
             }
-            $this->assign('search',$_SESSION[$this->getName().'Search']);
-            $map['title']=array('like','%'.$_SESSION[$this->getName().'Search'].'%');
+            $this->assign('search',$_SESSION[$info['name'].'Search']);
+            $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
         
-        $this->dataChaxun($this->getTable(), $this->getName(), $map,C('maxPageNum'),I('p')); 
+        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p')); 
         $this->display();
     }
     
     public function add(){
-        $count=M($this->getTable())->count()+1;
+        $info=$this->info();
+        $count=M($info['table'])->count()+1;
         $this->assign("count",$count);      
         $this->display();
     }
 
     public function insert(){
-        $this->dataInsert($this->getTable(), 7, $this->getName(), $_POST);
+        $info=$this->info();
+        if($info['idType'=='int']){
+            $this->dataIns($info['table'], $_POST);
+        }elseif ($info['idType']=='char'){
+            $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
+        }
     }
 
     public function mod(){
-        $arr=M($this->getTable())->find($_GET[id]);
+        $info=$this->info();
+        $arr=M($info['table'])->find($_GET[id]);
         $this->assign('arr',$arr);       
         $this->display();
     }
     
     public function update(){//更新
-        $this->dataUpdate($this->getTable(), $this->getName(), $_POST);
+        $info=$this->info();
+        $this->dataUpdate($info['table'], $info['name'], $_POST);
     }
     
-    public function order(){ //排序     
-        $this->paiXu($this->getTable(), $_POST);
+    public function order(){ //排序  
+        $info=$this->info();
+        $this->paiXu($info['table'], $_POST);
     }
     
 
-    public function fabu(){//发布、下线     
-        $this->Release($this->getTable(), I('id'), I('state'));
+    public function fabu(){//发布、下线  
+        $info=$this->info();
+        $this->Release($info['table'], I('id'), I('state'));
     }
 
     public function del(){//删除
-        $this->ljshanChu($this->getTable(),I('id'));
+        $info=$this->info();
+        $this->ljshanChu($info['table'],I('id'));
     }
     
-    function getTable(){
-        return 'tp_activity';
-    }
-    function getName(){
-        return 'Activity';
-    }
+    
 
 }

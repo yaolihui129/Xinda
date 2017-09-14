@@ -1,7 +1,18 @@
 <?php
 namespace Admin\Controller;
 class CateController extends CommonController {   
-    public function index(){        
+    function info(){
+        $info=array(
+            'table'=>'tp_cate',
+            'name'=>'Cate',
+            'idLenth'=>'6',
+            'idType'=>'char'
+        );
+        return $info;
+    }
+
+    public function index(){ 
+        $info=$this->info();
         if(IS_POST){//查询信息
             if($_POST['search']){//储存当前查询信息
                 $_SESSION['cateSearch']=$_POST['search'];
@@ -19,53 +30,61 @@ class CateController extends CommonController {
             }           
         }
         $this->assign('pidCateId',$_GET['pidCateId']);
-        $this->dataChaxun($this->getTable(), $this->getName(), $map,C('maxPageNum'),I('p'));
+        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
     }
     
-    public function add(){       
+    public function add(){
+        $info=$this->info();
         $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : '000000'; 
         $this->assign("pidCateId",$pidCateId);
         $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId,'isDelete'=>0);
-        $count=M('tp_cate')->where($map)->count()+1;
+        $count=M($info['table'])->where($map)->count()+1;
         $this->assign("count",$count);  
         $this -> assign("state", formSV("","state"));
         
         $this->display();        
-    }
+    }    
     
-    public function insert(){   
-        $this->dataInsert($this->getTable(), 6, $this->getName(), $_POST);       
+    public function insert(){
+        $info=$this->info();
+        if($info['idType'=='int']){
+            $this->dataIns($info['table'], $_POST);
+        }elseif ($info['idType']=='char'){
+            $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
+        }
+        
     }
 
     public function mod(){
-        $arr=M($this->getTable())->find($_GET[id]);
+        $info=$this->info();
+        $arr=M($info['table'])->find($_GET[id]);
         $this->assign('arr',$arr);       
         $this->display();
     }
     
     public function update(){//更新
-        $this->dataUpdate($this->getTable(), $this->getName(), $_POST);
+        $info=$this->info();
+        $this->dataUpdate($info['table'], $info['name'], $_POST);
     }
     
-    public function order(){ //排序     
-        $this->paiXu($this->getTable(), $_POST);
+    public function order(){ //排序  
+        $info=$this->info();
+        $this->paiXu($info['table'], $_POST);
     }
     
 
-    public function fabu(){//发布、下线     
-        $this->Release($this->getTable(), $_GET['id'], $_GET['state']);
+    public function fabu(){//发布、下线  
+        $info=$this->info();
+        $this->Release($info['table'], I('id'), I('state'));
     }
 
     public function del(){//删除
-        $this->ljshanChu($this->getTable(),I('id'));
+        $info=$this->info();
+        $this->ljshanChu($info['table'],I('id'));
     }
     
-    function getTable(){
-        return 'tp_cate';
-    }
-    function getName(){
-        return 'Cate';
-    }
+    
+    
 
 }

@@ -132,7 +132,7 @@ class CommonController extends WebInfoController{
     function ljShanchu($table,$id,$idName='id'){
         $_GET['id']=$id;
         $_GET['isDelete']=1;
-        if (D('tp_cate')->save($_GET)){
+        if (D($table)->save($_GET)){
             $this->success("删除成功！");
         }else{
             $this->error("删除失败！");

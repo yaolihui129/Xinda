@@ -1,6 +1,15 @@
 <?php
 namespace Admin\Controller;
 class HrController extends CommonController {
+    function info(){
+        $info=array(
+            'table'=>'tp_norms',
+            'name'=>'Norms',
+            'idLenth'=>'15',
+            'idType'=>'int'
+        );
+        return $info;
+    }
      public function index(){            
          $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
          $this->assign('search',$search);

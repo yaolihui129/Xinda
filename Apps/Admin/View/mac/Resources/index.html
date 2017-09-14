@@ -2,9 +2,9 @@
 <!-- Page heading -->
 <div class="page-head">
 	<h2 class="bread-crumb">	      	
-	    <a href="__APP__/<{$Think.config.PRODUCT}>"><i class="icon-gift"></i> 优惠促销</a> 
+	    <a href="__APP__/<{$Think.config.PRODUCT}>"><i class="icon-gift"></i> 权限管理</a> 
 		<span class="divider">/</span> 
-		<a href="__URL__" class="bread-current"> 促销活动</a>          		        	
+		<a href="__URL__" class="bread-current"> 资源</a>          		        	
 		<form class="form-inline pull-right" action="__URL__/index" method="post">
 			<div class="form-group">
 				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
@@ -28,7 +28,6 @@
 	               <thead>
 		              <tr>
 		                <th width=5% align="center" bgcolor="#ccc">顺序</th>
-		                <th width=10% align="center" bgcolor="#ccc">图片</th>
 		                <th width=20% align="center" bgcolor="#ccc">标题</th>	                                          
 	                    <th width=30% align="center" bgcolor="#ccc">描述</th>                                                                             
 	                    <th width=10% align="center" bgcolor="#ccc">更新时间</th>
@@ -40,25 +39,11 @@
 					<volist name='data' id='st'>
 		               <tr>                          
 		                 <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
-		                 <td><img src="__UPLOAD__/<{$_SESSION['qz']}><{$st.path}><{$st.img}>"  style="width:80px;max-width: 80px;"/></td>
 		                 <td><{$st.title}></td>		                 	                          
 		                 <td><{$st.desc}></td>
 		                 <td><{$st.utime}></td>                         
 		                 <td>                              
 		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 编辑</i></a>		                    
-		                    <switch name="st.state">
-							    <case value="5">
-							    	<a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-warning btn-lg">
-							    		<span class="glyphicon glyphicon-save"> 下线</span>
-							    	</a>
-							    </case>							    
-							    <default />
-							    	<a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-primary btn-lg">
-							    		<span class="glyphicon glyphicon-open"> 发布</span>
-							    	</a>
-							</switch>
-		                    			                    
-		                    
 		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger btn-lg" onclick="return confirm('你确定要删除？')">
 		                       <i class="glyphicon glyphicon-trash"> 删除</i>
 		                    </a>
@@ -81,5 +66,3 @@
          </div>
      </div>
 </div>
-	
-	
