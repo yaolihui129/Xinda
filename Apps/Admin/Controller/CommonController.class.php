@@ -34,6 +34,8 @@ class CommonController extends WebInfoController{
             $arr=$m->find($id);
         } while ($arr);
         $_POST[$idName]=$id;
+        $_POST['adder']=$_SESSION['realname'];
+        $_POST['ctime']=time();
         $_POST['moder']=$_SESSION['realname'];
         $_POST['prodid']=$_SESSION['prodid'];
         //处理上传图片
@@ -73,6 +75,8 @@ class CommonController extends WebInfoController{
     function dataIns($table,$data){
         $_POST=$data;
         $m=D($table);
+        $_POST['adder']=$_SESSION['realname'];
+        $_POST['ctime']=time();
         $_POST['moder']=$_SESSION['realname'];
         $_POST['prodid']=$_SESSION['prodid'];
         if(!$m->create()){

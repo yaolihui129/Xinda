@@ -27,7 +27,7 @@ class AdController extends CommonController {
     
     public function insert(){
         $info=$this->info();
-        if($info['idType'=='int']){
+        if($info['idType']=='int'){
             $this->dataIns($info['table'], $_POST);
         }elseif ($info['idType']=='char'){
             $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);

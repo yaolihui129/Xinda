@@ -23,7 +23,7 @@ class ResourcesController extends CommonController {
             $this->assign('search',$_SESSION[$info['name'].'Search']);
             $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
-    
+        $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
     }
@@ -37,7 +37,7 @@ class ResourcesController extends CommonController {
     
     public function insert(){
         $info=$this->info();
-        if($info['idType'=='int']){
+        if($info['idType']=='int'){
             $this->dataIns($info['table'], $_POST);
         }elseif ($info['idType']=='char'){
             $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);

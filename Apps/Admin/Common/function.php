@@ -29,4 +29,30 @@
         return $data['qz'];
     }
     
+    function deptselect($value,$name="dept") {
+        $where=array("isDelete"=>0,'prodid'=>$_SESSION['prodid']);
+        $cats = M('tp_dept')->where($where)->order('sn')->select();
+        $html = '<select name="'.$name.'" class="form-control">';
+        foreach($cats as $v) {
+            $selected = ($v['id']==$value) ? "selected" : "";
+            $html .= '<option '.$selected.' value="'.$v['id'].'">'.$v['name'].'</option>';
+        }
+        $html .='<select>';
+        return $html;
+    }
+    
+    function sysselect($value,$name="sysid") {
+        $where['delete']='0';
+        $prodid=array(12,$_SESSION['prodid']);
+        $where['product']=array('in',$prodid);
+        $cats = M('branch')->where($where)->order('id')->select();
+        $html = '<select name="'.$name.'" class="form-control">';
+        foreach($cats as $v) {
+            $selected = ($v['id']==$value) ? "selected" : "";
+            $html .= '<option '.$selected.' value="'.$v['id'].'">'.$v['name'].'</option>';
+        }
+        $html .='<select>';
+        return $html;
+    }
+    
     

@@ -15,7 +15,7 @@
 		    <tbody >		          
 				<volist name='data' id='st' empty="没有数据">
 					<tr>              
-				       <td><{$st.id}>【<{$st.account|getZTUserName=###}>】<{$st.name}></td> 
+				       <td>【<{$st.account|getZTUserName=###}>】<{$st.id}>.<{$st.name}></td> 
 				       <volist name='arr' id='ar' empty="没有数据">            
 				          <td><{$ar|sunDateSorty=$st[id],###}></td>
 				       </volist>

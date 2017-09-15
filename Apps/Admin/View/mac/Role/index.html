@@ -28,10 +28,11 @@
 	               <thead>
 		              <tr>
 		                <th width=5% align="center" bgcolor="#ccc">顺序</th>
-		                <th width=20% align="center" bgcolor="#ccc">标题</th>	                                          
-	                    <th width=30% align="center" bgcolor="#ccc">描述</th>                                                                             
-	                    <th width=10% align="center" bgcolor="#ccc">更新时间</th>
-	                    <th width=20% align="center" bgcolor="#ccc">操作</th>
+		                <th width=10% align="center" bgcolor="#ccc">角色</th>
+		                <th width=20% align="center" bgcolor="#ccc">平台</th>	                                          
+	                    <th width=20% align="center" bgcolor="#ccc">描述</th>                                                                             
+	                    <th width=15% align="center" bgcolor="#ccc">更新时间</th>
+	                    <th width=30% align="center" bgcolor="#ccc">操作</th>
 		               </tr>
 	               </thead>
 	               <tbody>  
@@ -39,10 +40,12 @@
 					<volist name='data' id='st'>
 		               <tr>                          
 		                 <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
-		                 <td><{$st.title}></td>		                 	                          
+		                 <td><{$st.name}></td>	
+		                 <td><{$st.sysid|getName='branch',###}></td>		                 	                          
 		                 <td><{$st.desc}></td>
 		                 <td><{$st.utime}></td>                         
 		                 <td>                              
+		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 资源</i></a>
 		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 编辑</i></a>		                    
 		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger btn-lg" onclick="return confirm('你确定要删除？')">
 		                       <i class="glyphicon glyphicon-trash"> 删除</i>

@@ -161,6 +161,19 @@
         }
     }
     
+    function sumDateUserTask($user,$date){
+        $where['account']=$user;
+        $where['date']=$date;
+        $data=M('taskestimate')->where($where)->Sum('consumed');
+        $var=round($data, 2);
+        if($var){
+            return $var;
+        }else{
+            return '';
+        }
+    }
+    
+    
     /**
      * 根据stgeid获取列队数据
      */

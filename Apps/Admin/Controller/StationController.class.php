@@ -23,21 +23,23 @@ class StationController extends CommonController {
             $this->assign('search',$_SESSION[$info['name'].'Search']);
             $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
-    
+        $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
     }
     
     public function add(){
         $info=$this->info();
-        $count=M($info['table'])->count()+1;
+        $map=array('isDelete'=>0);
+        $count=M($info['table'])->where($map)->count()+1;
         $this->assign("count",$count);
+        $this -> assign("dept", deptselect("","dept"));
         $this->display();
     }
     
     public function insert(){
         $info=$this->info();
-        if($info['idType'=='int']){
+        if($info['idType']=='int'){
             $this->dataIns($info['table'], $_POST);
         }elseif ($info['idType']=='char'){
             $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
@@ -48,6 +50,7 @@ class StationController extends CommonController {
         $info=$this->info();
         $arr=M($info['table'])->find($_GET[id]);
         $this->assign('arr',$arr);
+        $this -> assign("dept", deptselect($arr['dept'],"dept"));
         $this->display();
     }
     

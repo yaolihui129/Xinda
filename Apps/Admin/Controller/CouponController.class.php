@@ -21,7 +21,7 @@ class CouponController extends CommonController {
             $this->assign('search',$_SESSION[$info['name'].'Search']);
             $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
-        
+        $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));  
         $this->display();
     }

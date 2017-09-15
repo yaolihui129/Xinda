@@ -88,8 +88,7 @@ class PlanController extends CommonController {
    
     
     
-    public function mod(){
-        
+    public function mod(){        
         /* 实例化模型*/
         $m=D('tc_plan');
         $arr=$m-find($_GET['id']);

@@ -1,24 +1,38 @@
 <?php
 namespace Admin\Controller;
 class StaffController extends CommonController {
+    function info(){
+        $info=array(
+            'table'=>'tp_staff',
+            'table1'=>'tp_dept',
+            'table2'=>'tp_credit',
+            'name'=>'Staff',
+            'idLenth'=>'6',
+            'idType'=>'int'
+        );
+        return $info;
+    }
+    
     public function index(){
-        /* 接收参数*/
-        $search=!empty($_POST['search']) ? $_POST['search'] : $_GET['search'];
-        $page=!empty($_GET['page']) ? $_GET['page'] : 1;
-        $this->assign('search',$search);
-        $maxPageNum=10;        
-        $where['prodid']=$_SESSION['prodid'];
-        $where['username']=array('like','%'.$search.'%');       
-        $data=M('tp_staff')->where($where)->page($page,$maxPageNum)->select();
-        $this->assign('data',$data);       
-        
+        $info=$this->info();
+        if(IS_POST){//查询信息
+            if($_POST['search']){//储存当前查询信息
+                $_SESSION[$info['name'].'Search']=$_POST['search'];
+            }else {
+                $_SESSION[$info['name'].'Search']='';
+            }
+            $this->assign('search',$_SESSION[$info['name'].'Search']);          
+            $map['username']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
+        }
+        $map['prodid']=$_SESSION['prodid'];
+        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));       
         $this->display();
     }
     
     
     
     public function add(){
-
+        $this -> assign("dept",deptselect("","dept"));
         $this->display();
     }
     
@@ -119,6 +133,8 @@ class StaffController extends CommonController {
     public function mod(){
         $arr=M('tp_staff')->find($_GET[id]);
         $this->assign('arr',$arr);
+        
+        $this -> assign("dept", deptselect($arr['dept'],"dept"));
     
         $this->display();
     }
@@ -149,6 +165,15 @@ class StaffController extends CommonController {
                 $this->error("修改失败！");
             }
         }
+    }
+    public function dept(){
+        $dept=I('id');
+        $info=$this->info();       
+        $this->assign('dept',$dept);
+        $where=array('dept'=>$dept,'isDelete'=>0);
+        $data=M($info['table'])->where($where)->select();
+        $this->assign('data',$data);
+        $this->display();
     }
     
     

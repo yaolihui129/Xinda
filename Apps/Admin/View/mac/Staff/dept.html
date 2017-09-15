@@ -1,27 +1,21 @@
 <layout name="layout" />
 <!-- Page heading -->
 <div class="page-head">
-	<h2 class="bread-crumb">
-		<a href="#"><i class="icon-gift"></i> 权限</a> 
+	<h2 class="bread-crumb">	      	
+	    <a href="#"><i class="icon-gift"></i> 权限管理</a> 
 		<span class="divider">/</span> 
-		<a href="__URL__" class="bread-current">员工</a> 
-		<form class="form-inline pull-right" action="__URL__/index" method="post">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
-			</div>
-			<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-			<a href="__URL__/add" type="button" class="btn"><i class="icon-plus"> 添加</i></a>
-		</form>  
-	</h2>
+		<a href="__APP__/<{$Think.config.PRODUCT}>" class="bread-current"> <{$dept|getName='tp_dept',###}></a>
+		<span class="divider">/</span>人员         		        			   	
+	</h2>	      		        
 	<div class="clearfix"></div>
 </div>
-<!-- Page heading ends -->
-
+<!-- Page heading ends -->	
+<!-- Matter -->
 <div class="matter">
-   <div class="container">                  
-      <div class="widget">
-          <div class="widget-content medias">                 
-              <table class="table table-striped table-bordered table-hover">
+   <div class="container">         
+      <div class="widget">               
+	     <div class="widget-content referrer">                  
+	        <table class="table table-striped table-bordered table-hover">
                   <thead>
                         <tr>                          
                           <th width=10% align="center" bgcolor="#ccc">头像</th>
@@ -56,17 +50,17 @@
 					
                  </tbody>
                 </table>
- 					<div class="widget-foot">
-                      	
+	            <div class="widget-foot">
+                      	<div class="uni pull-left">
+                      		<input type="submit" name="do_submit" value="批量排序" class="btn btn-info">                      		
+                      	</div> 
+                      	</form>                
                         <ul class="pagination pull-right"><{$page}></ul>
                       
                       <div class="clearfix"></div> 
 
                     </div>
-                    
-
-                </div>
-              </div>  
-        </div>
+	         </div>
+         </div>
+     </div>
 </div>
-<!-- Matter ends -->

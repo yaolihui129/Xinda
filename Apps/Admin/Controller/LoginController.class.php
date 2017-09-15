@@ -2,8 +2,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 class LoginController extends Controller {
-    public function index(){
-        
+    public function index(){        
         $this->display();
     }
 
@@ -35,9 +34,7 @@ class LoginController extends Controller {
     }
 
     public function logout(){
-
         $_SESSION = array();
-
         if (isset($_COOKIE[session_name()])) {
             setcookie(session_name(),'',time()-3600,'/');
         }       

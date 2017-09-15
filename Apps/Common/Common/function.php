@@ -806,6 +806,15 @@
             ->count();
         return $count;
     }
+    function countId($table,$name,$value){
+        $where=array($name=>$value,"deleted"=>'0');
+        $count=M($table)->where($where)->count();
+        return $count;
+    }
+    function getName($table,$id,$name='name'){
+        $data=M($table)->find($id);
+        return $data[$name];
+    }
     function countBug($proid){
         $where=array("project"=>$proid,"deleted"=>'0');
         $count=M("bug")->where($where)->count();

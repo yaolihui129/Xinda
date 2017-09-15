@@ -16,8 +16,7 @@
 <!-- Matter -->
 	  <div class="matter">
         <div class="container">
-        	<div class="row">         
-	            
+        	<div class="row">         	            
 	             <div class="col-md-12">
 	             	<div class="widget-content">
 	                  <div class="padd">
@@ -46,7 +45,7 @@
 	                         </div> 
 	                         <div class="form-group">
 	                             <label class="col-lg-4 control-label">主营业务：</label>
-	                             <div class="col-lg-8"><textarea class="cleditor form-control" name="desc"><{$arr.desc}></textarea></div>
+	                             <div class="col-lg-8"><textarea class="form-control" name="desc"><{$arr.desc}></textarea></div>
 	                         </div>   
 	                                                 
 	                         <hr />
@@ -59,7 +58,10 @@
 	                  </div>
 	                </div>	             
 	             </div>	
-	             <div class="col-md-12">	            	       
+	                        
+            </div>
+            <div class="row">
+            	<div class="col-md-12">	            	       
 				    <table class="table table-striped table-bordered table-hover" >
 						<tr><th width="30%" bgcolor="#ccc" >网站</th> <td><{$arr.web}><{$arr.version}></td></tr>
 						<tr><th bgcolor="#ccc" >备案</th> <td><{$arr.record}></td></tr>
@@ -72,7 +74,7 @@
 						<tr><th bgcolor="#ccc">开发团队</th><td>yaolh</td></tr>
 						<tr><th bgcolor="#ccc">客户端</th><td><{$_SESSION['os']}>:<{$_SESSION['browser']}>:<{$_SESSION['ip']}></td></tr>
 					</table>	             			                					    
-	            </div>            
+	            </div> 
             </div>       
         </div>
       </div>  	
