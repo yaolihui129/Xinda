@@ -1,1 +1,67 @@
-!Templates.html5.content!
+<layout name="layout" />
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">	      	
+	    <a href="__APP__/<{$Think.config.PRODUCT}>"><i class="icon-home"></i> 商品服务</a> 
+		<span class="divider">/</span> 
+		<a href="__APP__/<{$Think.config.PRODUCT}>/Product" class="bread-current"> <{$_SESSION['product']|getName='tp_product',###}></a> 
+		<span class="divider">/</span>  
+		<a href="__APP__/<{$Think.config.PRODUCT}>/Guige/index/product/<{$_SESSION['product']}>" class="bread-current"> <{$_SESSION['normsid']|getNorms=###}></a>
+		<span class="divider">/</span>  
+		<a href="__URL__" class="bread-current"> 价格</a>             		        	
+		<span class="divider">/</span> 新增	
+		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	
+	</h2>	      		        
+	<div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+
+<!-- Matter -->
+<div class="matter">
+   <div class="container">
+		<div class="widget-content">
+		<form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                 
+            <input type="hidden" name="normsid" value="<{$_SESSION['normsid']}>" /> 
+            <input type="hidden" name="sn" value="<{$count}>" /> 
+            <div class="form-group">
+               <label class="col-lg-4 control-label">￥成本价（元）:</label>
+               <div class="col-lg-8">
+               		<input type="number" class="form-control" name='cmoney' value="" placeholder="￥成本价">
+               </div>                                                        
+            </div> 
+            <div class="form-group">
+               <label class="col-lg-4 control-label">￥零售价（元）:</label>
+               <div class="col-lg-8">
+               		<input type="number" class="form-control" name='money' value="" placeholder="￥零售价">
+               </div>                                                        
+            </div>
+            <div class="form-group">
+               <label class="col-lg-4 control-label">￥批发价（元）:</label>
+               <div class="col-lg-8">
+               		<input type="number" class="form-control" name='pmoney' value="" placeholder="￥批发价">
+               </div>                                                        
+            </div>
+            <div class="form-group">
+               <label class="col-lg-4 control-label">￥市场价（元）:</label>
+               <div class="col-lg-8">
+               		<input type="number" class="form-control" name='smoney' value="" placeholder="￥市场价">
+               </div>                                                        
+            </div> 
+            <div class="form-group">
+               <label class="col-lg-4 control-label">价格有效期(天):</label>
+               <div class="col-lg-8">
+               		<input type="number" class="form-control" name='etime' value="15" placeholder="价格有效期">
+               </div>                                                        
+            </div>                                                                                                                           
+	        <hr />
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-lg-8">
+                  	<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                      
+                </div>                             
+            </div>
+        </form>
+        </div>                
+    </div>
+</div>
+<!-- Matter ends -->

@@ -1,0 +1,45 @@
+<layout name="layout" />
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">
+		<a href="#"><i class="icon-shopping-cart"></i> 商品服务</a> 
+		<span class="divider">/</span> 
+		<a href="__URL__" class="bread-current">品牌管理</a>    
+		<span class="divider">/</span> 新增	
+		<a href="__URL__" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	         
+	</h2>       
+    <div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+<!-- Matter -->
+<div class="matter">
+   <div class="container">
+		<div class="widget-content">
+		<form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                 
+            <input type="hidden" name="sn" value="<{$count}>" />
+            <div class="form-group">
+               <label class="col-lg-4 control-label">品牌:</label>
+               <div class="col-lg-8">
+                   <input type="text" class="form-control" name='name' value="" placeholder="品牌">
+               </div>                                                        
+            </div>                                                                                                                                
+	        <div class="form-group">
+	           <label class="col-lg-4 control-label">图片:</label>
+	           <div class="col-lg-8">
+	               <input id="input-1" type="file" class="file form-control" name="img">
+	           </div>
+	        </div>
+            <div class="form-group">
+	            <label class="col-lg-4 control-label">详情介绍:</label>
+	            <div class="col-lg-8"><textarea class="cleditor" name="desc"><{$arr.desc}></textarea></div>
+	        </div><hr />
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-lg-8">
+                  	<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                      
+                </div>                             
+            </div>
+        </form>
+        </div>                
+    </div>
+</div>
+<!-- Matter ends -->

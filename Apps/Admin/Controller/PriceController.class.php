@@ -20,8 +20,13 @@ class PriceController extends CommonController {
                 $_SESSION[$info['name'].'Search']='';
             }
             $this->assign('search',$_SESSION[$info['name'].'Search']);
-            $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
+            $map['cmoney|money|pmoney|smoney']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
+        $noms=I('id');
+        if($noms){
+            $_SESSION['normsid']=$noms;
+        }
+        $map['normsid']=$_SESSION['normsid']; 
         $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
@@ -29,18 +34,32 @@ class PriceController extends CommonController {
 
     public function add(){
         $info=$this->info();
-        $count=M($info['table'])->count()+1;
+        $map['normsid']=$_SESSION['normsid'];
+        $count=M($info['table'])->where($map)->count()+1;
         $this->assign("count",$count);
         $this->display();
     }
 
     public function insert(){
-        $info=$this->info();
-        if($info['idType']=='int'){
-            $this->dataIns($info['table'], $_POST);
-        }elseif ($info['idType']=='char'){
-            $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
+        if(!$_POST['cmoney']){
+           $this->error('成本价不能为空'); 
+        }elseif(!$_POST['money']){
+            $this->error('零售价不能为空');
+        }elseif(!$_POST['pmoney']){
+            $this->error('批发价不能为空');
+        }elseif(!$_POST['smoney']){
+            $this->error("市场价不能为空");
+        }else{
+            $info=$this->info();
+            $_POST['etime']=time()+$_POST['etime']*24*3600;
+            if($info['idType']=='int'){
+                $this->dataIns($info['table'], $_POST,$info['name']);
+            }elseif ($info['idType']=='char'){
+                $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
+            } 
         }
+                
+        
     }
 
     public function mod(){

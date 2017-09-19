@@ -21,7 +21,7 @@ class StationController extends CommonController {
                 $_SESSION[$info['name'].'Search']='';
             }
             $this->assign('search',$_SESSION[$info['name'].'Search']);
-            $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
+            $map['name']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
         $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
@@ -40,7 +40,7 @@ class StationController extends CommonController {
     public function insert(){
         $info=$this->info();
         if($info['idType']=='int'){
-            $this->dataIns($info['table'], $_POST);
+            $this->dataIns($info['table'], $_POST,$info['name']);
         }elseif ($info['idType']=='char'){
             $this->dataInsert($info['table'], $info['idLenth'], $info['name'], $_POST);
         }

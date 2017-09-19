@@ -4,9 +4,9 @@
 	<h2 class="bread-crumb">	      	
 	    <a href="__APP__/<{$Think.config.PRODUCT}>"><i class="icon-home"></i> 商品服务</a> 
 		<span class="divider">/</span> 
-		<a href="__APP__/<{$Think.config.PRODUCT}>/Product" class="bread-current"> 商品管理</a> 
+		<a href="__APP__/<{$Think.config.PRODUCT}>/Product" class="bread-current"> <{$_SESSION['product']|getName='tp_product',###}></a> 
 		<span class="divider">/</span>  
-		<a href="__APP__/<{$Think.config.PRODUCT}>/Guige/product/<{$_SESSION['product']}>" class="bread-current"> 规格</a>
+		<a href="__APP__/<{$Think.config.PRODUCT}>/Guige/index/product/<{$_SESSION['product']}>" class="bread-current"> <{$_SESSION['normsid']|getNorms=###}></a>
 		<span class="divider">/</span>  
 		<a href="__URL__" class="bread-current"> 价格</a>         		        	
 		<form class="form-inline pull-right" action="__URL__/index" method="post">
@@ -14,7 +14,7 @@
 				<input type="text" class="form-control" name="search" value="<{$search}>" placeholder="查询">
 			</div>
 				<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>
-				<a href="__URL__/add" type="button" class="btn btn-default"><i class="icon-plus"> 添加</i></a>
+				<a href="__URL__/add" type="button" class="btn btn-default"><i class="icon-plus"> 报价</i></a>
 		</form>    	
 	</h2>	      		        
 	<div class="clearfix"></div>
@@ -32,43 +32,33 @@
 	               <thead>
 		              <tr>
 		                <th width=5% align="center" bgcolor="#ccc">顺序</th>
-		                <th width=10% align="center" bgcolor="#ccc">图片</th>
-		                <th width=20% align="center" bgcolor="#ccc">标题</th>		                                                          
-	                    <th width=20% align="center" bgcolor="#ccc">库存</th>                                                                             
+		                <th width=10% align="center" bgcolor="#ccc">成本价</th>
+		                <th width=10% align="center" bgcolor="#ccc">零售价</th>		                                                          
+	                    <th width=10% align="center" bgcolor="#ccc">批发价</th>
+	                    <th width=10% align="center" bgcolor="#ccc">市场价</th>
+	                    <th width=10% align="center" bgcolor="#ccc">有效时间</th>                                                                               
 	                    <th width=10% align="center" bgcolor="#ccc">更新时间</th>
-	                    <th width=20% align="center" bgcolor="#ccc">操作</th>
+	                   
 		               </tr>
 	               </thead>
-	               <tbody>  
-	               <form action="__URL__/order" method="post" >             
+	               <tbody>               
 					<volist name='data' id='st'>
 		               <tr>                          
-		                 <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
-		                 <td><img src="__UPLOAD__/<{$_SESSION['qz']}><{$st.path}><{$st.img}>"  style="width:80px;max-width: 80px;"/></td>
-		                 <td><{$st.title}></td>		                 	                          
-		                 <td><{$st.desc}></td>
+		                 <td><{$st.sn}></td>
+		                 <td>￥<{$st.cmoney}></td>
+		                 <td>￥<{$st.money}></td>
+		                 <td>￥<{$st.pmoney}></td>
+		                 <td>￥<{$st.smoney}></td>
+		                 <td><{$st.etime}></td>		                 	                          
 		                 <td><{$st.utime}></td>                         
-		                 <td>                              
-		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 编辑</i></a>
-		                    <a href="__APP__/<{$Think.config.PRODUCT}>/Price/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 调价</i></a>		                    
-		                    <a href="__URL__/del/id/<{$st.id}>" class="btn  btn-danger btn-lg" onclick="return confirm('你确定要删除？')">
-		                       <i class="glyphicon glyphicon-trash"> 删除</i>
-		                    </a>
-		                  </td>
 		                </tr>
 					</volist>				
                   </tbody>                                                                                        
 	            </table>
-	            <div class="widget-foot">
-                      	<div class="uni pull-left">
-                      		<input type="submit" name="do_submit" value="批量排序" class="btn btn-info">                      		
-                      	</div> 
-                      	</form>                
-                        <ul class="pagination pull-right"><{$page}></ul>
-                      
-                      <div class="clearfix"></div> 
-
-                    </div>
+	            <div class="widget-foot">               
+                     <ul class="pagination pull-right"><{$page}></ul>
+                     <div class="clearfix"></div> 
+               </div>
 	         </div>
          </div>
      </div>

@@ -1,17 +1,16 @@
 <?php
 namespace Admin\Controller;
-class ResourcesController extends CommonController {
-    function info(){
+class BrandController extends CommonController {
+    function info(){//品牌信息
         $info=array(
-            'table'=>'tp_resource',
-            'name'=>'Resource',
+            'table'=>'tp_brand',           
+            'name'=>'Brand',
             'idLenth'=>'6',
             'idType'=>'int'
         );
         return $info;
     }
     
-
     public function index(){
         $info=$this->info();
         if(IS_POST){//查询信息
@@ -21,12 +20,13 @@ class ResourcesController extends CommonController {
                 $_SESSION[$info['name'].'Search']='';
             }
             $this->assign('search',$_SESSION[$info['name'].'Search']);
-            $map['title']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
+            $map['name']=array('like','%'.$_SESSION[$info['name'].'Search'].'%');
         }
         $map['prodid']=$_SESSION['prodid'];
         $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();
     }
+    
     
     public function add(){
         $info=$this->info();
@@ -62,17 +62,9 @@ class ResourcesController extends CommonController {
     }
     
     
-    public function fabu(){//发布、下线
-        $info=$this->info();
-        $this->Release($info['table'], I('id'), I('state'));
-    }
-    
     public function del(){//删除
         $info=$this->info();
         $this->ljshanChu($info['table'],I('id'));
     }
     
 }
-    
-
-

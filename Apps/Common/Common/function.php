@@ -746,8 +746,41 @@
     function getBranchName($branchid){
         $data=M('branch')->find($branchid);
         return $data['name'];
-    }        
-
+    }   
+    //获取产品报价
+    function getPrice($norms,$tpye='money'){
+        $where['normsid']=$norms;
+        $data=M('tp_price')->where($where)->order('sn desc')->limit(1)->select();
+//         dump($data);
+        if($data){
+            return '￥'.$data[0][$tpye];
+        }else {
+            return '暂无报价';
+        }  
+    }
+    function getNorms($id){
+        $data=M('tp_norms')->find($id);
+        if($data['norm5']){
+            $str=$data['norm1']."-".$data['norm2']."-".$data['norm3']."-".$data['norm4']."-".$data['norm5'];
+        }elseif ($data['norm4']){
+            $str=$data['norm1']."-".$data['norm2']."-".$data['norm3']."-".$data['norm4'];
+        }elseif ($data['norm3']){
+            $str=$data['norm1']."-".$data['norm2']."-".$data['norm3'];
+        }elseif ($data['norm2']){
+            $str=$data['norm1']."-".$data['norm2'];
+        }else {          
+           $str=$data['norm1'];
+        }
+        return $str;
+    }
+    //获取产品库存
+    function getRepertory($norms){
+        $where['normsid']=$norms;
+        $debit=M('tp_repertory')->where($where)->sum('debit');
+        $credit=M('tp_repertory')->where($where)->sum('credit');
+        $kc=$debit-$credit;
+        return $kc;
+    }
     //获取职位信息
     function getHrtitle($hrid){
         $data=M('tp_hr')->find($hrid);
