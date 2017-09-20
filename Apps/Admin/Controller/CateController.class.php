@@ -36,7 +36,8 @@ class CateController extends CommonController {
     
     public function add(){
         $info=$this->info();
-        $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : '000000'; 
+//         $pidCateId=!empty($_GET['pidCateId']) ? $_GET['pidCateId'] : '000000'; 
+        $pidCateId=I('pidCateId','000000');
         $this->assign("pidCateId",$pidCateId);
         $map=array('prodid'=>$_SESSION['prodid'],'pidCateId'=>$pidCateId,'isDelete'=>0);
         $count=M($info['table'])->where($map)->count()+1;

@@ -54,7 +54,15 @@
 					<volist name='data' id='st'>
 		               <tr>                          
 		                 <td><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
-		                 <td><img src="__UPLOAD__/<{$_SESSION['qz']}><{$st.path}><{$st.img}>"  style="width:80px;max-width: 80px;"/></td>
+		                 <td>
+			                 <empty name="st.img">
+								<img src="__UPLOAD__/<{$arr.img}>"  style="width:80px;max-width: 80px;"/>
+							<else /> 
+								<img src="__UPLOAD__/<{$st.img}>"  style="width:80px;max-width: 80px;"/>
+							</empty> 
+		                 
+		                 
+		                 </td>
 		                 <td><{$st.norm1}></td>
 						 <notempty name="arr.guig2"><td><{$st.norm2}></td></notempty>
 						 <notempty name="arr.guig3"><td><{$st.norm3}></td></notempty>
@@ -64,6 +72,7 @@
 		                 <td><a href="__APP__/<{$Think.config.PRODUCT}>/Price/index/id/<{$st.id}>"><{$st.id|getPrice=###}></a></td>		                                         
 		                 <td>                              
 		                    <a href="__URL__/mod/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-pencil"> 编辑</i></a>
+		                    <a href="__URL__/copy/id/<{$st.id}>" class="btn  btn-default btn-lg"><i class="glyphicon glyphicon-copy"> 复制</i></a>
 		                    <switch name="st.state">
 							    <case value="5">
 							    	<a href="__URL__/fabu/id/<{$st.id}>/state/<{$st.state}>" class="btn  btn-warning btn-lg">

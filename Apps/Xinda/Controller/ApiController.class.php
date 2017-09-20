@@ -7,19 +7,16 @@ class ApiController extends Controller {
         echo '您购买的是：'.I('name').'团购价格为：'.I('jiage');
     }
     public function ad(){
-        $a=C('apiKey');
         $b=I('key');
         $pic='';
-        if($a==$b){
+        if(C('apiKey')==$b){
             $where=array('prodid'=>C('PRODID'),'state'=>5);
             $pic=M('tp_ad')->where($where)->order('utime desc')->field('img,url')->select();
-            $pic=$this->jsonEncode(200,'ok',$pic);
-            echo $pic;
+            $pic=$this->jsonEncode(200,'ok',$pic);          
         }else {
             $pic=$this->jsonEncode(405,'shib',$b);
-            echo $pic;
         }
-        
+        echo $pic;
     }
     
     public function activity(){

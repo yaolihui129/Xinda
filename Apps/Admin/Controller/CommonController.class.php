@@ -185,7 +185,7 @@ class CommonController extends WebInfoController{
         $arr[$idName]=$id;
         $arr['moder']=$_SESSION['realname'];
         if ($state=='5'){
-            $arr['state']="1";
+            $arr['state']="1";            
             if (D($table)->save($arr)){
                 $this->success("下线成功！");
             }else{
@@ -193,6 +193,7 @@ class CommonController extends WebInfoController{
             }
         }else{
             $arr['state']="5";
+            $arr['atime']=date("Y-m-d H:i:s",time());
             if (D($table)->save($arr)){
                 $this->success("发布成功！");
             }else{

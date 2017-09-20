@@ -1,0 +1,85 @@
+<layout name="layout" />
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="bread-crumb">	      	
+	    <a href="#"><i class="icon-home"></i> 商品服务</a> 
+		<span class="divider">/</span> 
+		<a href="__APP__/<{$Think.config.PRODUCT}>/Product" class="bread-current"> <{$guige.name}></a> 
+		<span class="divider">/</span>  
+		<a href="__URL__/index/product/<{$_SESSION['product']}>" class="bread-current"> 规格</a>         		        	
+		<span class="divider">/</span> 复制	
+		<a href="__URL__/index/product/<{$_SESSION['product']}>" class="pull-right"><i class="icon-arrow-left"> 返回</i></a>	
+	</h2>	      		        
+	<div class="clearfix"></div>
+</div>
+<!-- Page heading ends -->
+
+
+<!-- Matter -->
+<div class="matter">
+   <div class="container">
+		<div class="widget-content">
+		<form action="__URL__/insert" method="post" enctype='multipart/form-data' class="form-horizontal" role="form">                                                                                                 
+            <input type="hidden" name="sn" value="<{$count}>" />
+            <input type="hidden" name="img" value="<{$arr.img}>" />
+            <input type="hidden" name="product" value="<{$_SESSION['product']}>" />
+            <notempty name="guige.guig1">							
+				<div class="form-group">
+	               <label class="col-lg-4 control-label"><{$guige.guig1}>:</label>
+	               <div class="col-lg-8">
+	               		<input type="text" class="form-control" name='norm1' value="<{$arr.norm1}>" placeholder="<{$guige.guig1}>">              		
+	               </div>                                                        
+	            </div>
+			</notempty>
+			<notempty name="guige.guig2">							
+				<div class="form-group">
+	               <label class="col-lg-4 control-label"><{$guige.guig2}>:</label>
+	               <div class="col-lg-8">
+	               		<input type="text" class="form-control" name='norm2' value="<{$arr.norm2}>" placeholder="<{$guige.guig2}>">              		
+	               </div>                                                        
+	            </div>
+			</notempty>
+			<notempty name="guige.guig3">							
+				<div class="form-group">
+	               <label class="col-lg-4 control-label"><{$guige.guig3}>:</label>
+	               <div class="col-lg-8">
+	               		<input type="text" class="form-control" name='norm3' value="<{$arr.norm3}>" placeholder="<{$guige.guig3}>">              		
+	               </div>                                                        
+	            </div>
+			</notempty>
+			<notempty name="guige.guig4">							
+				<div class="form-group">
+	               <label class="col-lg-4 control-label"><{$guige.guig4}>:</label>
+	               <div class="col-lg-8">
+	               		<input type="text" class="form-control" name='norm4' value="<{$arr.norm4}>" placeholder="<{$guige.guig4}>">              		
+	               </div>                                                        
+	            </div>
+			</notempty>
+			<notempty name="guige.guig5">							
+				<div class="form-group">
+	               <label class="col-lg-4 control-label"><{$guige.guig5}>:</label>
+	               <div class="col-lg-8">
+	               		<input type="text" class="form-control" name='norm5' value="<{$arr.norm5}>" placeholder="<{$guige.guig5}>">              		
+	               </div>                                                        
+	            </div>
+			</notempty>                                                                                                                                          
+	        <div class="form-group">
+	           <label class="col-lg-4 control-label">图片:</label>
+	           <div class="col-lg-8">
+	               <input id="input-1" type="file" class="file form-control" name="img">
+	           </div>
+	        </div>
+            <div class="form-group">
+	            <label class="col-lg-4 control-label">简介:</label>
+	            <div class="col-lg-8"><textarea class="form-control" name="desc"><{$arr.desc}></textarea></div>
+	        </div><hr />
+            <div class="form-group">
+                <div class="col-lg-offset-1 col-lg-8">
+                  	<button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>                      
+                </div>                             
+            </div>
+        </form>
+        </div>                
+    </div>
+</div>
+<!-- Matter ends -->

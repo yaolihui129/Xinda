@@ -17,7 +17,7 @@ class GuigeController extends CommonController {
         if($product){
             $_SESSION['product']=$product;
         }        
-        $arr=M($info['table1'])->field('name,guig1,guig2,guig3,guig4,guig5')->find($_SESSION['product']);
+        $arr=M($info['table1'])->field('name,guig1,guig2,guig3,guig4,guig5,img')->find($_SESSION['product']);
         $this->assign('arr',$arr);
         if(IS_POST){//查询信息
             if($_POST['search']){//储存当前查询信息
@@ -35,6 +35,20 @@ class GuigeController extends CommonController {
 
     public function add(){
         $info=$this->info();
+        $product=$_SESSION['product'];
+        $where['product']=$product;
+        $where['isDelete']=0;
+        $count=M($info['table'])->where($where)->count()+1;
+        $this->assign("count",$count);
+        $guige=M($info['table1'])->field('name,guig1,guig2,guig3,guig4,guig5')->find($product);
+        $this->assign('guige',$guige);
+        $this->display();
+    }
+    
+    public function copy(){
+        $info=$this->info();
+        $arr=M($info['table'])->find($_GET[id]);
+        $this->assign('arr',$arr);
         $product=$_SESSION['product'];
         $where['product']=$product;
         $where['isDelete']=0;

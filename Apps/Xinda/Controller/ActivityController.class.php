@@ -1,35 +1,32 @@
 <?php
 namespace Xinda\Controller;
 class ActivityController extends WebInfoController {
+    function init(){
+        $info=array(
+            'table'=>'tp_activity',
+            'name'=>'Activity',
+        );
+        return $info;
+    }
     public function index(){
+        $info=$this->init();
         getWebInfo(C('PRODUCT'));//获取网页信息
         $this->changeMuban(I('muban'));//更换模板
-        if($_SESSION['isCLogin']==C(PRODUCT)){//已经登录跳过          
-        }else {//未登录  
-            if(I('wxAppId')){
-                $this->weiXinLogin(I('wxAppId'), I('wxOpenId'));
-            }
+        if(I('wxAppId')){
+            $this->weiXinLogin(I('wxAppId'), I('wxOpenId'));
         }
-        $id=I('id');
-        $table=$this->getTable();
-        $this->details($table, $id);               
+        $this->details($info['table'],I('id'));               
         $this->display();
     }
     
-    public function activityList(){  
-        $map['type']=$this->getName();
-        $savePath=$this->getName();
-        $table=$this->getTable();
-        $this->dataChaxun($table, $savePath, $map,C('maxPageNum'),I('p'));
+    public function activityList(){ 
+        $info=$this->init();
+        $map['type']=$info['name'];
+        $this->dataChaxun($info['table'], $info['name'], $map,C('maxPageNum'),I('p'));
         $this->display();      
     }
     
-    function getTable(){
-        return 'tp_activity';
-    }
-    function getName(){
-        return 'activity';
-    }
+    
     
 
 }

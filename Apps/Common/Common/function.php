@@ -749,14 +749,19 @@
     }   
     //获取产品报价
     function getPrice($norms,$tpye='money'){
-        $where['normsid']=$norms;
-        $data=M('tp_price')->where($where)->order('sn desc')->limit(1)->select();
-//         dump($data);
-        if($data){
-            return '￥'.$data[0][$tpye];
-        }else {
-            return '暂无报价';
-        }  
+        if($norms){
+            $where['normsid']=$norms;
+            $data=M('tp_price')->where($where)->order('sn desc')->limit(1)->select();
+            //         dump($data);
+            if($data){
+                return '￥'.$data[0][$tpye];
+            }else {
+                return '暂无报价';
+            } 
+        }else{
+            return '无此规格';
+        }
+         
     }
     function getNorms($id){
         $data=M('tp_norms')->find($id);

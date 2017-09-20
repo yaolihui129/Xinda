@@ -10,6 +10,7 @@ class ServicelistController extends WebInfoController {
         $this->assign('arr',$arr);
         $map['prodid']=C('PRODID');
         $map['state']=5;
+        $map['isDelete']=0;
         if($_GET['cate']){
            $map['cateId|pidCateId']=$_GET['cate'];
            $this->assign('cate',getCatname($_GET['cate']));

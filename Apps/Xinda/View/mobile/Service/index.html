@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-md-7 ">
 				<h5><{$arr.mark}></h5>
-				<h4>名称：<{$arr.name}></h4>
+				<h4><{$arr.brand|getName='tp_brand',###}>：<{$arr.name}></h4>
 				<switch name="arr.money">
 				    <case value="0"><br></case>				    
 				    <default />
