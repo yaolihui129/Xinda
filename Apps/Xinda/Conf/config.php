@@ -32,12 +32,14 @@ return array(
                                 {
                                     "type": "view", 
                                     "name": "信达官网", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Index/index/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda"
                                 }, 
                                 {
-                                    "type": "view", 
-                                    "name": "资质证书", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Index/index/muban/mobile"
+                                    "type": "miniprogram", 
+                                    "name": "双人成团", 
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda",
+                                    "appid":"wxe6f24ce3395cb972",
+                                    "pagepath":"pages/index/index",
                                 }, 
                                 {
                                     "type": "click",  
@@ -62,27 +64,27 @@ return array(
                                 {
                                     "type": "view", 
                                     "name": "电脑", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/9h0zez/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/9h0zez"
                                 }, 
                                 {
                                     "type": "view", 
                                     "name": "手机", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/Plxo5q/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/Plxo5q"
                                 }, 
                                 {
                                     "type": "view", 
                                     "name": "平板", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/QaARsI/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/QaARsI"
                                 }, 
                                 {
                                     "type": "view", 
                                     "name": "服务器", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/ct5y5E/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/ct5y5E"
                                 }, 
                                 {
                                     "type": "view", 
                                     "name": "相关配件", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/DGePKX/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Servicelist/index/cate/DGePKX"
                                 }
                             ]
                         }, 
@@ -92,7 +94,7 @@ return array(
                             	{
                                     "type": "view", 
                                     "name": "个人中心", 
-                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Customer/personal/muban/mobile"
+                                    "url": "http://www.zhihuixinda.com/index.php/Xinda/Customer/personal"
                                 },
                                 {
                                     "type": "click", 
