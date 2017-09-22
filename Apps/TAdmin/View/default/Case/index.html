@@ -5,7 +5,7 @@
 	  <div class="col-md-8">   
 	  	<div class="panel panel-info">
 		  <div class="panel-heading">
-		  	<b>用例（<{$_SESSION['proid']|getProNo=###}>）</b><{$arr.id|getSPFunc=###}>(<{$arr.sn}>)
+		  	<b>用例（<{$_SESSION['proid']|getName='project',###,'code'}>）</b><{$arr.id|getSPFunc=###}>(<{$arr.sn}>)
 		  	<div class="btn-group pull-right">
 					<a  data-toggle="modal" href="#tianjcase" type="button" class="btn btn-info btn-xs ">
 					<span class="glyphicon glyphicon-plus">添加</span></a>
@@ -25,7 +25,7 @@
 			            <li class="list-group-item">
 			            <span>
 			                <input type="text" name="sn[<{$case.id}>]" value="<{$case.sn}>"  class="input40"/>
-			                <b>意图：</b><{$case.main}><span class="badge"><{$case.fproid|getProNo=###}></span><br>
+			                <b>意图：</b><{$case.main}><span class="badge"><{$case.fproid|getName='project',###,'code'}></span><br>
 			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			                <b>预期：</b><{$case.expected}>	               
 			                <span class="badge"><{$case.state}>-<{$case.level}></span>
@@ -61,7 +61,7 @@
 					<default /><li class="list-group-item ">
 			 </switch> 
 	            <a href="__URL__/index/funcid/<{$vo.id}>">
-	            	<{$vo.sn}>.<{$vo.func}><{$vo.fproid|getProNo=###}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
+	            	<{$vo.sn}>.<{$vo.func}><{$vo.fproid|getName='project',###,'code'}></a><span class="badge"><{$vo.id|countFCase=###}></span></li>
 	        </volist>
 	      </ul>	  
 		</div>
