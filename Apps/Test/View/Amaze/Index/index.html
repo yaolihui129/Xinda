@@ -20,16 +20,16 @@
           <tbody >
           	<volist name='data' id='pro' empty="没有数据">
             <tr>              
-              <td><a href="__APP__/Test/Stage/index/proid/<{$pro.id}>"><{$pro.name}><span class="badge pull-right"><{$pro.id|countStage=###}></span></a></td>             
+              <td><a href="__APP__/Test/Stage/index/proid/<{$pro.id}>"><{$pro.name}><span class="badge pull-right"><{$pro.id|countId='tp_stage','proid',###}></span></a></td>             
               <td><a href="__APP__/Test/Rules/demandStatistics/proid/<{$pro.id}>"><{$pro.id|countPRules=###}></a></td>
               <td><{$pro.status|getProst=###}></td>
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$pro.id}>"><{$pro.id|countBug=###}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$pro.id}>"><{$pro.id|countId='bug','project',###}></a></td>
               <td><{$pro.begin}></td>
               <td><{$pro.end}></td>
-              <!-- <td><a href="__APP__/Test/Risk/index/proid/<{$pro.id}>"><{$pro.id|countRisk=###}></a></td> -->
+              <!-- <td><a href="__APP__/Test/Risk/index/proid/<{$pro.id}>"><{$pro.id|countId='tp_risk','proid',###}></a></td> -->
               <td><a href="__APP__/Test/Func/range/proid/<{$pro.id}>"><{$pro.id|countRange=###}></a></td>
-              <!--  <td><a href="__APP__/Test/Scene/index/proid/<{$pro.id}>"><{$pro.id|countScene=###}></a></td>-->
-              <td><a href="__APP__/Test/Case/procase/proid/<{$pro.id}>"><{$pro.id|countCase=###}></a></td>
+              <!--  <td><a href="__APP__/Test/Scene/index/proid/<{$pro.id}>"><{$pro.id|countId='tp_scene','proid',###}></a></td>-->
+              <td><a href="__APP__/Test/Case/procase/proid/<{$pro.id}>"><{$pro.id|countId='tp_case','fproid',###}></a></td>
             </tr>
             </volist>
           </tbody>
