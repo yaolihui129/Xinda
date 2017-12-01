@@ -1,0 +1,50 @@
+<layout name="layout" /> 
+<!-- content start -->
+<div class="admin-content">     
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">易鑫车险C端</h3></div>						
+				<ul class="list-group">
+					<volist name='var' id='vo' empty="没有数据">
+						<notempty  name="vo.name">				
+							<li class="list-group-item"><a target="_blank" href='<{$vo.name}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.realversion}></span></li>
+						</notempty > 				  	
+					</volist>				 
+				</ul>											
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-success">
+				<div class="panel-heading"><h3 class="panel-title">易鑫车险B端</h3></div>						
+				<ul class="list-group">
+					<volist name='var2' id='vo' empty="没有数据">
+						<li class="list-group-item"><a target="_blank" href='<{$vo.sedan}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.sedanversion}></span></li>									  	
+					</volist>				 
+				</ul>											
+			</div>
+		
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-success">
+				<div class="panel-heading"><h3 class="panel-title">易鑫车服</h3></div>						
+				<ul class="list-group">
+					<volist name='var1' id='vo' empty="没有数据">
+						<li class="list-group-item"><a target="_blank" href='<{$vo.testip}>'><{$vo.name}></a> <span class="label label-default pull-right"><{$vo.id|getBuildVersion=###}></span></li>									  	
+					</volist>				 
+				</ul>											
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+</div>	

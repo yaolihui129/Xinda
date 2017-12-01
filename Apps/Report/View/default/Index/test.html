@@ -1,0 +1,72 @@
+<layout name="layout" />
+<div class="container-fluid">
+	<div class="row">  
+	  <div class="col-md-9">
+	  		<div class="panel panel-info">
+			  <div class="panel-heading"><h3 class="panel-title"><{$arr.id|getPro=###}></h3></div>
+			  <div class="panel-body">
+			  		<b> 产品：</b><{$arr.po|getRealname=###}>
+			  		<b> 项目：</b><{$arr.pm|getRealname=###}>
+			  		<b> 研发：</b><{$arr.rd|getRealname=###}>
+			  		<b> 测试：</b><{$arr.qd|getRealname=###}><br>
+					<div class="well well-sm"><{$arr.desc}></div>				  		
+			  		<!-- Nav tabs -->
+				  	<ul class="nav nav-tabs" role="tablist">
+					    <li role="presentation" class="active"><a href="#stage" aria-controls="stage" role="tab" data-toggle="tab">里程碑<span class="badge"><{$arr.id|countStage=###}></span></a></li>
+					    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+					    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+					    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				  	</ul>				
+				  	<!-- Tab panes -->
+				  	<div class="tab-content">
+					    <div role="tabpanel" class="tab-pane active" id="stage">
+					    	<h3 class="panel-title"><div class="btn-group">
+					    		<a data-toggle="modal" href="#tianjstage" class=" btn btn-info btn-xs pull-right" >添加</a>
+					    	</div> </h3>
+					    
+					    	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						           <volist name='stages' id='st' empty="没有数据">
+						              <div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+											<h4 class="panel-title">
+											    <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
+											        <{$st.sn}>.<{$st.stage}>(<{$st.end}>完成)
+											        <span class="badge pull-right"><{$st.state}> </span>
+											     </a>
+											  </h4>
+										</div>
+										<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">											        
+												 <span class="pull-right"><{$st.moder}>&nbsp;更新于:<{$st.utime}></span><br>
+												 <ul class="list-group"><{$st.id|getQueue=###}></ul>						 					
+										</div>
+						  			 </div>                      
+						           </volist>
+						      </div>
+					    
+					    </div>
+					    <div role="tabpanel" class="tab-pane" id="profile">2</div>
+					    <div role="tabpanel" class="tab-pane" id="messages">3</div>
+					    <div role="tabpanel" class="tab-pane" id="settings">4</div>
+				  	</div>			  			  
+			  </div>
+			</div>					  
+	  </div>
+	  <div class="col-md-3  hidden-xs hidden-sm">
+	  		<div class="panel panel-info">
+			  	<div class="panel-heading"><h3 class="panel-title"><{$_SESSION['testgp']}>组测试项目</h3></div>
+			  <ul class="list-group">
+			    <volist name='pros' id='pro' empty="没有数据"> 			
+		           <switch name="pro.id">
+						<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+						<default /><li class="list-group-item ">
+				 </switch> 
+		            <a href="__URL__/test/proid/<{$pro.id}>">           	
+		            	<span class="badge"><{$pro.status|getProst=###}></span><{$pro.name}>
+		            	<span class="badge pull-right"><{$pro.id|countStage=###}></span></li>
+		            </a>		            
+		        </volist>
+		      </ul>	  
+			</div>	  
+	  </div>
+	</div>
+</div>

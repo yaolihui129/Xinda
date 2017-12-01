@@ -1,0 +1,27 @@
+<layout name="layout" />
+<!-- content start -->
+<div class="admin-content"> 
+	<h1>项目人员投入表<span class="pull-right"><a target="_blank" href="http://192.168.21.211:8075/WebReport/ReportServer?reportlet=zentao%2FPersonInput.cpt">项目人员投入表</a></span> </h1>
+	<div class="starter-template">
+		<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+		    <thead>
+		      <tr>               
+		         <th class="table-title" bgcolor="#ccc" >项目</th>
+		            <volist name='arr' id='ar' empty="没有数据">
+		               <th class="table-type" bgcolor="#ccc" ><{$ar|getZTUserName=###}></th>
+		            </volist> 		                                
+		       </tr>
+		    </thead>
+		    <tbody >		          
+				<volist name='project' id='pro' empty="没有数据">
+					<tr>              
+				       <td><a href="__URL__/dailyTaskAssignment/project/<{$pro}>"><{$pro|getProname=###}></a></td> 
+				       <volist name='arr' id='ar' empty="没有数据">            
+				          <td><{$ar|sunUserProject=$pro,###}></td>
+				       </volist>
+				    </tr>			        
+			   </volist>							          	
+		    </tbody>
+		</table> 	
+	</div>
+</div>

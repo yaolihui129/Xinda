@@ -861,8 +861,8 @@
     
     //根据$proid获取用例数
     function countCase($proid){
-        $where=array("fproid"=>$proid);
-        $count=M("tp_case")->where($where)->count();
+        $where=array("project"=>$proid);
+        $count=M("case")->where($where)->count();
         return $count;
     }
 

@@ -1,0 +1,146 @@
+<layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content"> 
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+			    <div class="btn-group pull-right">
+			    	<a href="__APP__/<{$Think.config.PRODUCT}>" class="btn btn-warning btn-xs">返回</a>
+			    </div>
+		    </h3>
+		  </div>
+		  <div class="panel-body ">
+		    	<ul class="nav nav-tabs" role="tablist">
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
+				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
+				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>				  
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$arr.id}>">用例
+				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$arr.id}>">范围
+				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
+				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">BUG
+				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
+				</ul>
+				
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		           <volist name='data' id='st' empty="没有数据">
+		              <div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="heading<{$st.id}>">
+							<h4 class="panel-title">
+							    <a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">
+							        <{$st.id}><span class="label label-warning"><{$st.assignedto|getZTUserName=###}></span>
+							        <span class="label label-default"><{$st.branch|getBranchName=###}></span>
+							        <span class="label label-info"><{$st.module|getModuleName=###}></span>
+							        <{$st.title}>
+							        <span class="badge pull-right"><{$st.status|getBugStauts=###}> </span>
+							     </a>
+							  </h4>
+						</div>
+						<div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$st.id}>">				
+								 <{$st.steps}>						 					
+						</div>
+		  			 </div>                      
+		           </volist>
+		      </div>
+				                                         		
+		   </div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">项目简介</h3></div>			
+			<div class="panel-body">	
+				<b> 产品：</b><{$arr.po|getRealname=###}>
+				<b> 项目：</b><{$arr.pm|getRealname=###}><br>
+				<b> 研发：</b><{$arr.rd|getRealname=###}>
+				<b> 测试：</b><{$arr.qd|getRealname=###}><br><br>
+				<{$arr.desc}>
+			</div>			
+		</div>
+		<notempty name="var">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">提交BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
+		<notempty name="var">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">提交BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		<notempty name="var1">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><h3 class="panel-title">解决BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var1' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.resolvedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		<notempty name="var2">
+			<div class="panel panel-warning">
+				<div class="panel-heading"><h3 class="panel-title">关闭BUG统计</h3></div>						
+				<ul class="list-group">
+					<volist name='var2' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.closedby|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
+		<notempty name="var4">
+			<div class="panel panel-danger">
+				<div class="panel-heading"><h3 class="panel-title">BUG当前指派</h3></div>						
+				<ul class="list-group">
+					<volist name='var4' id='vo' empty="没有数据">
+						<switch name="vo.assignedto">
+						    <case value="closed">
+						    	<li class="list-group-item"><{$vo.assignedto}><span class="badge"><{$vo.count(id)}></span></li>
+						    </case>					    
+						    <default />
+						    	<li class="list-group-item"><{$vo.assignedto|getZTUserName=###}><span class="badge"><{$vo.count(id)}></span></li>
+						</switch>
+					  	
+					</volist>				 
+				</ul>											
+			</div>		
+		</notempty>
+		
+		<notempty name="var4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">BUG模块分布</h3></div>						
+				<ul class="list-group">
+					<volist name='var3' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.module|getModuleName=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		
+		<notempty name="var4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">BUG版本分布</h3></div>						
+				<ul class="list-group">
+					<volist name='var5' id='vo' empty="没有数据">
+					  	<li class="list-group-item"><{$vo.openedbuild|getBuild=###}><span class="badge"><{$vo.count(id)}></span></li>
+					</volist>				 
+				</ul>											
+			</div>
+		</notempty>
+		
+				
+	</div>
+</div>
+</div>

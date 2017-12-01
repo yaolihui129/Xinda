@@ -1,0 +1,46 @@
+<layout name="layout" />
+<!-- content start -->
+<div class="admin-content">
+	<h1>
+		<a target="_blank" href="http://192.168.21.211:8075/WebReport/ReportServer?reportlet=zentao%2FPersonnelStageInput+.cpt">人员每日任务投入分布表 </a>
+		<form class="form-inline pull-right" action="__URL__/personnelDailyTask" method="post">
+			<div class="form-group">
+				<input type="text" class="form-control" name="day" value="<{$day}>" placeholder="查询">
+			</div>
+			<button type="submit" class="btn btn-info "><i class="icon-search"> 查询</i></button>										
+		</form> 
+		<ul class="nav navbar-nav pull-right">					          
+			<li class="dropdown">            
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#"><{$day}>天以内 <i class="icon-retweet"></i></a>
+				<ul class="dropdown-menu">
+					<li ><a  href="__URL__/personnelDailyTask/day/7">一周内</a></li>
+					<li ><a  href="__URL__/personnelDailyTask/day/14">两周内</a></li>
+					<li ><a  href="__URL__/personnelDailyTask/day/30">一个月内</a></li>					  				  							
+					<li ><a  href="__URL__/personnelDailyTask/day/90">一个季度内</a></li>
+				</ul>
+			</li>			          	          
+		</ul>		  
+	</h1>
+	<div class="starter-template">
+		<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+		    <thead>
+		      <tr>               
+		         <th class="table-title" bgcolor="#ccc" >任务</th>
+		            <volist name='arr' id='ar' empty="没有数据">
+		               <th class="table-type" bgcolor="#ccc" ><{$ar}></th>
+		            </volist> 		                                
+		       </tr>
+		    </thead>
+		    <tbody >		          
+				<volist name='data' id='st' empty="没有数据">
+					<tr>              
+				       <td>【<{$st.account|getZTUserName=###}>】<{$st.id}>.<{$st.name}></td> 
+				       <volist name='arr' id='ar' empty="没有数据">            
+				          <td><{$ar|sunDateSorty=$st[id],###}></td>
+				       </volist>
+				    </tr>			        
+			   </volist>							          	
+		    </tbody>
+		</table>
+	</div>
+</div>

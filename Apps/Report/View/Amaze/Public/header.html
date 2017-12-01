@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>易鑫-保险及后服务中心-产品质量平台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="__CSS__/amazeui.min.css"/>
+  <link rel="stylesheet" href="__CSS__/amazeui.admin.css">
+
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand"><strong>易鑫-保险及后服务中心</strong> <small>产品质量平台</small></div>
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
+  	<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+  </button>
+
+  
+</header>
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">     
+    <ul class="am-list admin-sidebar-list">
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index"><span class="glyphicon glyphicon-home"> 首页</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/testingEnvironment"><span class="glyphicon glyphicon-cog"> 环境</span></a></li>
+      <!-- <li class="admin-parent">
+        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
+	        <span class="am-icon-file"> 项目</span>
+	        <span class="am-icon-angle-right am-fr am-margin-right"></span>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+          <volist name='pros' id='pro' empty=""> 
+          	<li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/index/proid/<{$pro.id}>"> <{$pro.code}>
+          		<span class="am-badge"><{$pro.status|getProst=###}></span>
+          	</a></li> 
+          </volist>         
+        </ul>
+      </li> -->
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task/personLoad"><span class="glyphicon glyphicon-user"> 人员负荷表</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Taskestimate"><span class="glyphicon glyphicon-th-list"> 项目人员投入表</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Taskestimate/personnelDailyTask"><span class="glyphicon glyphicon-th"> 人员每日任务投入分布表</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Taskestimate/personnelStageInput"><span class="glyphicon glyphicon-calendar"> 人员阶段投入分布表</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task"><span class="glyphicon glyphicon-time"> 任务工时</span></a></li> 
+      <!-- <li><a href="__APP__/<{$Think.config.PRODUCT}>/Testcase"><span class="am-icon-pencil-square-o"> 测试用例</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Overtime"><span class="am-icon-pencil-square-o"> 加班调休</span></a></li> -->
+    </ul>
+     <div class="am-panel am-panel-default admin-sidebar-panel">
+	      <div class="am-panel-bd">
+	        <p><span class="am-icon-bookmark"></span> 公告</p>
+	        <p>时光静好，与君语；细水流年，与君同。—— Amaze</p>
+	      </div>
+     </div>
+     
+     <notempty name="arr.desc">
+     	<div class="am-panel am-panel-default admin-sidebar-panel">
+			 <div class="am-panel-bd">
+			    <p><span class="am-icon-tag"></span> 项目详情</p>
+			    <b> 产品：</b><{$arr.po|getRealname=###}>
+			    <b> 项目：</b><{$arr.pm|getRealname=###}><br>
+			    <b> 研发：</b><{$arr.rd|getRealname=###}>
+			   	<b> 测试：</b><{$arr.qd|getRealname=###}><br>
+			    <p><{$arr.desc}></p>
+			 </div>
+		</div>
+     </notempty>
+     	
+  </div> 
+  <!-- sidebar end -->

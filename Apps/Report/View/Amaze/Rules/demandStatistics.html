@@ -1,0 +1,60 @@
+<layout name="layout" />
+ <div class="admin-content"> 
+ 	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+				    <h3 class="panel-title"><{$arr.id|getPro=###}>
+				    	<div class="btn-group pull-right">
+				    	<a href="__APP__/Test"  class="btn btn-warning btn-xs">返回</a>
+				    	</div>
+				    </h3>
+				  </div>
+				  <div class="panel-body">
+			    	<ul class="nav nav-tabs" role="tablist">
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
+					  	<span class="badge"><{$arr.id|countStage=###}></span></a>
+					  </li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
+					  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>					  
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$arr.id}>">用例
+					  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
+					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$arr.id}>">范围
+					  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">BUG
+					  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
+					</ul>
+					
+					<div class="starter-template"> 
+						<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+				            <thead>
+				              <tr>               
+				                <th class="table-id" bgcolor="#ccc" >ID</th>
+				                <th class="table-type" bgcolor="#ccc" >平台</th> 
+				                <th class="table-type" bgcolor="#ccc" >模块</th>
+				                <th class="table-title" bgcolor="#ccc" >需求<span class="badge pull-right">任务</span></th>
+				                <th class="table-type" bgcolor="#ccc" >阶段</th>
+				                <th class="table-type" bgcolor="#ccc" >预计工时</th>
+				                <th class="table-type" bgcolor="#ccc" >实际工时</th> 				                 				                
+				              </tr>
+				          </thead>
+				          <tbody >
+				          	<volist name='data' id='st' empty="没有数据">
+				            <tr>              
+				              <td><{$st.id}></td>
+				              <td><{$st.branch|getBranchName=###}></td>             
+				              <td><{$st.module|getModuleName=###}></td>
+				              <td><a href="#"><{$st.title}><span class="badge pull-right"><{$st.id|countTask=###}></span></a></td>
+				              <td><{$st.stage|getStoryStage=###}></td>
+				              <td><{$st.id|sumTaskEstimate=###}></td>
+				              <td><{$st.id|sumTaskConsumed=###}></td>				              
+				            </tr>
+				            </volist>
+				          </tbody>
+				        </table> 
+					</div>
+				 </div>	
+			</div>
+		</div>		
+	</div>  
+ </div>
