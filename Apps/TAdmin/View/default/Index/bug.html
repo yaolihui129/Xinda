@@ -2,9 +2,9 @@
   <!-- content start -->
  <div class="admin-content">
 	 <div class="row">  
-	  <div class="col-md-8">
+	  <div class="col-md-12">
 	  	<div class="panel panel-info">
-		  <div class="panel-heading">禅道BUG（<{$_SESSION['proid']|getProNo=###}> ）</div>
+		  <div class="panel-heading">BUG（<{$_SESSION['proid']|getProNo=###}> ）</div>
 		  <div class="panel-body">	  
 		    <ul class="nav nav-pills" role="tablist">
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
@@ -12,15 +12,7 @@
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 				  <span class="badge"><{$arr.id|countId='tp_risk','proid',###}></span></a></li>
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
-				  <span class="badge"><{$arr.id|countId='tp_prosys','proid',###}></span> </a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
-				  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
-				  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-				  <span class="badge"><{$arr.id|countId='tp_scene','proid',###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
-				  <span class="badge"><{$arr.id|countId='tp_case','fproid',###}></span></a></li>
+				  <span class="badge"><{$arr.id|countId='tp_prosys','proid',###}></span> </a></li>				  
 				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">需求
 				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
 				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG

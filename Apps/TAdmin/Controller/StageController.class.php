@@ -9,7 +9,6 @@ class StageController extends CommonController {
         $this->assign("pros",$pros);
         
         $_SESSION['proid']=I('proid',$pros[0]['id']);
-//         dump($pros[0]['id']);
         $arr=$m->find($_SESSION['proid']);
         $this->assign("arr",$arr);
 
@@ -21,7 +20,7 @@ class StageController extends CommonController {
         /* 阶段添加*/        
         $count=$m->where($where)->count()+1;
         $this->assign('c',$count);       
-        $this -> assign("state", formselect("未开始","state","prost"));
+        $this -> assign("state", formselect("进行中","state","prost"));
         $end=date("Y-m-d",time()+1*24*3600);
         $this->assign('end',$end);
         

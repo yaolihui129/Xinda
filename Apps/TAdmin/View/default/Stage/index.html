@@ -18,15 +18,7 @@
 		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
 		  <span class="badge"><{$arr.id|countId='tp_risk','proid',###}></span></a></li>
 		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Prosys/index/proid/<{$arr.id}>">涉及系统
-		  <span class="badge"><{$arr.id|countId='tp_prosys','proid',###}></span> </a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Func/func/proid/<{$arr.id}>">功能点
-		  <span class="badge"><{$arr.id|countProFunc=###}></span></a></li>
-		  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Func/range/proid/<{$arr.id}>">范围
-		  <span class="badge"><{$arr.id|countRange=###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Scene/index/proid/<{$arr.id}>/copy/<{$arr.id}>">场景
-		  <span class="badge"><{$arr.id|countId='tp_scene','proid',###}></span></a></li>
-		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/library/proid/<{$arr.id}>">用例
-		  <span class="badge"><{$arr.id|countId='tp_case','fproid',###}></span></a></li>
+		  <span class="badge"><{$arr.id|countId='tp_prosys','proid',###}></span> </a></li>		 
 		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/rule/proid/<{$arr.id}>">需求
 		  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
 		  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Index/bug/proid/<{$arr.id}>">禅道BUG
@@ -37,12 +29,11 @@
 		   <form action="__URL__/Porder" method="post" >
 		   <input type="hidden" name="table" value="tp_stage" />
 		   <volist name='stages' id='st' empty="没有数据">
-		     <li class="list-group-item">
+		      <li class="list-group-item">
 		        <input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/><{$st.stage}>【<{$st.end}>】
 		        <a href="__URL__/modstate/id/<{$st.id}>/state/<{$st.state}>" class="label label-default"><{$st.state}></a>		                
 		        <div class="btn-group pull-right">		            
-		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/C" class="btn btn-success">用例任务<{$st.id|countCTester=###}></a>
-		            <a href="__APP__/<{$Think.config.PRODUCT}>/Stagetester/index/stageid/<{$st.id}>/type/M" class="btn btn-info">测试任务<{$st.id|countMTester=###}></a>		                    		            
+		           	                    		            
 		            <a href="__URL__/mod/id/<{$st.id}>"  class="btn btn-info">修改</a>
 		            <a href="__URL__/realdel/id/<{$st.id}>/table/tp_stage"  class="btn btn-info">删除</a>
 		        </div>
@@ -95,15 +86,12 @@
 					<label  class="col-sm-4 control-label">里程碑:</label>
 					<div class="col-sm-8">
 					  <select name="stage" class="form-control">
-                         <option value="编写测试计划">编写测试计划</option>
-                         <option value="编写测试用例">编写测试用例</option>                         
-                         <option value="测试冒烟测试">测试冒烟测试</option>
-                         <option value="第一轮测试">第一轮测试</option>
-                         <option value="第二轮测试">第二轮测试</option>
-                         <option value="第三轮测试">第三轮测试</option>
-                         <option value="第四轮测试">第四轮测试</option>
-                         <option value="仿真环境测试">仿真环境测试</option>
-                         <option value="线上验证测试">线上验证测试</option>
+                         <option value="需求评审">需求评审</option>                         
+                         <option value="需求排期">需求排期</option>
+                         <option value="冒烟测试">冒烟测试</option>
+                         <option value="测试环境">测试环境</option>
+                         <option value="仿真环境">仿真环境</option>
+                         <option value="线上环境">线上环境</option>
                        </select>
 					</div>
 				</div>				

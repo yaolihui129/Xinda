@@ -15,7 +15,7 @@ class ProsysController extends CommonController {
         $pp=M('projectproduct')->where($where)->find();
 
         $m = M('branch');
-        $where=array("zt_tp_prosys.project"=>$_SESSION['proid']);
+        $where=array("zt_tp_prosys.project"=>$_SESSION['proid'],"deleted"=>'0');
         $data=$m->where($where)->join('zt_tp_prosys ON zt_tp_prosys.branch =zt_branch.id')->order('zt_branch.sysno')->select();
         $this->assign("data",$data);
         foreach ($data as $sys){
@@ -27,7 +27,7 @@ class ProsysController extends CommonController {
         }
         $map['product']=$pp['product'];
         $map['state']=0;
-        $syses=$m->where($map)->order('sn')->select();
+        $syses=$m->where($map)->select();
         $this->assign('syses',$syses);
         
 	    $this->display();
@@ -61,7 +61,7 @@ class ProsysController extends CommonController {
     
         $where['product']=$sys['product'];
         $where['state']=0;
-        $data=$m->where($where)->order('sn')->select();
+        $data=$m->where($where)->select();
         $this->assign('data',$data);           
     
         $this->display();
