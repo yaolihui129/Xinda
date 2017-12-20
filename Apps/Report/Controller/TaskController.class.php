@@ -6,7 +6,7 @@ class TaskController extends WebInfoController {
         $this->assign('users',$users);
         
         $_SESSION['taskAccount']=I('account',$users[0]['account']);
-        $riqi=date("Y-m-d",time()-9*24*3600);
+        $riqi=date("Y-m-d",time()-7*24*3600);
         $map['date']  = array('egt',$riqi);
         $map['account']=$_SESSION['taskAccount'];
         $data=M('taskestimate')->where($map)->order('date desc')->select();
@@ -34,7 +34,7 @@ class TaskController extends WebInfoController {
         $m=M('task');
         $data=$m->field("assignedTo as name,count('id') as renwu")->group('assignedTo')->where($where)->select();
         $this->assign('data',$data);   
-        $name=I('name');
+        $name=I('name',$data[0]['name']);
         $where['assignedTo']=$name;
         $arr=$m->where($where)->field('id,project,name,deadline,estimate,consumed,left')->select();
         $this->assign('arr',$arr);

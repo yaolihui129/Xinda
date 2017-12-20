@@ -5,25 +5,30 @@
 	<div class="col-md-8">
 		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title"><{$arr.id|getPro=###}>
+		    <h3 class="panel-title"><{$Think.session.proid|getPro=###}>
 		    	<div class="btn-group pull-right">
-		    	<a href="__APP__/Test" class="btn btn-warning btn-xs">返回</a>
+		    	<a href="__APP__/Report" class="btn btn-warning btn-xs">返回</a>
 		    	</div>
 		    </h3>
 		  </div>
 		  <div class="panel-body">
 		    	<ul class="nav nav-tabs" role="tablist">
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
-				  <span class="badge"><{$arr.id|countStage=###}></span></a></li>
-				  <li role="presentation"  class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
-				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-			
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$arr.id}>">用例
-				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$arr.id}>">范围
-				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">BUG
-				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>
+				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$Think.session.proid}>">需求
+					  <span class="badge"><{$Think.session.proid|countPRules=###}></span></a></li>
+					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$Think.session.proid}>">风险
+					  <span class="badge"><{$Think.session.proid|countRisk=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$Think.session.proid}>">冒烟
+					  <span class="badge"><{$Think.session.proid|countSmokeCase=###}></span></a></li>				  
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$Think.session.proid}>">用例
+					  <span class="badge"><{$Think.session.proid|countProCase=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Build/index/proid/<{$Think.session.proid}>">版本
+					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  </li>	
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$Think.session.proid}>">测试单
+					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  </li>					  
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$Think.session.proid}>">BUG
+					  <span class="badge"><{$Think.session.proid|countBug=###}></span></a></li>
 				  
 				</ul>
 				

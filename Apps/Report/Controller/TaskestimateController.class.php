@@ -11,8 +11,8 @@ class TaskestimateController extends WebInfoController {
     public function index(){
         $info=$this->getInfo();
         $m=M($info['table']);
-        $user=array('benjamin','loki','Wain','damon','abby');//不考虑这些离职的人员和领导
-        $map['account']=array('not in',$user);
+        $user=array('yaolihui','fanqiao','menghuihui');//只看这些人员
+        $map['account']=array('in',$user);
         $data=$m->where($map)->select();
         $arr[]=$data[0]['account'];
         foreach ($data as $d){            
@@ -23,7 +23,7 @@ class TaskestimateController extends WebInfoController {
         }       
         $this->assign('arr',$arr);
         
-        $where['zt_taskestimate.account']=array('not in',$user);
+        $where['zt_taskestimate.account']=array('in',$user);
         $join='zt_task ON zt_taskestimate.task=zt_task.id';
         $var=$m->join($join)->where($where)->order('zt_task.project desc')->select();
         $project[]=$var[0]['project'];
@@ -33,7 +33,7 @@ class TaskestimateController extends WebInfoController {
                 $project[]=$v['project'];
             }
         }
-        $this->assign('project',$project);        
+        $this->assign('project',$project);       
         $this->display();
     }
     

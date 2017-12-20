@@ -11,21 +11,20 @@
 			  </div>
 			  <div class="panel-body">	
 			    	<ul class="nav nav-tabs" role="tablist">
-					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$Think.session.proid}>">需求<span class="badge">
-					  <{$Think.session.proid|countPRules=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$Think.session.proid}>">需求
+					  <span class="badge"><{$Think.session.proid|countPRules=###}></span></a></li>
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$Think.session.proid}>">风险
 					  <span class="badge"><{$Think.session.proid|countRisk=###}></span></a></li>
-					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$Think.session.proid}>">冒烟
+					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$Think.session.proid}>">冒烟
 					  <span class="badge"><{$Think.session.proid|countSmokeCase=###}></span></a></li>				  
-					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$Think.session.proid}>">用例
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$Think.session.proid}>">用例
 					  <span class="badge"><{$Think.session.proid|countProCase=###}></span></a></li>
 					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Build/index/proid/<{$Think.session.proid}>">版本
 					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
 					  </li>	
 					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$Think.session.proid}>">测试单
 					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
-					  </li>
-					  
+					  </li>					  
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$Think.session.proid}>">BUG
 					  <span class="badge"><{$Think.session.proid|countBug=###}></span></a></li>		  
 					</ul>
@@ -36,9 +35,9 @@
 							  <span class="label label-default"><{$vo.branch|getBranchName=###}></span>
 				              <span class="label label-info"><{$vo.module|getModuleName=###}></span>
 				              <{$vo.title}>【#<{$vo.version}>】
-				              <span class="badge"><{$vo.id|countStoryCase=###}></span>	 
+				              <span class="badge"><{$vo.id|countStorySmokeCase=###}></span>	 
 				              <br>          
-							  <{$vo.id|getStoryCase=###}> 
+							  <{$vo.id|getStorySmokeCase=###}> 
 						  </li>
 					 </volist> 
 					</ul>			

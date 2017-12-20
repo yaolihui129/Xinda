@@ -1,0 +1,58 @@
+<layout name="layout" />
+ <div class="admin-content"> 
+ 	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				  <div class="panel-body">
+				  	<ul class="nav nav-tabs" role="tablist">
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/unconfirmed">未确认BUG
+					  <span class="badge"><{$arr.id}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/fault">A类BUG
+					  <span class="badge"><{$arr.id}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/noregress">未回归BUG
+					  <span class="badge"><{$arr.id}></span></a></li>
+					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/activated">被激活BUG
+					  <span class="badge"><{$arr.id}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/punish">待处罚清单
+					  <span class="badge"><{$arr.id}></span></a></li>				  					  	  
+					</ul>
+					
+										
+					<div class="starter-template"> 
+					
+					
+						<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+				            <thead>
+				              <tr>               				                
+				                <th class="table-type" bgcolor="#ccc" >迭代</th>
+				                <th class="table-title" bgcolor="#ccc" >BUG【激活时间】<span class="badge pull-right">解决人</span></th>				                 				                
+				              </tr>
+				          </thead>
+				          <tbody >
+				          	<volist name='data' id='st' empty="没有数据">
+					            <tr>              
+					               <td><{$st.project|getPro=###}></td>             
+					              <td><{$st.id}>.<{$st.branch|getBranchName=###}><{$st.title}>-<{$st.module|getModuleName=###}>
+					              		【激活次数:<{$st.activatedcount}>】【<{$st.activateddate}>】
+						              <span class="badge pull-right">
+						              	<empty name="st.resolvedby">
+											<{$st.assignedto|getZTUserName=###}>
+										<else /> 
+											<{$st.resolvedby|getZTUserName=###}>
+										</empty> 
+						              </span>
+					              </td>					              				              
+					            </tr>
+				            </volist>
+				          </tbody>
+				        </table> 
+				        
+				        
+					</div>
+					
+					
+				 </div>	
+			</div>
+		</div>		
+	</div>  
+ </div>

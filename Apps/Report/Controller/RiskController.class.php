@@ -2,8 +2,7 @@
 namespace Report\Controller;
 class RiskController extends WebInfoController {
   public function index(){
-        $arr=M('project')->find(I('proid'));
-        $this->assign('arr',$arr);
+        $_SESSION['proid']= I('proid');
         
         $where=array("proid"=>I('proid'));
         $data=M("tp_risk")->where($where)->select();

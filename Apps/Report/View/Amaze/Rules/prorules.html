@@ -1,74 +1,65 @@
 <layout name="layout" />
- <!-- content start -->
  <div class="admin-content"> 
-<div class="row">
-	<div class="col-md-8">
-		<div class="panel panel-info">
-		  <div class="panel-heading">
-		    <h3 class="panel-title"><{$arr.id|getPro=###}>
-		    	<div class="btn-group pull-right">
-		    	<a href="__APP__/Test"  class="btn btn-warning btn-xs">返回</a>
-		    	</div>
-		    </h3>
-		  </div>
-		  <div class="panel-body">
-		    	<ul class="nav nav-tabs" role="tablist">
-				  <li role="presentation" ><a href="__APP__/Test<{$Think.config.PRODUCT}>/Stage/index/proid/<{$arr.id}>">里程碑
-				  	<span class="badge"><{$arr.id|countStage=###}></span></a>
-				  </li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$arr.id}>">风险
-				  <span class="badge"><{$arr.id|countRisk=###}></span></a></li>
-				  
-				  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$arr.id}>">用例
-				  <span class="badge"><{$arr.id|countCase=###}></span></a></li>
-				  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$arr.id}>">范围
-				  <span class="badge"><{$arr.id|countPRules=###}></span></a></li>
-				  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$arr.id}>">BUG
-				  <span class="badge"><{$arr.id|countBug=###}></span></a></li>		  
-				</ul>
-				<div class="starter-template">             
-			        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">               
-			         	<volist name='data' id='st' empty="没有规则">
-				            <div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="heading<{$st.id}>">
-									<h5 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion" href="#<{$st.id}>" aria-expanded="true" aria-controls="<{$st.id}>">						    	                                
-							                <{$st.id}>【#<{$st.version}>】
-							                <span class="label label-default"><{$st.branch|getBranchName=###}></span>
-							                <span class="label label-info"><{$st.moduleid|getModuleName=###}></span><{$st.title}>
-									        <span class='pull-right'>
-										        <span class="label label-info"><{$st.status|getBugStauts=###}></span> 
-										        <span class="label label-warning"><{$st.openedby|getZTUserName=###}></span>  
-									         	<span class="badge"><{$st.lastediteddate}></span><br>		         	          	                  	         	                	                
-							           		</span>															      
-									 </h5>
-								 </div>
-								 <div id="<{$st.id}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<{$pro.id}>">
-									    <div class="panel-body">
-										    <ul class="list-group"><{$st.id|getStorySpec=###}></ul>
-									    </div>
-								</div>
-				  			</div>                     
-			            </volist>
-			        </div>
-			     </div> 				
-		   </div>
-		</div>
-	
-	</div>
-	<div class="col-md-4">
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">项目简介</h3></div>			
-			<div class="panel-body">	
-				<b> 产品：</b><{$arr.po|getRealname=###}>
-				<b> 项目：</b><{$arr.pm|getRealname=###}><br>
-				<b> 研发：</b><{$arr.rd|getRealname=###}>
-				<b> 测试：</b><{$arr.qd|getRealname=###}><br><br>
-				<{$arr.desc}>
-			</div>			
-		</div>
-	</div>
-</div>
-
-
-</div>
+ 	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+				    <h3 class="panel-title"><{$Think.session.proid|getPro=###}>
+				    	<div class="btn-group pull-right">
+				    	<a href="__APP__/<{$Think.config.PRODUCT}>"  class="btn btn-warning btn-xs">返回</a>
+				    	</div>
+				    </h3>
+				  </div>
+				  <div class="panel-body">
+			    	<ul class="nav nav-tabs" role="tablist">
+					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$Think.session.proid}>">需求
+					  <span class="badge"><{$Think.session.proid|countPRules=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$Think.session.proid}>">风险
+					  <span class="badge"><{$Think.session.proid|countRisk=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$Think.session.proid}>">冒烟
+					  <span class="badge"><{$Think.session.proid|countSmokeCase=###}></span></a></li>				  
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$Think.session.proid}>">用例
+					  <span class="badge"><{$Think.session.proid|countProCase=###}></span></a></li>
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Build/index/proid/<{$Think.session.proid}>">版本
+					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  </li>	
+					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$Think.session.proid}>">测试单
+					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  </li>					  
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$Think.session.proid}>">BUG
+					  <span class="badge"><{$Think.session.proid|countBug=###}></span></a></li>	  
+					</ul>
+					
+					<div class="starter-template"> 
+						<table class="am-table am-table-striped am-table-hover table-main table-bordered">
+				            <thead>
+				              <tr>               
+				                <th class="table-id" bgcolor="#ccc" >ID</th>
+				                <th class="table-type" bgcolor="#ccc" >平台</th> 
+				                <th class="table-type" bgcolor="#ccc" >模块</th>
+				                <th class="table-title" bgcolor="#ccc" >需求<span class="badge pull-right">任务</span></th>
+				                <th class="table-type" bgcolor="#ccc" >阶段</th>
+				                <th class="table-type" bgcolor="#ccc" >预计工时</th>
+				                <th class="table-type" bgcolor="#ccc" >实际工时</th> 				                 				                
+				              </tr>
+				          </thead>
+				          <tbody >
+				          	<volist name='data' id='st' empty="没有数据">
+				            <tr>              
+				              <td><{$st.id}></td>
+				              <td><{$st.branch|getBranchName=###}></td>             
+				              <td><{$st.module|getModuleName=###}></td>
+				              <td><a href="#"><{$st.title}><span class="badge pull-right"><{$st.id|countTask=###}></span></a></td>
+				              <td><{$st.stage|getStoryStage=###}></td>
+				              <td><{$st.id|sumTaskEstimate=###}></td>
+				              <td><{$st.id|sumTaskConsumed=###}></td>				              
+				            </tr>
+				            </volist>
+				          </tbody>
+				        </table> 
+					</div>
+				 </div>	
+			</div>
+		</div>		
+	</div>  
+ </div>

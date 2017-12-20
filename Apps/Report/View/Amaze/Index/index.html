@@ -1,28 +1,26 @@
 <layout name="layout" /> 
- <div class="admin-content"> 
- <h1>产品（项目）信息列表</h1>    
+ <div class="admin-content">    
   	<div class="starter-template">
   		<table class="am-table am-table-striped am-table-hover table-main table-bordered">
             <thead>
               <tr>               
-                <th class="table-title" bgcolor="#ccc" >项目<span class="badge pull-right">里程牌</span></th> 
-                <th class="table-type" bgcolor="#ccc" >需求数</th>             
-                <th class="table-type" bgcolor="#ccc" >状态</th>
-                <th class="table-type" bgcolor="#ccc" >BUG数</th>
-                <th class="table-date" bgcolor="#ccc" >开始</th>
-                <th class="table-date" bgcolor="#ccc" >结束</th>
+                <th class="table-title" bgcolor="#ccc" >测试迭代信息<span class="badge pull-right">状态</span></th> 
+                <th class="table-type" bgcolor="#ccc" >需求</th>             
+                <th class="table-type" bgcolor="#ccc" >用例</th>
+                <th class="table-type" bgcolor="#ccc" >测试单</th>
+                <th class="table-type" bgcolor="#ccc" >BUG</th>
                 <!--  <th class="table-type" bgcolor="#ccc" >项目风险</th>-->                
               </tr>
           </thead>
           <tbody >
           	<volist name='data' id='pro' empty="没有数据">
             <tr>              
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$pro.id}>"><{$pro.name}><span class="badge pull-right"><{$pro.id|countId='tp_stage','proid',###}></span></a></td>             
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/demandStatistics/proid/<{$pro.id}>"><{$pro.id|countPRules=###}></a></td>
-              <td><{$pro.status|getProst=###}></td>
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$pro.id}>"><{$pro.id|countId='bug','project',###}></a></td>
-              <td><{$pro.begin}></td>
-              <td><{$pro.end}></td>             
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$pro.id}>"><{$pro.id|getPro=###}>【<{$pro.qd|getZTUserName=###}>】
+              <span class="badge pull-right"><{$pro.status|getProst=###}></span></a></td>             
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$pro.id}>"><{$pro.id|countPRules=###}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$pro.id}>"><{$pro.id}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$pro.id}>"><{$pro.id}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$pro.id}>"><{$pro.id|countId='bug','project',###}></a></td>           
             </tr>
             </volist>
           </tbody>

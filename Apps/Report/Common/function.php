@@ -2,15 +2,107 @@
     function taskInfo($task){
         $where=array('deleted'=>'0');
         $arr=M('task')->where($where)->find($task);
-        return "【".getProNo($arr['project']).'】<span class="label label-default">'.getProst($arr['status'])."</span>【".taskLastUpdateDate($arr['id']).'】<br><br>'.$arr['name'];
+        $str="【".getProNo($arr['project']).'】'.getProname($arr['project']).'【'.taskLastUpdateDate($arr['id']).'】'
+            .'<span class="label label-default">'.getProst($arr['status'])."</span>"
+            .'<br><br>'.$arr['id'].':'.$arr['name'];
+        return $str;
     }
+    function countStoryCase($storyid){
+        $where['story']=$storyid;
+        $where['deleted']='0';
+        $data=M('case')->where($where)->count();
+        return $data;
+    }
+    
+    function countStorySmokeCase($storyid){
+        $where['story']=$storyid;
+        $where['deleted']='0';
+        $where['pri']=1;
+        $data=M('case')->where($where)->count();
+        return $data;
+    }
+    
+    function countCaseStep($caseid){
+        $where['case']=$caseid;
+        $where['deleted']='0';
+        $data=M('casestep')->where($where)->count();
+        return $data;
+        
+    }
+    
+    function countSmokeCase($proid){
+        $where=array("zt_projectstory.project"=>$proid, 'zt_case.pri'=>1,'zt_case.deleted'=>'0');
+        $count=M('projectstory')->where($where)     
+        ->join('zt_case ON zt_case.story =zt_projectstory.story')
+        ->count();
+        return $count;
+    }
+    function countProCase($proid){
+        $where=array("zt_projectstory.project"=>$proid, 'zt_case.deleted'=>'0');
+        $count=M('projectstory')->where($where)     
+        ->join('zt_case ON zt_case.story =zt_projectstory.story')
+        ->count();
+        return $count;
+    }
+    
+    function getCaseStep($caseid){
+        $where=array('case'=>$caseid);
+        $data=M('casestep')->where($where)->select();
+        $str.='<ul>';
+        foreach ($data as $k=>$ar){
+            $str.='<li>';
+            $str.=   ($k+1).'.'. $ar['desc'].'-<b>预期:</b>'.$ar['expect'];
+            $str.='</li>';
+        }
+        $str.='</ul>';
+        if ($data){
+            return $str;
+        }else {
+            return ;
+        }
+            
+        
+    }
+    
+    function getStoryCase($storyid){
+        $where=array('story'=>$storyid,'deleted'=>'0');
+        $data=M('case')->where($where)->select();
+        $str.='<ul class="list-group">';
+        foreach ($data as $ar){
+            $str.='<li class="list-group-item">CaesID:';
+            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id']);
+            $str.=    '】最后执行结果：'.$ar['lastrunresult'];
+            $str.='<span class="badge">'.getZTUserName($ar['openedby']).':'.$ar['lastediteddate'].'</span><br>前置条件：'.$ar['precondition'];
+            $str.=getCaseStep($ar['id']);
+            $str.='</li>';
+        }
+        $str.='</ul>';
+        return $str;
+    }
+    
+    function getStorySmokeCase($storyid){
+        $where=array('story'=>$storyid,'pri'=>1,'deleted'=>'0');
+        $data=M('case')->where($where)->select();
+        $str.='<ul class="list-group">';
+        foreach ($data as $ar){
+            $str.='<li class="list-group-item">CaesID:';
+            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id']);
+            $str.=    '】最后执行结果：'.$ar['lastrunresult'];
+            $str.='<span class="badge">'.getZTUserName($ar['openedby']).':'.$ar['lastediteddate'].'</span><br>前置条件：'.$ar['precondition'];
+            $str.=getCaseStep($ar['id']);
+            $str.='</li>';
+        }
+        $str.='</ul>';
+        return $str;
+    }
+    
     function taskWorkTime($task){
         $where=array('deleted'=>'0');
         $arr=M('task')->where($where)->find($task);
         return '预估：'.$arr[estimate].',消耗：'.$arr[consumed].',剩余：'.$arr[left];
     }
     function countTaskWorkTime($account){      
-        $riqi=date("Y-m-d",time()-9*24*3600);
+        $riqi=date("Y-m-d",time()-7*24*3600);
         $map['date']  = array('egt',$riqi);
         $map['account']=$account;
         $data=M('taskestimate')->where($map)->order('date desc')->select();
@@ -87,7 +179,7 @@
     
     function countTaskBug($account){
         $where['resolvedBy|closedBy']=$account;
-        $riqi=date("Y-m-d",time()-9*24*3600);
+        $riqi=date("Y-m-d",time()-7*24*3600);
         $where['resolvedDate']= array('egt',$riqi);
         $m=M('bug');
         $data=$m->where($where)->count();
@@ -132,8 +224,6 @@
     }
     
     function sunUserProject($projet,$user){
-//         $riqi=date("Y-m-d",time()-9*24*3600);
-//         $where['zt_taskestimate.date']=array('egt',$riqi);
         $where['zt_taskestimate.account']=$user;
         $where['zt_task.project']=$projet;
         $join='zt_taskestimate ON zt_taskestimate.task=zt_task.id';
@@ -152,7 +242,6 @@
         $where['zt_taskestimate.date']=$date;
         $join='zt_taskestimate ON zt_taskestimate.task=zt_task.id';
         $data=M('task')->join($join)->where($where)->Sum('zt_taskestimate.consumed');
-//         dump($where);
         $var=round($data, 2);
         if($var){
             return $var;

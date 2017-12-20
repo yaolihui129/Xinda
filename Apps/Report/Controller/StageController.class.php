@@ -2,11 +2,9 @@
 namespace Report\Controller;
 class StageController extends WebInfoController {
     public function index(){
-        $arr=D('project')->find(I('proid'));
-        $this->assign('arr',$arr);        
-
-        $where=array("proid"=>I('proid'));
-        $data=D("tp_stage")->where($where)->order("sn,id")->select();
+        $_SESSION['proid']= I('proid');
+        $where=array("project"=>I('proid'),"deleted"=>'0');
+        $data=M("testtask")->where($where)->order("end,id")->select();
         $this->assign('data',$data);
 
         $this->display();
