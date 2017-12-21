@@ -45,6 +45,30 @@
         return $count;
     }
     
+
+    function countTesttask($proid){
+        $where=array("project"=>$proid,"deleted"=>"0");
+        $count=M("testtask")->where($where)->count();
+        return $count;
+    }
+    
+    function countProTask($proid){
+        $where=array("project"=>$proid,"type"=>"test","deleted"=>"0");
+        $count=M("task")->where($where)->count();
+        return $count;
+    }
+    
+    function countProCaseResult($proid){
+        $where=array("zt_projectstory.project"=>$proid, 'zt_case.deleted'=>'0');
+        $count=M('projectstory')->where($where)
+        ->join('zt_case ON zt_case.story =zt_projectstory.story')
+        ->join('zt_testresult ON zt_testresult.case=zt_case.id')
+        ->count();
+        return $count;
+    }
+    
+
+    
     function getCaseStep($caseid){
         $where=array('case'=>$caseid);
         $data=M('casestep')->where($where)->select();
@@ -79,6 +103,29 @@
         $str.='</ul>';
         return $str;
     }
+    
+    function countProBuild($proid){
+        $where['project']=$proid;
+        $where['deleted']='0';
+        $data=M("build")->where($where)->count();
+        return $data;
+        
+    }
+    
+    function getProBuild($branch){
+        $where=array('branch'=>$branch,'project'=>$_SESSION['proid'],'deleted'=>'0');
+        $data=M('build')->where($where)->select();
+        $str.='<ul class="list-group">';
+        foreach ($data as $ar){
+            $str.='<li class="list-group-item">';
+            $str.=    $ar['id'].'-'.$ar['name'];
+            $str.='<span class="badge">'.getZTUserName($ar['builder']).'</span>';
+            $str.='</li>';
+        }
+        $str.='</ul>';
+        return $str;
+    }
+    
     
     function getStorySmokeCase($storyid){
         $where=array('story'=>$storyid,'pri'=>1,'deleted'=>'0');
@@ -262,21 +309,7 @@
         }
     }
     
-    
-    /**
-     * 根据stgeid获取列队数据
-     */
-    function getQueue($stageid){
-        $m=M("tp_stagetester");
-        $where['stageid']=$stageid;
-        $arr=$m->where($where)->select();
-        foreach ($arr as $ar){
-           $str.='<li class="list-group-item">'
-                . $ar['sn'].".【".$ar['type'].'】'.$ar['tester']
-                .'<span class="badge">场景'.countExescene($ar['id']).'</span></li>';
-        };       
-        return $str;       
-    }
+  
     
     /**
      * 根据id获取工时明细

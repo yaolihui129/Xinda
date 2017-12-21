@@ -5,11 +5,12 @@
             <thead>
               <tr>               
                 <th class="table-title" bgcolor="#ccc" >测试迭代信息<span class="badge pull-right">状态</span></th> 
-                <th class="table-type" bgcolor="#ccc" >需求</th>             
-                <th class="table-type" bgcolor="#ccc" >用例</th>
+                <th class="table-type" bgcolor="#ccc" >需求</th>  
+                <th class="table-type" bgcolor="#ccc" >测试任务</th>            
+                <th class="table-type" bgcolor="#ccc" >冒烟/用例/执行</th>
                 <th class="table-type" bgcolor="#ccc" >测试单</th>
-                <th class="table-type" bgcolor="#ccc" >BUG</th>
-                <!--  <th class="table-type" bgcolor="#ccc" >项目风险</th>-->                
+                <th class="table-type" bgcolor="#ccc" >风险</th>
+                <th class="table-type" bgcolor="#ccc" >BUG</th>             
               </tr>
           </thead>
           <tbody >
@@ -18,8 +19,10 @@
               <td><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$pro.id}>"><{$pro.id|getPro=###}>【<{$pro.qd|getZTUserName=###}>】
               <span class="badge pull-right"><{$pro.status|getProst=###}></span></a></td>             
               <td><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$pro.id}>"><{$pro.id|countPRules=###}></a></td>
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$pro.id}>"><{$pro.id}></a></td>
-              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$pro.id}>"><{$pro.id}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Task/protask/proid/<{$pro.id}>"><{$pro.id|countProTask=###}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$pro.id}>"><{$pro.id|countSmokeCase=###}>/<{$pro.id|countProCase=###}>/<{$pro.id|countProCaseResult=###}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$pro.id}>"><{$pro.id|countTesttask=###}></a></td>
+              <td><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$pro.id}>"><{$pro.id|countRisk=###}></a></td>
               <td><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$pro.id}>"><{$pro.id|countId='bug','project',###}></a></td>           
             </tr>
             </volist>

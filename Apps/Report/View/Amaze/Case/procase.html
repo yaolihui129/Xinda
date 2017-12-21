@@ -13,6 +13,8 @@
 			    	<ul class="nav nav-tabs" role="tablist">
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Rules/prorules/proid/<{$Think.session.proid}>">需求<span class="badge">
 					  <{$Think.session.proid|countPRules=###}></span></a></li>
+					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Task/protask/proid/<{$Think.session.proid}>">测试任务
+					  <span class="badge"><{$Think.session.proid|countProTask=###}></span></a></li>
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$Think.session.proid}>">风险
 					  <span class="badge"><{$Think.session.proid|countRisk=###}></span></a></li>
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/smoke/proid/<{$Think.session.proid}>">冒烟
@@ -20,10 +22,10 @@
 					  <li role="presentation" class="active"><a href="__APP__/<{$Think.config.PRODUCT}>/Case/procase/proid/<{$Think.session.proid}>">用例
 					  <span class="badge"><{$Think.session.proid|countProCase=###}></span></a></li>
 					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Build/index/proid/<{$Think.session.proid}>">版本
-					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  	<span class="badge"><{$Think.session.proid|countProBuild=###}></span></a>
 					  </li>	
 					  <li role="presentation" ><a href="__APP__/<{$Think.config.PRODUCT}>/Stage/index/proid/<{$Think.session.proid}>">测试单
-					  	<span class="badge"><{$Think.session.proid|countStage=###}></span></a>
+					  	<span class="badge"><{$Think.session.proid|countTesttask=###}></span></a>
 					  </li>
 					  
 					  <li role="presentation"><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/index/proid/<{$Think.session.proid}>">BUG
