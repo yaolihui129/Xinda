@@ -24,7 +24,16 @@
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
   	<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
   </button>
-
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+	  <empty name="_SESSION['isCLogin']">
+	      <li><a href="__APP__/Record" target=_blank><span class="glyphicon glyphicon-file"></span> 登录后台</a></li>
+	           		
+	  <else />
+	        <li><span class="am-icon-user"></span> <{$_SESSION['realname']}> <span class="am-icon-caret-down"></span></li>       		         		        		             		
+	  </empty>
+    </ul>
+  </div>
   
 </header>
 <div class="am-cf admin-main">
@@ -35,6 +44,23 @@
       <li><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/unconfirmed"><span class="glyphicon glyphicon-bookmark"> 待处理BUG</span></a></li>
       <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task/personLoad"><span class="glyphicon glyphicon-user"> 测试人员投入</span></a></li>
       <!--<li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/testingEnvironment"><span class="glyphicon glyphicon-cog"> 环境</span></a></li>-->
+      <li class="admin-parent">
+        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
+	        <span class="am-icon-file"> 测试仿真环境OP</span>
+	        <span class="am-icon-angle-right am-fr am-margin-right"></span>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+          <li><a href="http://edit.cfw.taoche.com/order/index " target="_blank"> 测试车服全车宝订单
+          		<span class="am-badge"></span>
+          	</a></li>
+          	<li><a href="http://cfw.taoche.com/edit/order/index" target="_blank"> 仿真车服全车宝订单
+          		<span class="am-badge"></span>
+          	</a></li>
+          <li><a href="http://cfw.taoche.com/edit/orderFinance/index" target="_blank"> 仿真车服金融订单
+          		<span class="am-badge"></span>
+          	</a></li>     
+        </ul>
+      </li>
       <!-- <li class="admin-parent">
         <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
 	        <span class="am-icon-file"> 项目</span>

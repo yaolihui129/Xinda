@@ -22,8 +22,9 @@
         return $data;
     }
     
-    function countCaseStep($caseid){
+    function countCaseStep($caseid,$version=1){
         $where['case']=$caseid;
+        $where['version']=$version;
         $where['deleted']='0';
         $data=M('casestep')->where($where)->count();
         return $data;
@@ -69,8 +70,8 @@
     
 
     
-    function getCaseStep($caseid){
-        $where=array('case'=>$caseid);
+    function getCaseStep($caseid,$version=1){
+        $where=array('case'=>$caseid,'version'=>$version);
         $data=M('casestep')->where($where)->select();
         $str.='<ul>';
         foreach ($data as $k=>$ar){
@@ -92,12 +93,12 @@
         $where=array('story'=>$storyid,'deleted'=>'0');
         $data=M('case')->where($where)->select();
         $str.='<ul class="list-group">';
-        foreach ($data as $ar){
+        foreach ($data as $ar){           
             $str.='<li class="list-group-item">CaesID:';
-            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id']);
+            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id'],$ar['version']);
             $str.=    '】最后执行结果：'.$ar['lastrunresult'];
             $str.='<span class="badge">'.getZTUserName($ar['openedby']).':'.$ar['lastediteddate'].'</span><br>前置条件：'.$ar['precondition'];
-            $str.=getCaseStep($ar['id']);
+            $str.=getCaseStep($ar['id'],$ar['version']);
             $str.='</li>';
         }
         $str.='</ul>';
@@ -133,10 +134,10 @@
         $str.='<ul class="list-group">';
         foreach ($data as $ar){
             $str.='<li class="list-group-item">CaesID:';
-            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id']);
+            $str.=    $ar['id'].'-'.$ar['title'].'【步骤：'.countCaseStep($ar['id'],$ar['version']);
             $str.=    '】最后执行结果：'.$ar['lastrunresult'];
             $str.='<span class="badge">'.getZTUserName($ar['openedby']).':'.$ar['lastediteddate'].'</span><br>前置条件：'.$ar['precondition'];
-            $str.=getCaseStep($ar['id']);
+            $str.=getCaseStep($ar['id'],$ar['version']);
             $str.='</li>';
         }
         $str.='</ul>';

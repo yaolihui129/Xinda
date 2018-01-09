@@ -69,7 +69,7 @@ class BugController extends WebInfoController {
     function activated(){
         $where['deleted']='0';
         $where['activatedCount']  = array('gt',0);
-        $where['openedDate']  = array('gt','2017-12-09 00:00:00');
+        $where['openedDate']  = array('gt','2018-1-8 00:00:00');
         
         $data=M("bug")->where($where)->order('openedDate desc,activatedDate desc')->select();
         $this->assign('data',$data);
@@ -80,7 +80,7 @@ class BugController extends WebInfoController {
     function fault(){
         $where['deleted']='0';
         $where['severity']  =1;  
-        $where['openedDate']  = array('gt','2017-12-09 00:00:00');
+        $where['openedDate']  = array('gt','2018-1-8 00:00:00');
         $data=M("bug")->where($where)->order('openedDate')->select();
         $this->assign('data',$data);
         
