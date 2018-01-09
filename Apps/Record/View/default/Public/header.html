@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>保险及后服务中心-产品质量后台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="__CSS__/amazeui.min.css"/>
+  <link rel="stylesheet" href="__CSS__/amazeui.admin.css">
+
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+  <div class="am-topbar-brand"><strong>易鑫-保险及后服务中心</strong> <small>产品质量后台</small></div>
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
+  	<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+  </button>
+
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">   
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-user"></span> <{$_SESSION['realname']}> <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>                  
+        </ul>
+      </li>
+     <li><a href="__APP__/<{$Think.config.PRODUCT}>/Login/logout"><span class="am-icon-power-off"></span> 退出</a></li>
+    </ul>
+  </div>
+</header>
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  <div class="admin-sidebar">     
+    <ul class="am-list admin-sidebar-list">
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>"><span class="am-icon-home"></span> 迭代风险</a></li>            
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Overtime"><span class="am-icon-pencil-square-o"> 加班调休</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Punish"><span class="am-icon-pencil-square-o"> 处罚申诉</span></a></li>
+      <!--  <li><a href="__APP__/<{$Think.config.PRODUCT}>/Test"><span class="am-icon-pencil-square-o"> 练习研究</span></a></li>-->
+    </ul>
+     <div class="am-panel am-panel-default admin-sidebar-panel">
+	      <div class="am-panel-bd">
+	        <p><span class="am-icon-bookmark"></span> 公告</p>
+	        <p>时光静好，与君语；细水流年，与君同。—— Amaze</p>
+	      </div>
+     </div>
+     
+
+  </div> 
+  <!-- sidebar end -->

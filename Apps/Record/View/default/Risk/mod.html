@@ -1,0 +1,57 @@
+<layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content">
+ 	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg">
+  				<{$risk.proid|getPro=###}>	
+  			</strong>
+  			 /<a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$_SESSION['proid']}>">迭代风险</a>
+  			 /<small>修改</small>
+  		</div>	
+  	</div>
+	<div class="row">
+  		<div class="col-md-7">		
+  			<div class="panel-body">
+  		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
+  		     	  <input type="hidden" name="id" value="<{$stage.id}>" />
+  		     	  <input type="hidden" name="proid" value="<{$stage.proid}>" />
+  		     	    <div class="form-group">
+  		     	      <div class="col-sm-2"></div>
+  		     	      <div class="col-sm-10"><{$risk.moder}> 更新于:<{$risk.utime}></div>
+  		     	    </div>
+					  <div class="form-group">					   
+					    <label for="short" class="col-sm-2 control-label">顺序:</label>
+					    <div class="col-sm-2"><input type="text" class="form-control" name="sn" value="<{$risk.sn}>" placeholder="sn"></div>
+					    <label for="state" class="col-sm-2 control-label">状态:</label>
+					    <div class="col-sm-2"><{$level}></div>
+					    <label for="state" class="col-sm-2 control-label">状态:</label>
+					    <div class="col-sm-2"><{$state}></div>
+					  </div>
+					  <div class="form-group">
+					    <label for="product" class="col-sm-2 control-label">风险:</label>
+					    <div class="col-sm-10"><input type="text" class="form-control" name="stage" value="<{$risk.risk}>" placeholder="里程碑"></div>
+					  </div>					  
+					  <div class="form-group">
+					    <label for="state" class="col-sm-2 control-label">方案:</label>
+					    <div class="col-sm-10"><{$tamethod}></div>
+					  </div>
+					  <div class="form-group">
+					  	<label  class="col-sm-2 control-label"></label>
+					  	<div class="col-sm-10"><button type="submit" class="btn btn-info btn-block ">提 交</button></div>
+					  </div>					  					  
+                </form>                 
+  		    </div>	            
+  		</div>
+ 		 <div class="col-md-4 hidden-xs hidden-sm"> 
+ 		 <br>  <br>  
+	        <ul class="list-group">
+		  		<volist name='data' id='vo' empty="没有数据">
+		  			<li class="list-group-item" >
+		            	<a href="__URL__/mod/id/<{$vo.id}>"><{$vo.sn}>.<{$vo.risk}>【<{$vo.level}>】</a><span class="badge"><{$vo.state}></span>
+					</li>
+		        </volist>
+	        </ul>        	                     	
+  		</div>
+	</div>           
+</div>

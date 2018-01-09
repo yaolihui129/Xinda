@@ -1,0 +1,39 @@
+<layout name="layout" /> 
+ <!-- content start -->
+ <div class="admin-content container">
+	<div class="am-g">			    		
+		<div class="am-u-md-12 ">
+			<a class="navbar-brand" href="#"></a>
+			<form action="__URL__/index " method="post" class="navbar-form navbar-left" role="search">
+	        <div class="form-group input-group pull-right">
+	          <input  type="text" class="form-control" name="search" value="<{$search}>" placeholder="迭代、代码、上线月份">
+	          <span class="input-group-btn">
+	         	 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+	          </span>
+	        </div>        
+	      </form>  
+		</div>              
+	</div>   
+
+	<table class="am-table am-table-striped am-table-hover table-main">
+		<tbody>					      		
+			<volist name='arr' id='pro' empty="没有数据"> 	
+				<tr>				
+					<td  width=90% >
+						<a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$pro.id}>">
+							<span class="badge"><{$pro.status|getProst=###}></span>【<{$pro.id|getProNo}>】<{$pro.name}>
+						</a>
+					</td>
+					<td  width=10%><a href="__APP__/<{$Think.config.PRODUCT}>/Risk/index/proid/<{$pro.id}>" class="btn btn-warning">记录风险
+					<span class="badge"><{$pro.id|countId='tp_risk','proid',###}></span>
+					</a></td>					            		
+				</tr>
+			</volist>					            
+		</tbody>					     
+	</table>   
+
+</div>
+  <!-- content end -->
+
+
+  
