@@ -11,7 +11,7 @@ class TaskestimateController extends WebInfoController {
     public function index(){
         $info=$this->getInfo();
         $m=M($info['table']);
-        $user=array('yaolihui','fanqiao','menghuihui');//只看这些人员
+        $user=array('yaolihui','fanqiao','menghuihui','wangchenzi');//只看这些人员
         $map['account']=array('in',$user);
         $data=$m->where($map)->select();
         $arr[]=$data[0]['account'];
