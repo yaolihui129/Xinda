@@ -1,0 +1,122 @@
+<layout name="layout" />
+<div class="admin-content">
+    <h3>Api信息</h3>
+    <div class="starter-template">
+        <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+            <thead>
+            <tr>
+                <th class="table-type" bgcolor="#ccc" >平台-业务端</th>
+                <th class="table-title" bgcolor="#ccc" >接口名称<span class="badge pull-right">作者</span></th>
+                <th class="table-type" bgcolor="#ccc" >线上版本</th>
+                <th class="table-date" bgcolor="#ccc" >线上时间</th>
+            </tr>
+            </thead>
+            <tbody >
+                <tr>
+                    <td><{$data.branch}>-<{$data.client}> </td>
+                    <td>
+                       <{$data.apiname}>【<{$data.way}>】<{$data.agreement}>://<{$data.domain}><{$data.adress}>
+                            <span class="badge pull-right"><{$data.author}></span>
+                    </td>
+                    <td><{$data.status}></td>
+                    <td><{$data.id}></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>参数</h3>
+            <div class="starter-template">
+                <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="table-type" bgcolor="#ccc" >参数名</th>
+                        <th class="table-type" bgcolor="#ccc" >类型</th>
+                        <th class="table-type" bgcolor="#ccc" >是否必填</th>
+                        <th class="table-title" bgcolor="#ccc" >说明</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <volist name='arr' id='da' empty="没有数据">
+                        <tr>
+                            <td><{$da.branch}></td>
+                            <td><{$da.apiname}> </td>
+                            <td><{$da.status}></td>
+                            <td><{$da.id}></td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <h3>场景</h3>
+            <div class="starter-template">
+                <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="table-type" bgcolor="#ccc" >平台-业务端</th>
+                        <th class="table-title" bgcolor="#ccc" >接口名称<span class="badge pull-right">作者</span></th>
+                        <th class="table-type" bgcolor="#ccc" >状态</th>
+                        <th class="table-type" bgcolor="#ccc" >参数</th>
+                        <th class="table-type" bgcolor="#ccc" >场景</th>
+
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <volist name='arr' id='da' empty="没有数据">
+                        <tr>
+                            <td><{$da.branch}>-<{$da.client}> </td>
+                            <td>
+                                <a href="__URL__/details/id/<{$da.id}>"><{$da.apiname}>【<{$da.way}>】<{$da.agreement}>://<{$da.domain}><{$da.adress}>
+                                    <span class="badge pull-right"><{$da.author}></span>
+                                </a>
+                            </td>
+                            <td><{$da.status|getApiStatus=###}></td>
+                            <td><{$da.id}></td>
+                            <td><{$da.id}></td>
+
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <h3>Api版本历史</h3>
+    <div class="starter-template">
+        <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+            <thead>
+            <tr>
+                <th class="table-type" bgcolor="#ccc" >版本号</th>
+                <th class="table-date" bgcolor="#ccc" >日期</th>
+                <th class="table-type" bgcolor="#ccc" >作者</th>
+                <th class="table-date" bgcolor="#ccc" >上线</th>
+                <th class="table-title" bgcolor="#ccc" >说明</th>
+                <th class="table-date" bgcolor="#ccc" >最后更新时间</th>
+
+            </tr>
+            </thead>
+            <tbody >
+            <tr>
+                <td><{$data.branch}></td>
+                <td><{$data.apiname}></td>
+                <td><{$data.status}></td>
+                <td><{$data.id}></td>
+                <td><{$data.id}></td>
+                <td><{$data.id}></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

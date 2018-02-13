@@ -1,0 +1,39 @@
+<layout name="layout" />
+<div class="admin-content">
+    <div class="starter-template">
+        <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+            <thead>
+            <tr>
+                <th class="table-type" bgcolor="#ccc" >平台-业务端</th>
+                <th class="table-title" bgcolor="#ccc" >接口名称<span class="badge pull-right">作者</span></th>
+                <th class="table-type" bgcolor="#ccc" >线上</th>
+                <th class="table-type" bgcolor="#ccc" >预发</th>
+                <th class="table-type" bgcolor="#ccc" >测试</th>
+                <th class="table-date" bgcolor="#ccc" >上线日期</th>
+                <th class="table-type" bgcolor="#ccc" >参数</th>
+                <th class="table-type" bgcolor="#ccc" >场景</th>
+
+            </tr>
+            </thead>
+            <tbody >
+            <volist name='data' id='da' empty="没有数据">
+                <tr>
+                    <td><{$da.branch}>-<{$da.client}> </td>
+                    <td>
+                        <a href="__URL__/details/id/<{$da.id}>" target="_blank"><{$da.apiname}>【<{$da.way}>】<{$da.adress}>
+                            <span class="badge pull-right"><{$da.author}></span>
+                        </a>
+                    </td>
+                    <td><{$da.online}></td>
+                    <td><{$da.release}></td>
+                    <td><{$da.develp}></td>
+                    <td><{$da.cdate}></td>
+                    <td><{$da.id}></td>
+                    <td><{$da.id}></td>
+
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>

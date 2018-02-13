@@ -791,8 +791,32 @@
         $data=M('tp_hr')->find($hrid);
         return $data['title']."(".$data['id'].")";        
     }
-    
-    //获取项目状态
+
+
+//获取项目状态
+    function getApiStatus($value){
+        if($value=='1'){
+            return '规划中';
+        }elseif ($value=='2'){
+            return '写用例';
+        }elseif ($value=='3'){
+            return '已提测';
+        }elseif ($value=='4'){
+            return '测试中';
+        }elseif ($value=='5'){
+            return '已完成';
+        }elseif ($value=='6'){
+            return '已上线（未测试）';
+        }elseif ($value=='7'){
+            return '已上线';
+        }elseif ($value=='8'){
+            return '已作废';
+        }else{
+            return ;
+        }
+    }
+
+//获取项目状态
     function getProst($value){
         if($value=='doing'){
             return '进行中';
