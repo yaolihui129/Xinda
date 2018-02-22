@@ -850,7 +850,19 @@
             return ;
         }
     }
+    //获取API参数数量
+    function countApiParameter($apiId){
+        $where=array('api'=>$apiId,'deleted'=>'0');
+        $count=M('tp_api_parameter')->where($where)->count();
+        return $count;
+    }
 
+    //获取API场景数量
+    function countApiScene($apiId){
+        $where=array('api'=>$apiId,'deleted'=>'0');
+        $count=M('tp_api_scene')->where($where)->count();
+        return $count;
+    }
     
     //获取真实姓名
     function getRealname($username){       
@@ -858,7 +870,7 @@
         $data=M('user')->where($where)->find();
         return $data['realname'];  
     }
-    
+
     //写用例模块数
     function countCExescene($Tester){
         $where=array('zt_tp_stagetester.tester'=>$Tester,'zt_tp_stagetester.type'=>'C','zt_project.status'=>'doing','zt_tp_stage.state'=>'进行中','zt_tp_exescene.results'=>'未测试');

@@ -1,0 +1,100 @@
+﻿<layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content">
+<div class="row"> 
+  <div class="col-md-8">
+  		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"> <{$arr.sn}>&nbsp;<{$arr.id}>
+		    	<div class="btn-group pull-right">
+		    			<button data-toggle="modal" href="#tianjfunc" class=" btn btn-info btn-xs" >
+		    			<span class="glyphicon glyphicon-plus"> 添加</span></button>	  		
+			  			<a href="__APP__/<{$Think.config.PRODUCT}>/Path/index/sysid/<{$arr.branch}>" class=" btn btn-warning btn-xs ">返回</a>
+			  	</div>   	
+		    </h3>
+		  </div>
+		  <div class="panel-body table-responsive"> 
+			<table class="table table-striped table-bordered table-hover table-condensed ">
+		          <tr >
+		          	<th width=5% align="center" bgcolor="#ccc">顺序</th>
+		            <th width=60% align="left"  bgcolor="#ccc">功能点</th> 
+		            <th width=35% align="left"  bgcolor="#ccc">操作</th> 
+		         </tr>
+		         <form action="__URL__/order" method="post" > 
+		         <input type="hidden" name="table" value="tp_func" />   
+		         <volist name='funcs' id='st' empty="没有数据">
+		            <tr>             	
+		                <td align="center" ><input type="text" name="sn[<{$st.id}>]" value="<{$st.sn}>"  class="input40"/></td>
+		                <td ><{$st.id}>:<{$st.func}>【<{$st.state}>】
+		                	<a href="__URL__/modproid/id/<{$st.id}>"><span class="badge pull-right"><{$st.project|getProNo=###}></span></a>
+		                </td> 
+		                <td>
+		                 	<div class="btn-group">
+				               <a href="__URL__/mod/id/<{$st.id}>" class="btn btn-info ">修改</a>
+				               <a href="__URL__/realdel/id/<{$st.id}>/table/tp_func" class="btn btn-info " onclick="return confirm('你确定要删除功能点：<{$st.func}>？')">删除</a>				               
+				            </div>
+		                </td>                             
+		            </tr>
+		            </volist>
+		            <input type="hidden" name="pathid" value="<{$arr.id}>" /> 
+		            	<tr><td  colspan="10"><input type="submit" name="do_submit" value="批量排序" class="btn"></td></tr>
+		            </form>
+		       </table>
+		    </div>
+  		</div> 
+  </div>
+  
+  <div class="col-md-3 hidden-xs">
+  	<div class="panel panel-info">
+	  <div class="panel-heading"><h3 class="panel-title">平台</h3></div>
+	  <ul class="list-group">
+	    <volist name='data' id='vo' empty="没有数据"> 			
+           <switch name="vo.id">
+				<case value="$arr.id"> <li class="list-group-item list-group-item-warning"></case>					   					    
+				<default /><li class="list-group-item ">
+		 	</switch> 
+            	<a href="__URL__/index/pathid/<{$vo.id}>"><{$vo.sn}>.<{$vo.id|getSPath=###}></a><span class="badge"><{$vo.id|countFunc=###}></span>
+            </li>
+        </volist>
+      </ul>	  
+	</div>  	 
+  </div>    
+</div> 
+</div>
+
+<!-- 添加-模态框 -->
+<div class="modal fade " id="tianjfunc" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">功能-添加</h4>
+	    </div>
+	    <div class="modal-body">
+	      	<form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
+	      	<input type="hidden" name="pathid" value="<{$arr.id}>" />
+	      	<input type="hidden" name="table" value="tp_func" />
+				<div class="form-group">
+					<label for="short" class="col-sm-2 control-label">顺序:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="sn" value="<{$c}>" placeholder="顺序"></div>
+				</div>
+				<div class="form-group">
+					<label for="product" class="col-sm-2 control-label">功能:</label>
+					<div class="col-sm-10"><input type="text" class="form-control" name="func" value="" placeholder="功能"></div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">状态:</label>
+					<div class="col-sm-10"><{$state}></div>
+				</div>
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">项目:</label>
+					<div class="col-sm-10"><{$fproid}></div>
+				</div>							
+		</div>
+		<div class="modal-footer">
+		     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		     <button type="submit" class="btn btn-primary">提交</button></form>
+		</div>
+    </div>       
+  </div>
+</div>  

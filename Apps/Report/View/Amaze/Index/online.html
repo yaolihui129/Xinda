@@ -1,0 +1,46 @@
+<layout name="layout" />
+<div class="admin-content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="__URL__/Link">测试环境</a></li>
+                        <li role="presentation"><a href="__URL__/release">预发环境</a></li>
+                        <li role="presentation" class="active"><a href="__URL__/online">生产环境</a></li>
+                    </ul>
+                    <div class="starter-template">
+                        <empty name="data">
+                            <br><h3>尚未维护测试环境地址</h3>
+                            <else />
+                            <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="table-title" bgcolor="#ccc" >URL</th>
+                                    <th class="table-type" bgcolor="#ccc" >用户名</th>
+                                    <th class="table-type" bgcolor="#ccc" >密码</th>
+                                    <th class="table-type" bgcolor="#ccc" >HOSTS</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <volist name='data' id='st'>
+                                    <tr>
+                                        <td>【<{$st.name}>】<a href="<{$st.url}>" target="_blank"><{$st.url}></a></td>
+                                        <td><{$st.user}></td>
+                                        <td><{$st.password}></td>
+                                        <td><{$st.hosts}></td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </empty>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel-body"><p><{$hosts}></p></div>
+        </div>
+    </div>
+</div>

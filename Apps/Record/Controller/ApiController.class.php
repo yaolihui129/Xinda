@@ -6,8 +6,8 @@
  * Time: 10:46
  */
 
-namespace Report\Controller;
-class ApiController extends WebInfoController {
+namespace Record\Controller;
+class ApiController extends EmptyController {
     public function index(){
         //定义可以查的平台
         $branch=['全部','保险服务','安鑫保','车险APP','易鑫车服','微信','第三方'];

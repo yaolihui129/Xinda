@@ -7,8 +7,8 @@ class FuncController extends CommonController{
         $arr=$m->find(I('pathid'));
         $this->assign("arr",$arr);
           
-        $where=array('branch'=>$arr['branch'],'state'=>"正常");
-        $data=$m->where($where)->order("sn,id")->select();
+        $where=array('branch'=>$arr['branch'],'deleted'=>"0");
+        $data=$m->where($where)->select();
         $this->assign("data",$data);
         /* 实例化模型*/
         $m= D("tp_func");
@@ -20,7 +20,7 @@ class FuncController extends CommonController{
         $count=$m->where($map)->count()+1;
         $this->assign("c",$count);       
         $this->assign("state", formselect());
-        $this->assign("fproid", proselect($_SESSION['proid'],"fproid"));
+
                
 	    $this->display();
     }

@@ -40,42 +40,13 @@
   <!-- sidebar start -->
   <div class="admin-sidebar">     
     <ul class="am-list admin-sidebar-list">
-      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index"><span class="glyphicon glyphicon-home"> 首页</span></a></li>
-        <li><a href="__APP__/<{$Think.config.PRODUCT}>/Api"><span class="glyphicon glyphicon-home"> 接口测试</span></a></li>
-      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/unconfirmed"><span class="glyphicon glyphicon-bookmark"> 待处理BUG</span></a></li>
-      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task/personLoad"><span class="glyphicon glyphicon-user"> 测试人员投入</span></a></li>
-      <!--<li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/testingEnvironment"><span class="glyphicon glyphicon-cog"> 环境</span></a></li>-->
-      <li class="admin-parent">
-        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
-	        <span class="am-icon-file"> 测试仿真环境OP</span>
-	        <span class="am-icon-angle-right am-fr am-margin-right"></span>
-        </a>
-        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-          <li><a href="http://edit.cfw.taoche.com/order/index " target="_blank"> 测试车服全车宝订单
-          		<span class="am-badge"></span>
-          	</a></li>
-          	<li><a href="http://cfw.taoche.com/edit/order/index" target="_blank"> 仿真车服全车宝订单
-          		<span class="am-badge"></span>
-          	</a></li>
-          <li><a href="http://cfw.taoche.com/edit/orderFinance/index" target="_blank"> 仿真车服金融订单
-          		<span class="am-badge"></span>
-          	</a></li>     
-        </ul>
-      </li>
-        <li class="admin-parent">
-            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
-                <span class="am-icon-file"> Alix环境</span>
-                <span class="am-icon-angle-right am-fr am-margin-right"></span>
-            </a>
-            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                <li><a href="http://192.168.145.117:8080/alix/ " target="_blank"> 测试环境
-                    <span class="am-badge"></span>
-                </a></li>
-                <li><a href="http://alix.uat.yixincapital.com/login/index.jsp" target="_blank"> UAT环境
-                    <span class="am-badge"></span>
-                </a></li>
-            </ul>
-        </li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index"><span class="glyphicon glyphicon-home"> 测试迭代</span></a></li>
+        <li><a href="__APP__/<{$Think.config.PRODUCT}>/Index/link"><span class="glyphicon glyphicon-link"> 常用链接</span></a></li>
+        <li><a href="__APP__/<{$Think.config.PRODUCT}>/Api"><span class="glyphicon glyphicon-compressed"> 待测接口</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Bug/unconfirmed"><span class="glyphicon glyphicon-bell"> 待处理BUG</span></a></li>
+      <li><a href="__APP__/<{$Think.config.PRODUCT}>/Task/personLoad"><span class="glyphicon glyphicon-user"> 测试投入</span></a></li>
+
+
 
       <!-- <li class="admin-parent">
         <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
