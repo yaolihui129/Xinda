@@ -1,0 +1,46 @@
+<layout name="layout" />
+<!-- content start -->
+<div class="admin-content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> 模块</h3>
+                </div>
+
+                    <table class="table table-striped table-bordered table-hover table-condensed ">
+                            <volist name='module' id='st' empty="没有数据">
+                                <tr>
+                                    <td >
+                                        <a href="__URL__/index/id/<{$st.id}>">
+                                            【<{$st.grade}>】
+                                            <switch name="st.parent"><case value="0"></case><default /><{$st.id|getParentModule=###}></switch>
+                                            <{$st.name}>
+                                            <span class="badge pull-right"><{$st.id|countFunc=###}></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </volist>
+
+                    </table>
+
+            </div>
+        </div>
+
+        <div class="col-md-3 hidden-xs">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h3 class="panel-title">平台</h3></div>
+                <ul class="list-group">
+                    <volist name='data' id='vo' empty="没有数据">
+                        <switch name="vo.id">
+                            <case value="$id"> <li class="list-group-item list-group-item-warning"></case>
+                            <default /><li class="list-group-item ">
+                        </switch>
+                        <a href="__URL__/module/id/<{$vo.id}>"><{$vo.name}></a><span class="badge"><{$vo.id|countModule=###}></span>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

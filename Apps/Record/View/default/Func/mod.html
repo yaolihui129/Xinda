@@ -3,7 +3,7 @@
  <div class="admin-content">
  	<div class="am-cf am-padding">
   		<div class="am-fl am-cf">
-  			<strong class="am-text-primary am-text-lg"><a href="__URL__/index/pathid/<{$func.pathid}>">功能点</a></strong> / 
+  			<strong class="am-text-primary am-text-lg"><a href="__URL__/index/id/<{$func.module}>">功能点</a></strong> /
   			<small>编辑</small>
   		</div>	
   	</div> 
@@ -12,7 +12,6 @@
   			<div class="panel-body">
   		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
   		     	  <input type="hidden" name="id" value="<{$func.id}>" />
-  		     	  <input type="hidden" name="sysid" value="<{$func.pathid|getSysid=###}>" />
   		     	  <input type="hidden" name="table" value="tp_func" />  		     	  
   		     	    <div class="form-group">
   		     	      <div class="col-sm-2 control-label"></div>
@@ -25,10 +24,6 @@
 					  <div class="form-group">
 					    <label class="col-sm-2 control-label">功能:</label>
 					    <div class="col-sm-10"><input type="text" class="form-control" name="func" value="<{$func.func}>" placeholder="功能点"></div>
-					  </div>
-					  <div class="form-group">
-					    <label class="col-sm-2 control-label">状态:</label>
-					    <div class="col-sm-10"><{$state}></div>
 					  </div>
 					  <div class="form-group">
 					    <label class="col-sm-2 control-label">项目:</label>
@@ -51,7 +46,7 @@
 	            <ul class="list-group">
 		  			 <volist name='data' id='vo' empty="没有数据">
 			  			 <li class="list-group-item" >
-			            	<a href="__URL__/mod/id/<{$vo.id}>/pathid/<{$func.pathid}>"><{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】<{$vo.fproid|getProNo=###}></a>
+			            	<a href="__URL__/mod/id/<{$vo.id}>/module/<{$func.module}>"><{$vo.sn}>.<{$vo.func}>【<{$vo.state}>】<{$vo.fproid|getProNo=###}></a>
 						</li>
 		        	</volist>
 	        	</ul>

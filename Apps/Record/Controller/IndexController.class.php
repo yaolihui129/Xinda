@@ -9,7 +9,7 @@ class IndexController  extends CommonController{
         
         $map['name|code']=array('like','%'.$search.'%');
         $map['deleted']='0';        
-        $arr=M('project')->where($map)->order("end desc")->field("id,name,code,status")->select();
+        $arr=M('project')->where($map)->order("end desc")->select();
         $this->assign('arr',$arr);       
 
 	    $this->display();

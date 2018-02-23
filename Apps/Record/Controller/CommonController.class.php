@@ -29,7 +29,7 @@ class CommonController extends Controller {
         if (IS_GET){
             $_GET['adder']=$_SESSION['realname'];
             $_GET['moder']=$_SESSION['realname'];
-            $_GET['ctime']=date("Y-m-d H:i:s",time());
+            $_GET['ctime']=time();
             if(!$m->create($_GET)){
                 $this->error($m->getError());
             }
@@ -41,7 +41,7 @@ class CommonController extends Controller {
         }else {
             $_POST['adder']=$_SESSION['realname'];
             $_POST['moder']=$_SESSION['realname'];
-            $_POST['createTime']=date("Y-m-d H:i:s",time());
+            $_POST['ctime']=time();
             if(!$m->create()){
                 $this->error($m->getError());
             }
@@ -72,8 +72,9 @@ class CommonController extends Controller {
     }
     //逻辑删除
     public function del(){
+        $_POST[id]=I('id');
         $_POST['moder']=$_SESSION['realname'];
-        $_POST['delete']=1;
+        $_POST['deleted']=1;
         if (D(I('table'))->save($_POST)){
             $this->success("删除成功！");
         }else{

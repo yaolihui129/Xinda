@@ -70,9 +70,7 @@
         $_SESSION['ip']=get_client_ip();
         $_SESSION['browser']=GetBrowser();
         $_SESSION['os']=GetOs();
-//         import('Org.Net.IpLocation');// 导入IpLocation类
-// //         $Ip = new IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
-//         $_SESSION['area'] = $Ip->getlocation(get_client_ip()); // 获取某个IP地址所在的位置
+
     }
     //获取征信电话
     function getCreditidPhone($creditId){
@@ -596,6 +594,12 @@
         $count=M("module")->where($where)->count();
         return $count;
     }
+    //根据$branch获取模块径数
+    function countModule($branch){
+        $where=array("branch"=>$branch,'deleted'=>'0');
+        $count=M("module")->where($where)->count();
+        return $count;
+    }
         
     // 根据$testgp获取项目数     
     function countPro($testgp){
@@ -680,15 +684,26 @@
     //根据$pathid获取功能信息
     function getSPath($pathid){
         $where=array("zt_module.id"=>$pathid);
-        $data=M("branch")->where($where)->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')->find();   
+        $data=M("branch")->where($where)->join('inner JOIN zt_module ON zt_branch.id = zt_module.branch')->find();
         $str.= '<span class="label label-default">'
                     .getBranchName($data['branch'])
                 .'</span>&nbsp;';
         $str.= '<span class="label label-info">'
                     .getModuleName($data['parent'])
-                ."</span>" ;          
+                ."</span>" ;
         $str.=  "<b>".$data['name']."(".$data['id'].")</b>";
-        return $str;      
+        return $str;
+    }
+    //根据ModuleId获取功能信息
+    function getParentModule($id){
+        $data=M("module")->find($id);
+        if($data['parent']){
+            $str=getModuleName($data['parent']).'-';
+        }else{
+            $str='';
+        }
+
+        return $str;
     }
     
     //根据secneid获取场景信息
@@ -952,16 +967,16 @@
         return $count;
     }
     
-    //根据$pathid获取功能数
-    function countFunc($pathid){
-        $where=array("pathid"=>$pathid);
+    //根据$module获取功能数
+    function countFunc($module){
+        $where=array("module"=>$module,'deleted'=>'0');
         $count=M("tp_func")->where($where)->count();
         return $count;
     }
 
     //根据$pathid获取功能数
-    function countPFunc($pathid){
-        $where=array("pathid"=>$pathid,"fproid"=>$_SESSION['proid']);
+    function countPFunc($module){
+        $where=array("module"=>$module,"project"=>$_SESSION['proid'],'deleted'=>'0');
         $count=M("tp_func")->where($where)->count();
         return $count;
     }
