@@ -1,0 +1,84 @@
+<layout name="layout" />
+ <!-- content start -->
+ <div class="admin-content">
+ 	<div class="am-cf am-padding">
+  		<div class="am-fl am-cf">
+  			<strong class="am-text-primary am-text-lg"><a href="__URL__/index/id/<{$arr.id}>">API</a></strong> /
+  			<small>编辑</small>
+  		</div>	
+  	</div> 
+	<div class="row">		
+  		<div class="col-md-9">
+  			<div class="panel-body">
+  		     	<form action="__URL__/update" method="post" class="form-horizontal" role="form" >
+  		     	  <input type="hidden" name="id" value="<{$arr.id}>" />
+  		     	  <input type="hidden" name="table" value="tp_apitest" />
+  		     	    <div class="form-group">
+  		     	      <div class="col-sm-2 control-label"></div>
+  		     	      <div class="col-sm-10">
+						  <{$arr.moder}>更新于:<{$arr.utime}>
+						  <span class="pull-right">
+							  <a href="__URL__/details/id/<{$arr.id}>" target="_blank">详情</a>
+						  </span>
+					  </div>
+  		     	    </div>
+					<div class="form-group">
+						<label for="state" class="col-sm-2 control-label">平台:</label>
+						<div class="col-sm-2"><{$pingt}></div>
+						<div class="col-sm-4"><input type="text" class="form-control" name="client" value="<{$arr.client}>" placeholder="业务端"></div>
+						<label for="state" class="col-sm-1 control-label">类型:</label>
+						<div class="col-sm-3"><{$way}></div>
+					</div>
+					<div class="form-group">
+						<label for="product" class="col-sm-2 control-label">API:</label>
+						<div class="col-sm-6"><input type="text" class="form-control" name="apiName" value="<{$arr.apiname}>" placeholder="接口名称"></div>
+						<label for="state" class="col-sm-1 control-label">作者:</label>
+						<div class="col-sm-3"><input type="text" class="form-control" name="author" value="<{$arr.author}>" placeholder="作者"></div>
+					</div>
+					<div class="form-group">
+						<label for="state" class="col-sm-2 control-label">地址:</label>
+						<div class="col-sm-2"><{$agreement}></div>
+						<div class="col-sm-4"><{$domain}></div>
+						<div class="col-sm-4"><input type="text" class="form-control" name="adress" value="<{$arr.adress}>" placeholder="地址"></div>
+					</div>
+					<div class="form-group">
+						<label for="desc" class="col-sm-2 control-label">说明:</label>
+						<div class="col-sm-10"><{$desc}></div>
+					</div>
+					<div class="form-group">
+						<label for="desc" class="col-sm-2 control-label">示例:</label>
+						<div class="col-sm-10"><{$request}></div>
+					</div>
+					<div class="form-group">
+						<label for="desc" class="col-sm-2 control-label">响应:</label>
+						<div class="col-sm-10"><{$response}></div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label"></label>
+						<div class="col-sm-10"></div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"></label>
+						<div class="col-sm-5"><button type="submit" class="btn btn-info btn-block ">提 交</button></div>
+						<div class="col-sm-5"><a href="__URL__/index/id/<{$arr.id}>" class="btn btn-warning btn-block">返回列表</a></div>
+					</div>
+					  
+                </form>
+                
+  		     	</div>	           
+  		</div>	
+  		<div class="col-md-3 hidden-xs hidden-sm">
+	            <ul class="list-group">
+		  			 <volist name='data' id='vo' empty="没有数据">
+			  			 <li class="list-group-item" >
+			            	<a href="__URL__/mod/id/<{$vo.id}>">
+								【<{$vo.way}>】<{$vo.apiname}>
+								<span class="badge pull-right"><{$vo.author}></span>
+							</a>
+						</li>
+		        	</volist>
+	        	</ul>
+        	</div>                            	
+  		</div>	 
+	</div>           

@@ -21,15 +21,7 @@ class FuncController extends CommonController{
         $this->display();
     }
 
-    function select($data,$name,$value){
-        $html = '<select name="'.$name.'" class="form-control">';
-        foreach($data as $v) {
-            $selected = ($v['key']==$value) ? "selected" : "";
-            $html .= '<option '.$selected.' value="'.$v['key'].'">'.$v['value'].'</option>';
-        }
-        $html .='<select>';
-        return $html;
-    }
+
 
     public function index(){
         $m=D('module');
@@ -51,30 +43,30 @@ class FuncController extends CommonController{
         /* 添加*/
         $count=$m->where($map)->count()+1;
         $this->assign("c",$count);
-
-        /*项目迭代*/
-        $var['testgp']='YX';
-        $map['deleted']='0';
-        $pros=M('project')->where($map)->order("status,end desc")->limit(10)->select();
-
-        foreach($pros as $v) {
-            $data[]=array();
-            $data['key']=$v['id'];
-            $data['value']=$v['name'];
-
-        }
-dump($data);
-
+        //获取项目数据
+        $project=$this->projectDict();
+        //封装下拉列表
+        $project=$this->select($project,'project',1);
+        $this->assign("project",$project);
         $this->display();
     }
-  
+
+
+
 
     public function mod(){
         $m= D("tp_func");
         $func=$m->find(I('id'));
         $this->assign("func",$func);
-        $data=$m->order("sn")->select();
-        $this->assign("data",$data);      
+
+        $where=array('module'=>$func['module'],'deleted'=>'0');
+        $data=$m->where($where)->order("sn")->select();
+        $this->assign("data",$data);
+
+
+        $a=$this->projectDict();
+        $project=$this->select($a,'project',$func['project']);
+        $this->assign("project",$project);
 
 
         $this->display();

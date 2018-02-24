@@ -11,6 +11,29 @@ class CommonController extends Controller {
     public function _empty(){ //错误网页重新定向到首页       
         $this->redirect('public/404');
     }
+
+    function projectDict($limit=10){
+        /*项目迭代*/
+        $map['testgp']='YX';
+        $map['deleted']='0';
+        $pros=M('project')->where($map)->order("status,end desc")->limit($limit)->select();
+        foreach($pros as $k=>$v) {
+            $project[0]['key']=0;
+            $project[0]['value']='【待定】未关联';
+            $project[$k+1]['key']=$v['id'];
+            $project[$k+1]['value']='【'.getProst($v['status']).'】-'.$v['name'].'('.$v['code'].')';
+        }
+        return $project;
+    }
+    function select($data,$name,$value){
+        $html = '<select name="'.$name.'" class="form-control">';
+        foreach($data as $v) {
+            $selected = ($v['key']==$value) ? "selected" : "";
+            $html .= '<option '.$selected.' value="'.$v['key'].'">'.$v['value'].'</option>';
+        }
+        $html .='<select>';
+        return $html;
+    }
     
     public function order(){
         $num = 0;
@@ -27,8 +50,8 @@ class CommonController extends Controller {
     public function insert(){
         $m=D(I('table'));
         if (IS_GET){
-            $_GET['adder']=$_SESSION['realname'];
-            $_GET['moder']=$_SESSION['realname'];
+            $_GET['adder']=$_SESSION['account'];
+            $_GET['moder']=$_SESSION['account'];
             $_GET['ctime']=time();
             if(!$m->create($_GET)){
                 $this->error($m->getError());
@@ -39,8 +62,8 @@ class CommonController extends Controller {
                 $this->error("添加失败");
             }
         }else {
-            $_POST['adder']=$_SESSION['realname'];
-            $_POST['moder']=$_SESSION['realname'];
+            $_POST['adder']=$_SESSION['account'];
+            $_POST['moder']=$_SESSION['account'];
             $_POST['ctime']=time();
             if(!$m->create()){
                 $this->error($m->getError());
@@ -55,14 +78,14 @@ class CommonController extends Controller {
     //修改
     public function update(){
         if (IS_GET){
-            $_GET['moder']=$_SESSION['realname'];
+            $_GET['moder']=$_SESSION['account'];
             if (D(I('table'))->save($_GET)){
                 $this->success("修改成功！");
             }else{
                 $this->error("修改失败！");
             }
         }else {
-            $_POST['moder']=$_SESSION['realname'];
+            $_POST['moder']=$_SESSION['account'];
             if (D(I('table'))->save($_POST)){
                 $this->success("修改成功！");
             }else{
@@ -73,7 +96,7 @@ class CommonController extends Controller {
     //逻辑删除
     public function del(){
         $_POST[id]=I('id');
-        $_POST['moder']=$_SESSION['realname'];
+        $_POST['moder']=$_SESSION['account'];
         $_POST['deleted']=1;
         if (D(I('table'))->save($_POST)){
             $this->success("删除成功！");

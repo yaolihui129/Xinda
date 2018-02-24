@@ -45,12 +45,29 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="starter-template">
+                        <table class="am-table am-table-striped am-table-hover table-main table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="table-title" bgcolor="#ccc" >逻辑说明<span class="pull-right"><a href="__URL__/mod/id/<{$data.id}>">编辑</a></span></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr>
+                                    <td><{$data.desc}></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="row">
                 <div class="col-md-6">
-                    <h3>参数 <span class="badge"><{$data.id|countApiParameter=###}></span></h3>
+                    <h3>参数 <span class="badge"><{$data.id|countApiParameter=###}></span><span class="pull-right"><a data-toggle="modal" href="#tianjcans" >添加参数</a></span></h3>
 
                     <empty name="parameter">
                             无需传递参数&还没有维护参数信息
@@ -60,20 +77,27 @@
                                 <thead>
                                 <tr>
                                     <th class="table-type" bgcolor="#ccc" >分组</th>
+                                    <th class="table-type" bgcolor="#ccc" >顺序</th>
                                     <th class="table-type" bgcolor="#ccc" >参数名</th>
                                     <th class="table-type" bgcolor="#ccc" >类型</th>
                                     <th class="table-type" bgcolor="#ccc" >必填</th>
                                     <th class="table-title" bgcolor="#ccc" >说明</th>
+                                    <th class="table-type" bgcolor="#ccc" >操作</th>
                                 </tr>
                                 </thead>
                                 <tbody >
                                 <volist name='parameter' id='param'>
                                     <tr>
                                         <td><{$param.group}></td>
+                                        <td><{$param.sn}></td>
                                         <td><{$param.parameter}></td>
                                         <td><{$param.type}> </td>
                                         <td><{$param.required}></td>
                                         <td><{$param.desc}></td>
+                                        <td>
+                                            <a href="__URL__/modparameter/id/<{$param.id}>">编辑</a>
+                                            <a href="__URL__/del/id/<{$param.id}>/table/tp_api_parameter" onclick="return confirm('你确定要删除参数：<{$param.parameter}>？')">删除</a>
+                                        </td>
                                     </tr>
                                 </volist>
                                 </tbody>
@@ -82,7 +106,7 @@
                     </empty>
                 </div>
                 <div class="col-md-6">
-                    <h3>场景 <span class="badge"><{$data.id|countApiScene=###}></span></h3>
+                    <h3>场景 <span class="badge"><{$data.id|countApiScene=###}></span><span class="pull-right"><a data-toggle="modal" href="#tianjchangj">添加场景</a></span></h3>
                     <empty name="scene">
                         还没有规划测试场景
                         <else />
@@ -93,6 +117,7 @@
                                     <th class="table-title" bgcolor="#ccc" >测试场景<span class="badge pull-right">作者</span></th>
                                     <th class="table-type" bgcolor="#ccc" >状态</th>
                                     <th class="table-title" bgcolor="#ccc" >说明</th>
+                                    <th class="table-type" bgcolor="#ccc" >操作</th>
                                 </tr>
                                 </thead>
                                 <tbody >
@@ -105,6 +130,11 @@
                                         </td>
                                         <td><{$sc.status}></td>
                                         <td><{$sc.desc}></td>
+                                        <td>
+                                            <a href="#">测试</a>
+                                            <a href="__URL__/modscene/id/<{$sc.id}>">编辑</a>
+                                            <a href="__URL__/del/id/<{$sc.id}>/table/tp_api_scene" onclick="return confirm('你确定要删除场景：<{$sc.scene}>？')">删除</a>
+                                        </td>
                                     </tr>
                                 </volist>
                                 </tbody>
@@ -114,8 +144,7 @@
                 </div>
             </div>
 
-
-            <h3>Api版本历史</h3>
+            <h3>Api版本历史<span class="pull-right"><a data-toggle="modal" href="#tianjbanb">添加历史版本</a></span></h3>
             <empty name="version">
                 没有维护版本信息
                 <else />
@@ -129,6 +158,7 @@
                             <th class="table-date" bgcolor="#ccc" >上线</th>
                             <th class="table-title" bgcolor="#ccc" >说明</th>
                             <th class="table-date" bgcolor="#ccc" >最后更新时间</th>
+                            <th class="table-type" bgcolor="#ccc" >操作</th>
 
                         </tr>
                         </thead>
@@ -141,6 +171,10 @@
                                 <td><{$ver.atime}></td>
                                 <td><{$ver.desc}></td>
                                 <td><{$ver.utime}></td>
+                                <td>
+                                    <a href="__URL__/modscene/id/<{$ver.id}>">编辑</a>
+                                    <a href="__URL__/del/id/<{$ver.id}>/table/tp_apiversion" onclick="return confirm('你确定要删除场景：<{$ver.version}>？')">删除</a>
+                                </td>
                             </tr>
                         </volist>
 
@@ -148,9 +182,136 @@
                     </table>
                 </div>
             </empty>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>请求示例</span></h3>
+                    <table class="am-table">
+                        <tr><td><{$data.request}></td></tr>
+                     </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>响应</span></h3>
+                    <table class="am-table">
+                        <tr><td><{$data.response}></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 
+
+
+
+
+
+
+<!-- 添加-参数 -->
+<div class="modal fade " id="tianjcans" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="cansModalLabel">参数-添加</h4>
+            </div>
+            <div class="modal-body">
+                <form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
+                    <input type="hidden" name="api" value="<{$data.id}>" />
+                    <input type="hidden" name="table" value="tp_api_parameter" />
+                    <div class="form-group">
+                        <label for="product" class="col-sm-2 control-label">参数:</label>
+                        <div class="col-sm-7"><input type="text" class="form-control" name="parameter" value="" placeholder="参数"></div>
+                        <label for="short" class="col-sm-1 control-label">顺序:</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" name="sn" value="<{$c.parameter}>" placeholder="顺序"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="col-sm-2 control-label">分组:</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="group" value="私有请求参数" placeholder="分组"></div>
+                        <label for="state" class="col-sm-1 control-label">类型:</label>
+                        <div class="col-sm-2"><{$type}></div>
+                        <label for="state" class="col-sm-1 control-label">必填:</label>
+                        <div class="col-sm-2"><{$required}></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="col-sm-2 control-label">说明:</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" name="desc" value="" placeholder="参数说明"></div>
+
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">提交</button></form>
+            </div>
         </div>
     </div>
+</div>
+
+
+<!-- 添加-场景 -->
+<div class="modal fade " id="tianjchangj" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="changjModalLabel">场景-添加</h4>
+            </div>
+            <div class="modal-body">
+                <form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
+                    <input type="hidden" name="api" value="<{$data.id}>" />
+                    <input type="hidden" name="table" value="tp_api_scene" />
+                    <div class="form-group">
+                        <label for="product" class="col-sm-2 control-label">场景:</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="scene" value="" placeholder="场景"></div>
+                        <label for="product" class="col-sm-1 control-label">作者:</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" name="author" value="<{$_SESSION['realname']}>" placeholder="作者"></div>
+                        <label for="short" class="col-sm-1 control-label">顺序:</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" name="sn" value="<{$c.scene}>" placeholder="顺序"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="col-sm-2 control-label">说明:</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" name="desc" value="" placeholder="场景说明"></div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">提交</button></form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加-历史版本 -->
+<div class="modal fade " id="tianjbanb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="banbModalLabel">历史版本-添加</h4>
+            </div>
+            <div class="modal-body">
+                <form action="__URL__/insert" method="post" class="form-horizontal" role="form" >
+                    <input type="hidden" name="api" value="<{$data.id}>" />
+                    <input type="hidden" name="table" value="tp_apiversion" />
+                    <div class="form-group">
+                        <label for="product" class="col-sm-2 control-label">版本:</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="version" value="" placeholder="版本"></div>
+                        <label for="product" class="col-sm-1 control-label">作者:</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" name="author" value="<{$_SESSION['realname']}>" placeholder="作者"></div>
+                        <label for="short" class="col-sm-1 control-label">顺序:</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" name="sn" value="<{$c.version}>" placeholder="顺序"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="col-sm-2 control-label">说明:</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" name="desc" value="" placeholder="版本说明"></div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">提交</button></form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <footer><hr>
         <p class="am-padding-left">© 2018 易鑫-保险及后服务中心.</p>
     </footer>

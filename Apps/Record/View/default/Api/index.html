@@ -43,12 +43,7 @@
                     </button>
                 </li>
             </ul>
-
-
-
         </div>
-
-
     </div>
     <div class="starter-template">
         <table class="am-table am-table-striped am-table-hover table-main table-bordered">
@@ -62,9 +57,7 @@
                 <th class="table-type" bgcolor="#ccc" >线上</th>
                 <th class="table-type" bgcolor="#ccc" >预发</th>
                 <th class="table-type" bgcolor="#ccc" >测试</th>
-                <th class="table-date" bgcolor="#ccc" >上线日期</th>
                 <th class="table-type" bgcolor="#ccc" >操作</th>
-
             </tr>
             </thead>
             <tbody >
@@ -81,11 +74,11 @@
                     <td><{$da.online}></td>
                     <td><{$da.release}></td>
                     <td><{$da.develp}></td>
-                    <td><{$da.atime}></td>
                     <td>
-                        <a class="cke_button" href="#">编辑</a>
-                        <a class="cke_button" href="#">预发</a>
-                        <a class="cke_button" href="#">上线</a>
+                        <a class="cke_button" href="__URL__/mod/id/<{$da.id}>">编辑</a>
+                        <a class="cke_button" href="__URL__/release/id/<{$da.id}>">预发</a>
+                        <a class="cke_button" href="__URL__/online/id/<{$da.id}>">上线</a>
+                        <a class="cke_button" href="__URL__/del/id/<{$da.id}>/table/tp_apitest" onclick="return confirm('你确定要删除API：<{$da.apiname}>？')">删除</a>
                     </td>
 
                 </tr>
@@ -109,37 +102,23 @@
                     <input type="hidden" name="table" value="tp_apitest" />
                     <div class="form-group">
                         <label for="state" class="col-sm-2 control-label">平台:</label>
-                        <div class="col-sm-10"><{$state}></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="product" class="col-sm-2 control-label">业务端:</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" name="apiName" value="" placeholder="API"></div>
+                        <div class="col-sm-2"><{$pingt}></div>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="client" value="服务端" placeholder="业务端"></div>
+                        <label for="state" class="col-sm-1 control-label">类型:</label>
+                        <div class="col-sm-3"><{$way}></div>
                     </div>
                     <div class="form-group">
                         <label for="product" class="col-sm-2 control-label">API:</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" name="apiName" value="" placeholder="API"></div>
+                        <div class="col-sm-6"><input type="text" class="form-control" name="apiName" value="" placeholder="接口名称"></div>
+                        <label for="state" class="col-sm-1 control-label">作者:</label>
+                        <div class="col-sm-3"><input type="text" class="form-control" name="author" value="" placeholder="作者"></div>
                     </div>
                     <div class="form-group">
-                        <label for="state" class="col-sm-2 control-label">协议:</label>
-                        <div class="col-sm-10"><{$state}></div>
+                        <label for="state" class="col-sm-2 control-label">地址:</label>
+                        <div class="col-sm-2"><{$agreement}></div>
+                        <div class="col-sm-4"><{$domain}></div>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="adress" value="" placeholder="地址"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="state" class="col-sm-2 control-label">服务器:</label>
-                        <div class="col-sm-10"><{$state}></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="product" class="col-sm-2 control-label">地址:</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" name="adress" value="" placeholder="地址"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="state" class="col-sm-2 control-label">类型:</label>
-                        <div class="col-sm-10"><{$state}></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="state" class="col-sm-2 control-label">作者:</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" name="adress" value="" placeholder="地址"></div>
-                    </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
